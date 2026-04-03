@@ -29,11 +29,11 @@ export function Icon({ name, size = 20, color = "currentColor", style = {} }) {
     <div style={{
       width: size, height: size,
       backgroundColor: color,
-      maskImage: `url(/src/assets/svg/${name}.svg)`,
+      maskImage: `url(/assets/svg/${name}.svg)`,
       maskSize: "contain",
       maskRepeat: "no-repeat",
       maskPosition: "center",
-      WebkitMaskImage: `url(/src/assets/svg/${name}.svg)`,
+      WebkitMaskImage: `url(/assets/svg/${name}.svg)`,
       WebkitMaskSize: "contain",
       WebkitMaskRepeat: "no-repeat",
       WebkitMaskPosition: "center",

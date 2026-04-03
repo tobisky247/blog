@@ -207,10 +207,10 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
   if (selectedEvent === 1) {
     // AVN Detail View (Previous content)
     const avnPhotos = [
-      { src: "/src/assets/creators/Quietlyvae.avn1.jpeg", alt: "QuietlyVae at AVN" },
-      { src: "/src/assets/AVN2.jpeg", alt: "Industry Networking" },
-      { src: "/src/assets/Quietlyvae.avn2.jpeg", alt: "Red Carpet Visibility" },
-      { src: "/src/assets/Quietlyvae.avn3.jpeg", alt: "Creator Community" }
+      { src: "/assets/creators/Quietlyvae.avn1.jpeg", alt: "QuietlyVae at AVN" },
+      { src: "/assets/AVN2.jpeg", alt: "Industry Networking" },
+      { src: "/assets/Quietlyvae.avn2.jpeg", alt: "Red Carpet Visibility" },
+      { src: "/assets/Quietlyvae.avn3.jpeg", alt: "Creator Community" }
     ];
     
     return (
@@ -221,7 +221,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
         {/* Hero */}
         <section style={{ padding: isMobile ? "60px 5vw" : "120px 5vw", background: dark ? "#0a0a0a" : "#fff", textAlign: "center", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, opacity: 0.2, background: "url('/src/assets/Quietlyvae.avn.jpeg') center/cover no-repeat", filter: "blur(40px) brightness(0.7)" }} />
+          <div style={{ position: "absolute", inset: 0, opacity: 0.2, background: "url('/assets/Quietlyvae.avn.jpeg') center/cover no-repeat", filter: "blur(40px) brightness(0.7)" }} />
           <div style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}>
             <Badge>2026 AVN · LAS VEGAS</Badge>
             <h1 style={{ fontSize: "clamp(30px, 6vw, 64px)", fontWeight: 800, margin: "24px 0", lineHeight: 1.1, letterSpacing: "-0.03em" }}>LuvlyFans @ the <span style={{ color: "#7B51CC" }}>AVN Awards</span></h1>
@@ -231,7 +231,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
         {/* Hero Image */}
         <section style={{ maxWidth: 1100, margin: isMobile ? "0 auto 40px" : "-60px auto 80px", padding: "0 5vw", position: "relative", zIndex: 10 }}>
-          <img src="/src/assets/Quietlyvae.avn.jpeg" alt="LuvlyFans @ AVN" style={{ width: "100%", height: isMobile ? 300 : 500, objectFit: "cover", borderRadius: isMobile ? 24 : 32, boxShadow: "0 40px 100px rgba(0,0,0,0.3)", border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} />
+          <img src="/assets/Quietlyvae.avn.jpeg" alt="LuvlyFans @ AVN" style={{ width: "100%", height: isMobile ? 300 : 500, objectFit: "cover", borderRadius: isMobile ? 24 : 32, boxShadow: "0 40px 100px rgba(0,0,0,0.3)", border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} />
         </section>
 
         {/* Content */}
@@ -368,7 +368,7 @@ export function HomePage({ dark, onRead, setPage }) {
                 onClick={() => { const a = ARTICLES.find(a => a.slug === "creator-habits"); if(a) { onRead(a); window.scrollTo(0,0); } }}
                 onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-6px)"}
                 onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
-                  <img src="/src/assets/promotions/fortune_cookie.png" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <img src="/assets/promotions/fortune_cookie.png" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   <div style={{ 
                     position: "absolute", inset: 0, 
                     background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)",
@@ -396,7 +396,7 @@ export function HomePage({ dark, onRead, setPage }) {
                 onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
                   {/* Full-bleed background photo */}
                   <img 
-                    src="/src/assets/promotions/spotlight_Image.png" 
+                    src="/assets/promotions/spotlight_Image.png" 
                     alt="The LuvlyFans Standard" 
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }} 
                   />
@@ -431,7 +431,7 @@ export function HomePage({ dark, onRead, setPage }) {
                   transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                 }} onClick={() => setPage("free-creators")} onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"} onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
                   <img
-                    src="/src/assets/promotions/Free accounts.png"
+                    src="/assets/promotions/Free accounts.png"
                     alt="Free LuvlyFans Accounts to Follow"
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
                   />
@@ -455,7 +455,7 @@ export function HomePage({ dark, onRead, setPage }) {
                   transition: "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                 }} onClick={() => setPage("free")} onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"} onMouseLeave={(e) => e.currentTarget.style.transform = "none"}>
                   <img 
-                    src="/src/assets/promotions/Rising_star.png" 
+                    src="/assets/promotions/Rising_star.png" 
                     alt="Rising Stars on LuvlyFans" 
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }} 
                   />
@@ -1566,7 +1566,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               
               {/* Mockup 1: Discovery Feed */}
               <div style={{ margin: "48px 0" }}>
-                <img src="/src/assets/spotlight2.png" alt="Discovery Feed Mockup" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
+                <img src="/assets/spotlight2.png" alt="Discovery Feed Mockup" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
                 <div style={{ fontSize: 13, opacity: 0.5, marginTop: 16, textAlign: "center", fontStyle: "italic" }}>
                   A high-fidelity screenshot of the LuvlyFans Discovery Feed highlighting how spotlighted posts are surfaced to new fans.
                 </div>
@@ -1606,8 +1606,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               {/* Mockup 2: Activation Button */}
               <div style={{ margin: "64px 0" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                  <img src="/src/assets/spotlight3.png" alt="Spotlight Activation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
-                  <img src="/src/assets/spotlight4.png" alt="Spotlight Confirmation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
+                  <img src="/assets/spotlight3.png" alt="Spotlight Activation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
+                  <img src="/assets/spotlight4.png" alt="Spotlight Confirmation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
                 </div>
                 <div style={{ fontSize: 13, opacity: 0.5, marginTop: 16, textAlign: "center", fontStyle: "italic" }}>
                   Close-up UI showing the Spotlight toggle within post settings and the final activation confirmation.
@@ -1644,7 +1644,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
         {/* Hero Image */}
         <section style={{ maxWidth: 800, margin: "-40px auto 0", padding: "0 5vw", position: "relative", zIndex: 10 }}>
-           <img src="/src/assets/Stories.png" alt="Stories on LuvlyFans" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
+           <img src="/assets/Stories.png" alt="Stories on LuvlyFans" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
         </section>
 
         {/* Main Content */}
@@ -1846,7 +1846,7 @@ export function FreeCreatorsPage({ dark }) {
                      backgroundColor: dark ? "#111" : "#fff", overflow: "hidden"
                    }}>
                       <img 
-                        src={c.image || "/src/assets/events/AVN2.jpeg"} 
+                        src={c.image || "/assets/events/AVN2.jpeg"} 
                         alt={c.name} 
                         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} 
                       />

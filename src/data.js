@@ -176,7 +176,7 @@ export const EVENTS = [
   {
     id: 1,
     title: "LuvlyFans at the AVN Awards: Celebrating Creators",
-    thumbnail: "/src/assets/Quietlyvae.avn.jpeg",
+    thumbnail: "/assets/Quietlyvae.avn.jpeg",
     date: "January 18, 2026",
     location: "Las Vegas, NV",
     excerpt: "LuvlyFans creator QuietlyVae represents the next generation of professional talent at the industry's largest event.",
@@ -185,7 +185,7 @@ export const EVENTS = [
   {
     id: 2,
     title: "Spring Creator Summit 2026: London",
-    thumbnail: "/src/assets/avn-1.png",
+    thumbnail: "/assets/avn-1.png",
     date: "April 12, 2026",
     location: "London, UK",
     excerpt: "A direct look at the exclusive networking and brand-building workshops from our London flagship event.",
@@ -194,7 +194,7 @@ export const EVENTS = [
   {
     id: 3,
     title: "LuvlyFans x Creator Camp: Ibiza 2026 Recap",
-    thumbnail: "/src/assets/AVN2.jpeg",
+    thumbnail: "/assets/AVN2.jpeg",
     date: "June 05, 2026",
     location: "Ibiza, Spain",
     excerpt: "Celebrating summer success with our top performing creators at the LuvlyFans Creator Camp retreat.",
@@ -206,7 +206,7 @@ export const FEATURES = [
   {
     id: 1,
     title: "Spotlight: Amplify Your Global Reach",
-    thumbnail: "/src/assets/spotlight4.png",
+    thumbnail: "/assets/spotlight4.png",
     date: "New Feature",
     location: "Platform Tool",
     excerpt: "Break outside your follower count and get discovered by thousands of new fans across the LuvlyFans network.",
@@ -215,7 +215,7 @@ export const FEATURES = [
   {
     id: 2,
     title: "Stories: Share the Moment",
-    thumbnail: "/src/assets/Stories.png",
+    thumbnail: "/assets/Stories.png",
     date: "Available Now",
     location: "Growth Tool",
     excerpt: "Stay present between posts. Share short, temporary updates that give fans a more natural connection to your day.",
@@ -224,7 +224,7 @@ export const FEATURES = [
   {
     id: 3,
     title: "Dynamic Subscriber Tiers",
-    thumbnail: "/src/assets/Quietlyvae.avn.jpeg",
+    thumbnail: "/assets/Quietlyvae.avn.jpeg",
     date: "Coming Soon",
     location: "Revenue Tool",
     excerpt: "Reward your loyal fans with custom access levels, digital perks, and multi-tier subscription models.",
@@ -235,14 +235,14 @@ export const FEATURES = [
 export const FREE_CREATORS_DIGEST = [
   {
     month: new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date()),
-    hero: "/src/assets/creators/Creator hero.png",
+    hero: "/assets/creators/Creator hero.png",
     featured: [
       {
         id: 1, name: "QuietlyVae", handle: "@quietlyvae", type: "QuietlyVae",
         category: "Alternative Lifestyle",
         quote: "A bit nerdy, naughty, and hella dorky — but never just one thing. 💫",
         bio: "I’m Vae, and I love exploring different fantasies… from playful lingerie and solo indulgence, to cheeky cosplay, steamy couple nights, and surprise fetishes you didn’t see coming. Think of me as your unpredictable escape — the girl-next-door who keeps you guessing.💕 Spoil me, chat with me, or dive into my latest treats — either way, you’ll never get bored!",
-        color: "#083344", image: "/src/assets/creators/Quietlyvae.avn1.jpeg",
+        color: "#083344", image: "/assets/creators/Quietlyvae.avn1.jpeg",
         profileUrl: "https://luvlyfans.com/QuietlyVae"
       },
       {
@@ -250,7 +250,7 @@ export const FREE_CREATORS_DIGEST = [
         category: "British Lifestyle",
         quote: "Down to earth British charm meets high-energy wild-cat energy! 🇬🇧✨",
         bio: "Hailing from the UK, Loula Lou offers an authentic and deeply personal content experience. From high-quality cinematic solo productions to exclusive behind-the-scenes access and intimate girlfriend-style connection, her page is a must-follow for anyone seeking premium, professional, and endlessly engaging entertainment.",
-        color: "#0c3a54", image: "/src/assets/creators/Loulalou.png",
+        color: "#0c3a54", image: "/assets/creators/Loulalou.png",
         profileUrl: "https://luvlyfans.com/Loulalou"
       },
       {
@@ -258,7 +258,7 @@ export const FREE_CREATORS_DIGEST = [
         category: "Petite & Kinky",
         quote: "Petite but powerful. Red hair, brown eyes, and always ready for something kinky! 💜🩵",
         bio: "Standing at 4’11”, Dollia Sakura is the definition of petite power. At 23, she’s built a reputation for high-quality, kinky-focused content creation, blending her striking red hair and brown eyes with an adventurous, bold approach. She specializes in custom requests, offering her community a deeply personal and tailored experience through her professional productions.",
-        color: "#112d42", image: "/src/assets/creators/Dollia%20Sakura.png",
+        color: "#112d42", image: "/assets/creators/Dollia%20Sakura.png",
         profileUrl: "https://luvlyfans.com/PrincessDollia"
       },
       {
@@ -266,7 +266,7 @@ export const FREE_CREATORS_DIGEST = [
         category: "Girl Next Door",
         quote: "The girl next door with a wild side. Let’s unlock some guilty pleasures together! 💋",
         bio: "Krooked Orchid (KO) is the playful, down-to-earth creator you’ve always had on your mind. Known for her interactive approach and high-energy personal connections, she specializes in custom creations that bring your specific requests to life. Whether she’s exploring new fantasies or sharing exclusive life updates, KO is dedicated to providing an unforgettable and highly tailored experience for her community.",
-        color: "#4c1d95", image: "/src/assets/creators/KrookedOrchid.png",
+        color: "#4c1d95", image: "/assets/creators/KrookedOrchid.png",
         profileUrl: "https://luvlyfans.com/KrookedOrchid"
       },
       {
@@ -274,7 +274,7 @@ export const FREE_CREATORS_DIGEST = [
         category: "Glamour / Playful",
         quote: "A fresh and playful energy with a classic aesthetic. Join my world today! 🖤",
         bio: "Andi Bunni brings a bold and energetic presence to her page, blending a classic 'Playboy Bunni' aesthetic with a highly interactive approach. Known for her adventurous personality and attention to detail, Andi specializes in a wide range of custom requests and exclusive content. Her page is built on premium engagement, rewarding her most dedicated fans with an intimate, professional, and endlessly fun experience.",
-        color: "#1e1b4b", image: "/src/assets/creators/Andibunni.png",
+        color: "#1e1b4b", image: "/assets/creators/Andibunni.png",
         profileUrl: "https://luvlyfans.com/Andibunni"
       },
       {
@@ -282,7 +282,7 @@ export const FREE_CREATORS_DIGEST = [
         category: "Asian BBW / British Charm",
         quote: "Authenticity, curves, and a bold British personality. Welcome to my exclusive world! 💖",
         bio: "Zozo is a captivating Asian BBW creator known for her infectious British charm and authentic interactive style. Based in the UK, she has built a dedicated community by blending high-quality solo and collaborative productions with a fetish-friendly, inclusive approach. Whether she’s responding to custom requests or sharing exclusive voice notes, Zozo’s premium content is designed to be deeply engaging, interactive, and high-fidelity.",
-        color: "#500724", image: "/src/assets/creators/Zozo.png",
+        color: "#500724", image: "/assets/creators/Zozo.png",
         profileUrl: "https://luvlyfans.com/zozonicoco"
       },
       {
@@ -290,19 +290,19 @@ export const FREE_CREATORS_DIGEST = [
         category: "Alternative / Bubbly",
         quote: "A bubbly teaser with an alternative edge. Curves, ink, and genuine connection. ✨",
         bio: "Ellie Bee brings a unique and vibrant energy to the platform, perfectly blending her bubbly persona with a striking alternative aesthetic. Adorned with expressive tattoos and piercings, she focuses on creating authentic, one-on-one connections with her fans. Ellie specializes in high-end custom content and interactive DMs, ensuring that every fan feels heard and valued in her curated, inclusive digital space.",
-        color: "#312e81", image: "/src/assets/creators/Ellie_bee.png",
+        color: "#312e81", image: "/assets/creators/Ellie_bee.png",
         profileUrl: "https://luvlyfans.com/EllieBee"
       }
     ],
     pastRecaps: [
-      { month: "March 2026", thumbnail: "/src/assets/AVN.jpeg" },
-      { month: "February 2026", thumbnail: "/src/assets/AVN2.jpeg" },
-      { month: "January 2026", thumbnail: "/src/assets/avn-1.png" },
-      { month: "December 2025", thumbnail: "/src/assets/Quietlyvae.avn1.jpeg" },
-      { month: "November 2025", thumbnail: "/src/assets/Quietlyvae.avn2.jpeg" },
-      { month: "October 2025", thumbnail: "/src/assets/Quietlyvae.avn3.jpeg" },
-      { month: "September 2025", thumbnail: "/src/assets/Quietlyvae.avn.jpeg" },
-      { month: "August 2025", label: "Launch Month", thumbnail: "/src/assets/AVN.jpeg" }
+      { month: "March 2026", thumbnail: "/assets/AVN.jpeg" },
+      { month: "February 2026", thumbnail: "/assets/AVN2.jpeg" },
+      { month: "January 2026", thumbnail: "/assets/avn-1.png" },
+      { month: "December 2025", thumbnail: "/assets/Quietlyvae.avn1.jpeg" },
+      { month: "November 2025", thumbnail: "/assets/Quietlyvae.avn2.jpeg" },
+      { month: "October 2025", thumbnail: "/assets/Quietlyvae.avn3.jpeg" },
+      { month: "September 2025", thumbnail: "/assets/Quietlyvae.avn.jpeg" },
+      { month: "August 2025", label: "Launch Month", thumbnail: "/assets/AVN.jpeg" }
     ]
   }
 ];
