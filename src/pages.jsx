@@ -558,16 +558,8 @@ export function HomePage({ dark, onRead, setPage }) {
                 }}>
                   <div style={{ fontSize: 32, fontWeight: 900, color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", minWidth: 60, fontFamily: "monospace" }}>0{i + 1}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: 12 }}>
+                    <div style={{ marginBottom: 12 }}>
                       <Badge color={catColors[a.category]}>{a.category}</Badge>
-                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                        {a.authorAvatar && a.authorAvatar.includes("/") ? (
-                          <img src={a.authorAvatar} alt={a.author} style={{ width: 18, height: 18, borderRadius: "50%", objectFit: "cover" }} />
-                        ) : (
-                           <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#7B51CC", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, color: "#fff" }}>{a.authorAvatar || "LF"}</div>
-                        )}
-                        <span style={{ fontSize: 13, fontWeight: 700, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{a.author}</span>
-                      </div>
                     </div>
                     <div style={{ fontSize: 17, fontWeight: 700, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif", lineHeight: 1.3 }}>{a.title}</div>
                   </div>
@@ -927,25 +919,10 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
   
           <p style={{ margin: "0 0 28px", fontSize: 18, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)", lineHeight: 1.7 }}>{article.excerpt}</p>
   
-          {/* Author block */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "20px 24px", background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", borderRadius: 14, border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, marginBottom: 40 }}>
-            {article.authorAvatar && article.authorAvatar.includes("/") ? (
-              <img 
-                src={article.authorAvatar} 
-                alt={article.author} 
-                style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} 
-              />
-            ) : (
-              <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg, #7B51CC, #8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 16, fontWeight: 800, flexShrink: 0 }}>
-                {article.authorAvatar || "LF"}
-              </div>
-            )}
             <div>
-              <div style={{ fontWeight: 700, fontSize: 15, color: dark ? "#fff" : "#0f0f0f" }}>{article.author}</div>
-              <div style={{ fontSize: 13, color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)" }}>{article.authorRole}</div>
-            </div>
-            <div style={{ marginLeft: "auto" }}>
-              <CTAButton size="sm" onClick={() => {}}>Follow</CTAButton>
+              <div style={{ fontWeight: 700, fontSize: 16, color: dark ? "#fff" : "#0f0f0f" }}>By {article.author}</div>
+              <div style={{ fontSize: 13, color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)" }}>{article.authorRole} · {article.readTime} read</div>
             </div>
           </div>
   
@@ -968,7 +945,7 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#7B51CC", textTransform: "uppercase", marginBottom: 8 }}>Ready to Apply This?</div>
             <h3 style={{ margin: "0 0 10px", fontSize: 22, fontWeight: 800, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif" }}>Start Your LuvlyFans Page Today</h3>
             <p style={{ margin: "0 0 20px", fontSize: 14, color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)" }}>Join 200,000+ creators earning on the platform built for growth. Setup takes under 10 minutes.</p>
-            <CTAButton size="lg" onClick={() => {}}>Create My Page — It's Free</CTAButton>
+            <CTAButton size="lg" onClick={() => window.open('https://luvlyfans.com/', '_blank')}>Create My Page — It's Free</CTAButton>
           </div>
   
           {/* Related */}

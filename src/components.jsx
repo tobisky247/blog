@@ -68,7 +68,7 @@ export function CTAButton({ children, size = "md", onClick, style = {}, block = 
       onMouseLeave={() => setHov(false)}
       style={{
         background: hov ? "#613db7" : "#7B51CC",
-        color: "#fff", border: "none", borderRadius: 10, padding: pad,
+        color: "#fff", border: "none", borderRadius: 99, padding: pad,
         fontSize: fs, fontWeight: 700, cursor: "pointer", letterSpacing: "0.01em",
         transition: "all 0.18s ease", transform: hov ? "translateY(-1px)" : "translateY(0)",
         boxShadow: hov ? "0 8px 24px #7B51CC40" : "0 4px 14px #7B51CC30",
@@ -139,21 +139,8 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
         }}>{article.excerpt}</p>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            {article.authorAvatar && article.authorAvatar.includes("/") ? (
-              <img 
-                src={article.authorAvatar} 
-                alt={article.author} 
-                style={{ width: 28, height: 28, borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)"}` }} 
-              />
-            ) : (
-              <div style={{ width: 28, height: 28, borderRadius: "50%", background: `linear-gradient(135deg, #7B51CC, #8b5cf6)`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 10, fontWeight: 800 }}>
-                {article.authorAvatar || "LF"}
-              </div>
-            )}
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: dark ? "rgba(255,255,255,0.8)" : "#0f0f0f" }}>{article.author}</div>
-              <div style={{ fontSize: 11, color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>{article.readTime} read · {article.date}</div>
-            </div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)" }}>By {article.author}</div>
+            <div style={{ fontSize: 11, color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>· {article.readTime} read</div>
           </div>
           <div style={{ color: color, fontSize: 18, transition: "transform 0.15s", transform: hov ? "translateX(4px)" : "none" }}>→</div>
         </div>
