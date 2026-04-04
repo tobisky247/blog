@@ -99,7 +99,7 @@ export function GhostButton({ children, onClick, dark }) {
 export function ArticleCard({ article, dark, onRead, featured = false }) {
   const [hov, setHov] = useState(false);
   const isMobile = useIsMobile(600);
-  const catColors = { "Make Money": "#7B51CC", "Growth": "#8b5cf6", "Guides": "#0ea5e9" };
+  const catColors = { "Make Money": "#059669", "Growth": "#D946EF", "Guides": "#0284C7" };
   const color = catColors[article.category] || "#7B51CC";
   return (
     <div

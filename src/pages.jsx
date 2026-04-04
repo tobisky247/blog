@@ -320,7 +320,7 @@ export function HomePage({ dark, onRead, setPage }) {
   });
   const featured = ARTICLES.filter(a => a.featured);
   const trending = ARTICLES.filter(a => a.trending);
-  const catColors = { "Make Money": "#7B51CC", "Growth": "#8b5cf6", "Guides": "#0ea5e9" };
+  const catColors = { "Make Money": "#059669", "Growth": "#D946EF", "Guides": "#0284C7" };
 
   return (
     <div style={{ overflowX: "hidden", width: "100%" }}>
@@ -331,7 +331,7 @@ export function HomePage({ dark, onRead, setPage }) {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {/* Hero text block — narrower for readability, but left-aligned with container */}
           <div style={{ opacity: heroInView ? 1 : 0, transform: heroInView ? "translateY(0)" : "translateY(40px)", transition: "all 0.7s ease" }}>
-            <div style={{ marginBottom: 20 }}>
+            <div style={{ marginBottom: 32 }}>
               <Badge><Icon name="fire" size={14} color="#fff" style={{ marginRight: 6 }} /> Creator Education Platform</Badge>
             </div>
             <h1 style={{ margin: "0 0 20px", fontSize: "clamp(36px, 6vw, 68px)", fontWeight: 800, lineHeight: 1.1, fontFamily: "'Sora', sans-serif", color: dark ? "#fff" : "#0a0a0a", maxWidth: 760 }}>
@@ -540,22 +540,30 @@ export function HomePage({ dark, onRead, setPage }) {
               <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif" }}>Trending Now</h2>
               <div style={{ flex: 1, height: 1, background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)" }} />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 60 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 80 }}>
               {trending.map((a, i) => (
                 <div key={a.id} onClick={() => onRead(a)} style={{
                   background: dark ? "rgba(255,255,255,0.03)" : "#fff",
                   border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
-                  borderRadius: 14, padding: "18px 22px", cursor: "pointer",
-                  display: "flex", alignItems: "center", gap: 20, transition: "all 0.18s"
+                  borderRadius: 20, padding: "24px 32px", cursor: "pointer",
+                  display: "flex", alignItems: "center", gap: 32, transition: "all 0.18s"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateX(5px)";
+                  e.currentTarget.style.background = dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.01)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "none";
+                  e.currentTarget.style.background = dark ? "rgba(255,255,255,0.03)" : "#fff";
                 }}>
-                  <div style={{ fontSize: 28, fontWeight: 900, color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", minWidth: 40, fontFamily: "monospace" }}>0{i + 1}</div>
+                  <div style={{ fontSize: 32, fontWeight: 900, color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", minWidth: 60, fontFamily: "monospace" }}>0{i + 1}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: 4 }}><Badge color={catColors[a.category]}>{a.category}</Badge></div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif" }}>{a.title}</div>
+                    <div style={{ marginBottom: 16 }}><Badge color={catColors[a.category]}>{a.category}</Badge></div>
+                    <div style={{ fontSize: 17, fontWeight: 700, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif", lineHeight: 1.3 }}>{a.title}</div>
                   </div>
                   <div style={{ textAlign: "right", flexShrink: 0 }}>
-                    <div style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)" }}>{a.readTime} read</div>
-                    <div style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)" }}>{a.date}</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", marginBottom: 4 }}>{a.readTime} read</div>
+                    <div style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.35)" }}>{a.date}</div>
                   </div>
                 </div>
               ))}
@@ -897,7 +905,7 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
         </div>
   
         <article style={{ maxWidth: 760, margin: "0 auto", padding: "0 5vw 80px" }}>
-          <div style={{ marginBottom: 20, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+          <div style={{ marginBottom: 32, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
             <Badge color={color}>{article.category}</Badge>
             {article.trending && <Badge color="#f59e0b"><Icon name="fire" size={12} color="#fff" style={{ marginRight: 4 }} /> Trending</Badge>}
             <span style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)" }}>{article.readTime} read · {article.date}</span>
@@ -911,7 +919,17 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
   
           {/* Author block */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "20px 24px", background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)", borderRadius: 14, border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`, marginBottom: 40 }}>
-            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg, #7B51CC, #8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 16, fontWeight: 800, flexShrink: 0 }}>{article.authorAvatar}</div>
+            {article.authorAvatar && article.authorAvatar.includes("/") ? (
+              <img 
+                src={article.authorAvatar} 
+                alt={article.author} 
+                style={{ width: 48, height: 48, borderRadius: "50%", objectFit: "cover", flexShrink: 0, border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} 
+              />
+            ) : (
+              <div style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg, #7B51CC, #8b5cf6)", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 16, fontWeight: 800, flexShrink: 0 }}>
+                {article.authorAvatar || "LF"}
+              </div>
+            )}
             <div>
               <div style={{ fontWeight: 700, fontSize: 15, color: dark ? "#fff" : "#0f0f0f" }}>{article.author}</div>
               <div style={{ fontSize: 13, color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)" }}>{article.authorRole}</div>
@@ -973,7 +991,7 @@ export function HubPage({ dark, onRead, setPage }) {
         <section style={{ padding: "80px 5vw 40px", textAlign: "center", position: "relative", zIndex: 2 }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <Badge color="#7B51CC">Creator Hub</Badge>
-            <h1 style={{ margin: "24px 0 20px", fontSize: "clamp(32px, 6vw, 64px)", fontWeight: 800, fontFamily: "'Sora', sans-serif", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+            <h1 style={{ margin: "32px 0 20px", fontSize: "clamp(32px, 6vw, 64px)", fontWeight: 800, fontFamily: "'Sora', sans-serif", lineHeight: 1.1, letterSpacing: "-0.02em" }}>
               Start building your page <span style={{ background: "linear-gradient(135deg, #7B51CC, #9333ea)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>the right way</span>
             </h1>
             <p style={{ margin: "0 auto 40px", maxWidth: 640, fontSize: "clamp(16px, 2vw, 20px)", color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)", lineHeight: 1.6, fontWeight: 500 }}>
@@ -1782,7 +1800,7 @@ export function FreeCreatorsPage({ dark }) {
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8) 100%)" }} />
         <div style={{ position: "absolute", bottom: "10%", left: "5vw", maxWidth: 800 }}>
           <Badge>MONTHLY DIGEST</Badge>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, color: "#fff", margin: "16px 0", letterSpacing: "-0.03em" }}>
+          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, color: "#fff", margin: "24px 0", letterSpacing: "-0.03em" }}>
             Free Creator Accounts to Follow in {data.month}
           </h1>
         </div>
