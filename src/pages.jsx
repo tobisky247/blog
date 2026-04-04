@@ -558,11 +558,21 @@ export function HomePage({ dark, onRead, setPage }) {
                 }}>
                   <div style={{ fontSize: 32, fontWeight: 900, color: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)", minWidth: 60, fontFamily: "monospace" }}>0{i + 1}</div>
                   <div style={{ flex: 1 }}>
-                    <div style={{ marginBottom: 16 }}><Badge color={catColors[a.category]}>{a.category}</Badge></div>
+                    <div style={{ marginBottom: 12, display: "flex", alignItems: "center", gap: 12 }}>
+                      <Badge color={catColors[a.category]}>{a.category}</Badge>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                        {a.authorAvatar && a.authorAvatar.includes("/") ? (
+                          <img src={a.authorAvatar} alt={a.author} style={{ width: 18, height: 18, borderRadius: "50%", objectFit: "cover" }} />
+                        ) : (
+                           <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#7B51CC", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 8, color: "#fff" }}>{a.authorAvatar || "LF"}</div>
+                        )}
+                        <span style={{ fontSize: 13, fontWeight: 700, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.5)" }}>{a.author}</span>
+                      </div>
+                    </div>
                     <div style={{ fontSize: 17, fontWeight: 700, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif", lineHeight: 1.3 }}>{a.title}</div>
                   </div>
                   <div style={{ textAlign: "right", flexShrink: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)", marginBottom: 4 }}>{a.readTime} read</div>
+                    <div style={{ fontSize: 13, fontWeight: 600, color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)", marginBottom: 4 }}>{a.readTime} read</div>
                     <div style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.35)" }}>{a.date}</div>
                   </div>
                 </div>
