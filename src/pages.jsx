@@ -208,9 +208,9 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
     // AVN Detail View (Previous content)
     const avnPhotos = [
       { src: "/assets/creators/Quietlyvae.avn1.jpeg", alt: "QuietlyVae at AVN" },
-      { src: "/assets/AVN2.jpeg", alt: "Industry Networking" },
-      { src: "/assets/Quietlyvae.avn2.jpeg", alt: "Red Carpet Visibility" },
-      { src: "/assets/Quietlyvae.avn3.jpeg", alt: "Creator Community" }
+      { src: "/assets/events/AVN2.jpeg", alt: "Industry Networking" },
+      { src: "/assets/events/Quietlyvae.avn2.jpeg", alt: "Red Carpet Visibility" },
+      { src: "/assets/events/Quietlyvae.avn3.jpeg", alt: "Creator Community" }
     ];
     
     return (
@@ -221,7 +221,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
         {/* Hero */}
         <section style={{ padding: isMobile ? "60px 5vw" : "120px 5vw", background: dark ? "#0a0a0a" : "#fff", textAlign: "center", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, position: "relative", overflow: "hidden" }}>
-          <div style={{ position: "absolute", inset: 0, opacity: 0.2, background: "url('/assets/Quietlyvae.avn.jpeg') center/cover no-repeat", filter: "blur(40px) brightness(0.7)" }} />
+          <div style={{ position: "absolute", inset: 0, opacity: 0.2, background: "url('/assets/events/Quietlyvae.avn.jpeg') center/cover no-repeat", filter: "blur(40px) brightness(0.7)" }} />
           <div style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}>
             <Badge>2026 AVN · LAS VEGAS</Badge>
             <h1 style={{ fontSize: "clamp(30px, 6vw, 64px)", fontWeight: 800, margin: "24px 0", lineHeight: 1.1, letterSpacing: "-0.03em" }}>LuvlyFans @ the <span style={{ color: "#7B51CC" }}>AVN Awards</span></h1>
@@ -231,7 +231,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
         {/* Hero Image */}
         <section style={{ maxWidth: 1100, margin: isMobile ? "0 auto 40px" : "-60px auto 80px", padding: "0 5vw", position: "relative", zIndex: 10 }}>
-          <img src="/assets/Quietlyvae.avn.jpeg" alt="LuvlyFans @ AVN" style={{ width: "100%", height: isMobile ? 300 : 500, objectFit: "cover", borderRadius: isMobile ? 24 : 32, boxShadow: "0 40px 100px rgba(0,0,0,0.3)", border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} />
+          <img src="/assets/events/Quietlyvae.avn.jpeg" alt="LuvlyFans @ AVN" style={{ width: "100%", height: isMobile ? 300 : 500, objectFit: "cover", borderRadius: isMobile ? 24 : 32, boxShadow: "0 40px 100px rgba(0,0,0,0.3)", border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} />
         </section>
 
         {/* Content */}
@@ -1566,7 +1566,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               
               {/* Mockup 1: Discovery Feed */}
               <div style={{ margin: "48px 0" }}>
-                <img src="/assets/spotlight2.png" alt="Discovery Feed Mockup" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
+                <img src="/assets/promotions/spotlight2.png" alt="Discovery Feed Mockup" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
                 <div style={{ fontSize: 13, opacity: 0.5, marginTop: 16, textAlign: "center", fontStyle: "italic" }}>
                   A high-fidelity screenshot of the LuvlyFans Discovery Feed highlighting how spotlighted posts are surfaced to new fans.
                 </div>
@@ -1606,8 +1606,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               {/* Mockup 2: Activation Button */}
               <div style={{ margin: "64px 0" }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                  <img src="/assets/spotlight3.png" alt="Spotlight Activation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
-                  <img src="/assets/spotlight4.png" alt="Spotlight Confirmation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
+                  <img src="/assets/promotions/spotlight3.png" alt="Spotlight Activation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
+                  <img src="/assets/promotions/spotlight4.png" alt="Spotlight Confirmation" style={{ width: "100%", borderRadius: 16, boxShadow: dark ? "0 10px 30px rgba(0,0,0,0.3)" : "0 10px 20px rgba(0,0,0,0.08)" }} />
                 </div>
                 <div style={{ fontSize: 13, opacity: 0.5, marginTop: 16, textAlign: "center", fontStyle: "italic" }}>
                   Close-up UI showing the Spotlight toggle within post settings and the final activation confirmation.
@@ -1644,7 +1644,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
         {/* Hero Image */}
         <section style={{ maxWidth: 800, margin: "-40px auto 0", padding: "0 5vw", position: "relative", zIndex: 10 }}>
-           <img src="/assets/Stories.png" alt="Stories on LuvlyFans" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
+           <img src="/assets/promotions/Stories.png" alt="Stories on LuvlyFans" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
         </section>
 
         {/* Main Content */}

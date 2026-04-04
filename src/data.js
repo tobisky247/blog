@@ -176,7 +176,7 @@ export const EVENTS = [
   {
     id: 1,
     title: "LuvlyFans at the AVN Awards: Celebrating Creators",
-    thumbnail: "/assets/Quietlyvae.avn.jpeg",
+    thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
     date: "January 18, 2026",
     location: "Las Vegas, NV",
     excerpt: "LuvlyFans creator QuietlyVae represents the next generation of professional talent at the industry's largest event.",
@@ -185,7 +185,7 @@ export const EVENTS = [
   {
     id: 2,
     title: "Spring Creator Summit 2026: London",
-    thumbnail: "/assets/avn-1.png",
+    thumbnail: "/assets/promotions/avn-1.png",
     date: "April 12, 2026",
     location: "London, UK",
     excerpt: "A direct look at the exclusive networking and brand-building workshops from our London flagship event.",
@@ -194,7 +194,7 @@ export const EVENTS = [
   {
     id: 3,
     title: "LuvlyFans x Creator Camp: Ibiza 2026 Recap",
-    thumbnail: "/assets/AVN2.jpeg",
+    thumbnail: "/assets/events/AVN2.jpeg",
     date: "June 05, 2026",
     location: "Ibiza, Spain",
     excerpt: "Celebrating summer success with our top performing creators at the LuvlyFans Creator Camp retreat.",
@@ -206,7 +206,7 @@ export const FEATURES = [
   {
     id: 1,
     title: "Spotlight: Amplify Your Global Reach",
-    thumbnail: "/assets/spotlight4.png",
+    thumbnail: "/assets/promotions/spotlight4.png",
     date: "New Feature",
     location: "Platform Tool",
     excerpt: "Break outside your follower count and get discovered by thousands of new fans across the LuvlyFans network.",
@@ -215,7 +215,7 @@ export const FEATURES = [
   {
     id: 2,
     title: "Stories: Share the Moment",
-    thumbnail: "/assets/Stories.png",
+    thumbnail: "/assets/promotions/Stories.png",
     date: "Available Now",
     location: "Growth Tool",
     excerpt: "Stay present between posts. Share short, temporary updates that give fans a more natural connection to your day.",
@@ -224,7 +224,7 @@ export const FEATURES = [
   {
     id: 3,
     title: "Dynamic Subscriber Tiers",
-    thumbnail: "/assets/Quietlyvae.avn.jpeg",
+    thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
     date: "Coming Soon",
     location: "Revenue Tool",
     excerpt: "Reward your loyal fans with custom access levels, digital perks, and multi-tier subscription models.",
@@ -295,14 +295,14 @@ export const FREE_CREATORS_DIGEST = [
       }
     ],
     pastRecaps: [
-      { month: "March 2026", thumbnail: "/assets/AVN.jpeg" },
-      { month: "February 2026", thumbnail: "/assets/AVN2.jpeg" },
-      { month: "January 2026", thumbnail: "/assets/avn-1.png" },
-      { month: "December 2025", thumbnail: "/assets/Quietlyvae.avn1.jpeg" },
-      { month: "November 2025", thumbnail: "/assets/Quietlyvae.avn2.jpeg" },
-      { month: "October 2025", thumbnail: "/assets/Quietlyvae.avn3.jpeg" },
-      { month: "September 2025", thumbnail: "/assets/Quietlyvae.avn.jpeg" },
-      { month: "August 2025", label: "Launch Month", thumbnail: "/assets/AVN.jpeg" }
+      { month: "March 2026", thumbnail: "/assets/events/AVN.jpeg" },
+      { month: "February 2026", thumbnail: "/assets/events/AVN2.jpeg" },
+      { month: "January 2026", thumbnail: "/assets/promotions/avn-1.png" },
+      { month: "December 2025", thumbnail: "/assets/events/Quietlyvae.avn1.jpeg" },
+      { month: "November 2025", thumbnail: "/assets/events/Quietlyvae.avn2.jpeg" },
+      { month: "October 2025", thumbnail: "/assets/events/Quietlyvae.avn3.jpeg" },
+      { month: "September 2025", thumbnail: "/assets/events/Quietlyvae.avn.jpeg" },
+      { month: "August 2025", label: "Launch Month", thumbnail: "/assets/events/AVN.jpeg" }
     ]
   }
 ];
