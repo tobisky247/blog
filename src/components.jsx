@@ -158,14 +158,14 @@ export function EmailCapture({ dark }) {
   
   // Custom avatars for the side bubbles - expanded to 8 total
   const avatars = [
-    { src: "/src/assets/creators/Ellie_bee.png", size: isMobile ? 60 : 100, top: "8%", left: "4%", delay: "0s" },
-    { src: "/src/assets/creators/quietly-vae.png", size: isMobile ? 70 : 110, top: "35%", left: "-2%", delay: "0.2s" },
-    { src: "/src/assets/creators/KrookedOrchid.png", size: isMobile ? 50 : 85, bottom: "12%", left: "7%", delay: "0.4s" },
-    { src: "/src/assets/creators/Andibunni.png", size: isMobile ? 65 : 120, top: "30%", right: "-1%", delay: "0.6s" },
-    { src: "/src/assets/creators/Ellie_bee.png", size: isMobile ? 55 : 95, bottom: "6%", right: "6%", delay: "0.8s" },
-    { src: "/src/assets/creators/quietly-vae.png", size: 60, top: "15%", right: "12%", delay: "1s" }, // Added quietly-vae.png
-    { src: "/src/assets/creators/Andibunni.png", size: 70, bottom: "25%", right: "15%", delay: "1.2s" },
-    { src: "/src/assets/creators/quietly-vae.png", size: 55, top: "12%", left: "18%", delay: "1.4s" }, // Added quietly-vae.png
+    { src: "/assets/creators/Ellie_bee.png", size: isMobile ? 60 : 100, top: "8%", left: "4%", delay: "0s" },
+    { src: "/assets/creators/quietly-vae.png", size: isMobile ? 70 : 110, top: "35%", left: "-2%", delay: "0.2s" },
+    { src: "/assets/creators/KrookedOrchid.png", size: isMobile ? 50 : 85, bottom: "12%", left: "7%", delay: "0.4s" },
+    { src: "/assets/creators/Andibunni.png", size: isMobile ? 65 : 120, top: "30%", right: "-1%", delay: "0.6s" },
+    { src: "/assets/creators/Zozo.png", size: isMobile ? 55 : 95, bottom: "6%", right: "6%", delay: "0.8s" },
+    { src: "/assets/creators/Dollia Sakura.png", size: 60, top: "15%", right: "12%", delay: "1s" },
+    { src: "/assets/creators/Loulalou.png", size: 70, bottom: "25%", right: "15%", delay: "1.2s" },
+    { src: "/assets/creators/quietly-vae.png", size: 55, top: "12%", left: "18%", delay: "1.4s" },
   ];
 
   return (
