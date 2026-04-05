@@ -1,10 +1,16 @@
 /* Minimal base styles to ensure the app works as expected */
-body {
+html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Prevent any element from causing horizontal scroll */
+img, video, iframe, table {
+  max-width: 100%;
 }

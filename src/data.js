@@ -251,7 +251,7 @@ export const FEATURES = [
 export const FREE_CREATORS_DIGEST = [
   {
     month: new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(new Date()),
-    hero: "/assets/creators/Creator hero.png",
+    hero: "/assets/creators/creator-hero.png",
     featured: [
       {
         id: 1, name: "QuietlyVae", handle: "@quietlyvae", type: "QuietlyVae",

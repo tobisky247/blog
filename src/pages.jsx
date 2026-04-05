@@ -37,6 +37,21 @@ export function Nav({ dark, setDark, page, setPage }) {
     };
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const navLinks = [
     { label: "Blog", p: "home" },
     { 
@@ -128,9 +143,29 @@ export function Nav({ dark, setDark, page, setPage }) {
           )}
 
           <div style={{ display: "flex", gap: 10, alignItems: "center", zIndex: 1001 }}>
-            <button onClick={() => setDark(!dark)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: dark ? "#fbbf24" : "#6b7280", padding: "6px 10px", display: "flex", alignItems: "center" }}>
-              <Icon name={dark ? "sun" : "moon"} size={20} color={dark ? "#fbbf24" : "#6b7280"} />
-            </button>
+            {/* Dark mode toggle — pill switch on desktop */}
+            {!isMobile && (
+              <button
+                onClick={() => setDark(!dark)}
+                title={dark ? "Switch to light mode" : "Switch to dark mode"}
+                style={{
+                  width: 52, height: 28, borderRadius: 99, border: "none", cursor: "pointer", outline: "none",
+                  background: dark ? "#7B51CC" : "#e5e7eb",
+                  position: "relative", transition: "background 0.3s", flexShrink: 0
+                }}
+              >
+                <div style={{
+                  position: "absolute", top: 3, left: dark ? 25 : 3,
+                  width: 22, height: 22, borderRadius: "50%",
+                  background: "#fff",
+                  transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: 12, boxShadow: "0 1px 4px rgba(0,0,0,0.25)"
+                }}>
+                  {dark ? "🌙" : "☀️"}
+                </div>
+              </button>
+            )}
             {!isMobile && <CTAButton size="sm" onClick={() => window.open('https://luvlyfans.com/', '_blank')}>Start Earning</CTAButton>}
             
             {/* Mobile Toggle */}
@@ -150,49 +185,112 @@ export function Nav({ dark, setDark, page, setPage }) {
           </div>
         </div>
 
-        {/* Mobile Menu Drawer */}
+        {/* Mobile Menu — Full-Screen Backdrop + Drawer */}
         {isMobile && (
-          <div style={{
-            position: "fixed", top: 64, left: 0, width: "100%", height: "calc(100vh - 64px)",
-            background: dark ? "#0a0a0a" : "#fff",
-            zIndex: 1000, padding: "20px 5vw",
-            transform: menuOpen ? "translateX(0)" : "translateX(100%)",
-            transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            overflowY: "auto", display: "flex", flexDirection: "column", gap: 10
-          }}>
-            {navLinks.map(link => (
-              <div key={link.label}>
-                {link.sub ? (
-                  <div style={{ marginBottom: 20 }}>
-                    <div style={{ fontSize: 12, fontWeight: 800, color: "#7B51CC", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12, paddingLeft: 12 }}>{link.label}</div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                      {link.sub.map(s => (
-                        <button key={s.p} onClick={() => { setPage(s.p); setMenuOpen(false); window.scrollTo(0,0); }} style={{
-                          width: "100%", textAlign: "left", padding: "14px 16px", borderRadius: 16,
-                          background: dark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
-                          border: "none", color: dark ? "#fff" : "#000", fontSize: 15, fontWeight: 600,
-                          display: "flex", alignItems: "center", gap: 12
-                        }}>
-                          {s.icon && <span style={{ fontSize: 18 }}>{s.icon}</span>}
-                          {s.label}
-                        </button>
-                      ))}
+          <>
+            {/* Backdrop: covers entire page behind the drawer */}
+            <div 
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: "fixed", inset: 0,
+                background: "rgba(0,0,0,0.85)",
+                zIndex: 1999,
+                opacity: menuOpen ? 1 : 0,
+                pointerEvents: menuOpen ? "all" : "none",
+                transition: "opacity 0.3s ease"
+              }} 
+            />
+            {/* Drawer */}
+            <div style={{
+              position: "fixed", top: 0, left: 0, width: "100%", height: "100vh",
+              background: dark ? "#0a0a0a" : "#fff",
+              zIndex: 2000, padding: "0 5vw 40px",
+              transform: menuOpen ? "translateX(0)" : "translateX(100%)",
+              transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+              overflowY: "auto", display: "flex", flexDirection: "column", gap: 10
+            }}>
+
+              {/* Drawer Header — Logo, Toggle, Close */}
+              <div style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "18px 0 24px", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+                marginBottom: 12, flexShrink: 0
+              }}>
+                <button onClick={() => { setPage("home"); setMenuOpen(false); }} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+                  <Logo dark={dark} />
+                </button>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  {/* Dark mode pill toggle */}
+                  <button
+                    onClick={() => setDark(!dark)}
+                    title={dark ? "Switch to light mode" : "Switch to dark mode"}
+                    style={{
+                      width: 52, height: 28, borderRadius: 99, border: "none", cursor: "pointer", outline: "none",
+                      background: dark ? "#7B51CC" : "#e5e7eb",
+                      position: "relative", transition: "background 0.3s", flexShrink: 0
+                    }}
+                  >
+                    <div style={{
+                      position: "absolute", top: 3, left: dark ? 25 : 3,
+                      width: 22, height: 22, borderRadius: "50%",
+                      background: "#fff",
+                      transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 12, boxShadow: "0 1px 4px rgba(0,0,0,0.25)"
+                    }}>
+                      {dark ? "🌙" : "☀️"}
                     </div>
-                  </div>
-                ) : (
-                  <button onClick={() => { setPage(link.p); setMenuOpen(false); window.scrollTo(0,0); }} style={{
-                    width: "100%", textAlign: "left", padding: "16px", borderRadius: 16,
-                    background: page === link.p ? (dark ? "rgba(123,81,204,0.15)" : "rgba(123,81,204,0.05)") : "transparent",
-                    border: "none", color: page === link.p ? "#7B51CC" : (dark ? "#fff" : "#000"),
-                    fontSize: 18, fontWeight: 700, marginBottom: 5
-                  }}>{link.label}</button>
-                )}
+                  </button>
+                  {/* Close button */}
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      width: 36, height: 36, borderRadius: "50%",
+                      background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)",
+                      border: "none", cursor: "pointer",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: 18, color: dark ? "#fff" : "#000", fontWeight: 300, lineHeight: 1
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
               </div>
-            ))}
-            <div style={{ marginTop: "auto", paddingBottom: 40 }}>
-              <CTAButton block onClick={() => { setPage("home"); setMenuOpen(false); }}>Start Earning Now</CTAButton>
+
+              {navLinks.map(link => (
+                <div key={link.label}>
+                  {link.sub ? (
+                    <div style={{ marginBottom: 20 }}>
+                      <div style={{ fontSize: 12, fontWeight: 800, color: "#7B51CC", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12, paddingLeft: 12 }}>{link.label}</div>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                        {link.sub.map(s => (
+                          <button key={s.p} onClick={() => { setPage(s.p); setMenuOpen(false); window.scrollTo(0,0); }} style={{
+                            width: "100%", textAlign: "left", padding: "14px 16px", borderRadius: 16,
+                            background: dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
+                            border: "none", color: dark ? "#fff" : "#000", fontSize: 15, fontWeight: 600,
+                            display: "flex", alignItems: "center", gap: 12, cursor: "pointer"
+                          }}>
+                            {s.icon && <Icon name={s.icon} size={18} color="#7B51CC" />}
+                            {s.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <button onClick={() => { setPage(link.p); setMenuOpen(false); window.scrollTo(0,0); }} style={{
+                      width: "100%", textAlign: "left", padding: "16px", borderRadius: 16,
+                      background: page === link.p ? (dark ? "rgba(123,81,204,0.15)" : "rgba(123,81,204,0.05)") : "transparent",
+                      border: "none", color: page === link.p ? "#7B51CC" : (dark ? "#fff" : "#000"),
+                      fontSize: 18, fontWeight: 700, marginBottom: 5, cursor: "pointer"
+                    }}>{link.label}</button>
+                  )}
+                </div>
+              ))}
+              <div style={{ marginTop: "auto", paddingBottom: 40 }}>
+                <CTAButton block onClick={() => { window.open('https://luvlyfans.com/', '_blank'); setMenuOpen(false); }}>Start Earning Now</CTAButton>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </nav>
     </>
@@ -2006,18 +2104,26 @@ export function FreeCreatorsPage({ dark }) {
   const data = FREE_CREATORS_DIGEST[0];
   const isMobile = useIsMobile();
   return (
-    <div style={{ background: dark ? "#0a0a0a" : "#fff", color: dark ? "#fff" : "#111", overflowX: "hidden" }}>
+    <div style={{ background: dark ? "#0a0a0a" : "#fff", color: dark ? "#fff" : "#111", overflowX: "hidden", maxWidth: "100vw", width: "100%" }}>
       {/* Hero Section */}
-      <section style={{ position: "relative", height: "70vh", overflow: "hidden" }}>
-        <img src={data.hero} alt="Creator Digest Hero" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.8, filter: "brightness(0.7)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8) 100%)" }} />
-        <div style={{ position: "absolute", bottom: "10%", left: "5vw", maxWidth: 800 }}>
-          <Badge>MONTHLY DIGEST</Badge>
-          <h1 style={{ fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 900, color: "#fff", margin: "24px 0", letterSpacing: "-0.03em" }}>
-            Free Creator Accounts to Follow in {data.month}
-          </h1>
-        </div>
-      </section>
+      <div style={{ overflowX: "hidden", width: "100%", maxWidth: "100vw" }}>
+        <section style={{ position: "relative", height: "70vh", overflow: "hidden", width: "100%" }}>
+          <div style={{ 
+            position: "absolute", inset: 0,
+            backgroundImage: `url("${data.hero}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            filter: "brightness(0.65)"
+          }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8) 100%)" }} />
+          <div style={{ position: "absolute", bottom: "10%", left: "5vw", right: "5vw", maxWidth: 800 }}>
+            <Badge>MONTHLY DIGEST</Badge>
+            <h1 style={{ fontSize: "clamp(28px, 5vw, 72px)", fontWeight: 900, color: "#fff", margin: "24px 0", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+              Free Creator Accounts to Follow in {data.month}
+            </h1>
+          </div>
+        </section>
+      </div>
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 5vw" }}>
         {/* Intro */}
