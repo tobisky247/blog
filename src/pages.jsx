@@ -204,6 +204,104 @@ export function Nav({ dark, setDark, page, setPage }) {
 export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
   const isMobile = useIsMobile();
 
+  // DETAIL VIEW FOR INTRODUCTION (Lustful Ladies & Perspective)
+  if (selectedEvent === 4) {
+    const lustfulPhotos = [
+      { src: "/assets/creators/Loulalou.png", alt: "CEO Lou" },
+      { src: "/assets/events/AVN.jpeg", alt: "Industry Networking" },
+      { src: "/assets/creators/Zozo.png", alt: "Creator Community" },
+      { src: "/assets/events/AVN2.jpeg", alt: "Atmosphere" }
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button onClick={() => { setSelectedEvent(null); window.scrollTo(0, 0); }} style={{ margin: isMobile ? "24px 5vw 0" : "24px 5vw", background: "none", border: "none", color: "#7B51CC", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+          ← Back to Events
+        </button>
+
+        {/* Hero */}
+        <section style={{ padding: isMobile ? "60px 5vw" : "120px 5vw", background: dark ? "#0a0a0a" : "#fff", textAlign: "center", borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, opacity: 0.2, background: "url('/assets/creators/Loulalou.png') center/cover no-repeat", filter: "blur(40px) brightness(0.7)" }} />
+          <div style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}>
+            <Badge>EDITORIAL PERSPECTIVE</Badge>
+            <h1 style={{ fontSize: "clamp(30px, 6vw, 64px)", fontWeight: 800, margin: "24px 0", lineHeight: 1.1, letterSpacing: "-0.02em" }}>Beyond the Screen: <span style={{ color: "#7B51CC" }}>Real-World Experiences</span></h1>
+            <p style={{ fontSize: isMobile ? 18 : 20, opacity: 0.8, maxWidth: 700, margin: "0 auto", lineHeight: 1.6, fontWeight: 500 }}>Real-world creator spaces are the foundation of community.</p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section style={{ maxWidth: 1100, margin: isMobile ? "0 auto 40px" : "-60px auto 80px", padding: "0 5vw", position: "relative", zIndex: 10 }}>
+          <img src="/assets/creators/Loulalou.png" alt="CEO Lou - Lustful Events" style={{ width: "100%", height: isMobile ? 300 : 500, objectFit: "cover", borderRadius: isMobile ? 24 : 32, boxShadow: "0 40px 100px rgba(0,0,0,0.3)", border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}` }} />
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2 style={{ fontSize: isMobile ? 26 : 36, fontWeight: 800, marginBottom: 28, lineHeight: 1.2, fontFamily: "'Sora', sans-serif" }}>Organised by Lustful Events CEO Lou (@iamloulalouagain)</h2>
+          
+          <div style={{ fontSize: 17, lineHeight: 1.9, color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a" }}>
+            <p>The creator space doesn’t just exist online. It also lives in real-world environments where people meet, talk, and understand the space they’re part of. The Lustful Ladies event was one of those environments. A place where creators came together in a more direct and personal setting.</p>
+            <p>LuvlyFans was in attendance, and it gave us the opportunity to step outside the platform and see things from a different perspective.</p>
+
+            <div style={{ margin: "40px 0", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
+              {lustfulPhotos.map((p, i) => (
+                <div key={i} style={{ borderRadius: 20, overflow: "hidden", aspectRatio: isMobile ? "16/9" : "4/3", background: "#222" }}>
+                  <img src={p.src} alt={p.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What Lustful Ladies Represents</h3>
+            <p>Lustful Ladies is part of a wider UK-based event series that brings together creators and audiences in a curated environment. What stood out wasn’t just the setting, but the mix of people. Creators at different stages. Different approaches. Different goals. All in one space. It’s a reminder that the creator world isn’t one-dimensional. It’s varied, and constantly evolving.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>Being in the Room Changes Perspective</h3>
+            <p>Online, everything can feel separate. Profiles, posts, and numbers don’t always reflect the full picture. Being in the room changes that. You start to see how creators present themselves, how they connect, and how differently people approach the same space. It adds context that you don’t always get from a screen.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Conversations That Matter</h3>
+            <p>What stood out most were the conversations. Creators spoke openly about what’s working for them, where they feel stuck, what they expect from platforms, and how they’re building income over time. These weren’t polished answers. They were honest, practical, and grounded in real experience.</p>
+            
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>What We Learned</h3>
+            <div style={{ background: dark ? "rgba(123,81,204,0.05)" : "rgba(123,81,204,0.03)", padding: isMobile ? "32px 24px" : "56px 48px", borderRadius: 24, border: `1px solid ${dark ? "rgba(123,81,204,0.15)" : "rgba(123,81,204,0.1)"}`, marginBottom: 40 }}>
+              <div style={{ display: "grid", gap: 56 }}>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>Creators Are Looking for Stability</h4>
+                  <p>A lot of the focus wasn’t on going viral. It was on consistency. Predictable income. Platforms that don’t change direction without warning. Creators are thinking more about long-term stability than short-term spikes.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>Visibility Is Still a Challenge</h4>
+                  <p>Even strong creators mentioned the same issue. Getting seen is difficult. Not because they aren’t creating, but because discovery is unpredictable. It reinforced how important visibility tools are. Posting alone isn’t always enough.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>There Is No Single Path</h4>
+                  <p>Every creator we spoke to was doing things differently. Some post frequently. Others focus on fewer, higher-quality updates. What works is often personal, not universal.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>Community Still Matters</h4>
+                  <p>Even in a digital space, creators value connection. Being able to talk, share experiences, and learn from others stood out as something people don’t get enough of online.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>Clarity From Platforms Is Important</h4>
+                  <p>Creators want clear rules, expectations, and earning structures. When things feel unclear, it slows people down. Simple and transparent systems build confidence.</p>
+                </div>
+                <div>
+                  <h4 style={{ color: "#7B51CC", fontSize: 20, marginBottom: 16, fontWeight: 800 }}>Small Improvements Go a Long Way</h4>
+                  <p>Not everything needs to be complex. Often it’s the smaller things that make the biggest difference: better onboarding, clear guidance, and simpler tools. These are the things creators notice and value.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
+            <p>These aren’t abstract takeaways. They directly shape how we think about the platform. From improving visibility through features like Spotlight, to keeping things simple and clear, these conversations help us stay aligned with what creators actually need. Being present in these spaces helps us build with more awareness, not assumptions.</p>
+            
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>Final Thoughts</h3>
+            <p>Events like Lustful Ladies are a reminder that the creator world is built on people first. The platforms, the features, and the numbers all come after that. What matters is understanding the space and the people within it.</p>
+            
+            <p style={{ fontWeight: 800, fontStyle: "italic", fontSize: 22, marginTop: 48, color: "#7B51CC" }}>“We’re glad we were there, and we’ll continue to listen, learn, and build with that in mind.”</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   if (selectedEvent === 1) {
     // AVN Detail View (Previous content)
     const avnPhotos = [
@@ -264,44 +362,11 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           <h1 style={{ fontSize: isMobile ? 32 : 48, fontWeight: 800, marginTop: 16 }}>Creators on the Move</h1>
         </header>
 
-        {/* Introduction Section */}
-        <section style={{ marginBottom: 80, borderLeft: `4px solid #7B51CC`, paddingLeft: isMobile ? 24 : 40, maxWidth: 800 }}>
-          <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 800, marginBottom: 24, fontFamily: "'Sora', sans-serif" }}>Introduction</h2>
-          <div style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.8, opacity: 0.85, display: "flex", flexDirection: "column", gap: 20 }}>
-            <p>The creator space doesn’t just exist online.</p>
-            <p>It also lives in real-world environments where people meet, talk, and build connections. The Lustful Ladies event is one of those spaces, bringing together creators in a more direct and personal setting.</p>
-            <p>LuvlyFans was in attendance, and it gave us the chance to step into that environment and see things from a different perspective.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12, color: "#7B51CC" }}>What Lustful Ladies Represents</h3>
-            <p>Lustful Ladies is part of the wider Lustful Events, a UK-based event brand focused on curated adult entertainment experiences. The events bring together creators, hosts, and attendees in a structured setting that blends social interaction with performance and presence.</p>
-            <p>What makes these events stand out is not just the environment, but the mix of people. Established creators, new faces, and those exploring the space all come together in one place.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Being in the Room Changes Perspective</h3>
-            <p>Online, everything can feel separated.</p>
-            <p>Profiles, posts, messages. It’s easy to forget that behind each page is a real person building something in their own way. Events like this bring that back into focus.</p>
-            <p>Being in the room allows you to see how creators present themselves, understand how they connect with others, and notice the different stages people are at. It adds context that doesn’t always come through online.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Conversations Beyond the Screen</h3>
-            <p>What stood out most were the conversations. Creators spoke about how they’re growing their audience, what’s working for them right now, and where they feel platforms fall short. These are the kinds of insights you don’t always see publicly. They’re honest, practical, and often more grounded than what’s shared online.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
-            <p>Attending the event wasn’t about visibility. It was about understanding. LuvlyFans is still growing, and being present in spaces like this helps us stay aligned with what creators actually need—not assumptions, but real conversations. That’s what shapes better decisions over time.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>A Space for Different Creator Journeys</h3>
-            <p>Not every creator at the event was in the same place. Some were just starting; others were refining what they’ve built. It’s a reminder that there is no single path, and that platforms need to support that variety rather than push one model.</p>
-
-            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Looking Ahead</h3>
-            <p>We’ll continue to show up. Not just online, but in spaces where creators are building, connecting, and learning. These moments help us stay grounded and informed as the platform evolves.</p>
-            
-            <p style={{ fontWeight: 700, fontStyle: "italic", marginTop: 20 }}>Events like Lustful Ladies are a reminder that the creator world is built on people first. The platforms, the content, the numbers all come later. We’re glad we were there.</p>
-          </div>
-        </section>
-
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(350px, 1fr))", gap: 24 }}>
           {EVENTS.map(event => (
             <div 
               key={event.id}
-              onClick={() => { if(event.id === 1) setSelectedEvent(1); window.scrollTo(0,0); }}
+              onClick={() => { if([1, 4].includes(event.id)) setSelectedEvent(event.id); window.scrollTo(0,0); }}
               style={{
                 borderRadius: 24, overflow: "hidden", 
                 background: dark ? "rgba(255,255,255,0.03)" : "#f9f9f9",
@@ -959,12 +1024,26 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
             </div>
           </div>
   
-          {/* Hero gradient banner */}
-          <div style={{ height: 220, borderRadius: 18, background: `linear-gradient(135deg, ${article.gradient.replace("from-", "").replace(" to-", ", ").split(",").map(c => { const map = { "rose-500": "#7B51CC", "pink-600": "#db2777", "amber-500": "#f59e0b", "orange-500": "#f97316", "violet-500": "#8b5cf6", "purple-600": "#9333ea", "cyan-500": "#06b6d4", "blue-600": "#2563eb", "emerald-500": "#10b981", "teal-600": "#0d9488", "fuchsia-500": "#d946ef", "rose-600": "#613db7" }; return map[c.trim()] || "#7B51CC"; }).join(", ")})`, marginBottom: 40, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ textAlign: "center", color: "#fff" }}>
-              <div style={{ fontSize: 48, marginBottom: 8 }}><Icon name="chart-line" size={48} color="#fff" /></div>
-              <div style={{ fontSize: 16, fontWeight: 700, opacity: 0.9 }}>Visual guide coming soon</div>
-            </div>
+          {/* Hero Image / Banner */}
+          <div style={{ 
+            height: isMobile ? 240 : 400, 
+            borderRadius: 18, 
+            background: `linear-gradient(135deg, ${article.gradient.replace("from-", "").replace(" to-", ", ").split(",").map(c => { const map = { "rose-500": "#7B51CC", "pink-600": "#db2777", "amber-500": "#f59e0b", "orange-500": "#f97316", "violet-500": "#8b5cf6", "purple-600": "#9333ea", "cyan-500": "#06b6d4", "blue-600": "#2563eb", "emerald-500": "#10b981", "teal-600": "#0d9488", "fuchsia-500": "#d946ef", "rose-600": "#613db7" }; return map[c.trim()] || "#7B51CC"; }).join(", ")})`, 
+            marginBottom: 40, 
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center",
+            position: "relative",
+            overflow: "hidden"
+          }}>
+            {article.thumbnail ? (
+              <img src={article.thumbnail} alt={article.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            ) : (
+              <div style={{ textAlign: "center", color: "#fff" }}>
+                <div style={{ fontSize: 48, marginBottom: 8 }}><Icon name="chart-line" size={48} color="#fff" /></div>
+                <div style={{ fontSize: 16, fontWeight: 700, opacity: 0.9 }}>Visual guide coming soon</div>
+              </div>
+            )}
           </div>
   
           {/* Article body */}
@@ -1749,6 +1828,120 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
     );
   }
 
+  if (selectedFeature === 3) {
+    // Media Vault Detail View
+    return (
+      <div style={{ paddingBottom: 100 }}>
+        <button onClick={() => { setSelectedFeature(null); window.scrollTo(0, 0); }} style={{ margin: "24px 5vw", background: "none", border: "none", color: "#7B51CC", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 8, fontSize: 14 }}>
+          ← Back to Features
+        </button>
+
+        {/* Hero */}
+        <header style={{ padding: "80px 5vw", background: dark ? "rgba(123,81,204,0.05)" : "#f9f6ff", borderBottom: `1px solid ${dark ? "rgba(123,81,204,0.1)" : "rgba(123,81,204,0.08)"}` }}>
+          <div style={{ maxWidth: 800, margin: "0 auto" }}>
+            <Badge>CREATOR TOOL</Badge>
+            <h1 style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 800, margin: "24px 0", lineHeight: 1.1 }}>Introducing Media Vault: Store, Organise, and Reuse Your Content</h1>
+            <p style={{ fontSize: 18, opacity: 0.7, lineHeight: 1.6 }}>Creating content takes time. Uploading, organising, and reusing it shouldn't take just as long. Media Vault is where your content library lives — always organised, always ready.</p>
+          </div>
+        </header>
+
+        {/* Hero Image */}
+        <section style={{ maxWidth: 800, margin: "-40px auto 0", padding: "0 5vw", position: "relative", zIndex: 10 }}>
+          <img src="/assets/promotions/spotlight_Image.png" alt="Media Vault" style={{ width: "100%", borderRadius: 24, boxShadow: dark ? "0 20px 50px rgba(0,0,0,0.5)" : "0 20px 40px rgba(0,0,0,0.1)" }} />
+        </section>
+
+        {/* Main Content */}
+        <section style={{ maxWidth: 800, margin: "0 auto", padding: "80px 5vw" }}>
+          <div style={{ fontSize: 17, lineHeight: 1.8, color: dark ? "rgba(255,255,255,0.8)" : "#333" }}>
+
+            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 24px" }}>What Media Vault Is</h2>
+            <p>Media Vault is your personal content library inside LuvlyFans. It's the space where all your uploaded photos and videos live, ready to be used, reused, and repurposed without starting from scratch every time.</p>
+            <p>Think of it like a well-organised hard drive for your page — except it's built directly into the platform, accessible whenever you need it.</p>
+
+            <div style={{ margin: "48px 0", padding: 40, background: "#7B51CC", borderRadius: 32, color: "#fff" }}>
+              <h3 style={{ color: "#fff", marginBottom: 16, fontWeight: 800 }}>One Place. Everything In It.</h3>
+              <p>No more digging through old posts. No more re-uploading files you've already uploaded. Your media stays in one place so you can focus on what it's supposed to do — connect with your audience.</p>
+            </div>
+
+            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "48px 0 24px" }}>Why This Matters</h2>
+            <p>As your page grows, so does your content. Without structure, things start to pile up. What used to take a few minutes begins to take much longer, and that friction adds up over time.</p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 24, margin: "40px 0" }}>
+              {[
+                { t: "Files Get Lost", d: "Repeated uploads, scattered files, no clear system to find what you need." },
+                { t: "Posting Takes Longer", d: "Every post becomes its own admin task when there's no organised library behind it." },
+                { t: "Momentum Breaks", d: "Small inefficiencies compound. When posting is slow, consistency suffers." }
+              ].map((item, i) => (
+                <div key={i} style={{ padding: 24, borderRadius: 20, background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "transparent"}` }}>
+                  <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 8, color: "#7B51CC" }}>{item.t}</div>
+                  <div style={{ fontSize: 14, opacity: 0.6 }}>{item.d}</div>
+                </div>
+              ))}
+            </div>
+            <p>Media Vault removes that friction. Your content is always there, always accessible, and always ready to use.</p>
+
+            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "48px 0 24px" }}>How Creators Use It</h2>
+            <p>Media Vault is designed around how creators actually work — not how platforms assume they do.</p>
+            <div style={{ display: "grid", gap: 32, marginTop: 32 }}>
+              {[
+                { s: "Upload and Store in Advance", t: "Batch create your content and keep it in the Vault until you're ready to post. No pressure to post immediately after creating." },
+                { s: "Reuse Across Posts", t: "A photo that worked well in one context can work in another. Pull from your Vault instead of re-uploading the same file." },
+                { s: "Keep Everything Organised", t: "Everything you've uploaded is stored cleanly in one place. No searching through your feed to find something from three months ago." },
+                { s: "Prepare Content Ahead of Time", t: "Build up a library before a busy period. When you're ready to post, your content is already waiting for you." }
+              ].map((step, i) => (
+                <div key={i} style={{ display: "flex", gap: 20 }}>
+                  <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#7B51CC", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontWeight: 800, fontSize: 14 }}>{i+1}</div>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: 18, marginBottom: 6 }}>{step.s}</div>
+                    <p style={{ margin: 0, opacity: 0.7, fontSize: 15 }}>{step.t}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "48px 0 24px" }}>Before vs. After</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+              <div style={{ padding: 32, borderRadius: 20, background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8", border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.06)"}` }}>
+                <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 20, opacity: 0.5, textTransform: "uppercase", letterSpacing: "0.08em" }}>Without Media Vault</div>
+                {["Re-upload the same file every time", "Search through old posts to find content", "Lose time on small repetitive tasks", "Disrupted workflow between sessions"].map((t, i) => (
+                  <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 14, fontSize: 14, opacity: 0.7 }}>
+                    <span style={{ color: "#ef4444", fontWeight: 800, flexShrink: 0 }}>✕</span> {t}
+                  </div>
+                ))}
+              </div>
+              <div style={{ padding: 32, borderRadius: 20, background: dark ? "rgba(123,81,204,0.06)" : "#f3f0ff", border: `1px solid ${dark ? "rgba(123,81,204,0.2)" : "rgba(123,81,204,0.15)"}` }}>
+                <div style={{ fontWeight: 800, fontSize: 16, marginBottom: 20, color: "#7B51CC", textTransform: "uppercase", letterSpacing: "0.08em" }}>With Media Vault</div>
+                {["Pick from your library in seconds", "Everything is already organised and ready", "Post without friction or interruption", "Build content batches and post on schedule"].map((t, i) => (
+                  <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 14, fontSize: 14 }}>
+                    <span style={{ color: "#7B51CC", fontWeight: 800, flexShrink: 0 }}>✓</span> {t}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginTop: 64, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
+              <div style={{ padding: 40, background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8", borderRadius: 32 }}>
+                <Badge color="#7B51CC">💡 FOR CREATORS</Badge>
+                <h3 style={{ margin: "16px 0", fontSize: 22, fontWeight: 800 }}>Built for Batch Creators</h3>
+                <p style={{ fontSize: 15, opacity: 0.7 }}>If you create content in batches, Media Vault is the missing piece. Upload everything in one session, then post from your library throughout the week without touching a file again.</p>
+              </div>
+              <div style={{ padding: 40, background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8", borderRadius: 32 }}>
+                <Badge color="#0ea5e9">📋 BUILD CONSISTENCY</Badge>
+                <h3 style={{ margin: "16px 0", fontSize: 22, fontWeight: 800 }}>Consistency Needs Preparation</h3>
+                <p style={{ fontSize: 15, opacity: 0.7 }}>Showing up regularly is easier when your content is already ready. Media Vault supports consistent posting by reducing the friction between having content and sharing it.</p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 64, padding: "48px", background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8", borderRadius: 32, border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}` }}>
+              <Badge>FINAL THOUGHTS</Badge>
+              <p style={{ margin: "16px 0 0", fontWeight: 700, fontSize: 22, lineHeight: 1.3 }}>As you build more content, organisation becomes just as important as creation. Media Vault gives you the structure to do both — without slowing either one down.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   // List View (Same style as Events List)
   return (
     <div style={{ padding: "80px 5vw" }}>
@@ -1763,16 +1956,16 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           {FEATURES.map(f => (
             <div 
               key={f.id}
-              onClick={() => { if(f.id === 1 || f.id === 2) setSelectedFeature(f.id); window.scrollTo(0,0); }}
+              onClick={() => { if(f.id === 1 || f.id === 2 || f.id === 3) setSelectedFeature(f.id); window.scrollTo(0,0); }}
               style={{
                 borderRadius: 20, overflow: "hidden", 
                 background: dark ? "rgba(255,255,255,0.03)" : "#f9f9f9",
                 border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "transparent"}`,
-                cursor: (f.id === 1 || f.id === 2) ? "pointer" : "default", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                cursor: (f.id === 1 || f.id === 2 || f.id === 3) ? "pointer" : "default", transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                 position: "relative"
               }}
               onMouseEnter={(e) => {
-                if(f.id === 1 || f.id === 2) {
+                if(f.id === 1 || f.id === 2 || f.id === 3) {
                   e.currentTarget.style.transform = "translateY(-12px)";
                   e.currentTarget.style.boxShadow = dark ? "0 40px 80px rgba(0,0,0,0.6)" : "0 30px 60px rgba(0,0,0,0.1)";
                 }

@@ -6,6 +6,7 @@ export const ARTICLES = [
     excerpt: "Virality opens the door, but sustainability keeps it open. Learn the balance between capitalizing on attention and building a reliable base.",
     readTime: "8 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 30, 2026", featured: true, trending: true,
+    thumbnail: "/assets/homepage/creating sustainable income.jpg",
     gradient: "from-rose-500 to-pink-600",
   },
   {
@@ -15,6 +16,7 @@ export const ARTICLES = [
     excerpt: "Stop guessing. Here's the data-backed approach to pricing your tiers, PPV, and bundles.",
     readTime: "6 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 20, 2026", featured: true, trending: false,
+    thumbnail: "/assets/homepage/pricing-plan.jpg",
     gradient: "from-amber-500 to-orange-500",
   },
   {
@@ -33,6 +35,7 @@ export const ARTICLES = [
     excerpt: "Making money is not the same as making money consistently. Learn the habits, structure, and trust required for reliable monthly earnings.",
     readTime: "9 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 29, 2026", featured: true, trending: true,
+    thumbnail: "/assets/homepage/Building Consistent Monthly Income as a Creator.jpg",
     gradient: "from-cyan-500 to-blue-600",
   },
   {
@@ -51,6 +54,7 @@ export const ARTICLES = [
     excerpt: "Promotion works best when it's simple, consistent, and clear. Learn the best practices for social media, Reddit, and collaborations.",
     readTime: "7 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 30, 2026", featured: true, trending: false,
+    thumbnail: "/assets/homepage/promotion.jpg",
     gradient: "from-violet-500 to-purple-600",
   },
   {
@@ -60,6 +64,7 @@ export const ARTICLES = [
     excerpt: "Building a fanbase is less about quick wins and more about what you do repeatedly. Learn the difference between followers and subscribers, and how to build lasting trust.",
     readTime: "8 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 30, 2026", featured: true, trending: true,
+    thumbnail: "/assets/homepage/fans.jpg",
     gradient: "from-violet-500 to-purple-600",
   },
   {
@@ -69,6 +74,7 @@ export const ARTICLES = [
     excerpt: "Most creators post and hope. The ones who earn consistently? They do these five things instead. No gimmicks — just the quiet habits that actually move the needle.",
     readTime: "7 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Apr 3, 2026", featured: true, trending: true,
+    thumbnail: "/assets/homepage/plan.jpg",
     gradient: "from-rose-500 to-pink-600",
   },
   {
@@ -78,6 +84,7 @@ export const ARTICLES = [
     excerpt: "Fast payouts, real human support, and built-in growth tools. Discover why the biggest creators in the industry are choosing LuvlyFans as their long-term partner.",
     readTime: "5 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Apr 3, 2026", featured: true, trending: false,
+    thumbnail: "/assets/homepage/luvlfans-macbook.png",
     gradient: "from-blue-500 to-indigo-600",
   },
 ];
@@ -174,6 +181,15 @@ export const STATS = [
 
 export const EVENTS = [
   {
+    id: 4,
+    title: "Introduction: The Real-World Creator Environment",
+    thumbnail: "/assets/events/AVN.jpeg",
+    date: "April 05, 2026",
+    location: "Global Perspective",
+    excerpt: "Organised by Lustful Events CEO Lou (@iamloulalouagain), the Lustful Ladies space brings creators together for real-world connection and perspective.",
+    type: "Editorial"
+  },
+  {
     id: 1,
     title: "LuvlyFans at the AVN Awards: Celebrating Creators",
     thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
@@ -223,11 +239,11 @@ export const FEATURES = [
   },
   {
     id: 3,
-    title: "Dynamic Subscriber Tiers",
-    thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
-    date: "Coming Soon",
-    location: "Revenue Tool",
-    excerpt: "Reward your loyal fans with custom access levels, digital perks, and multi-tier subscription models.",
+    title: "Media Vault",
+    thumbnail: "/assets/promotions/spotlight_Image.png",
+    date: "Available Now",
+    location: "Creator Tool",
+    excerpt: "Creating content takes time. Managing it shouldn't. Media Vault keeps all your photos and videos in one place — ready to reuse, repost, and repurpose whenever you need.",
     type: "Monetization"
   }
 ];

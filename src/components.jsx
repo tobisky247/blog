@@ -118,17 +118,26 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
       {/* Card gradient header */}
       <div style={{
         height: isMobile ? 120 : (featured ? 220 : 180),
-        background: `linear-gradient(135deg, ${article.gradient.replace("from-", "").replace(" to-", ", ").split(",").map(c => {
-          const map = { "rose-500": "#7B51CC", "pink-600": "#db2777", "amber-500": "#f59e0b", "orange-500": "#f97316", "violet-500": "#8b5cf6", "purple-600": "#9333ea", "cyan-500": "#06b6d4", "blue-600": "#2563eb", "emerald-500": "#10b981", "teal-600": "#0d9488", "fuchsia-500": "#d946ef", "rose-600": "#613db7" }; return map[c.trim()] || "#7B51CC";
-        }).join(", ")})`,
+        background: article.thumbnail 
+          ? (dark ? "#0a0a0a" : "#f5f5f5") 
+          : `linear-gradient(135deg, ${article.gradient.replace("from-", "").replace(" to-", ", ").split(",").map(c => {
+            const map = { "rose-500": "#7B51CC", "pink-600": "#db2777", "amber-500": "#f59e0b", "orange-500": "#f97316", "violet-500": "#8b5cf6", "purple-600": "#9333ea", "cyan-500": "#06b6d4", "blue-600": "#2563eb", "emerald-500": "#10b981", "teal-600": "#0d9488", "fuchsia-500": "#d946ef", "rose-600": "#613db7" }; return map[c.trim()] || "#7B51CC";
+          }).join(", ")})`,
         display: "flex", alignItems: "flex-end", padding: "14px 18px",
-        position: "relative"
+        position: "relative",
+        overflow: "hidden"
       }}>
-        <div style={{ position: "absolute", top: 12, left: 16 }}>
+        <div style={{ position: "absolute", top: 12, left: 16, zIndex: 2 }}>
           <Badge color="#fff">{article.category}</Badge>
         </div>
         {article.trending && (
-          <div style={{ position: "absolute", top: 12, right: 16, background: "rgba(0,0,0,0.3)", backdropFilter: "blur(8px)", borderRadius: 99, padding: "3px 10px", color: "#fff", fontSize: 11, fontWeight: 700 }}>🔥</div>
+          <div style={{ position: "absolute", top: 12, right: 16, background: "rgba(0,0,0,0.3)", backdropFilter: "blur(8px)", borderRadius: 99, padding: "3px 10px", color: "#fff", fontSize: 11, fontWeight: 700, zIndex: 2 }}>🔥</div>
+        )}
+        {article.thumbnail && (
+          <>
+            <img src={article.thumbnail} alt={article.title} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }} />
+            <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.4), transparent 40%)", zIndex: 1 }} />
+          </>
         )}
       </div>
       <div style={{ padding: isMobile ? "16px" : "18px 20px 20px" }}>
