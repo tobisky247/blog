@@ -259,10 +259,43 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
   return (
     <div style={{ padding: isMobile ? "40px 5vw" : "80px 5vw" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <header style={{ marginBottom: isMobile ? 40 : 60 }}>
+        <header style={{ marginBottom: isMobile ? 40 : 80 }}>
           <Badge>INDUSTRY RECAPS</Badge>
           <h1 style={{ fontSize: isMobile ? 32 : 48, fontWeight: 800, marginTop: 16 }}>Creators on the Move</h1>
         </header>
+
+        {/* Introduction Section */}
+        <section style={{ marginBottom: 80, borderLeft: `4px solid #7B51CC`, paddingLeft: isMobile ? 24 : 40, maxWidth: 800 }}>
+          <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 800, marginBottom: 24, fontFamily: "'Sora', sans-serif" }}>Introduction</h2>
+          <div style={{ fontSize: isMobile ? 16 : 18, lineHeight: 1.8, opacity: 0.85, display: "flex", flexDirection: "column", gap: 20 }}>
+            <p>The creator space doesn’t just exist online.</p>
+            <p>It also lives in real-world environments where people meet, talk, and build connections. The Lustful Ladies event is one of those spaces, bringing together creators in a more direct and personal setting.</p>
+            <p>LuvlyFans was in attendance, and it gave us the chance to step into that environment and see things from a different perspective.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12, color: "#7B51CC" }}>What Lustful Ladies Represents</h3>
+            <p>Lustful Ladies is part of the wider Lustful Events, a UK-based event brand focused on curated adult entertainment experiences. The events bring together creators, hosts, and attendees in a structured setting that blends social interaction with performance and presence.</p>
+            <p>What makes these events stand out is not just the environment, but the mix of people. Established creators, new faces, and those exploring the space all come together in one place.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Being in the Room Changes Perspective</h3>
+            <p>Online, everything can feel separated.</p>
+            <p>Profiles, posts, messages. It’s easy to forget that behind each page is a real person building something in their own way. Events like this bring that back into focus.</p>
+            <p>Being in the room allows you to see how creators present themselves, understand how they connect with others, and notice the different stages people are at. It adds context that doesn’t always come through online.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Conversations Beyond the Screen</h3>
+            <p>What stood out most were the conversations. Creators spoke about how they’re growing their audience, what’s working for them right now, and where they feel platforms fall short. These are the kinds of insights you don’t always see publicly. They’re honest, practical, and often more grounded than what’s shared online.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
+            <p>Attending the event wasn’t about visibility. It was about understanding. LuvlyFans is still growing, and being present in spaces like this helps us stay aligned with what creators actually need—not assumptions, but real conversations. That’s what shapes better decisions over time.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>A Space for Different Creator Journeys</h3>
+            <p>Not every creator at the event was in the same place. Some were just starting; others were refining what they’ve built. It’s a reminder that there is no single path, and that platforms need to support that variety rather than push one model.</p>
+
+            <h3 style={{ fontSize: 22, fontWeight: 800, marginTop: 12 }}>Looking Ahead</h3>
+            <p>We’ll continue to show up. Not just online, but in spaces where creators are building, connecting, and learning. These moments help us stay grounded and informed as the platform evolves.</p>
+            
+            <p style={{ fontWeight: 700, fontStyle: "italic", marginTop: 20 }}>Events like Lustful Ladies are a reminder that the creator world is built on people first. The platforms, the content, the numbers all come later. We’re glad we were there.</p>
+          </div>
+        </section>
 
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(350px, 1fr))", gap: 24 }}>
           {EVENTS.map(event => (
