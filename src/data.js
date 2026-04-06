@@ -10,22 +10,23 @@ export const ARTICLES = [
     gradient: "from-rose-500 to-pink-600",
   },
   {
-    id: 2, slug: "pricing-strategies",
+    id: 2, slug: "pricing-strategy",
     category: "Make Money", tag: "make-money",
-    title: "The Pricing Strategy That 3x'd My Subscription Revenue",
-    excerpt: "Stop guessing. Here's the data-backed approach to pricing your tiers, PPV, and bundles.",
+    title: "A Pricing Strategy That Supports Consistent Subscription Income",
+    excerpt: "Stop guessing. Pricing isn't just about maximizing short-term spikes. Learn how to build a structure that feels sustainable and fair for the long run.",
     readTime: "6 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 20, 2026", featured: true, trending: false,
     thumbnail: "/assets/homepage/pricing-plan.jpg",
     gradient: "from-amber-500 to-orange-500",
   },
   {
-    id: 3, slug: "get-1000-subscribers",
+    id: 3, slug: "get-subscribers",
     category: "Growth", tag: "growth",
-    title: "Get Your First 1,000 Subscribers Without Buying Ads",
-    excerpt: "Organic growth tactics that actually work in 2026. Funnels, hooks, and the content formats dominating right now.",
+    title: "Get Your First Subscribers Without Buying Ads",
+    excerpt: "Most creators think they need a budget to start. They don't. Learn how to leverage your existing presence and platform tools to build your first base organically.",
     readTime: "10 min", author: "LuvlyFans Team", authorRole: "Platform",
     authorAvatar: "LF", date: "Mar 18, 2026", featured: false, trending: true,
+    thumbnail: "/assets/homepage/subscribers.jpg",
     gradient: "from-violet-500 to-purple-600",
   },
   {
@@ -87,6 +88,46 @@ export const ARTICLES = [
     thumbnail: "/assets/homepage/luvlfans-macbook.png",
     gradient: "from-blue-500 to-indigo-600",
   },
+  {
+    id: 11, slug: "setup-first-impressions",
+    category: "Guides", tag: "guides",
+    title: "Setting Up Your Page for First Impressions",
+    excerpt: "When someone lands on your page, they decide quickly whether to stay or leave. Learn how to build trust immediately with a clear profile.",
+    readTime: "5 min", author: "LuvlyFans Team", authorRole: "Platform",
+    authorAvatar: "LF", date: "Apr 6, 2026", featured: false, trending: false,
+    thumbnail: "/assets/homepage/page-set-up.jpg",
+    gradient: "from-emerald-500 to-teal-600",
+  },
+  {
+    id: 12, slug: "content-direction",
+    category: "Guides", tag: "guides",
+    title: "Choosing Your Content Direction",
+    excerpt: "You don’t need a perfect niche, but you do need a clear direction. Learn how to define what your page is about for prospective subscribers.",
+    readTime: "8 min", author: "LuvlyFans Team", authorRole: "Platform",
+    authorAvatar: "LF", date: "Apr 6, 2026", featured: false, trending: false,
+    thumbnail: "/assets/homepage/choosing-content.jpg",
+    gradient: "from-blue-500 to-indigo-600",
+  },
+  {
+    id: 13, slug: "first-30-days",
+    category: "Guides", tag: "guides",
+    title: "Your First 30 Days Plan",
+    excerpt: "Your first month is about building a foundation, not chasing results. Follow this 4-week structure to get your page ready for growth.",
+    readTime: "12 min", author: "LuvlyFans Team", authorRole: "Platform",
+    authorAvatar: "LF", date: "Apr 6, 2026", featured: false, trending: false,
+    thumbnail: "/assets/homepage/planning.jpg",
+    gradient: "from-violet-500 to-purple-600",
+  },
+  {
+    id: 14, slug: "pricing-content",
+    category: "Guides", tag: "guides",
+    title: "Pricing Your Content",
+    excerpt: "Pricing affects who subscribes and how long they stay. Learn the simple structure that supports consistency and reduces pressure.",
+    readTime: "6 min", author: "LuvlyFans Team", authorRole: "Platform",
+    authorAvatar: "LF", date: "Apr 6, 2026", featured: false, trending: false,
+    thumbnail: "/assets/homepage/pricing.jpg",
+    gradient: "from-rose-500 to-pink-600",
+  },
 ];
 
 export const CATEGORIES = ["All", "Make Money", "Growth", "Guides"];
@@ -107,10 +148,10 @@ export const HUB_MODULES = [
       "Choose a realistic subscription price"
     ],
     guides: [
-      { title: "Setting Up Your Page for First Impressions", time: "5 min" },
-      { title: "Choosing Your Content Direction", time: "8 min" },
-      { title: "Your First 30 Days Plan", time: "12 min" },
-      { title: "Pricing Your Content", time: "6 min" },
+      { title: "Setting Up Your Page for First Impressions", slug: "setup-first-impressions", time: "5 min" },
+      { title: "Choosing Your Content Direction", slug: "content-direction", time: "8 min" },
+      { title: "Your First 30 Days Plan", slug: "first-30-days", time: "12 min" },
+      { title: "Pricing Your Content", slug: "pricing-content", time: "6 min" },
     ]
   },
   {
@@ -128,10 +169,10 @@ export const HUB_MODULES = [
       "Make your profile clear and easy to understand"
     ],
     guides: [
-      { title: "How to Promote Your Profile", time: "10 min" },
-      { title: "Turning Followers into Subscribers", time: "9 min" },
-      { title: "Using Spotlight Effectively", time: "7 min" },
-      { title: "Content Scheduling Strategies", time: "11 min" },
+      { title: "How to Promote Your Profile", slug: "promote-your-profile", time: "10 min" },
+      { title: "Getting Your First Subscribers", slug: "get-subscribers", time: "10 min" },
+      { title: "Using Spotlight Effectively", slug: "luvlyfans-standard", time: "7 min" },
+      { title: "Content Scheduling Strategies", slug: "creator-habits", time: "11 min" },
     ]
   },
   {
@@ -149,10 +190,10 @@ export const HUB_MODULES = [
       "Stay consistent without burning out"
     ],
     guides: [
-      { title: "Subscription vs Pay-Per-View", time: "15 min" },
-      { title: "Retention vs Acquisition", time: "13 min" },
-      { title: "Pricing Your Content", time: "10 min" },
-      { title: "Long-Term Creator Sustainability", time: "8 min" },
+      { title: "Pricing Strategy", slug: "pricing-strategy", time: "6 min" },
+      { title: "Building Consistent Income", slug: "building-consistent-monthly-income", time: "13 min" },
+      { title: "Sustainable Growth", slug: "sustainable-monthly-income", time: "10 min" },
+      { title: "Building Your Fanbase", slug: "build-your-fanbase", time: "8 min" },
     ]
   },
 ];

@@ -1084,6 +1084,223 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
 
         <h2>A Community Built on Trust</h2>
         <p>The transition to LuvlyFans isn't just about better tools; it's about a better culture. We believe that when creators are supported, the entire ecosystem thrives. Join the thousands of creators who are making the switch to a platform that measures its success by yours.</p>
+      `,
+      "get-subscribers": `
+        <p>When you’re starting out, it’s easy to think you need ads to grow.</p>
+        <p>You don’t.</p>
+        <p>Most creators get their first subscribers without spending anything. What matters more is how clearly you present your page, how visible you are, and how easy it is for someone to decide to subscribe.</p>
+        <p>This is about building your first base, not scaling quickly.</p>
+
+        <h2>Start With People Who Already Know You</h2>
+        <p>Your first subscribers often come from places you’re already active. This might be social media followers, people who have interacted with your content before, or existing audiences on other platforms.</p>
+        <p>You don’t need a large following. You need a small group of people who already recognise you. Make it easy for them to find your page by:</p>
+        <ul>
+          <li>Adding your link to your bio</li>
+          <li>Mentioning your page naturally</li>
+          <li>Sharing simple updates about what you’re doing</li>
+        </ul>
+
+        <h2>Make Your Page Worth Subscribing To</h2>
+        <p>Before focusing on promotion, make sure your page is ready. If someone clicks your link, they should see a clear profile, a short, understandable bio, and enough content to explore (6–12 posts is a good start).</p>
+        <p>First impressions matter more than traffic. Even a small number of visitors can convert if your page feels complete.</p>
+
+        <h2>Use Content as Your Promotion</h2>
+        <p>Promotion doesn’t always mean announcing your page. It can be as simple as sharing short previews, clips or highlights, and small insights into your content. You’re not trying to show everything. You’re giving people a reason to be curious.</p>
+
+        <h2>Be Consistent, Even if It’s Small</h2>
+        <p>You don’t need to post everywhere, every day. But you do need to show up regularly.</p>
+        <p>Consistency helps people remember you, trust that you’re active, and feel comfortable subscribing. Even a few consistent posts per week is enough to start building momentum.</p>
+
+        <h2>Use Visibility Tools on the Platform</h2>
+        <p>Once your page is set up, use the tools available to you. Features like Spotlight can help your content reach people who aren’t following you yet. This gives you exposure without relying only on external platforms.</p>
+        <p>Visibility creates opportunities. Your content converts them.</p>
+
+        <h2>Engage Early</h2>
+        <p>When your first subscribers arrive, how you respond matters. Simple actions like replying to messages, acknowledging support, and being present can make a difference in whether someone stays or leaves. Your first subscribers often shape your early growth.</p>
+
+        <h2>Avoid Overcomplicating It</h2>
+        <p>It’s easy to think you need a full strategy, perfect content, or a large audience. You don’t. You need a clear page, a small amount of content, consistency, and visibility. That’s enough to get started.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Your first subscribers don’t come from ads. They come from clarity, presence, and small, consistent actions over time. Once you have a foundation, you can build on it. But the beginning is usually simpler than it seems.</p>
+        <p>At LuvlyFans, the focus is on helping creators grow step by step, without needing to rely on paid promotion.</p>
+      `,
+      "pricing-strategy": `
+        <p>Pricing is often treated as a quick decision.</p>
+        <p>Set a number, move on, and focus on content. But over time, pricing tends to influence more than people expect. It affects who subscribes, how long they stay, and how stable your income becomes.</p>
+        <p>This isn’t about finding a perfect price. It’s about building a structure that works over time.</p>
+
+        <h2>Start With Sustainability, Not Optimism</h2>
+        <p>Many creators set prices based on what they hope to deliver. The problem is that expectations increase quickly. If your pricing is too high for what you can realistically maintain, it creates pressure and leads to inconsistency.</p>
+        <p>A more stable approach is:</p>
+        <ul>
+          <li>Price based on what you can consistently deliver</li>
+          <li>Keep expectations clear</li>
+          <li>Build from there</li>
+        </ul>
+        <p>Consistency tends to matter more than ambition.</p>
+
+        <h2>Think Beyond the First Subscription</h2>
+        <p>Getting someone to subscribe is only the first step. What matters more is whether they stay. If your pricing attracts people who expect more than you can provide, they’re more likely to leave quickly.</p>
+        <p>A slightly lower but realistic price often leads to longer subscriptions, better retention, and more predictable income.</p>
+
+        <h2>Use Structure Instead of Guesswork</h2>
+        <p>Pricing works better when it’s structured. A simple way to think about it: Subscription = your core content, while additional content = optional extras.</p>
+        <p>This gives you flexibility without making your page feel confusing. You don’t need to use every option immediately. Start simple and adjust over time.</p>
+
+        <h2>Avoid Constant Changes</h2>
+        <p>Changing your price too often creates uncertainty. Subscribers prefer stability. If you do adjust your pricing, do it gradually, give people time to understand, and keep things clear. Frequent changes can make your page feel inconsistent.</p>
+
+        <h2>Consider Who You Want to Attract</h2>
+        <p>Pricing shapes your audience. Lower pricing can attract more casual subscribers. Higher pricing can attract more committed ones. Neither is right or wrong, but each leads to a different type of experience.</p>
+        <p>Think about your content style, your posting frequency, and the kind of audience you want, then price accordingly.</p>
+
+        <h2>Retention Has More Impact Than Price</h2>
+        <p>Many creators focus on pricing as the main lever. In reality, retention often matters more. Things that improve retention include clear expectations, consistent posting, and good communication.</p>
+        <p>When people stay longer, income becomes more stable, even without changing your price.</p>
+
+        <h2>Small Adjustments Make a Difference</h2>
+        <p>Pricing doesn’t need to change dramatically. Often, small adjustments are enough: refining what’s included, improving how you present your value, or slightly adjusting your price over time. These changes tend to be more effective than large shifts.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Pricing is not about finding a number that maximises short-term income. It’s about building something that feels sustainable, clear, and fair over time. When your pricing aligns with what you can consistently deliver, growth becomes easier to manage.</p>
+        <p>At LuvlyFans, the focus is on helping creators build income that lasts, not just income that spikes.</p>
+      `,
+      "setup-first-impressions": `
+        <p>When someone lands on your page, they decide quickly whether to stay or leave.</p>
+        <p>You don’t need a lot of content to make a strong impression, but you do need clarity. A clear profile builds trust immediately.</p>
+        
+        <h2>What matters most</h2>
+        <ul>
+          <li>A clear profile photo</li>
+          <li>A short bio that explains what you offer</li>
+          <li>A few posts that represent your content</li>
+          <li>A consistent look and feel</li>
+        </ul>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Empty profiles</li>
+          <li>No explanation of your content</li>
+          <li>Uploading one or two posts and promoting too early</li>
+        </ul>
+
+        <h2>Quick setup checklist</h2>
+        <ul>
+          <li>Upload at least 6–12 posts</li>
+          <li>Add a short bio (simple and clear)</li>
+          <li>Choose a profile photo that represents you</li>
+          <li>Pin a post explaining what fans can expect</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Your page doesn’t need to be perfect. It just needs to feel complete.</p>
+      `,
+      "content-direction": `
+        <p>You don’t need a perfect niche.</p>
+        <p>But you do need a clear direction so people understand what your page is about.</p>
+
+        <h2>Start simple</h2>
+        <p>Think about:</p>
+        <ul>
+          <li>What you enjoy creating</li>
+          <li>What people respond to</li>
+          <li>What you can maintain consistently</li>
+        </ul>
+
+        <h2>Keep it clear</h2>
+        <p>Your content should answer this quickly: “What will I see if I subscribe?”</p>
+
+        <h2>Common approaches</h2>
+        <ul>
+          <li><strong>One clear theme:</strong> Focusing on a specific interest or style.</li>
+          <li><strong>A mix of related content:</strong> Combining a few complementary topics.</li>
+          <li><strong>A personality-driven page:</strong> Building everything around your own perspective.</li>
+        </ul>
+        <p>All can work if they’re consistent.</p>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Changing direction too often</li>
+          <li>Trying to do everything at once</li>
+          <li>Copying others too closely</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Your direction can evolve. Start simple and refine over time.</p>
+      `,
+      "first-30-days": `
+        <p>Your first month is about building a foundation, not chasing results.</p>
+        <p>Focus on structure first, growth second.</p>
+
+        <h2>Week 1: Set up</h2>
+        <ul>
+          <li>Complete your profile</li>
+          <li>Upload your first content</li>
+          <li>Set your pricing</li>
+          <li>Prepare your page before promoting</li>
+        </ul>
+
+        <h2>Week 2: Start posting</h2>
+        <ul>
+          <li>Begin posting consistently</li>
+          <li>Add small updates alongside main content</li>
+          <li>Start sharing your page externally</li>
+        </ul>
+
+        <h2>Week 3: Increase visibility</h2>
+        <ul>
+          <li>Use Spotlight</li>
+          <li>Share previews on social platforms</li>
+          <li>Engage with new subscribers</li>
+        </ul>
+
+        <h2>Week 4: Adjust</h2>
+        <ul>
+          <li>Look at what’s working</li>
+          <li>Refine your content</li>
+          <li>Keep things simple and consistent</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Progress in the first month is often quiet. Focus on building, not rushing.</p>
+      `,
+      "pricing-content": `
+        <p>Pricing affects who subscribes and how long they stay.</p>
+        <p>There’s no perfect number, but there is a structure that works.</p>
+
+        <h2>Start with what you can maintain</h2>
+        <p>Set a price based on:</p>
+        <ul>
+          <li>How often you post</li>
+          <li>What kind of content you create</li>
+          <li>What you can sustain long-term</li>
+        </ul>
+
+        <h2>Keep it simple</h2>
+        <ul>
+          <li><strong>Subscription:</strong> your main content</li>
+          <li><strong>Additional content:</strong> optional</li>
+        </ul>
+        <p>You don’t need complexity early on.</p>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Pricing too high too early</li>
+          <li>Changing your price too often</li>
+          <li>Comparing too closely to others</li>
+        </ul>
+
+        <h2>Think long-term</h2>
+        <p>A stable setup leads to:</p>
+        <ul>
+          <li>Better retention</li>
+          <li>More predictable income</li>
+          <li>Less pressure</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Pricing should support your consistency, not stress you.</p>
       `
     };
 
@@ -1324,7 +1541,10 @@ export function HubPage({ dark, onRead, setPage }) {
                   {m.guides.map((g, j) => {
                     const [hov, setHov] = useState(false);
                     return (
-                      <div key={g.title} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={() => onRead(ARTICLES[j % ARTICLES.length])} style={{
+                      <div key={g.title} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} onClick={() => {
+                        const targetArticle = ARTICLES.find(a => a.slug === g.slug);
+                        if (targetArticle) { onRead(targetArticle); window.scrollTo(0, 0); }
+                      }} style={{
                         padding: "32px", borderRadius: 24, cursor: "pointer",
                         background: dark ? "rgba(255,255,255,0.03)" : "#fff",
                         border: `1.5px solid ${hov ? "#7B51CC" : (dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)")}`,
@@ -2203,18 +2423,12 @@ export function FreeCreatorsPage({ dark }) {
                 <div style={{ borderLeft: `4px solid ${c.color}`, paddingLeft: 24, margin: "32px 0", fontSize: 15, lineHeight: 1.7, fontStyle: "italic", opacity: 0.9 }}>
                    {c.quote}
                 </div>
-                <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+                <div style={{ display: "flex", gap: 16 }}>
                   <button 
                     onClick={() => window.open(c.profileUrl, '_blank')}
-                    style={{ background: "transparent", border: `2px solid ${dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)"}`, color: dark ? "#fff" : "#111", padding: "12px 24px", borderRadius: 12, fontWeight: 700, cursor: "pointer", flex: isMobile ? 1 : "initial" }}
+                    style={{ background: "#7B51CC", color: "#fff", border: "none", border: `2px solid #7B51CC`, padding: "14px 28px", borderRadius: 12, fontWeight: 800, cursor: "pointer", flex: isMobile ? 1 : "initial", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
                   >
                     Follow for free
-                  </button>
-                  <button 
-                    onClick={() => window.open(c.profileUrl, '_blank')}
-                    style={{ background: "none", border: "none", color: "#7B51CC", fontWeight: 700, cursor: "pointer", flex: isMobile ? 1 : "initial" }}
-                  >
-                    View Profile →
                   </button>
                 </div>
               </div>
