@@ -2157,42 +2157,45 @@ export function FreeCreatorsPage({ dark }) {
               flexDirection: isMobile ? "column" : (i % 2 === 1 ? "row-reverse" : "row"), 
               flexWrap: "wrap" 
             }}>
-              {/* Image Section */}
-              <div style={{ flex: isMobile ? "1 1 100%" : "1 1 450px", position: "relative", width: "100%", overflow: "hidden", borderRadius: 24 }}>
-                 <div style={{ position: "absolute", inset: -20, background: c.color, borderRadius: 24, opacity: 0.1, zIndex: -1 }} />
-                 <div style={{ 
-                   height: isMobile ? 400 : 540, borderRadius: 24, background: c.color, color: "#fff", 
-                   display: "flex", flexDirection: "column", padding: isMobile ? 32 : 48, boxShadow: "0 40px 80px rgba(0,0,0,0.2)",
-                   backgroundImage: `radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 70%)`
-                 }}>
-                    <h2 style={{ fontSize: "clamp(18px, 3.2vw, 30px)", fontWeight: 800, lineHeight: 1.2, flex: 1, margin: 0 }}>“{c.quote}”</h2>
-                    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                      <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#fff", color: c.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 900 }}>{c.name[0]}</div>
-                      <div>
-                        <div style={{ fontSize: 15, fontWeight: 700 }}>{c.handle}</div>
-                        <div style={{ fontSize: 12, opacity: 0.7 }}>on LuvlyFans</div>
-                      </div>
-                    </div>
-                 </div>
-                 {/* Secondary Visual (Floating image or mask) */}
-                 {!isMobile && (
-                   <div style={{ 
-                     position: "absolute", bottom: -40, right: i % 2 === 0 ? -40 : "auto", left: i % 2 === 1 ? -40 : "auto", 
-                     width: 280, height: 350, 
-                     borderRadius: 24, border: "8px solid #fff", boxShadow: "0 20px 50px rgba(0,0,0,0.1)", display: "flex", alignItems: "flex-end", padding: 20,
-                     backgroundColor: dark ? "#111" : "#fff", overflow: "hidden"
-                   }}>
+              {/* Image & Quote Section */}
+              <div style={{ flex: isMobile ? "1 1 100%" : "1 1 450px", position: "relative", width: "100%", overflow: isMobile ? "visible" : "hidden", borderRadius: 24, display: isMobile ? "flex" : "block", flexDirection: "column", gap: 20 }}>
+                  
+                  {/* Creator Photo Visual - Fixed cropping for faces on mobile */}
+                  <div style={isMobile ? {
+                    width: "100%", height: "auto", borderRadius: 24, overflow: "hidden", position: "relative", border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`, order: -1
+                  } : {
+                    position: "absolute", bottom: -40, right: i % 2 === 0 ? -40 : "auto", left: i % 2 === 1 ? -40 : "auto", 
+                    width: 280, height: 350, 
+                    borderRadius: 24, border: `8px solid ${dark ? "#1a1a1a" : "#fff"}`, boxShadow: "0 20px 50px rgba(0,0,0,0.25)", display: "flex", alignItems: "flex-end", padding: 12,
+                    backgroundColor: dark ? "#111" : "#fff", overflow: "hidden", zIndex: 10
+                  }}>
                       <img 
                         src={c.image || "/assets/events/AVN2.jpeg"} 
                         alt={c.name} 
-                        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} 
+                        style={{ position: isMobile ? "relative" : "absolute", inset: 0, width: "100%", height: isMobile ? "auto" : "100%", objectFit: isMobile ? "contain" : "cover", display: "block" }} 
                       />
-                      <div style={{ position: "relative", zIndex: 2, background: "rgba(255,255,255,0.9)", padding: "10px 16px", borderRadius: 12, fontSize: 12, fontWeight: 700, backdropFilter: "blur(4px)", color: "#111" }}>{c.type}</div>
-                   </div>
-                 )}
+                      <div style={{ position: "absolute", bottom: 12, left: 12, zIndex: 2, background: "rgba(255,255,255,0.95)", padding: "10px 18px", borderRadius: 12, fontSize: 13, fontWeight: 800, backdropFilter: "blur(4px)", color: "#111" }}>{c.type}</div>
+                  </div>
+
+                  {/* Quote Card (Main background) */}
+                  <div style={{ 
+                    height: isMobile ? "auto" : 540, borderRadius: 24, background: c.color, color: "#fff", 
+                    display: "flex", flexDirection: "column", padding: isMobile ? "32px" : 48, boxShadow: "0 40px 80px rgba(0,0,0,0.2)",
+                    backgroundImage: `radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 70%)`,
+                    position: "relative"
+                  }}>
+                     <h2 style={{ fontSize: "clamp(18px, 3.2vw, 30px)", fontWeight: 800, lineHeight: 1.2, flex: isMobile ? "none" : 1, margin: 0, marginBottom: isMobile ? 32 : 0 }}>“{c.quote}”</h2>
+                     <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                       <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#fff", color: c.color, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, fontWeight: 900 }}>{c.name[0]}</div>
+                       <div>
+                         <div style={{ fontSize: 15, fontWeight: 700 }}>{c.handle}</div>
+                         <div style={{ fontSize: 12, opacity: 0.7 }}>on LuvlyFans</div>
+                       </div>
+                     </div>
+                  </div>
               </div>
 
-              {/* Text Section */}
+              {/* Text Section (Description) */}
               <div style={{ flex: isMobile ? "1 1 100%" : "1 1 400px" }}>
                 <div style={{ fontSize: isMobile ? 16 : 18, fontWeight: 400, color: "#7B51CC", marginBottom: 12 }}>{i + 1}. {c.name} <span style={{ fontWeight: 800 }}>{c.handle}</span></div>
                 <h3 style={{ fontSize: isMobile ? 22 : 24, fontWeight: 800, marginBottom: 20 }}>{c.type}</h3>
