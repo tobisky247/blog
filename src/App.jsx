@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Nav, HomePage, ArticlePage, HubPage, ComparePage, Footer, GettingStartedPage, EarningPage, FeaturesPage, EventsPage, FreeCreatorsPage } from "./pages";
+import { Nav, HomePage, ArticlePage, HubPage, ComparePage, Footer, GettingStartedPage, EarningPage, FeaturesPage, EventsPage, FreeCreatorsPage, MissionPage, ContactPage } from "./pages";
 import { StickyBar } from "./components";
 
 export default function App() {
@@ -52,6 +52,8 @@ export default function App() {
       {page === "features" && <FeaturesPage dark={dark} selectedFeature={selectedFeature} setSelectedFeature={setSelectedFeature} />}
       {page === "events" && <EventsPage dark={dark} selectedEvent={selectedEvent} setSelectedEvent={setSelectedEvent} />}
       {page === "free-creators" && <FreeCreatorsPage dark={dark} />}
+      {page === "mission" && <MissionPage dark={dark} />}
+      {page === "contact" && <ContactPage dark={dark} />}
 
       <Footer dark={dark} setPage={handleNav} />
       <StickyBar dark={dark} onNavigate={handleNav} />

@@ -1678,15 +1678,27 @@ export function Footer({ dark, setPage }) {
               <p style={{ marginTop: 14, fontSize: 13, color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)", lineHeight: 1.7, maxWidth: 280 }}>The creator education hub for the next generation of independent earners. Learn, grow, and monetize — smarter.</p>
             </div>
             {[
-              { title: "Learn", links: ["Creator Hub", "Guides", "Playbooks"] },
-              { title: "Platform", links: ["How it Works", "Pricing", "Testimonials"] },
-              { title: "Company", links: ["About", "Blog", "Careers", "Contact"] }
+              { title: "Education", links: [
+                { name: "Creator Hub", action: () => setPage("hub") },
+                { name: "Getting Started", action: () => setPage("getting-started") },
+                { name: "Playbooks", action: () => { setPage("hub"); setTimeout(() => document.getElementById("playbooks")?.scrollIntoView({ behavior: "smooth" }), 100); } }
+              ]},
+              { title: "Platform", links: [
+                { name: "Platform Overview", action: () => setPage("getting-started") },
+                { name: "Free Accounts", action: () => setPage("free-creators") },
+                { name: "Features", action: () => { setPage("home"); setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100); } }
+              ]},
+              { title: "Support", links: [
+                { name: "Mission", action: () => setPage("mission") },
+                { name: "Blog", action: () => setPage("home") },
+                { name: "Contact", action: () => setPage("contact") }
+              ]}
             ].map(col => (
               <div key={col.title}>
                 <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)", marginBottom: 14 }}>{col.title}</div>
                 {col.links.map(l => (
-                  <div key={l} style={{ marginBottom: 10 }}>
-                    <button onClick={() => {}} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)", padding: 0, textAlign: "left" }}>{l}</button>
+                  <div key={l.name} style={{ marginBottom: 10 }}>
+                    <button onClick={l.action} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 13, color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)", padding: 0, textAlign: "left" }}>{l.name}</button>
                   </div>
                 ))}
               </div>
@@ -1695,9 +1707,9 @@ export function Footer({ dark, setPage }) {
           <div style={{ borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`, paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <div style={{ fontSize: 12, color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.35)" }}>© 2026 LuvlyFans. All rights reserved.</div>
             <div style={{ display: "flex", gap: 20 }}>
-              {["Privacy Policy", "Terms of Service", "Creator Guidelines"].map(l => (
-                <button key={l} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 12, color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)", padding: 0 }}>{l}</button>
-              ))}
+              <a href="https://luvlyfans.com/pages/privacy" target="_blank" rel="noreferrer" style={{ textDecoration: "none", fontSize: 12, color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>Privacy Policy</a>
+              <a href="https://luvlyfans.com/pages/terms-of-service" target="_blank" rel="noreferrer" style={{ textDecoration: "none", fontSize: 12, color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>Terms of Service</a>
+              <a href="https://luvlyfans.com/pages/creator-agreement" target="_blank" rel="noreferrer" style={{ textDecoration: "none", fontSize: 12, color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)" }}>Creator Agreement</a>
             </div>
           </div>
         </div>
@@ -2486,6 +2498,39 @@ export function FreeCreatorsPage({ dark }) {
             </div>
           </div>
         </section>
+      </div>
+    </div>
+  );
+}
+
+// ─── MISSION PAGE ────────────────────────────────────────────────────────────
+
+export function MissionPage({ dark }) {
+  return (
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: "100px 5vw", textAlign: "center" }}>
+      <Badge>OUR MISSION</Badge>
+      <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 800, margin: "24px 0", fontFamily: "'Sora', sans-serif" }}>Built for Creators, by Creators.</h1>
+      <p style={{ fontSize: 18, lineHeight: 1.7, opacity: 0.8, marginBottom: 40 }}>
+        At LuvlyFans, we believe the creator economy has been uneven for too long. Our mission is to provide the tools, education, and platform stability that independent earners need to build sustainable careers.
+      </p>
+      <p style={{ fontSize: 18, lineHeight: 1.7, opacity: 0.8 }}>
+        We focus on automation, transparency, and human-first support so you can focus on what matters most: your content and your connection with fans.
+      </p>
+    </div>
+  );
+}
+
+// ─── CONTACT PAGE ────────────────────────────────────────────────────────────
+
+export function ContactPage({ dark }) {
+  return (
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: "100px 5vw", textAlign: "center" }}>
+      <Badge>SUPPORT</Badge>
+      <h1 style={{ fontSize: "clamp(32px, 5vw, 48px)", fontWeight: 800, margin: "24px 0", fontFamily: "'Sora', sans-serif" }}>Get in Touch</h1>
+      <p style={{ fontSize: 18, marginBottom: 40, opacity: 0.8 }}>Have a question or need assistance? Our support team is here to help.</p>
+      <div style={{ background: dark ? "rgba(123,81,204,0.1)" : "rgba(123,81,204,0.05)", border: "1px solid rgba(123,81,204,0.2)", padding: "40px", borderRadius: 24 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: "#7B51CC", marginBottom: 8, textTransform: "uppercase" }}>Official Support Email</div>
+        <a href="mailto:support@luvlyfans.com" style={{ fontSize: "clamp(20px, 4vw, 32px)", fontWeight: 800, color: dark ? "#fff" : "#111", textDecoration: "none" }}>support@luvlyfans.com</a>
       </div>
     </div>
   );
