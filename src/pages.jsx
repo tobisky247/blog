@@ -460,7 +460,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           <h1 style={{ fontSize: isMobile ? 32 : 48, fontWeight: 800, marginTop: 16 }}>Creators on the Move</h1>
         </header>
 
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit, minmax(350px, 1fr))", gap: 24 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2, minmax(0, 400px))", gap: 24 }}>
           {EVENTS.map(event => (
             <div 
               key={event.id}
