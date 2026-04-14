@@ -238,24 +238,6 @@ export const EVENTS = [
     location: "Las Vegas, NV",
     excerpt: "LuvlyFans creator QuietlyVae represents the next generation of professional talent at the industry's largest event.",
     type: "Awards & Networking"
-  },
-  {
-    id: 2,
-    title: "Spring Creator Summit 2026: London",
-    thumbnail: "/assets/promotions/avn-1.png",
-    date: "April 12, 2026",
-    location: "London, UK",
-    excerpt: "A direct look at the exclusive networking and brand-building workshops from our London flagship event.",
-    type: "Conference"
-  },
-  {
-    id: 3,
-    title: "LuvlyFans x Creator Camp: Ibiza 2026 Recap",
-    thumbnail: "/assets/events/AVN2.jpeg",
-    date: "June 05, 2026",
-    location: "Ibiza, Spain",
-    excerpt: "Celebrating summer success with our top performing creators at the LuvlyFans Creator Camp retreat.",
-    type: "Retreat"
   }
 ];
 
