@@ -141,7 +141,7 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
         )}
       </div>
       <div style={{ padding: isMobile ? "16px" : "18px 20px 20px" }}>
-        <h3 style={{ margin: "0 0 8px", fontSize: isMobile ? 16 : (featured ? 18 : 15), fontWeight: 700, lineHeight: 1.35, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Sora', sans-serif" }}>{article.title}</h3>
+        <h3 style={{ margin: "0 0 8px", fontSize: isMobile ? 16 : (featured ? 18 : 15), fontWeight: 700, lineHeight: 1.35, color: dark ? "#fff" : "#0f0f0f", fontFamily: "'Lora', Georgia, serif" }}>{article.title}</h3>
         <p style={{ 
           margin: "0 0 16px", fontSize: 13, color: dark ? "rgba(255,255,255,0.55)" : "rgba(0,0,0,0.55)", lineHeight: 1.6,
           display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis"
@@ -237,7 +237,7 @@ export function EmailCapture({ dark }) {
           fontSize: isMobile ? 32 : 56, 
           fontWeight: 800, 
           color: dark ? "#fff" : "#2D2926", 
-          fontFamily: "'Sora', sans-serif", 
+          fontFamily: "'Lora', Georgia, serif", 
           lineHeight: 1.1,
           letterSpacing: "-0.02em"
         }}>

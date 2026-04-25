@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════
+   GETTING STARTED PAGE
+   ═══════════════════════════════════════════════════════ */
+
+.gs-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 5vw;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Header */
+.gs-header {
+  margin-bottom: 80px;
+  text-align: center;
+}
+.gs-title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  margin: 24px 0 16px;
+  line-height: 1.1;
+}
+.gs-subtitle {
+  font-size: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+.gs-notice {
+  margin-top: 24px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  display: inline-block;
+  border: 1px solid rgba(123, 81, 204, 0.2);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Sections */
+.gs-section {
+  margin-bottom: 100px;
+}
+.gs-section-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 48px;
+  padding-bottom: 16px;
+}
+
+/* Steps */
+.gs-step {
+  margin-bottom: 40px;
+}
+.gs-step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.gs-step-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.gs-step-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.gs-step-body {
+  padding-left: 44px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.gs-step-tip {
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-style: italic;
+}
+.gs-step-warning {
+  font-weight: 600;
+  color: #f43f5e;
+}
+
+/* Fan items */
+.gs-fan-list {
+  display: grid;
+  gap: 32px;
+}
+.gs-fan-item {
+  padding-left: 24px;
+}
+.gs-fan-title {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.gs-fan-desc {
+  margin: 0;
+  opacity: 0.7;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Checklists */
+.gs-checklist-box {
+  padding: 48px;
+  border-radius: 32px;
+}
+.gs-checklist-title {
+  font-size: 32px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 48px;
+}
+.gs-checklist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.gs-checklist-col-title {
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.gs-checklist-items {
+  display: grid;
+  gap: 12px;
+}
+.gs-checklist-item {
+  font-size: 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.gs-footer-note {
+  margin-top: 80px;
+  text-align: center;
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 1.7;
+}
