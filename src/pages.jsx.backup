@@ -1,17 +1,3 @@
-// Main export file for all page components
-// Components are being gradually split into individual files for better maintainability
-
-// ===== EXPORTED COMPONENTS (in separate files) =====
-export { Nav } from "./pages/Nav";
-export { HomePage } from "./pages/HomePage";
-export { ArticlePage } from "./pages/ArticlePage";
-export { EventsPage } from "./pages/EventsPage";
-export { Footer } from "./pages/Footer";
-
-// ===== COMPONENTS STILL TO BE EXTRACTED =====
-// These components are temporarily kept here until extraction is complete
-// They will be moved to individual files in src/pages/
-
 import React, { useState, useEffect } from "react";
 import "./nav.css";
 import "./home.css";
@@ -72,6 +58,2779 @@ function useIsMobile() {
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
+
+export function Nav({ dark, setDark, page, setPage }) {
+  const [scroll, setScroll] = useState(false);
+  const [guidesOpen, setGuidesOpen] = useState(false);
+  const [hubOpen, setHubOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScroll(window.scrollY > 10);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+      if (window.innerWidth >= 800) setMenuOpen(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const navLinks = [
+    { label: "Blog", p: "home" },
+    {
+      label: "Creator Hub",
+      p: "hub",
+      sub: [
+        { label: "Creator Hub", p: "hub", icon: "chart-arrow-up" },
+        {
+          label: "Free Creators accounts",
+          p: "free-creators",
+          icon: "diamond",
+        },
+      ],
+    },
+    {
+      label: "How-to-guides",
+      sub: [
+        { label: "Getting started", p: "getting-started" },
+        { label: "Earning on Luvlyfans", p: "earning" },
+        { label: "Features", p: "features" },
+      ],
+    },
+    { label: "Events", p: "events" },
+  ];
+
+  return (
+    <>
+      <nav
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1000,
+          background:
+            scroll || menuOpen
+              ? dark
+                ? "rgba(10,10,10,0.98)"
+                : "rgba(255,255,255,0.98)"
+              : "transparent",
+          backdropFilter: scroll || menuOpen ? "blur(20px)" : "none",
+          borderBottom:
+            scroll || menuOpen
+              ? `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`
+              : "1px solid transparent",
+          transition: "all 0.3s ease",
+          padding: "0 5vw",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 64,
+          }}
+        >
+          <button
+            onClick={() => {
+              setPage("home");
+              setMenuOpen(false);
+            }}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              zIndex: 1001,
+            }}
+          >
+            <Logo dark={dark} />
+          </button>
+
+          {/* Desktop Nav */}
+          {!isMobile && (
+            <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+              {navLinks.map((link) => (
+                <div
+                  key={link.label}
+                  onMouseEnter={() =>
+                    link.sub &&
+                    (link.label === "Creator Hub"
+                      ? setHubOpen(true)
+                      : setGuidesOpen(true))
+                  }
+                  onMouseLeave={() =>
+                    link.sub &&
+                    (link.label === "Creator Hub"
+                      ? setHubOpen(false)
+                      : setGuidesOpen(false))
+                  }
+                  style={{ position: "relative" }}
+                >
+                  <button
+                    onClick={() => !link.sub && setPage(link.p)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: "8px 14px",
+                      borderRadius: 8,
+                      color:
+                        page === link.p
+                          ? "#7B51CC"
+                          : dark
+                            ? "rgba(255,255,255,0.7)"
+                            : "rgba(0,0,0,0.65)",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      transition: "color 0.15s",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                    }}
+                  >
+                    {link.label}{" "}
+                    {link.sub && (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          transform: (
+                            link.label === "Creator Hub" ? hubOpen : guidesOpen
+                          )
+                            ? "rotate(180deg)"
+                            : "none",
+                          transition: "transform 0.2s",
+                        }}
+                      >
+                        ▼
+                      </span>
+                    )}
+                  </button>
+
+                  {link.sub && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        width: 240,
+                        background: dark ? "rgba(18,18,18,0.98)" : "#fff",
+                        border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}`,
+                        borderRadius: 20,
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
+                        opacity: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? 1
+                          : 0,
+                        transform: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? "translateY(5px)"
+                          : "translateY(15px)",
+                        visibility: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? "visible"
+                          : "hidden",
+                        transition: "all 0.25s cubic-bezier(0.23, 1, 0.32, 1)",
+                        padding: "8px",
+                        zIndex: 1001,
+                        backdropFilter: "blur(20px)",
+                      }}
+                    >
+                      {link.sub.map((s) => (
+                        <button
+                          key={s.p}
+                          onClick={() => {
+                            setPage(s.p);
+                            setHubOpen(false);
+                            setGuidesOpen(false);
+                            window.scrollTo(0, 0);
+                          }}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 10,
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "10px 14px",
+                            borderRadius: 12,
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: dark
+                              ? "rgba(255,255,255,0.8)"
+                              : "rgba(0,0,0,0.75)",
+                            background: "transparent",
+                            cursor: "pointer",
+                            transition: "all 0.15s",
+                            border: "none",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = dark
+                              ? "rgba(123,81,204,0.15)"
+                              : "rgba(123,81,204,0.1)";
+                            e.currentTarget.style.color = "#7B51CC";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = dark
+                              ? "rgba(255,255,255,0.8)"
+                              : "rgba(0,0,0,0.75)";
+                          }}
+                        >
+                          {s.icon && (
+                            <Icon name={s.icon} size={16} color="#7B51CC" />
+                          )}
+                          {s.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "center",
+              zIndex: 1001,
+            }}
+          >
+            {/* Dark mode toggle — pill switch on desktop */}
+            {!isMobile && (
+              <button
+                onClick={() => setDark(!dark)}
+                title={dark ? "Switch to light mode" : "Switch to dark mode"}
+                style={{
+                  width: 52,
+                  height: 28,
+                  borderRadius: 99,
+                  border: "none",
+                  cursor: "pointer",
+                  outline: "none",
+                  background: dark ? "#7B51CC" : "#e5e7eb",
+                  position: "relative",
+                  transition: "background 0.3s",
+                  flexShrink: 0,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 3,
+                    left: dark ? 25 : 3,
+                    width: 22,
+                    height: 22,
+                    borderRadius: "50%",
+                    background: "#fff",
+                    transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 12,
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                  }}
+                >
+                  {dark ? "🌙" : "☀️"}
+                </div>
+              </button>
+            )}
+            {!isMobile && (
+              <CTAButton
+                size="sm"
+                onClick={() => window.open("https://luvlyfans.com/", "_blank")}
+              >
+                Start Earning
+              </CTAButton>
+            )}
+
+            {/* Mobile Toggle */}
+            {isMobile && (
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                style={{
+                  width: 40,
+                  height: 40,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 5,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    transition: "all 0.3s",
+                    transform: menuOpen
+                      ? "rotate(45deg) translateY(5px)"
+                      : "none",
+                  }}
+                />
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    opacity: menuOpen ? 0 : 1,
+                    transition: "all 0.3s",
+                  }}
+                />
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    transition: "all 0.3s",
+                    transform: menuOpen
+                      ? "rotate(-45deg) translateY(-5px)"
+                      : "none",
+                  }}
+                />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Menu — Full-Screen Backdrop + Drawer */}
+        {isMobile && (
+          <>
+            {/* Backdrop: covers entire page behind the drawer */}
+            <div
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.85)",
+                zIndex: 1999,
+                opacity: menuOpen ? 1 : 0,
+                pointerEvents: menuOpen ? "all" : "none",
+                transition: "opacity 0.3s ease",
+              }}
+            />
+            {/* Drawer */}
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100vh",
+                background: dark ? "#0a0a0a" : "#fff",
+                zIndex: 2000,
+                padding: "0 5vw 40px",
+                transform: menuOpen ? "translateX(0)" : "translateX(100%)",
+                transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
+              {/* Drawer Header — Logo, Toggle, Close */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "18px 0 24px",
+                  borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+                  marginBottom: 12,
+                  flexShrink: 0,
+                }}
+              >
+                <button
+                  onClick={() => {
+                    setPage("home");
+                    setMenuOpen(false);
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  <Logo dark={dark} />
+                </button>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  {/* Dark mode pill toggle */}
+                  <button
+                    onClick={() => setDark(!dark)}
+                    title={
+                      dark ? "Switch to light mode" : "Switch to dark mode"
+                    }
+                    style={{
+                      width: 52,
+                      height: 28,
+                      borderRadius: 99,
+                      border: "none",
+                      cursor: "pointer",
+                      outline: "none",
+                      background: dark ? "#7B51CC" : "#e5e7eb",
+                      position: "relative",
+                      transition: "background 0.3s",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 3,
+                        left: dark ? 25 : 3,
+                        width: 22,
+                        height: 22,
+                        borderRadius: "50%",
+                        background: "#fff",
+                        transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 12,
+                        boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                      }}
+                    >
+                      {dark ? "🌙" : "☀️"}
+                    </div>
+                  </button>
+                  {/* Close button */}
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "50%",
+                      background: dark
+                        ? "rgba(255,255,255,0.08)"
+                        : "rgba(0,0,0,0.06)",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 18,
+                      color: dark ? "#fff" : "#000",
+                      fontWeight: 300,
+                      lineHeight: 1,
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {navLinks.map((link) => (
+                <div key={link.label}>
+                  {link.sub ? (
+                    <div style={{ marginBottom: 20 }}>
+                      <div
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 800,
+                          color: "#7B51CC",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          marginBottom: 12,
+                          paddingLeft: 12,
+                        }}
+                      >
+                        {link.label}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 5,
+                        }}
+                      >
+                        {link.sub.map((s) => (
+                          <button
+                            key={s.p}
+                            onClick={() => {
+                              setPage(s.p);
+                              setMenuOpen(false);
+                              window.scrollTo(0, 0);
+                            }}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "14px 16px",
+                              borderRadius: 16,
+                              background: dark
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.03)",
+                              border: "none",
+                              color: dark ? "#fff" : "#000",
+                              fontSize: 15,
+                              fontWeight: 600,
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 12,
+                              cursor: "pointer",
+                            }}
+                          >
+                            {s.icon && (
+                              <Icon name={s.icon} size={18} color="#7B51CC" />
+                            )}
+                            {s.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setPage(link.p);
+                        setMenuOpen(false);
+                        window.scrollTo(0, 0);
+                      }}
+                      style={{
+                        width: "100%",
+                        textAlign: "left",
+                        padding: "16px",
+                        borderRadius: 16,
+                        background:
+                          page === link.p
+                            ? dark
+                              ? "rgba(123,81,204,0.15)"
+                              : "rgba(123,81,204,0.05)"
+                            : "transparent",
+                        border: "none",
+                        color:
+                          page === link.p ? "#7B51CC" : dark ? "#fff" : "#000",
+                        fontSize: 18,
+                        fontWeight: 700,
+                        marginBottom: 5,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {link.label}
+                    </button>
+                  )}
+                </div>
+              ))}
+              <div style={{ marginTop: "auto", paddingBottom: 40 }}>
+                <CTAButton
+                  block
+                  onClick={() => {
+                    window.open("https://luvlyfans.com/", "_blank");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Start Earning Now
+                </CTAButton>
+              </div>
+            </div>
+          </>
+        )}
+      </nav>
+    </>
+  );
+}
+
+// ─── EVENTS PAGE ──────────────────────────────────────────────────────────────
+
+export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
+  const isMobile = useIsMobile();
+
+  // DETAIL VIEW FOR INTRODUCTION (Lustful Ladies & Perspective)
+  if (selectedEvent === 4) {
+    const lustfulPhotos = [
+      { src: "/assets/creators/Loulalou.png", alt: "CEO Lou" },
+      { src: "/assets/events/AVN.jpeg", alt: "Industry Networking" },
+      { src: "/assets/creators/Zozo.png", alt: "Creator Community" },
+      { src: "/assets/events/AVN2.jpeg", alt: "Atmosphere" },
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedEvent(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          ← Back to Events
+        </button>
+
+        {/* Hero */}
+        <section
+          style={{
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
+            textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: 0.2,
+              background:
+                "url('/assets/creators/Loulalou.png') center/cover no-repeat",
+              filter: "blur(40px) brightness(0.7)",
+            }}
+          />
+          <div
+            style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}
+          >
+            <Badge>EDITORIAL PERSPECTIVE</Badge>
+            <h1
+              style={{
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Beyond the Screen:{" "}
+              <span style={{ color: "#7B51CC" }}>Real-World Experiences</span>
+            </h1>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              Real-world creator spaces are the foundation of community.
+            </p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <img
+            src="/assets/creators/Loulalou.png"
+            alt="CEO Lou - Lustful Events"
+            style={{
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              objectFit: "cover",
+              borderRadius: isMobile ? 24 : 32,
+              boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+              border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+            }}
+          />
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2
+            style={{
+              fontSize: isMobile ? 26 : 36,
+              fontWeight: 800,
+              marginBottom: 28,
+              lineHeight: 1.2,
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Organised by Lustful Events CEO Lou (@iamloulalouagain)
+          </h2>
+
+          <div
+            style={{
+              fontSize: 17,
+              lineHeight: 1.9,
+              color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
+            }}
+          >
+            <p>
+              The creator space doesn’t just exist online. It also lives in
+              real-world environments where people meet, talk, and understand
+              the space they’re part of. The Lustful Ladies event was one of
+              those environments. A place where creators came together in a more
+              direct and personal setting.
+            </p>
+            <p>
+              LuvlyFans was in attendance, and it gave us the opportunity to
+              step outside the platform and see things from a different
+              perspective.
+            </p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {lustfulPhotos.map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "16/9" : "4/3",
+                    background: "#222",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              What Lustful Ladies Represents
+            </h3>
+            <p>
+              Lustful Ladies is part of a wider UK-based event series that
+              brings together creators and audiences in a curated environment.
+              What stood out wasn’t just the setting, but the mix of people.
+              Creators at different stages. Different approaches. Different
+              goals. All in one space. It’s a reminder that the creator world
+              isn’t one-dimensional. It’s varied, and constantly evolving.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              Being in the Room Changes Perspective
+            </h3>
+            <p>
+              Online, everything can feel separate. Profiles, posts, and numbers
+              don’t always reflect the full picture. Being in the room changes
+              that. You start to see how creators present themselves, how they
+              connect, and how differently people approach the same space. It
+              adds context that you don’t always get from a screen.
+            </p>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Conversations That Matter
+            </h3>
+            <p>
+              What stood out most were the conversations. Creators spoke openly
+              about what’s working for them, where they feel stuck, what they
+              expect from platforms, and how they’re building income over time.
+              These weren’t polished answers. They were honest, practical, and
+              grounded in real experience.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              What We Learned
+            </h3>
+            <div
+              style={{
+                background: dark
+                  ? "rgba(123,81,204,0.05)"
+                  : "rgba(123,81,204,0.03)",
+                padding: isMobile ? "32px 24px" : "56px 48px",
+                borderRadius: 24,
+                border: `1px solid ${dark ? "rgba(123,81,204,0.15)" : "rgba(123,81,204,0.1)"}`,
+                marginBottom: 40,
+              }}
+            >
+              <div style={{ display: "grid", gap: 56 }}>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Creators Are Looking for Stability
+                  </h4>
+                  <p>
+                    A lot of the focus wasn’t on going viral. It was on
+                    consistency. Predictable income. Platforms that don’t change
+                    direction without warning. Creators are thinking more about
+                    long-term stability than short-term spikes.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Visibility Is Still a Challenge
+                  </h4>
+                  <p>
+                    Even strong creators mentioned the same issue. Getting seen
+                    is difficult. Not because they aren’t creating, but because
+                    discovery is unpredictable. It reinforced how important
+                    visibility tools are. Posting alone isn’t always enough.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    There Is No Single Path
+                  </h4>
+                  <p>
+                    Every creator we spoke to was doing things differently. Some
+                    post frequently. Others focus on fewer, higher-quality
+                    updates. What works is often personal, not universal.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Community Still Matters
+                  </h4>
+                  <p>
+                    Even in a digital space, creators value connection. Being
+                    able to talk, share experiences, and learn from others stood
+                    out as something people don’t get enough of online.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Clarity From Platforms Is Important
+                  </h4>
+                  <p>
+                    Creators want clear rules, expectations, and earning
+                    structures. When things feel unclear, it slows people down.
+                    Simple and transparent systems build confidence.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Small Improvements Go a Long Way
+                  </h4>
+                  <p>
+                    Not everything needs to be complex. Often it’s the smaller
+                    things that make the biggest difference: better onboarding,
+                    clear guidance, and simpler tools. These are the things
+                    creators notice and value.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Why This Matters for LuvlyFans
+            </h3>
+            <p>
+              These aren’t abstract takeaways. They directly shape how we think
+              about the platform. From improving visibility through features
+              like Spotlight, to keeping things simple and clear, these
+              conversations help us stay aligned with what creators actually
+              need. Being present in these spaces helps us build with more
+              awareness, not assumptions.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              Final Thoughts
+            </h3>
+            <p>
+              Events like Lustful Ladies are a reminder that the creator world
+              is built on people first. The platforms, the features, and the
+              numbers all come after that. What matters is understanding the
+              space and the people within it.
+            </p>
+
+            <p
+              style={{
+                fontWeight: 800,
+                fontStyle: "italic",
+                fontSize: 22,
+                marginTop: 48,
+                color: "#7B51CC",
+              }}
+            >
+              “We’re glad we were there, and we’ll continue to listen, learn,
+              and build with that in mind.”
+            </p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (selectedEvent === 1) {
+    // AVN Detail View (Previous content)
+    const avnPhotos = [
+      {
+        src: "/assets/creators/Quietlyvae.avn1.jpeg",
+        alt: "QuietlyVae at AVN",
+      },
+      { src: "/assets/events/AVN2.jpeg", alt: "Industry Networking" },
+      {
+        src: "/assets/events/Quietlyvae.avn2.jpeg",
+        alt: "Red Carpet Visibility",
+      },
+      { src: "/assets/events/Quietlyvae.avn3.jpeg", alt: "Creator Community" },
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedEvent(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          ← Back to Events
+        </button>
+
+        {/* Hero */}
+        <section
+          style={{
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
+            textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: 0.2,
+              background:
+                "url('/assets/events/Quietlyvae.avn.jpeg') center/cover no-repeat",
+              filter: "blur(40px) brightness(0.7)",
+            }}
+          />
+          <div
+            style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}
+          >
+            <Badge>2026 AVN · LAS VEGAS</Badge>
+            <h1
+              style={{
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              LuvlyFans @ the{" "}
+              <span style={{ color: "#7B51CC" }}>AVN Awards</span>
+            </h1>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              The Future of Creator Community
+            </p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <img
+            src="/assets/events/Quietlyvae.avn.jpeg"
+            alt="LuvlyFans @ AVN"
+            style={{
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              objectFit: "cover",
+              borderRadius: isMobile ? 24 : 32,
+              boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+              border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+            }}
+          />
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2
+            style={{
+              fontSize: isMobile ? 24 : 32,
+              fontWeight: 800,
+              marginBottom: 28,
+              lineHeight: 1.25,
+            }}
+          >
+            QuietlyVae Represents the Future
+          </h2>
+          <div
+            style={{
+              fontSize: 17,
+              lineHeight: 1.9,
+              color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
+            }}
+          >
+            <p>
+              Participating in industry conversations that continue to shape the
+              future of creator-led platforms.
+            </p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {avnPhotos.map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "16/9" : "auto",
+                    background: "#222",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p>
+              AVN brings together top creators and innovators. Its presence
+              reflects our commitment to creator success.
+            </p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // LIST VIEW
+  return (
+    <div style={{ padding: isMobile ? "40px 5vw" : "80px 5vw" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <header style={{ marginBottom: isMobile ? 40 : 80 }}>
+          <Badge>INDUSTRY RECAPS</Badge>
+          <h1
+            style={{
+              fontSize: isMobile ? 32 : 48,
+              fontWeight: 800,
+              marginTop: 16,
+            }}
+          >
+            Creators on the Move
+          </h1>
+        </header>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(2, minmax(0, 400px))",
+            gap: 24,
+          }}
+        >
+          {EVENTS.map((event) => (
+            <div
+              key={event.id}
+              onClick={() => {
+                if ([1, 4].includes(event.id)) setSelectedEvent(event.id);
+                window.scrollTo(0, 0);
+              }}
+              style={{
+                borderRadius: 24,
+                overflow: "hidden",
+                background: dark ? "rgba(255,255,255,0.03)" : "#f9f9f9",
+                border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "transparent"}`,
+                cursor: "pointer",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                position: "relative",
+                transform: "translateY(0)",
+              }}
+              onMouseEnter={(e) => {
+                if (!isMobile) {
+                  e.currentTarget.style.transform = "translateY(-12px)";
+                  e.currentTarget.style.boxShadow = dark
+                    ? "0 40px 80px rgba(0,0,0,0.6)"
+                    : "0 30px 60px rgba(0,0,0,0.1)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div style={{ height: isMobile ? 200 : 240, overflow: "hidden" }}>
+                <img
+                  src={event.thumbnail}
+                  alt={event.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ padding: isMobile ? 24 : 32 }}>
+                <Badge color="#7B51CC">{event.type}</Badge>
+                <h3
+                  style={{
+                    fontSize: 24,
+                    fontWeight: 800,
+                    margin: "16px 0",
+                    color: dark ? "#fff" : "#111",
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {event.title}
+                </h3>
+                <p style={{ fontSize: 15, opacity: 0.6, lineHeight: 1.6 }}>
+                  {event.excerpt}
+                </p>
+                <div
+                  style={{
+                    marginTop: 24,
+                    color: "#7B51CC",
+                    fontWeight: 700,
+                    fontSize: 13,
+                  }}
+                >
+                  Read Recap →
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── HOME PAGE ────────────────────────────────────────────────────────────────
+
+export function HomePage({ dark, onRead, setPage }) {
+  const isMobile = useIsMobile();
+  const [cat, setCat] = useState("All");
+  const [search, setSearch] = useState("");
+  const [heroRef, heroInView] = useInView(0.05);
+
+  const filtered = ARTICLES.filter((a) => {
+    const matchCat = cat === "All" || a.category === cat;
+    const matchSearch =
+      !search ||
+      a.title.toLowerCase().includes(search.toLowerCase()) ||
+      a.excerpt.toLowerCase().includes(search.toLowerCase());
+    return matchCat && matchSearch;
+  });
+  const featured = ARTICLES.filter((a) => a.featured);
+  const trending = ARTICLES.filter((a) => a.trending);
+  const catColors = {
+    "Make Money": "#059669",
+    Growth: "#D946EF",
+    Guides: "#0284C7",
+  };
+
+  const heroBg = dark
+    ? "radial-gradient(ellipse at 60% 0%, rgba(123,81,204,0.12) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.08) 0%, transparent 50%)"
+    : "radial-gradient(ellipse at 60% 0%, rgba(123,81,204,0.07) 0%, transparent 60%)";
+
+  const dateLabel = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
+  return (
+    <div className="page-wrap">
+      {/* ── Hero ── */}
+      <section ref={heroRef} className="hero-section">
+        <div className="hero-bg-gradient" style={{ background: heroBg }} />
+        <div className="hero-container">
+          <div
+            className="hero-animate"
+            style={{
+              opacity: heroInView ? 1 : 0,
+              transform: heroInView ? "translateY(0)" : "translateY(40px)",
+            }}
+          >
+            <h1 className="hero-title">
+              Grow. <span className="gradient-text">Monetize.</span> Win.
+            </h1>
+            <p className="hero-subtitle">
+              Real strategies, proven playbooks, insights, and tactics designed
+              to help you grow faster and make more on LuvlyFans.
+            </p>
+            <div className="hero-cta-row">
+              <CTAButton size="lg" onClick={() => setPage("hub")}>
+                Explore the Creator Hub
+              </CTAButton>
+            </div>
+
+            {/* Asymmetrical featured grid */}
+            <div className="hero-grid">
+              {/* Left column - Single large card */}
+              <div className="hero-col">
+                {/* Card 1 — Free Accounts (Full height) */}
+                <div
+                  className="hero-card hero-card-large hero-card-full"
+                  onClick={() => setPage("free-creators")}
+                >
+                  <img
+                    src="/assets/homepage/Free accounts.png"
+                    alt="Free LuvlyFans Accounts"
+                  />
+                  <div className="hero-overlay">
+                    <h className="hero-card-title">
+                      Free LuvlyFans Accounts to Follow in {dateLabel}
+                    </h>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right column - Two stacked cards */}
+              <div className="hero-right-col">
+                {/* Card 2 — LuvlyFans Standard */}
+                <div
+                  className="hero-card hero-card-right sm"
+                  onClick={() => {
+                    const a = ARTICLES.find(
+                      (a) => a.slug === "luvlyfans-standard",
+                    );
+                    if (a) {
+                      onRead(a);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  <img
+                    src="/assets/promotions/spotlight_Image.png"
+                    alt="The LuvlyFans Standard"
+                    style={{ objectPosition: "center 30%" }}
+                  />
+                  <div className="hero-overlay-dark" />
+                  <div className="hero-card-bottom-content">
+                    <h4 className="hero-card-bottom-title">
+                      Why the Top 1% are Switching to LuvlyFans.
+                    </h4>
+                    {/*<div className="hero-card-cta-row">
+                      <span className="hero-card-cta-label">Read More</span>
+                      <div className="hero-card-cta-line" />
+                    </div>*/}
+                  </div>
+                </div>
+
+                {/* Card 3 — Creator Habits */}
+                <div
+                  className="hero-card hero-card-right sm"
+                  onClick={() => {
+                    const a = ARTICLES.find((a) => a.slug === "creator-habits");
+                    if (a) {
+                      onRead(a);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  <img
+                    src="/assets/homepage/hero-26.png"
+                    alt="Creator Habits"
+                  />
+                  <div className="hero-overlay-dark" />
+                  <div className="hero-card-bottom-content">
+                    <h4 className="hero-card-bottom-title">
+                      5 Habits That Separate Creators Who Earn From Those Who
+                      Don't
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured mini-cards */}
+            <div
+              className="mini-cards-grid"
+              style={{ opacity: heroInView ? 1 : 0 }}
+            >
+              {featured.slice(0, 2).map((a) => (
+                <div key={a.id} className="mini-card" onClick={() => onRead(a)}>
+                  <div className="mini-card-meta">
+                    <div
+                      className="mini-card-dot"
+                      style={{ background: catColors[a.category] }}
+                    />
+                    <span
+                      className="mini-card-cat"
+                      style={{ color: catColors[a.category] }}
+                    >
+                      {a.category}
+                    </span>
+                    <span className="mini-card-read">{a.readTime}</span>
+                  </div>
+                  <div className="mini-card-title">{a.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Articles ── */}
+      <div className="articles-section">
+        <div className="articles-container">
+          {/* Section header */}
+          <div className="section-header">
+            <h2 className="section-title">
+              {cat === "All" ? "Featured Articles" : `${cat} Articles`}
+            </h2>
+            <div className="section-divider" />
+          </div>
+
+          {/* Category filters */}
+          <div className="cat-filters">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                className={`cat-btn${cat === c ? " active" : ""}`}
+                onClick={() => setCat(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+
+          {cat === "All" && !search && (
+            <>
+              <div className="featured-grid">
+                {featured.map((a) => (
+                  <ArticleCard
+                    key={a.id}
+                    article={a}
+                    dark={dark}
+                    onRead={onRead}
+                    featured
+                  />
+                ))}
+              </div>
+
+              <div className="trending-header">
+                <Icon name="fire" size={24} color="#7B51CC" />
+                <h2 className="section-title">Trending Now</h2>
+                <div className="section-divider" />
+              </div>
+
+              <div className="trending-list">
+                {trending.map((a, i) => (
+                  <div
+                    key={a.id}
+                    className="trending-row"
+                    onClick={() => onRead(a)}
+                  >
+                    <div className="trending-number">0{i + 1}</div>
+                    <div className="trending-info">
+                      <div className="trending-cat-row">
+                        <Badge color={catColors[a.category]}>
+                          {a.category}
+                        </Badge>
+                      </div>
+                      <div className="trending-title">{a.title}</div>
+                    </div>
+                    <div className="trending-meta">
+                      <div className="trending-read-time">
+                        {a.readTime} read
+                      </div>
+                      <div className="trending-date">{a.date}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {(cat !== "All" || search) && (
+            <div className="filtered-grid">
+              {filtered.length ? (
+                filtered.map((a) => (
+                  <ArticleCard
+                    key={a.id}
+                    article={a}
+                    dark={dark}
+                    onRead={onRead}
+                    featured
+                  />
+                ))
+              ) : (
+                <div className="no-results">
+                  No articles found. Try a different search.
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="email-capture-row">
+            <EmailCapture dark={dark} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ARTICLE PAGE ─────────────────────────────────────────────────────────────
+
+export function ArticlePage({ article, dark, onBack, onRead }) {
+  const isMobile = useIsMobile();
+  const progress = useScrollProgress();
+  const others = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
+  const catColors = {
+    "Make Money": "#7B51CC",
+    Growth: "#8b5cf6",
+    Guides: "#0ea5e9",
+  };
+  const color = catColors[article.category] || "#7B51CC";
+
+  // Map article slugs to their components
+  const ARTICLE_COMPONENTS = {
+    "sustainable-monthly-income": SustainableMonthlyIncome,
+    "pricing-strategy": PricingStrategy,
+    "get-subscribers": GetSubscribers,
+    "building-consistent-monthly-income": BuildingConsistentMonthlyIncome,
+    "content-ideas-that-sell": ContentIdeasThatSell,
+    "promote-your-profile": PromoteYourProfile,
+    "build-your-fanbase": BuildYourFanbase,
+    "creator-habits": CreatorHabits,
+    "luvlyfans-standard": LuvlyfansStandard,
+    "setup-first-impressions": SetupFirstImpressions,
+    "content-direction": ContentDirection,
+    "first-30-days": First30Days,
+    "pricing-content": PricingContent,
+  };
+
+  const ArticleContent = ARTICLE_COMPONENTS[article.slug];
+
+  return (
+    <div style={{ overflowX: "hidden", width: "100%" }}>
+      {/* Progress Bar */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: `${progress * 100}%`,
+          height: 3,
+          background: "linear-gradient(90deg, #7B51CC, #8b5cf6)",
+          zIndex: 1000,
+          transition: "width 0.1s",
+        }}
+      />
+
+      {/* Hero */}
+      <div style={{ padding: "48px 5vw 0", maxWidth: 1400, margin: "0 auto" }}>
+        <button
+          onClick={onBack}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            fontSize: 13,
+            fontWeight: 600,
+            padding: "0 0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          ← Back to Blog
+        </button>
+      </div>
+
+      <article
+        style={{ maxWidth: 1400, margin: "0 auto", padding: "0 5vw 80px" }}
+      >
+        <div
+          style={{
+            marginBottom: 32,
+            display: "flex",
+            gap: 10,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Badge color={color}>{article.category}</Badge>
+          {article.trending && (
+            <Badge color="#f59e0b">
+              <Icon
+                name="fire"
+                size={12}
+                color="#fff"
+                style={{ marginRight: 4 }}
+              />{" "}
+              Trending
+            </Badge>
+          )}
+          <span
+            style={{
+              fontSize: 12,
+              color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+            }}
+          >
+            {article.readTime} read · {article.date}
+          </span>
+        </div>
+
+        <h1
+          style={{
+            margin: "0 0 20px",
+            fontSize: "clamp(28px, 4vw, 44px)",
+            fontWeight: 800,
+            lineHeight: 1.15,
+            fontFamily: "'Lora', Georgia, serif",
+            color: dark ? "#fff" : "#0a0a0a",
+          }}
+        >
+          {article.title}
+        </h1>
+
+        <p
+          style={{
+            margin: "0 0 28px",
+            fontSize: 18,
+            color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)",
+            lineHeight: 1.7,
+          }}
+        >
+          {article.excerpt}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "20px 24px",
+            background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+            borderRadius: 14,
+            border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+            marginBottom: 40,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: 16,
+                color: dark ? "#fff" : "#0f0f0f",
+              }}
+            >
+              By {article.author}
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+              }}
+            >
+              {article.authorRole} · {article.readTime} read
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Image / Banner */}
+        <div
+          style={{
+            height: isMobile ? 240 : 400,
+            borderRadius: 18,
+            background: `linear-gradient(135deg, ${article.gradient
+              .replace("from-", "")
+              .replace(" to-", ", ")
+              .split(",")
+              .map((c) => {
+                const map = {
+                  "rose-500": "#7B51CC",
+                  "pink-600": "#db2777",
+                  "amber-500": "#f59e0b",
+                  "orange-500": "#f97316",
+                  "violet-500": "#8b5cf6",
+                  "purple-600": "#9333ea",
+                  "cyan-500": "#06b6d4",
+                  "blue-600": "#2563eb",
+                  "emerald-500": "#10b981",
+                  "teal-600": "#0d9488",
+                  "fuchsia-500": "#d946ef",
+                  "rose-600": "#613db7",
+                };
+                return map[c.trim()] || "#7B51CC";
+              })
+              .join(", ")})`,
+            marginBottom: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {article.thumbnail ? (
+            <img
+              src={article.thumbnail}
+              alt={article.title}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <div style={{ textAlign: "center", color: "#fff" }}>
+              <div style={{ fontSize: 48, marginBottom: 8 }}>
+                <Icon name="chart-line" size={48} color="#fff" />
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 700, opacity: 0.9 }}>
+                Visual guide coming soon
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Article body */}
+        <div
+          style={{
+            fontSize: 17,
+            lineHeight: 1.8,
+            color: dark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.72)",
+          }}
+        >
+          {ArticleContent ? (
+            <ArticleContent />
+          ) : (
+            <>
+              <p>This is a placeholder for the full article content. In a production environment, this would be fetched from a CMS based on the slug: <strong>{article.slug}</strong>.</p>
+              <p>LuvlyFans is dedicated to providing creators with the best tools and educational resources to grow their digital business.</p>
+            </>
+          )}
+        </div>
+
+        {/* Inline CTA */}
+        <div
+          style={{
+            margin: "40px 0",
+            padding: "32px",
+            background: dark
+              ? "rgba(123,81,204,0.08)"
+              : "rgba(123,81,204,0.05)",
+            border: "1.5px solid rgba(123,81,204,0.2)",
+            borderRadius: 18,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.1em",
+              color: "#7B51CC",
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}
+          >
+            Ready to Apply This?
+          </div>
+          <h3
+            style={{
+              margin: "0 0 10px",
+              fontSize: 22,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Start Your LuvlyFans Page Today
+          </h3>
+          <p
+            style={{
+              margin: "0 0 20px",
+              fontSize: 14,
+              color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+            }}
+          >
+            Join thousands of creators earning on the platform built for growth.
+            Setup takes under 10 minutes.
+          </p>
+          <CTAButton
+            size="lg"
+            onClick={() => window.open("https://luvlyfans.com/", "_blank")}
+          >
+            Create a Free Account
+          </CTAButton>
+        </div>
+
+        {/* Related */}
+        <div style={{ marginTop: 60 }}>
+          <h3
+            style={{
+              margin: "0 0 20px",
+              fontSize: 20,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Keep Reading
+          </h3>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {others.map((a) => (
+              <ArticleCard key={a.id} article={a} dark={dark} onRead={onRead} />
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+// ─── CREATOR HUB ─────────────────────────────────────────────────────────────
+  const isMobile = useIsMobile();
+  const progress = useScrollProgress();
+  const others = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
+  const catColors = {
+    "Make Money": "#7B51CC",
+    Growth: "#8b5cf6",
+    Guides: "#0ea5e9",
+  };
+  const color = catColors[article.category] || "#7B51CC";
+
+  // Map article slugs to their components
+  const ARTICLE_COMPONENTS = {
+    "sustainable-monthly-income": SustainableMonthlyIncome,
+    "pricing-strategy": PricingStrategy,
+    "get-subscribers": GetSubscribers,
+    "building-consistent-monthly-income": BuildingConsistentMonthlyIncome,
+    "content-ideas-that-sell": ContentIdeasThatSell,
+    "promote-your-profile": PromoteYourProfile,
+    "build-your-fanbase": BuildYourFanbase,
+    "creator-habits": CreatorHabits,
+    "luvlyfans-standard": LuvlyfansStandard,
+    "setup-first-impressions": SetupFirstImpressions,
+    "content-direction": ContentDirection,
+    "first-30-days": First30Days,
+    "pricing-content": PricingContent,
+  };
+
+  const ArticleContent = ARTICLE_COMPONENTS[article.slug];
+
+  return (
+    <div style={{ overflowX: "hidden", width: "100%" }}>
+      {/* Progress Bar */}
+        <p>It’s not always the most enjoyable part, but it’s what helps people find you, understand what you offer, and decide whether they want to support you.</p>
+        <p>Whether you’re just starting out or trying to grow steadily, promotion works best when it’s simple, consistent, and clear.</p>
+
+        <div style="margin: 32px 0; border-radius: 16px; overflow: hidden; background: rgba(123,81,204,0.05); border: 2px dashed rgba(123,81,204,0.2); min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #7B51CC; text-align: center; padding: 20px;">
+          <div style="font-size: 32px; margin-bottom: 12px; color: #7B51CC;">#</div>
+          <div style="font-weight: 700; font-size: 16px;">Image Placeholder: Social Bio Example</div>
+          <div style="font-size: 13px; opacity: 0.7; max-width: 300px; margin-top: 8px;">Recommended: A screenshot showing a clean Instagram or X bio with your LuvlyFans link.</div>
+        </div>
+
+        <h2>Start With Your Existing Platforms</h2>
+        <p>The easiest place to begin is where people already follow you. This might be Instagram, X (Twitter), TikTok, Reddit, or any platform where you already post.</p>
+        <p>Make sure your LuvlyFans link is easy to find. Adding it to your bio is often enough to start. You don’t need to constantly push it. Just make it visible.</p>
+
+        <h2>Share What People Can Expect</h2>
+        <p>People are more likely to subscribe when they understand what they’re getting. When posting about your LuvlyFans profile:</p>
+        <ul>
+          <li>Share short previews or clips</li>
+          <li>Give a sense of your content style</li>
+          <li>Keep it simple and honest</li>
+        </ul>
+        <p>You’re not trying to convince everyone. You’re helping the right people decide.</p>
+
+        <div style="margin: 32px 0; border-radius: 16px; overflow: hidden; background: rgba(123,81,204,0.05); border: 2px dashed rgba(123,81,204,0.2); min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #7B51CC; text-align: center; padding: 20px;">
+          <div style="font-size: 32px; margin-bottom: 12px; color: #7B51CC;">@</div>
+          <div style="font-weight: 700; font-size: 16px;">Image Placeholder: Content Preview</div>
+          <div style="font-size: 13px; opacity: 0.7; max-width: 300px; margin-top: 8px;">Recommended: A blurred or watermarked preview of premium content to entice subscribers.</div>
+        </div>
+
+        <h2>Use Platforms Like Reddit and Forums Carefully</h2>
+        <p>Discussion platforms can help you reach new audiences, especially when your content fits the space. If you use platforms like Reddit, post in relevant communities, follow the rules of each space, and avoid repetitive posting.</p>
+        <p>People respond better when content feels natural, not forced.</p>
+
+        <h2>Keep Your Links Organised</h2>
+        <p>If you’re active on multiple platforms, it helps to keep everything in one place. Many creators use a simple landing page that includes your LuvlyFans profile, social media accounts, and any other relevant links. This makes it easier for people to find you without confusion.</p>
+
+        <h2>Collaborate With Other Creators</h2>
+        <p>Working with other creators can help you reach new audiences. This might include creating content together, mentioning each other, or posting at similar times. Collaboration works best when it feels natural and benefits both sides.</p>
+
+        <h2>Protect Your Content</h2>
+        <p>When sharing previews outside LuvlyFans, it’s worth thinking about content protection. Adding a watermark or keeping content slightly limited helps protect your work and reduce misuse. You don’t need to overdo it, just be aware.</p>
+
+        <h2>Use Promotions Thoughtfully</h2>
+        <p>If you offer promotions such as discounts, limited offers, or special access, keep them clear and occasional. Too many promotions can reduce their impact. Used carefully, they can help new fans take the first step.</p>
+
+        <h2>Grow Through Referrals</h2>
+        <p>As your presence grows, other creators may join through you. Sharing your referral link can help new creators get started and give you a small additional income stream. This works best when it happens naturally, not as pressure.</p>
+
+        <h2>Don’t Neglect Your Existing Fans</h2>
+        <p>It’s easy to focus on getting new subscribers. But long-term growth usually comes from the people who are already supporting you. Consistent content, clear communication, and respect go a long way in keeping subscribers over time.</p>
+
+        <blockquote>Promotion brings people in. Consistency keeps them.</blockquote>
+
+        <h2>Final Thoughts</h2>
+        <p>There isn’t a single way to promote your profile. What works for one creator may not work for another. The most reliable approach is to stay consistent, keep things clear, and focus on building something people want to come back to.</p>
+        <p>At LuvlyFans, growth is not about rushing. It’s about building something steady over time.</p>
+      `,
+    "building-consistent-monthly-income": `
+        <p>Making money as a creator is not the same as making money consistently.</p>
+        <p>Many creators have moments where income spikes. A post performs well. A promotion works. A burst of attention turns into short-term sales. The harder part is turning those moments into something reliable that shows up month after month.</p>
+        <p>Creators who earn consistently tend to focus less on quick wins and more on habits, structure, and trust.</p>
+
+        <h2>Consistency Starts With Expectations</h2>
+        <p>One of the biggest factors in consistent income is clarity. Creators who do well over time are usually clear about what kind of content they share, how often they post, and what subscribers can realistically expect.</p>
+        <p>This does not mean everything has to be rigid. It means avoiding surprises. When people know what they are subscribing to, they are more likely to stay. Unclear expectations often lead to short subscriptions and frustration on both sides.</p>
+
+        <h2>Turning Attention Into Ongoing Support</h2>
+        <p>Attention matters. Virality matters. Growth moments matter. What separates creators who earn consistently from those who do not is what happens next.</p>
+        <p>Creators who build monthly income tend to:</p>
+        <ul>
+          <li>Direct new attention toward subscriptions</li>
+          <li>Give people a reason to stay, not just click</li>
+          <li>Focus on retaining subscribers after growth spikes</li>
+        </ul>
+        <p>Attention brings people in. Retention is what creates stability.</p>
+
+        <h2>Building a Subscription Base Slowly</h2>
+        <p>Consistent income does not always start big. Many creators build a subscription base gradually. A few subscribers turn into a few more. Over time, that base becomes reliable monthly support. Even modest numbers can make a difference when subscribers stay for several months.</p>
+        <blockquote>Slow growth often lasts longer than fast growth with no foundation.</blockquote>
+
+        <h2>Posting Regularly, Not Constantly</h2>
+        <p>Consistency does not mean posting all the time. Creators who last usually find a rhythm they can maintain. That might be a few posts a week or a set schedule that works around other commitments. What matters most is that subscribers know when to expect updates.</p>
+        <p>Posting too often can lead to burnout. Posting too little without communication can lead to cancellations. Finding balance is key.</p>
+
+        <h2>Communicating With Subscribers</h2>
+        <p>Creators who earn consistently tend to communicate clearly. This might include letting subscribers know when content is coming, explaining changes in schedule, and being open about breaks or slow periods.</p>
+        <p>Good communication builds trust. Trust keeps people subscribed, even during quieter periods.</p>
+
+        <h2>Using One-Off Content Carefully</h2>
+        <p>One-off content such as pay-per-view posts can increase income, especially after growth moments. Creators who rely on consistent monthly income usually use these thoughtfully. They add to subscriptions rather than replacing them.</p>
+
+        <h2>Looking After Energy and Motivation</h2>
+        <p>Consistency is not just about strategy. It is also about wellbeing. Sustainable income comes from work that is sustainable to do. Creators who burn out struggle to maintain income, no matter how strong their following is. Those who last tend to pace themselves and avoid comparison.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Consistent monthly income is built through clarity, patience, and trust. Attention helps, but long-term income comes from retaining supporters and building habits that can be maintained over time.</p>
+      `,
+    "sustainable-monthly-income": `
+        <p>There is a lot of noise around what it takes to make money as a creator.</p>
+        <p>Some people talk about going viral. Others say consistency is everything. The truth is more balanced than that. Most creators who earn well over time understand how to use attention when it comes, and how to build something stable once it does.</p>
+        <p>Sustainable income is rarely about one thing. It is about timing, effort, and what you do after people notice you.</p>
+
+        <h2>Understanding Virality and What Comes After</h2>
+        <p>Going viral matters. Virality is often how creators break through in the first place. It brings attention, reach, and momentum. It is also one of the reasons a small percentage of creators rise to the very top. The top one percent did not get there by accident. In many cases, a viral moment played a role.</p>
+        <blockquote>Virality opens the door. Sustainability is what keeps it open.</blockquote>
+        <p>The issue is not virality itself. The issue is relying on it alone. A post can perform extremely well and then fade just as quickly. When income depends only on moments like that, things can feel unstable. What works one week might not work the next.</p>
+        <p>Creators who build long-term income usually treat virality as a starting point. They focus on turning attention into something more reliable by giving people a reason to stay, subscribe, and come back.</p>
+
+        <h2>Why Monthly Income Makes a Difference</h2>
+        <p>Monthly income gives creators breathing room. It allows you to plan, to slow down when needed, and to create without constant pressure. Even a relatively small but steady income can be more valuable than occasional spikes that disappear just as quickly as they arrive.</p>
+        <p>For many creators, subscriptions are not about making a lot of money straight away. They are about building a base that grows over time.</p>
+
+        <h2>Consistency Without Burning Out</h2>
+        <p>Consistency matters, but it does not mean doing everything all the time.</p>
+        <ul>
+          <li>Set a schedule you can realistically maintain</li>
+          <li>Communicate clearly with subscribers</li>
+          <li>Focus on quality rather than volume</li>
+          <li>Allow yourself time off</li>
+        </ul>
+        <p>Trying to post constantly or be available at all hours often leads to burnout. Consistency works best when it fits into your life, not when it takes over.</p>
+
+        <h2>Subscriptions and One-Off Content</h2>
+        <p>Subscriptions work best as a foundation. They give creators predictable income and give fans clarity about what they are supporting. One-off content, such as pay-per-view posts, can work well alongside subscriptions, especially after moments of increased attention.</p>
+        <p>Creators who build sustainably tend to use one-off content as an addition, not as their only source of income.</p>
+
+        <h2>Turning Attention Into Loyalty</h2>
+        <p>A large following does not always mean strong income. Creators with fewer but more engaged subscribers often earn more than those with large audiences that do not convert. Loyalty comes from showing up consistently, being clear about what you offer, and respecting your own boundaries.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Sustainable monthly income is built by combining opportunity with consistency. Virality can create momentum. Consistency and trust are what turn that momentum into something lasting. There is no single path, and success looks different for everyone.</p>
+      `,
+    "build-your-fanbase": `
+        <p>Building a fanbase takes time.</p>
+        <p>It doesn’t happen overnight, and it doesn’t come from one post or one moment. Most creators who grow steadily do so through a combination of consistency, clarity, and how they treat the people already supporting them.</p>
+        <p>Whether you’re just starting out or looking to grow what you already have, building a fanbase is less about quick wins and more about what you do repeatedly.</p>
+
+        <h2>Followers and Subscribers Are Not the Same</h2>
+        <p>It’s easy to assume that followers and subscribers behave the same way, but they don’t.</p>
+        <p>Followers usually discover you through:</p>
+        <ul>
+          <li>Social media</li>
+          <li>Shared content</li>
+          <li>Recommendations or reposts</li>
+        </ul>
+
+        <p>Subscribers make a different decision. They:</p>
+        <ul>
+          <li>Visit your profile intentionally</li>
+          <li>Choose to subscribe</li>
+          <li>Continue paying or staying based on their experience</li>
+        </ul>
+
+        <p>That difference matters. Growth is not just about getting attention. It’s about giving people a reason to stay.</p>
+
+        <h2>Consistency Builds Trust</h2>
+        <p>Subscribers stay when they know what to expect. This doesn’t mean posting constantly. It means posting in a way that feels reliable.</p>
+        <p>That might look like:</p>
+        <ul>
+          <li>A few posts each week</li>
+          <li>A regular rhythm that fits your schedule</li>
+          <li>Clear communication if things change</li>
+        </ul>
+        <p>When people feel like they understand your pace, they’re more likely to stay subscribed.</p>
+
+        <h2>Leave Room for Natural Moments</h2>
+        <p>While consistency matters, everything doesn’t need to feel planned. Alongside your regular content, it helps to include:</p>
+        <ul>
+          <li>Smaller updates</li>
+          <li>Behind-the-scenes moments</li>
+          <li>Quick thoughts or reactions</li>
+        </ul>
+        <p>These don’t need to be perfect. They help your page feel active and real.</p>
+
+        <h2>Collaborate With Other Creators</h2>
+        <p>Working with other creators can introduce your content to new audiences. This might include:</p>
+        <ul>
+          <li>Creating content together</li>
+          <li>Mentioning or tagging each other</li>
+          <li>Posting around the same time</li>
+        </ul>
+        <p>Collaboration works best when it feels natural and relevant to both creators.</p>
+
+        <h2>Engage With the People Who Support You</h2>
+        <p>Building a fanbase is not just about attracting people. It’s about keeping them. Simple actions make a difference:</p>
+        <ul>
+          <li>Replying to messages when you can</li>
+          <li>Acknowledging comments</li>
+          <li>Making new subscribers feel welcome</li>
+        </ul>
+        <p>Many creators set up a welcome message so new subscribers feel recognised straight away. Small things like this often shape how long someone stays.</p>
+
+        <h2>Let Your Fans Be Part of the Process</h2>
+        <p>People are more likely to stay when they feel involved. You can:</p>
+        <ul>
+          <li>Ask what they’d like to see more of</li>
+          <li>Pay attention to what gets the best response</li>
+          <li>Adjust your content over time</li>
+        </ul>
+        <p>This doesn’t mean doing everything people ask for. It means listening and responding where it makes sense.</p>
+
+        <h2>Focus on Retention, Not Just Growth</h2>
+        <p>It’s easy to focus on getting new subscribers. But long-term growth usually comes from the people who are already there. If your existing subscribers are happy, they stay longer and sometimes recommend you to others.</p>
+        <p>A smaller, loyal fanbase is often more valuable than a large, inconsistent one.</p>
+
+        <blockquote>Building a fanbase is not about doing everything at once. Consistency and respect are the foundation.</blockquote>
+
+        <h2>Final Thoughts</h2>
+        <p>Building a fanbase is not about doing everything at once. It’s about showing up consistently, communicating clearly, and treating your audience with respect. Growth tends to follow when those things are in place.</p>
+        <p>At LuvlyFans, the focus is on helping creators build fanbases that last, not just ones that grow quickly.</p>
+      `,
+    "creator-habits": `
+        <p>Most creators start the same way.</p>
+        <p>They sign up, post a few times, wait for income to arrive — and wonder why it doesn't. The truth is that earning consistently on LuvlyFans isn't about luck, follower count, or even talent alone. It's about habit.</p>
+        <p>The creators who build real, reliable income — month after month — tend to do five things that most others skip entirely.</p>
+
+        <h2>1. They Treat Their Page Like a Business, Not a Side Project</h2>
+        <p>The mindset shift is everything. Creators who earn consistently don't log in when they feel like it — they show up the same way a business owner manages their shop.</p>
+        <p>That means:</p>
+        <ul>
+          <li>A profile bio that clearly describes what subscribers get</li>
+          <li>Pricing that reflects the value of the content</li>
+          <li>A posting schedule they stick to — not just when inspiration strikes</li>
+        </ul>
+        <p>You don't need to be everywhere. You need to be reliable. When a new fan lands on your page, they should immediately understand what you're about and feel confident that subscribing is worth it.</p>
+        <blockquote>Your profile is your storefront. If the window display is unclear, people walk past.</blockquote>
+
+        <h2>2. They Post on a Schedule — Even When They Don't Feel Like It</h2>
+        <p>Consistency beats brilliance almost every time. A creator who posts solid content three times a week will outperform one who posts amazing content once a month and then disappears.</p>
+        <p>Subscribers cancel when they feel forgotten. They stay when they feel like something is always waiting for them.</p>
+        <p>The creators who build real monthly income typically:</p>
+        <ul>
+          <li>Pick a posting cadence they can actually maintain</li>
+          <li>Batch create content in advance so they're never scrambling</li>
+          <li>Communicate openly if life gets in the way</li>
+        </ul>
+        <p>You don't need to post daily. You need to post predictably.</p>
+
+        <h2>3. They Actually Talk to Their Subscribers</h2>
+        <p>This one is consistently underestimated. The creators who retain subscribers longest are almost always the ones who engage personally — even briefly.</p>
+        <p>A welcome message when someone subscribes. A reply to a comment. A check-in DM after a week of silence. These small moments build loyalty that no algorithm can replicate.</p>
+        <p>It doesn't have to be time-consuming. Even a few minutes a day spent genuinely engaging creates a relationship feel that makes people want to stay — and spend.</p>
+        <blockquote>Subscribers who feel seen are subscribers who stick around.</blockquote>
+
+        <h2>4. They Track What Actually Performs</h2>
+        <p>Creators who guess what their audience wants stay stuck. Creators who pay attention to data grow.</p>
+        <p>You don't need to be a data scientist. You just need to notice:</p>
+        <ul>
+          <li>Which types of content get the most engagement?</li>
+          <li>At what times do your subscribers respond most?</li>
+          <li>Which posts led to new subscriptions or tips?</li>
+        </ul>
+        <p>Over time, patterns emerge. Double down on what works. Don't waste energy creating content that consistently underperforms — no matter how much effort went into it.</p>
+
+        <h2>5. They Protect Their Energy Like It's Their Most Valuable Asset</h2>
+        <p>Content creation is a long game. Burnout is one of the most common reasons creators stop — not lack of talent, not lack of audience. Just running out of energy.</p>
+        <p>The creators who last set boundaries:</p>
+        <ul>
+          <li>They don't create content during every waking hour</li>
+          <li>They take breaks without guilt and communicate with their audience about it</li>
+          <li>They know what kind of content drains them and limit it</li>
+        </ul>
+        <p>Sustainable income requires a sustainable pace. The hustle-every-day approach works for a while — until it doesn't. Building rest into your rhythm isn't a weakness. It's strategy.</p>
+        <blockquote>You can't pour from an empty cup. Protect your energy, and your content will show it.</blockquote>
+
+        <h2>The Common Thread</h2>
+        <p>None of these habits are glamorous. There's no secret hack here. What they share is simple: they're all about showing up — consistently, intentionally, and with longevity in mind.</p>
+        <p>The creators who earn most reliably on LuvlyFans aren't always the most talented or the most followed. They're the ones who decided to run their page like a business, engage like a human, and pace themselves like a professional.</p>
+        <p>Start with one habit. Build from there. Income follows consistency — not the other way around.</p>
+      `,
+    "luvlyfans-standard": `
+        <p>The creator economy is shifting.</p>
+        <p>For too long, creators have been at the mercy of platforms that treat them as an afterthought. Hidden fees, delayed payouts, and non-existent support have become the industry norm. At LuvlyFans, we’re setting a new standard.</p>
+
+        <h2>Fast Payouts: Your Money, When You Earn It</h2>
+        <p>In a world that moves this fast, waiting weeks for your hard-earned money is unacceptable. The LuvlyFans Standard means you get access to your funds in as little as 24 hours. Whether you’re reinvesting in your brand or just living your life, you shouldn’t have to wait for the platform to catch up.</p>
+
+        <h2>Real Human Support: No More Chatbots</h2>
+        <p>When you have a question about your business, you deserve a human answer. We’ve eliminated the frustration of automated loops. Every creator on LuvlyFans has access to dedicated human support. We’re here to solve problems, not clear tickets.</p>
+
+        <h2>Built-in Growth: Beyond Your Follower Count</h2>
+        <p>Most platforms leave discovery entirely up to you. If you don't have a massive external following, you don't grow. LuvlyFans is the only platform with built-in discovery tools like Spotlight, designed to get your content in front of thousands of new fans who are already on the platform looking for creators like you.</p>
+
+        <blockquote>"LuvlyFans is the first platform that feels like it's actually on my side. The growth tools alone changed everything for my career." — Top 1% Creator</blockquote>
+
+        <h2>A Community Built on Trust</h2>
+        <p>The transition to LuvlyFans isn't just about better tools; it's about a better culture. We believe that when creators are supported, the entire ecosystem thrives. Join the thousands of creators who are making the switch to a platform that measures its success by yours.</p>
+      `,
+    "get-subscribers": `
+        <p>When you’re starting out, it’s easy to think you need ads to grow.</p>
+        <p>You don’t.</p>
+        <p>Most creators get their first subscribers without spending anything. What matters more is how clearly you present your page, how visible you are, and how easy it is for someone to decide to subscribe.</p>
+        <p>This is about building your first base, not scaling quickly.</p>
+
+        <h2>Start With People Who Already Know You</h2>
+        <p>Your first subscribers often come from places you’re already active. This might be social media followers, people who have interacted with your content before, or existing audiences on other platforms.</p>
+        <p>You don’t need a large following. You need a small group of people who already recognise you. Make it easy for them to find your page by:</p>
+        <ul>
+          <li>Adding your link to your bio</li>
+          <li>Mentioning your page naturally</li>
+          <li>Sharing simple updates about what you’re doing</li>
+        </ul>
+
+        <h2>Make Your Page Worth Subscribing To</h2>
+        <p>Before focusing on promotion, make sure your page is ready. If someone clicks your link, they should see a clear profile, a short, understandable bio, and enough content to explore (6–12 posts is a good start).</p>
+        <p>First impressions matter more than traffic. Even a small number of visitors can convert if your page feels complete.</p>
+
+        <h2>Use Content as Your Promotion</h2>
+        <p>Promotion doesn’t always mean announcing your page. It can be as simple as sharing short previews, clips or highlights, and small insights into your content. You’re not trying to show everything. You’re giving people a reason to be curious.</p>
+
+        <h2>Be Consistent, Even if It’s Small</h2>
+        <p>You don’t need to post everywhere, every day. But you do need to show up regularly.</p>
+        <p>Consistency helps people remember you, trust that you’re active, and feel comfortable subscribing. Even a few consistent posts per week is enough to start building momentum.</p>
+
+        <h2>Use Visibility Tools on the Platform</h2>
+        <p>Once your page is set up, use the tools available to you. Features like Spotlight can help your content reach people who aren’t following you yet. This gives you exposure without relying only on external platforms.</p>
+        <p>Visibility creates opportunities. Your content converts them.</p>
+
+        <h2>Engage Early</h2>
+        <p>When your first subscribers arrive, how you respond matters. Simple actions like replying to messages, acknowledging support, and being present can make a difference in whether someone stays or leaves. Your first subscribers often shape your early growth.</p>
+
+        <h2>Avoid Overcomplicating It</h2>
+        <p>It’s easy to think you need a full strategy, perfect content, or a large audience. You don’t. You need a clear page, a small amount of content, consistency, and visibility. That’s enough to get started.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Your first subscribers don’t come from ads. They come from clarity, presence, and small, consistent actions over time. Once you have a foundation, you can build on it. But the beginning is usually simpler than it seems.</p>
+        <p>At LuvlyFans, the focus is on helping creators grow step by step, without needing to rely on paid promotion.</p>
+      `,
+    "pricing-strategy": `
+        <p>Pricing is often treated as a quick decision.</p>
+        <p>Set a number, move on, and focus on content. But over time, pricing tends to influence more than people expect. It affects who subscribes, how long they stay, and how stable your income becomes.</p>
+        <p>This isn’t about finding a perfect price. It’s about building a structure that works over time.</p>
+
+        <h2>Start With Sustainability, Not Optimism</h2>
+        <p>Many creators set prices based on what they hope to deliver. The problem is that expectations increase quickly. If your pricing is too high for what you can realistically maintain, it creates pressure and leads to inconsistency.</p>
+        <p>A more stable approach is:</p>
+        <ul>
+          <li>Price based on what you can consistently deliver</li>
+          <li>Keep expectations clear</li>
+          <li>Build from there</li>
+        </ul>
+        <p>Consistency tends to matter more than ambition.</p>
+
+        <h2>Think Beyond the First Subscription</h2>
+        <p>Getting someone to subscribe is only the first step. What matters more is whether they stay. If your pricing attracts people who expect more than you can provide, they’re more likely to leave quickly.</p>
+        <p>A slightly lower but realistic price often leads to longer subscriptions, better retention, and more predictable income.</p>
+
+        <h2>Use Structure Instead of Guesswork</h2>
+        <p>Pricing works better when it’s structured. A simple way to think about it: Subscription = your core content, while additional content = optional extras.</p>
+        <p>This gives you flexibility without making your page feel confusing. You don’t need to use every option immediately. Start simple and adjust over time.</p>
+
+        <h2>Avoid Constant Changes</h2>
+        <p>Changing your price too often creates uncertainty. Subscribers prefer stability. If you do adjust your pricing, do it gradually, give people time to understand, and keep things clear. Frequent changes can make your page feel inconsistent.</p>
+
+        <h2>Consider Who You Want to Attract</h2>
+        <p>Pricing shapes your audience. Lower pricing can attract more casual subscribers. Higher pricing can attract more committed ones. Neither is right or wrong, but each leads to a different type of experience.</p>
+        <p>Think about your content style, your posting frequency, and the kind of audience you want, then price accordingly.</p>
+
+        <h2>Retention Has More Impact Than Price</h2>
+        <p>Many creators focus on pricing as the main lever. In reality, retention often matters more. Things that improve retention include clear expectations, consistent posting, and good communication.</p>
+        <p>When people stay longer, income becomes more stable, even without changing your price.</p>
+
+        <h2>Small Adjustments Make a Difference</h2>
+        <p>Pricing doesn’t need to change dramatically. Often, small adjustments are enough: refining what’s included, improving how you present your value, or slightly adjusting your price over time. These changes tend to be more effective than large shifts.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Pricing is not about finding a number that maximises short-term income. It’s about building something that feels sustainable, clear, and fair over time. When your pricing aligns with what you can consistently deliver, growth becomes easier to manage.</p>
+        <p>At LuvlyFans, the focus is on helping creators build income that lasts, not just income that spikes.</p>
+      `,
+    "setup-first-impressions": `
+        <p>When someone lands on your page, they decide quickly whether to stay or leave.</p>
+        <p>You don’t need a lot of content to make a strong impression, but you do need clarity. A clear profile builds trust immediately.</p>
+        
+        <h2>What matters most</h2>
+        <ul>
+          <li>A clear profile photo</li>
+          <li>A short bio that explains what you offer</li>
+          <li>A few posts that represent your content</li>
+          <li>A consistent look and feel</li>
+        </ul>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Empty profiles</li>
+          <li>No explanation of your content</li>
+          <li>Uploading one or two posts and promoting too early</li>
+        </ul>
+
+        <h2>Quick setup checklist</h2>
+        <ul>
+          <li>Upload at least 6–12 posts</li>
+          <li>Add a short bio (simple and clear)</li>
+          <li>Choose a profile photo that represents you</li>
+          <li>Pin a post explaining what fans can expect</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Your page doesn’t need to be perfect. It just needs to feel complete.</p>
+      `,
+    "content-direction": `
+        <p>You don’t need a perfect niche.</p>
+        <p>But you do need a clear direction so people understand what your page is about.</p>
+
+        <h2>Start simple</h2>
+        <p>Think about:</p>
+        <ul>
+          <li>What you enjoy creating</li>
+          <li>What people respond to</li>
+          <li>What you can maintain consistently</li>
+        </ul>
+
+        <h2>Keep it clear</h2>
+        <p>Your content should answer this quickly: “What will I see if I subscribe?”</p>
+
+        <h2>Common approaches</h2>
+        <ul>
+          <li><strong>One clear theme:</strong> Focusing on a specific interest or style.</li>
+          <li><strong>A mix of related content:</strong> Combining a few complementary topics.</li>
+          <li><strong>A personality-driven page:</strong> Building everything around your own perspective.</li>
+        </ul>
+        <p>All can work if they’re consistent.</p>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Changing direction too often</li>
+          <li>Trying to do everything at once</li>
+          <li>Copying others too closely</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Your direction can evolve. Start simple and refine over time.</p>
+      `,
+    "first-30-days": `
+        <p>Your first month is about building a foundation, not chasing results.</p>
+        <p>Focus on structure first, growth second.</p>
+
+        <h2>Week 1: Set up</h2>
+        <ul>
+          <li>Complete your profile</li>
+          <li>Upload your first content</li>
+          <li>Set your pricing</li>
+          <li>Prepare your page before promoting</li>
+        </ul>
+
+        <h2>Week 2: Start posting</h2>
+        <ul>
+          <li>Begin posting consistently</li>
+          <li>Add small updates alongside main content</li>
+          <li>Start sharing your page externally</li>
+        </ul>
+
+        <h2>Week 3: Increase visibility</h2>
+        <ul>
+          <li>Use Spotlight</li>
+          <li>Share previews on social platforms</li>
+          <li>Engage with new subscribers</li>
+        </ul>
+
+        <h2>Week 4: Adjust</h2>
+        <ul>
+          <li>Look at what’s working</li>
+          <li>Refine your content</li>
+          <li>Keep things simple and consistent</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Progress in the first month is often quiet. Focus on building, not rushing.</p>
+      `,
+    "pricing-content": `
+        <p>Pricing affects who subscribes and how long they stay.</p>
+        <p>There’s no perfect number, but there is a structure that works.</p>
+
+        <h2>Start with what you can maintain</h2>
+        <p>Set a price based on:</p>
+        <ul>
+          <li>How often you post</li>
+          <li>What kind of content you create</li>
+          <li>What you can sustain long-term</li>
+        </ul>
+
+        <h2>Keep it simple</h2>
+        <ul>
+          <li><strong>Subscription:</strong> your main content</li>
+          <li><strong>Additional content:</strong> optional</li>
+        </ul>
+        <p>You don’t need complexity early on.</p>
+
+        <h2>What to avoid</h2>
+        <ul>
+          <li>Pricing too high too early</li>
+          <li>Changing your price too often</li>
+          <li>Comparing too closely to others</li>
+        </ul>
+
+        <h2>Think long-term</h2>
+        <p>A stable setup leads to:</p>
+        <ul>
+          <li>Better retention</li>
+          <li>More predictable income</li>
+          <li>Less pressure</li>
+        </ul>
+
+        <h2>Final note</h2>
+        <p>Pricing should support your consistency, not stress you.</p>
+      `,
+    "content-ideas-that-sell": `
+        <p>Finding content ideas is one of the hardest parts of being a creator.</p>
+        <p>You want to stay fresh, keep subscribers engaged, and create posts that actually convert to paid subscribers. The challenge is doing this consistently without burning out or running out of ideas.</p>
+        <p>This list includes 50 proven content formats that creators use to grow and maintain their subscriber base. These aren't gimmicks — they're ideas that work.</p>
+
+        <h2>Behind-the-Scenes & Personal</h2>
+        <ul>
+          <li>Morning routine or getting-ready video</li>
+          <li>Day in the life vlog style content</li>
+          <li>Behind the scenes of a photoshoot</li>
+          <li>Getting ready for a night out</li>
+          <li>Workout or fitness routine</li>
+          <li>Cooking or meal prep content</li>
+          <li>Personal story or Q&A session</li>
+          <li>Room tour or home setup</li>
+          <li>Travel diary or vacation content</li>
+          <li>Unboxing packages or PR items</li>
+        </ul>
+
+        <h2>Teases & Previews</h2>
+        <ul>
+          <li>Sneak peek of upcoming exclusive content</li>
+          <li>Teaser photo with full set available to subscribers</li>
+          <li>Preview of a new theme or concept</li>
+          <li>Before/after transformation content</li>
+          <li>Outfit reveal or try-on haul</li>
+        </ul>
+
+        <h2>Interactive & Engagement</h2>
+        <ul>
+          <li>Poll asking subscribers what they want to see next</li>
+          <li>Request for feedback or suggestions</li>
+          <li>Caption this photo challenge</li>
+          <li>Rate my outfit posts</li>
+          <li>Ask me anything session</li>
+          <li>Let subscribers vote on next content theme</li>
+          <li>Respond to top fan messages publicly</li>
+          <li>Subscriber shoutouts or appreciation posts</li>
+        </ul>
+
+        <h2>Exclusive & Premium</h2>
+        <ul>
+          <li>Subscriber-only photo sets</li>
+          <li>Extended video content not available elsewhere</li>
+          <li>Custom content created from subscriber requests</li>
+          <li>Premium photosets with professional editing</li>
+          <li>Uncensored or extended cuts of previous content</li>
+          <li>Special occasion content (holidays, birthdays)</li>
+          <li>Limited-time exclusive drops</li>
+        </ul>
+
+        <h2>Throwbacks & Archives</h2>
+        <ul>
+          <li>Throwback to earlier content</li>
+          <li>Best of the month compilation</li>
+          <li>Fan-favorite content reposted</li>
+          <li>Archive unlocks from previous sets</li>
+        </ul>
+
+        <h2>Themed Series</h2>
+        <ul>
+          <li>Weekly themed photoshoot (e.g., Fashion Friday, Motivation Monday)</li>
+          <li>Seasonal content (summer vibes, cozy winter)</li>
+          <li>Color-themed sets</li>
+          <li>Outfit or style challenges</li>
+          <li>Location-based series (beach, city, home)</li>
+        </ul>
+
+        <h2>Educational & Value-Adding</h2>
+        <ul>
+          <li>Tips for aspiring creators</li>
+          <li>Tutorial on photography, lighting, or editing</li>
+          <li>Fitness or wellness advice</li>
+          <li>Skincare or beauty routine breakdown</li>
+          <li>Productivity or mindset content</li>
+        </ul>
+
+        <h2>Fun & Playful</h2>
+        <ul>
+          <li>Challenge yourself content (ice bucket, trends)</li>
+          <li>Memes or relatable content</li>
+          <li>Reaction videos to comments or messages</li>
+          <li>Funny outtakes or bloopers</li>
+          <li>Random fun facts about yourself</li>
+        </ul>
+
+        <blockquote>The best content ideas come from understanding your audience and staying consistent with what works for you.</blockquote>
+
+        <h2>How to Use This List</h2>
+        <p>Don't try to do everything at once. Pick 5-10 ideas that feel natural to you and rotate through them. Pay attention to what gets the best response, then double down on those formats.</p>
+        <p>Consistency beats variety every time. It's better to master a few content types than to spread yourself too thin trying to do everything.</p>
+
+        <h2>Final Thoughts</h2>
+        <p>Content ideas are everywhere once you start paying attention. The key is to stay consistent, engage with your audience, and focus on what makes you unique. These 50 ideas are just a starting point — adapt them to fit your style and watch what performs best.</p>
+        <p>At LuvlyFans, we're here to help you create content that converts and keeps subscribers coming back.</p>
+      `,
+  };
+
+  const body =
+    CONTENT[article.slug] ||
+    `
+      <p>This is a placeholder for the full article content. In a production environment, this would be fetched from a CMS based on the slug: <strong>${article.slug}</strong>.</p>
+      <p>LuvlyFans is dedicated to providing creators with the best tools and educational resources to grow their digital business.</p>
+    `;
+
+  return (
+    <div style={{ overflowX: "hidden", width: "100%" }}>
+      {/* Progress Bar */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: `${progress * 100}%`,
+          height: 3,
+          background: "linear-gradient(90deg, #7B51CC, #8b5cf6)",
+          zIndex: 1000,
+          transition: "width 0.1s",
+        }}
+      />
+
+      {/* Hero */}
+      <div style={{ padding: "48px 5vw 0", maxWidth: 1200, margin: "0 auto" }}>
+        <button
+          onClick={onBack}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            fontSize: 13,
+            fontWeight: 600,
+            padding: "0 0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          ← Back to Blog
+        </button>
+      </div>
+
+      <article
+        style={{ maxWidth: 760, margin: "0 auto", padding: "0 5vw 80px" }}
+      >
+        <div
+          style={{
+            marginBottom: 32,
+            display: "flex",
+            gap: 10,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Badge color={color}>{article.category}</Badge>
+          {article.trending && (
+            <Badge color="#f59e0b">
+              <Icon
+                name="fire"
+                size={12}
+                color="#fff"
+                style={{ marginRight: 4 }}
+              />{" "}
+              Trending
+            </Badge>
+          )}
+          <span
+            style={{
+              fontSize: 12,
+              color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+            }}
+          >
+            {article.readTime} read · {article.date}
+          </span>
+        </div>
+
+        <h1
+          style={{
+            margin: "0 0 20px",
+            fontSize: "clamp(28px, 4vw, 44px)",
+            fontWeight: 800,
+            lineHeight: 1.15,
+            fontFamily: "'Lora', Georgia, serif",
+            color: dark ? "#fff" : "#0a0a0a",
+          }}
+        >
+          {article.title}
+        </h1>
+
+        <p
+          style={{
+            margin: "0 0 28px",
+            fontSize: 18,
+            color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)",
+            lineHeight: 1.7,
+          }}
+        >
+          {article.excerpt}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "20px 24px",
+            background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+            borderRadius: 14,
+            border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+            marginBottom: 40,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: 16,
+                color: dark ? "#fff" : "#0f0f0f",
+              }}
+            >
+              By {article.author}
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+              }}
+            >
+              {article.authorRole} · {article.readTime} read
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Image / Banner */}
+        <div
+          style={{
+            height: isMobile ? 240 : 400,
+            borderRadius: 18,
+            background: `linear-gradient(135deg, ${article.gradient
+              .replace("from-", "")
+              .replace(" to-", ", ")
+              .split(",")
+              .map((c) => {
+                const map = {
+                  "rose-500": "#7B51CC",
+                  "pink-600": "#db2777",
+                  "amber-500": "#f59e0b",
+                  "orange-500": "#f97316",
+                  "violet-500": "#8b5cf6",
+                  "purple-600": "#9333ea",
+                  "cyan-500": "#06b6d4",
+                  "blue-600": "#2563eb",
+                  "emerald-500": "#10b981",
+                  "teal-600": "#0d9488",
+                  "fuchsia-500": "#d946ef",
+                  "rose-600": "#613db7",
+                };
+                return map[c.trim()] || "#7B51CC";
+              })
+              .join(", ")})`,
+            marginBottom: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {article.thumbnail ? (
+            <img
+              src={article.thumbnail}
+              alt={article.title}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <div style={{ textAlign: "center", color: "#fff" }}>
+              <div style={{ fontSize: 48, marginBottom: 8 }}>
+                <Icon name="chart-line" size={48} color="#fff" />
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 700, opacity: 0.9 }}>
+                Visual guide coming soon
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Article body */}
+        <div
+          dangerouslySetInnerHTML={{ __html: body }}
+          style={{
+            fontSize: 17,
+            lineHeight: 1.8,
+            color: dark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.72)",
+          }}
+        />
+
+        {/* Inline CTA */}
+        <div
+          style={{
+            margin: "40px 0",
+            padding: "32px",
+            background: dark
+              ? "rgba(123,81,204,0.08)"
+              : "rgba(123,81,204,0.05)",
+            border: "1.5px solid rgba(123,81,204,0.2)",
+            borderRadius: 18,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.1em",
+              color: "#7B51CC",
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}
+          >
+            Ready to Apply This?
+          </div>
+          <h3
+            style={{
+              margin: "0 0 10px",
+              fontSize: 22,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Start Your LuvlyFans Page Today
+          </h3>
+          <p
+            style={{
+              margin: "0 0 20px",
+              fontSize: 14,
+              color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+            }}
+          >
+            Join thousands of creators earning on the platform built for growth.
+            Setup takes under 10 minutes.
+          </p>
+          <CTAButton
+            size="lg"
+            onClick={() => window.open("https://luvlyfans.com/", "_blank")}
+          >
+            Create a Free Account
+          </CTAButton>
+        </div>
+
+        {/* Related */}
+        <div style={{ marginTop: 60 }}>
+          <h3
+            style={{
+              margin: "0 0 20px",
+              fontSize: 20,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Keep Reading
+          </h3>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {others.map((a) => (
+              <ArticleCard key={a.id} article={a} dark={dark} onRead={onRead} />
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+// ─── CREATOR HUB ─────────────────────────────────────────────────────────────
 
 export function HubPage({ dark, onRead, setPage }) {
   const [activeModule, setActiveModule] = useState(0);
@@ -944,6 +3703,196 @@ export function HubPage({ dark, onRead, setPage }) {
         </section>
       </div>
     </div>
+  );
+}
+
+// ─── FOOTER ───────────────────────────────────────────────────────────────────
+
+export function Footer({ dark, setPage }) {
+  return (
+    <footer
+      style={{
+        borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+        padding: "48px 5vw 32px",
+      }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gap: 40,
+            marginBottom: 40,
+            flexWrap: "wrap",
+          }}
+        >
+          <div>
+            <Logo dark={dark} />
+            <p
+              style={{
+                marginTop: 14,
+                fontSize: 13,
+                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+                lineHeight: 1.7,
+                maxWidth: 280,
+              }}
+            >
+              The creator education hub for the next generation of independent
+              earners. Learn, grow, and monetize — smarter.
+            </p>
+          </div>
+          {[
+            {
+              title: "Education",
+              links: [
+                { name: "Creator Hub", action: () => setPage("hub") },
+                {
+                  name: "Getting Started",
+                  action: () => setPage("getting-started"),
+                },
+                {
+                  name: "Playbooks",
+                  action: () => {
+                    setPage("hub");
+                    setTimeout(
+                      () =>
+                        document
+                          .getElementById("playbooks")
+                          ?.scrollIntoView({ behavior: "smooth" }),
+                      100,
+                    );
+                  },
+                },
+              ],
+            },
+            {
+              title: "Platform",
+              links: [
+                {
+                  name: "Platform Overview",
+                  action: () => setPage("getting-started"),
+                },
+                {
+                  name: "Free Accounts",
+                  action: () => setPage("free-creators"),
+                },
+                {
+                  name: "Features",
+                  action: () => {
+                    setPage("home");
+                    setTimeout(
+                      () => window.scrollTo({ top: 0, behavior: "smooth" }),
+                      100,
+                    );
+                  },
+                },
+              ],
+            },
+            {
+              title: "Support",
+              links: [
+                { name: "Mission", action: () => setPage("mission") },
+                { name: "Blog", action: () => setPage("home") },
+                { name: "Contact", action: () => setPage("contact") },
+              ],
+            },
+          ].map((col) => (
+            <div key={col.title}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+                  marginBottom: 14,
+                }}
+              >
+                {col.title}
+              </div>
+              {col.links.map((l) => (
+                <div key={l.name} style={{ marginBottom: 10 }}>
+                  <button
+                    onClick={l.action}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: 13,
+                      color: dark
+                        ? "rgba(255,255,255,0.6)"
+                        : "rgba(0,0,0,0.55)",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {l.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+            paddingTop: 24,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 12,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.35)",
+            }}
+          >
+            © 2026 LuvlyFans. All rights reserved.
+          </div>
+          <div style={{ display: "flex", gap: 20 }}>
+            <a
+              href="https://luvlyfans.com/pages/privacy"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://luvlyfans.com/pages/terms-of-service"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Terms of Service
+            </a>
+            <a
+              href="https://luvlyfans.com/pages/creator-agreement"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Creator Agreement
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
 

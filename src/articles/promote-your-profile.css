@@ -1,0 +1,43 @@
+/* Promote Your Profile Article Styles */
+
+.article-promote-profile {
+  /* Add custom styles specific to this article */
+}
+
+.article-promote-profile h2 {
+  color: var(--primary);
+  margin-top: 40px;
+}
+
+.article-promote-profile blockquote {
+  border-left: 4px solid #7b51cc;
+  padding-left: 20px;
+  margin: 32px 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.article-promote-profile ul {
+  margin: 20px 0;
+  padding-left: 24px;
+}
+
+.article-promote-profile li {
+  margin: 10px 0;
+}
+
+.article-promote-profile .image-placeholder {
+  margin: 32px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(123, 81, 204, 0.05);
+  border: 2px dashed rgba(123, 81, 204, 0.2);
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #7b51cc;
+  text-align: center;
+  padding: 20px;
+}

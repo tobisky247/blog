@@ -1,17 +1,3 @@
-// Main export file for all page components
-// Components are being gradually split into individual files for better maintainability
-
-// ===== EXPORTED COMPONENTS (in separate files) =====
-export { Nav } from "./pages/Nav";
-export { HomePage } from "./pages/HomePage";
-export { ArticlePage } from "./pages/ArticlePage";
-export { EventsPage } from "./pages/EventsPage";
-export { Footer } from "./pages/Footer";
-
-// ===== COMPONENTS STILL TO BE EXTRACTED =====
-// These components are temporarily kept here until extraction is complete
-// They will be moved to individual files in src/pages/
-
 import React, { useState, useEffect } from "react";
 import "./nav.css";
 import "./home.css";
@@ -72,6 +58,1869 @@ function useIsMobile() {
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
+
+export function Nav({ dark, setDark, page, setPage }) {
+  const [scroll, setScroll] = useState(false);
+  const [guidesOpen, setGuidesOpen] = useState(false);
+  const [hubOpen, setHubOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScroll(window.scrollY > 10);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+      if (window.innerWidth >= 800) setMenuOpen(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const navLinks = [
+    { label: "Blog", p: "home" },
+    {
+      label: "Creator Hub",
+      p: "hub",
+      sub: [
+        { label: "Creator Hub", p: "hub", icon: "chart-arrow-up" },
+        {
+          label: "Free Creators accounts",
+          p: "free-creators",
+          icon: "diamond",
+        },
+      ],
+    },
+    {
+      label: "How-to-guides",
+      sub: [
+        { label: "Getting started", p: "getting-started" },
+        { label: "Earning on Luvlyfans", p: "earning" },
+        { label: "Features", p: "features" },
+      ],
+    },
+    { label: "Events", p: "events" },
+  ];
+
+  return (
+    <>
+      <nav
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1000,
+          background:
+            scroll || menuOpen
+              ? dark
+                ? "rgba(10,10,10,0.98)"
+                : "rgba(255,255,255,0.98)"
+              : "transparent",
+          backdropFilter: scroll || menuOpen ? "blur(20px)" : "none",
+          borderBottom:
+            scroll || menuOpen
+              ? `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`
+              : "1px solid transparent",
+          transition: "all 0.3s ease",
+          padding: "0 5vw",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 64,
+          }}
+        >
+          <button
+            onClick={() => {
+              setPage("home");
+              setMenuOpen(false);
+            }}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              zIndex: 1001,
+            }}
+          >
+            <Logo dark={dark} />
+          </button>
+
+          {/* Desktop Nav */}
+          {!isMobile && (
+            <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+              {navLinks.map((link) => (
+                <div
+                  key={link.label}
+                  onMouseEnter={() =>
+                    link.sub &&
+                    (link.label === "Creator Hub"
+                      ? setHubOpen(true)
+                      : setGuidesOpen(true))
+                  }
+                  onMouseLeave={() =>
+                    link.sub &&
+                    (link.label === "Creator Hub"
+                      ? setHubOpen(false)
+                      : setGuidesOpen(false))
+                  }
+                  style={{ position: "relative" }}
+                >
+                  <button
+                    onClick={() => !link.sub && setPage(link.p)}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: "8px 14px",
+                      borderRadius: 8,
+                      color:
+                        page === link.p
+                          ? "#7B51CC"
+                          : dark
+                            ? "rgba(255,255,255,0.7)"
+                            : "rgba(0,0,0,0.65)",
+                      fontSize: 14,
+                      fontWeight: 600,
+                      transition: "color 0.15s",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 5,
+                    }}
+                  >
+                    {link.label}{" "}
+                    {link.sub && (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          transform: (
+                            link.label === "Creator Hub" ? hubOpen : guidesOpen
+                          )
+                            ? "rotate(180deg)"
+                            : "none",
+                          transition: "transform 0.2s",
+                        }}
+                      >
+                        ▼
+                      </span>
+                    )}
+                  </button>
+
+                  {link.sub && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: 0,
+                        width: 240,
+                        background: dark ? "rgba(18,18,18,0.98)" : "#fff",
+                        border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}`,
+                        borderRadius: 20,
+                        boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
+                        opacity: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? 1
+                          : 0,
+                        transform: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? "translateY(5px)"
+                          : "translateY(15px)",
+                        visibility: (
+                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                        )
+                          ? "visible"
+                          : "hidden",
+                        transition: "all 0.25s cubic-bezier(0.23, 1, 0.32, 1)",
+                        padding: "8px",
+                        zIndex: 1001,
+                        backdropFilter: "blur(20px)",
+                      }}
+                    >
+                      {link.sub.map((s) => (
+                        <button
+                          key={s.p}
+                          onClick={() => {
+                            setPage(s.p);
+                            setHubOpen(false);
+                            setGuidesOpen(false);
+                            window.scrollTo(0, 0);
+                          }}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 10,
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "10px 14px",
+                            borderRadius: 12,
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: dark
+                              ? "rgba(255,255,255,0.8)"
+                              : "rgba(0,0,0,0.75)",
+                            background: "transparent",
+                            cursor: "pointer",
+                            transition: "all 0.15s",
+                            border: "none",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = dark
+                              ? "rgba(123,81,204,0.15)"
+                              : "rgba(123,81,204,0.1)";
+                            e.currentTarget.style.color = "#7B51CC";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = dark
+                              ? "rgba(255,255,255,0.8)"
+                              : "rgba(0,0,0,0.75)";
+                          }}
+                        >
+                          {s.icon && (
+                            <Icon name={s.icon} size={16} color="#7B51CC" />
+                          )}
+                          {s.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "center",
+              zIndex: 1001,
+            }}
+          >
+            {/* Dark mode toggle — pill switch on desktop */}
+            {!isMobile && (
+              <button
+                onClick={() => setDark(!dark)}
+                title={dark ? "Switch to light mode" : "Switch to dark mode"}
+                style={{
+                  width: 52,
+                  height: 28,
+                  borderRadius: 99,
+                  border: "none",
+                  cursor: "pointer",
+                  outline: "none",
+                  background: dark ? "#7B51CC" : "#e5e7eb",
+                  position: "relative",
+                  transition: "background 0.3s",
+                  flexShrink: 0,
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 3,
+                    left: dark ? 25 : 3,
+                    width: 22,
+                    height: 22,
+                    borderRadius: "50%",
+                    background: "#fff",
+                    transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 12,
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                  }}
+                >
+                  {dark ? "🌙" : "☀️"}
+                </div>
+              </button>
+            )}
+            {!isMobile && (
+              <CTAButton
+                size="sm"
+                onClick={() => window.open("https://luvlyfans.com/", "_blank")}
+              >
+                Start Earning
+              </CTAButton>
+            )}
+
+            {/* Mobile Toggle */}
+            {isMobile && (
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                style={{
+                  width: 40,
+                  height: 40,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: 5,
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    transition: "all 0.3s",
+                    transform: menuOpen
+                      ? "rotate(45deg) translateY(5px)"
+                      : "none",
+                  }}
+                />
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    opacity: menuOpen ? 0 : 1,
+                    transition: "all 0.3s",
+                  }}
+                />
+                <div
+                  style={{
+                    width: 22,
+                    height: 2,
+                    background: dark ? "#fff" : "#000",
+                    transition: "all 0.3s",
+                    transform: menuOpen
+                      ? "rotate(-45deg) translateY(-5px)"
+                      : "none",
+                  }}
+                />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile Menu — Full-Screen Backdrop + Drawer */}
+        {isMobile && (
+          <>
+            {/* Backdrop: covers entire page behind the drawer */}
+            <div
+              onClick={() => setMenuOpen(false)}
+              style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.85)",
+                zIndex: 1999,
+                opacity: menuOpen ? 1 : 0,
+                pointerEvents: menuOpen ? "all" : "none",
+                transition: "opacity 0.3s ease",
+              }}
+            />
+            {/* Drawer */}
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100vh",
+                background: dark ? "#0a0a0a" : "#fff",
+                zIndex: 2000,
+                padding: "0 5vw 40px",
+                transform: menuOpen ? "translateX(0)" : "translateX(100%)",
+                transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 10,
+              }}
+            >
+              {/* Drawer Header — Logo, Toggle, Close */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "18px 0 24px",
+                  borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+                  marginBottom: 12,
+                  flexShrink: 0,
+                }}
+              >
+                <button
+                  onClick={() => {
+                    setPage("home");
+                    setMenuOpen(false);
+                  }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  <Logo dark={dark} />
+                </button>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  {/* Dark mode pill toggle */}
+                  <button
+                    onClick={() => setDark(!dark)}
+                    title={
+                      dark ? "Switch to light mode" : "Switch to dark mode"
+                    }
+                    style={{
+                      width: 52,
+                      height: 28,
+                      borderRadius: 99,
+                      border: "none",
+                      cursor: "pointer",
+                      outline: "none",
+                      background: dark ? "#7B51CC" : "#e5e7eb",
+                      position: "relative",
+                      transition: "background 0.3s",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 3,
+                        left: dark ? 25 : 3,
+                        width: 22,
+                        height: 22,
+                        borderRadius: "50%",
+                        background: "#fff",
+                        transition: "left 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 12,
+                        boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                      }}
+                    >
+                      {dark ? "🌙" : "☀️"}
+                    </div>
+                  </button>
+                  {/* Close button */}
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "50%",
+                      background: dark
+                        ? "rgba(255,255,255,0.08)"
+                        : "rgba(0,0,0,0.06)",
+                      border: "none",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 18,
+                      color: dark ? "#fff" : "#000",
+                      fontWeight: 300,
+                      lineHeight: 1,
+                    }}
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {navLinks.map((link) => (
+                <div key={link.label}>
+                  {link.sub ? (
+                    <div style={{ marginBottom: 20 }}>
+                      <div
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 800,
+                          color: "#7B51CC",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          marginBottom: 12,
+                          paddingLeft: 12,
+                        }}
+                      >
+                        {link.label}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 5,
+                        }}
+                      >
+                        {link.sub.map((s) => (
+                          <button
+                            key={s.p}
+                            onClick={() => {
+                              setPage(s.p);
+                              setMenuOpen(false);
+                              window.scrollTo(0, 0);
+                            }}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              padding: "14px 16px",
+                              borderRadius: 16,
+                              background: dark
+                                ? "rgba(255,255,255,0.05)"
+                                : "rgba(0,0,0,0.03)",
+                              border: "none",
+                              color: dark ? "#fff" : "#000",
+                              fontSize: 15,
+                              fontWeight: 600,
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 12,
+                              cursor: "pointer",
+                            }}
+                          >
+                            {s.icon && (
+                              <Icon name={s.icon} size={18} color="#7B51CC" />
+                            )}
+                            {s.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setPage(link.p);
+                        setMenuOpen(false);
+                        window.scrollTo(0, 0);
+                      }}
+                      style={{
+                        width: "100%",
+                        textAlign: "left",
+                        padding: "16px",
+                        borderRadius: 16,
+                        background:
+                          page === link.p
+                            ? dark
+                              ? "rgba(123,81,204,0.15)"
+                              : "rgba(123,81,204,0.05)"
+                            : "transparent",
+                        border: "none",
+                        color:
+                          page === link.p ? "#7B51CC" : dark ? "#fff" : "#000",
+                        fontSize: 18,
+                        fontWeight: 700,
+                        marginBottom: 5,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {link.label}
+                    </button>
+                  )}
+                </div>
+              ))}
+              <div style={{ marginTop: "auto", paddingBottom: 40 }}>
+                <CTAButton
+                  block
+                  onClick={() => {
+                    window.open("https://luvlyfans.com/", "_blank");
+                    setMenuOpen(false);
+                  }}
+                >
+                  Start Earning Now
+                </CTAButton>
+              </div>
+            </div>
+          </>
+        )}
+      </nav>
+    </>
+  );
+}
+
+// ─── EVENTS PAGE ──────────────────────────────────────────────────────────────
+
+export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
+  const isMobile = useIsMobile();
+
+  // DETAIL VIEW FOR INTRODUCTION (Lustful Ladies & Perspective)
+  if (selectedEvent === 4) {
+    const lustfulPhotos = [
+      { src: "/assets/creators/Loulalou.png", alt: "CEO Lou" },
+      { src: "/assets/events/AVN.jpeg", alt: "Industry Networking" },
+      { src: "/assets/creators/Zozo.png", alt: "Creator Community" },
+      { src: "/assets/events/AVN2.jpeg", alt: "Atmosphere" },
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedEvent(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          ← Back to Events
+        </button>
+
+        {/* Hero */}
+        <section
+          style={{
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
+            textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: 0.2,
+              background:
+                "url('/assets/creators/Loulalou.png') center/cover no-repeat",
+              filter: "blur(40px) brightness(0.7)",
+            }}
+          />
+          <div
+            style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}
+          >
+            <Badge>EDITORIAL PERSPECTIVE</Badge>
+            <h1
+              style={{
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              Beyond the Screen:{" "}
+              <span style={{ color: "#7B51CC" }}>Real-World Experiences</span>
+            </h1>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              Real-world creator spaces are the foundation of community.
+            </p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <img
+            src="/assets/creators/Loulalou.png"
+            alt="CEO Lou - Lustful Events"
+            style={{
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              objectFit: "cover",
+              borderRadius: isMobile ? 24 : 32,
+              boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+              border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+            }}
+          />
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2
+            style={{
+              fontSize: isMobile ? 26 : 36,
+              fontWeight: 800,
+              marginBottom: 28,
+              lineHeight: 1.2,
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Organised by Lustful Events CEO Lou (@iamloulalouagain)
+          </h2>
+
+          <div
+            style={{
+              fontSize: 17,
+              lineHeight: 1.9,
+              color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
+            }}
+          >
+            <p>
+              The creator space doesn’t just exist online. It also lives in
+              real-world environments where people meet, talk, and understand
+              the space they’re part of. The Lustful Ladies event was one of
+              those environments. A place where creators came together in a more
+              direct and personal setting.
+            </p>
+            <p>
+              LuvlyFans was in attendance, and it gave us the opportunity to
+              step outside the platform and see things from a different
+              perspective.
+            </p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {lustfulPhotos.map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "16/9" : "4/3",
+                    background: "#222",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              What Lustful Ladies Represents
+            </h3>
+            <p>
+              Lustful Ladies is part of a wider UK-based event series that
+              brings together creators and audiences in a curated environment.
+              What stood out wasn’t just the setting, but the mix of people.
+              Creators at different stages. Different approaches. Different
+              goals. All in one space. It’s a reminder that the creator world
+              isn’t one-dimensional. It’s varied, and constantly evolving.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              Being in the Room Changes Perspective
+            </h3>
+            <p>
+              Online, everything can feel separate. Profiles, posts, and numbers
+              don’t always reflect the full picture. Being in the room changes
+              that. You start to see how creators present themselves, how they
+              connect, and how differently people approach the same space. It
+              adds context that you don’t always get from a screen.
+            </p>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Conversations That Matter
+            </h3>
+            <p>
+              What stood out most were the conversations. Creators spoke openly
+              about what’s working for them, where they feel stuck, what they
+              expect from platforms, and how they’re building income over time.
+              These weren’t polished answers. They were honest, practical, and
+              grounded in real experience.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              What We Learned
+            </h3>
+            <div
+              style={{
+                background: dark
+                  ? "rgba(123,81,204,0.05)"
+                  : "rgba(123,81,204,0.03)",
+                padding: isMobile ? "32px 24px" : "56px 48px",
+                borderRadius: 24,
+                border: `1px solid ${dark ? "rgba(123,81,204,0.15)" : "rgba(123,81,204,0.1)"}`,
+                marginBottom: 40,
+              }}
+            >
+              <div style={{ display: "grid", gap: 56 }}>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Creators Are Looking for Stability
+                  </h4>
+                  <p>
+                    A lot of the focus wasn’t on going viral. It was on
+                    consistency. Predictable income. Platforms that don’t change
+                    direction without warning. Creators are thinking more about
+                    long-term stability than short-term spikes.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Visibility Is Still a Challenge
+                  </h4>
+                  <p>
+                    Even strong creators mentioned the same issue. Getting seen
+                    is difficult. Not because they aren’t creating, but because
+                    discovery is unpredictable. It reinforced how important
+                    visibility tools are. Posting alone isn’t always enough.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    There Is No Single Path
+                  </h4>
+                  <p>
+                    Every creator we spoke to was doing things differently. Some
+                    post frequently. Others focus on fewer, higher-quality
+                    updates. What works is often personal, not universal.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Community Still Matters
+                  </h4>
+                  <p>
+                    Even in a digital space, creators value connection. Being
+                    able to talk, share experiences, and learn from others stood
+                    out as something people don’t get enough of online.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Clarity From Platforms Is Important
+                  </h4>
+                  <p>
+                    Creators want clear rules, expectations, and earning
+                    structures. When things feel unclear, it slows people down.
+                    Simple and transparent systems build confidence.
+                  </p>
+                </div>
+                <div>
+                  <h4
+                    style={{
+                      color: "#7B51CC",
+                      fontSize: 20,
+                      marginBottom: 16,
+                      fontWeight: 800,
+                    }}
+                  >
+                    Small Improvements Go a Long Way
+                  </h4>
+                  <p>
+                    Not everything needs to be complex. Often it’s the smaller
+                    things that make the biggest difference: better onboarding,
+                    clear guidance, and simpler tools. These are the things
+                    creators notice and value.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Why This Matters for LuvlyFans
+            </h3>
+            <p>
+              These aren’t abstract takeaways. They directly shape how we think
+              about the platform. From improving visibility through features
+              like Spotlight, to keeping things simple and clear, these
+              conversations help us stay aligned with what creators actually
+              need. Being present in these spaces helps us build with more
+              awareness, not assumptions.
+            </p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40 }}>
+              Final Thoughts
+            </h3>
+            <p>
+              Events like Lustful Ladies are a reminder that the creator world
+              is built on people first. The platforms, the features, and the
+              numbers all come after that. What matters is understanding the
+              space and the people within it.
+            </p>
+
+            <p
+              style={{
+                fontWeight: 800,
+                fontStyle: "italic",
+                fontSize: 22,
+                marginTop: 48,
+                color: "#7B51CC",
+              }}
+            >
+              “We’re glad we were there, and we’ll continue to listen, learn,
+              and build with that in mind.”
+            </p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (selectedEvent === 1) {
+    // AVN Detail View (Previous content)
+    const avnPhotos = [
+      {
+        src: "/assets/creators/Quietlyvae.avn1.jpeg",
+        alt: "QuietlyVae at AVN",
+      },
+      { src: "/assets/events/AVN2.jpeg", alt: "Industry Networking" },
+      {
+        src: "/assets/events/Quietlyvae.avn2.jpeg",
+        alt: "Red Carpet Visibility",
+      },
+      { src: "/assets/events/Quietlyvae.avn3.jpeg", alt: "Creator Community" },
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedEvent(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          ← Back to Events
+        </button>
+
+        {/* Hero */}
+        <section
+          style={{
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
+            textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              opacity: 0.2,
+              background:
+                "url('/assets/events/Quietlyvae.avn.jpeg') center/cover no-repeat",
+              filter: "blur(40px) brightness(0.7)",
+            }}
+          />
+          <div
+            style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}
+          >
+            <Badge>2026 AVN · LAS VEGAS</Badge>
+            <h1
+              style={{
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              LuvlyFans @ the{" "}
+              <span style={{ color: "#7B51CC" }}>AVN Awards</span>
+            </h1>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              The Future of Creator Community
+            </p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <img
+            src="/assets/events/Quietlyvae.avn.jpeg"
+            alt="LuvlyFans @ AVN"
+            style={{
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              objectFit: "cover",
+              borderRadius: isMobile ? 24 : 32,
+              boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+              border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+            }}
+          />
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2
+            style={{
+              fontSize: isMobile ? 24 : 32,
+              fontWeight: 800,
+              marginBottom: 28,
+              lineHeight: 1.25,
+            }}
+          >
+            QuietlyVae Represents the Future
+          </h2>
+          <div
+            style={{
+              fontSize: 17,
+              lineHeight: 1.9,
+              color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
+            }}
+          >
+            <p>
+              Participating in industry conversations that continue to shape the
+              future of creator-led platforms.
+            </p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {avnPhotos.map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "16/9" : "auto",
+                    background: "#222",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <p>
+              AVN brings together top creators and innovators. Its presence
+              reflects our commitment to creator success.
+            </p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  // LIST VIEW
+  return (
+    <div style={{ padding: isMobile ? "40px 5vw" : "80px 5vw" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <header style={{ marginBottom: isMobile ? 40 : 80 }}>
+          <Badge>INDUSTRY RECAPS</Badge>
+          <h1
+            style={{
+              fontSize: isMobile ? 32 : 48,
+              fontWeight: 800,
+              marginTop: 16,
+            }}
+          >
+            Creators on the Move
+          </h1>
+        </header>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : "repeat(2, minmax(0, 400px))",
+            gap: 24,
+          }}
+        >
+          {EVENTS.map((event) => (
+            <div
+              key={event.id}
+              onClick={() => {
+                if ([1, 4].includes(event.id)) setSelectedEvent(event.id);
+                window.scrollTo(0, 0);
+              }}
+              style={{
+                borderRadius: 24,
+                overflow: "hidden",
+                background: dark ? "rgba(255,255,255,0.03)" : "#f9f9f9",
+                border: `1px solid ${dark ? "rgba(255,255,255,0.08)" : "transparent"}`,
+                cursor: "pointer",
+                transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                position: "relative",
+                transform: "translateY(0)",
+              }}
+              onMouseEnter={(e) => {
+                if (!isMobile) {
+                  e.currentTarget.style.transform = "translateY(-12px)";
+                  e.currentTarget.style.boxShadow = dark
+                    ? "0 40px 80px rgba(0,0,0,0.6)"
+                    : "0 30px 60px rgba(0,0,0,0.1)";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              <div style={{ height: isMobile ? 200 : 240, overflow: "hidden" }}>
+                <img
+                  src={event.thumbnail}
+                  alt={event.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ padding: isMobile ? 24 : 32 }}>
+                <Badge color="#7B51CC">{event.type}</Badge>
+                <h3
+                  style={{
+                    fontSize: 24,
+                    fontWeight: 800,
+                    margin: "16px 0",
+                    color: dark ? "#fff" : "#111",
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {event.title}
+                </h3>
+                <p style={{ fontSize: 15, opacity: 0.6, lineHeight: 1.6 }}>
+                  {event.excerpt}
+                </p>
+                <div
+                  style={{
+                    marginTop: 24,
+                    color: "#7B51CC",
+                    fontWeight: 700,
+                    fontSize: 13,
+                  }}
+                >
+                  Read Recap →
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── HOME PAGE ────────────────────────────────────────────────────────────────
+
+export function HomePage({ dark, onRead, setPage }) {
+  const isMobile = useIsMobile();
+  const [cat, setCat] = useState("All");
+  const [search, setSearch] = useState("");
+  const [heroRef, heroInView] = useInView(0.05);
+
+  const filtered = ARTICLES.filter((a) => {
+    const matchCat = cat === "All" || a.category === cat;
+    const matchSearch =
+      !search ||
+      a.title.toLowerCase().includes(search.toLowerCase()) ||
+      a.excerpt.toLowerCase().includes(search.toLowerCase());
+    return matchCat && matchSearch;
+  });
+  const featured = ARTICLES.filter((a) => a.featured);
+  const trending = ARTICLES.filter((a) => a.trending);
+  const catColors = {
+    "Make Money": "#059669",
+    Growth: "#D946EF",
+    Guides: "#0284C7",
+  };
+
+  const heroBg = dark
+    ? "radial-gradient(ellipse at 60% 0%, rgba(123,81,204,0.12) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.08) 0%, transparent 50%)"
+    : "radial-gradient(ellipse at 60% 0%, rgba(123,81,204,0.07) 0%, transparent 60%)";
+
+  const dateLabel = new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
+
+  return (
+    <div className="page-wrap">
+      {/* ── Hero ── */}
+      <section ref={heroRef} className="hero-section">
+        <div className="hero-bg-gradient" style={{ background: heroBg }} />
+        <div className="hero-container">
+          <div
+            className="hero-animate"
+            style={{
+              opacity: heroInView ? 1 : 0,
+              transform: heroInView ? "translateY(0)" : "translateY(40px)",
+            }}
+          >
+            <h1 className="hero-title">
+              Grow. <span className="gradient-text">Monetize.</span> Win.
+            </h1>
+            <p className="hero-subtitle">
+              Real strategies, proven playbooks, insights, and tactics designed
+              to help you grow faster and make more on LuvlyFans.
+            </p>
+            <div className="hero-cta-row">
+              <CTAButton size="lg" onClick={() => setPage("hub")}>
+                Explore the Creator Hub
+              </CTAButton>
+            </div>
+
+            {/* Asymmetrical featured grid */}
+            <div className="hero-grid">
+              {/* Left column - Single large card */}
+              <div className="hero-col">
+                {/* Card 1 — Free Accounts (Full height) */}
+                <div
+                  className="hero-card hero-card-large hero-card-full"
+                  onClick={() => setPage("free-creators")}
+                >
+                  <img
+                    src="/assets/homepage/Free accounts.png"
+                    alt="Free LuvlyFans Accounts"
+                  />
+                  <div className="hero-overlay">
+                    <h className="hero-card-title">
+                      Free LuvlyFans Accounts to Follow in {dateLabel}
+                    </h>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right column - Two stacked cards */}
+              <div className="hero-right-col">
+                {/* Card 2 — LuvlyFans Standard */}
+                <div
+                  className="hero-card hero-card-right sm"
+                  onClick={() => {
+                    const a = ARTICLES.find(
+                      (a) => a.slug === "luvlyfans-standard",
+                    );
+                    if (a) {
+                      onRead(a);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  <img
+                    src="/assets/promotions/spotlight_Image.png"
+                    alt="The LuvlyFans Standard"
+                    style={{ objectPosition: "center 30%" }}
+                  />
+                  <div className="hero-overlay-dark" />
+                  <div className="hero-card-bottom-content">
+                    <h4 className="hero-card-bottom-title">
+                      Why the Top 1% are Switching to LuvlyFans.
+                    </h4>
+                    {/*<div className="hero-card-cta-row">
+                      <span className="hero-card-cta-label">Read More</span>
+                      <div className="hero-card-cta-line" />
+                    </div>*/}
+                  </div>
+                </div>
+
+                {/* Card 3 — Creator Habits */}
+                <div
+                  className="hero-card hero-card-right sm"
+                  onClick={() => {
+                    const a = ARTICLES.find((a) => a.slug === "creator-habits");
+                    if (a) {
+                      onRead(a);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
+                >
+                  <img
+                    src="/assets/homepage/hero-26.png"
+                    alt="Creator Habits"
+                  />
+                  <div className="hero-overlay-dark" />
+                  <div className="hero-card-bottom-content">
+                    <h4 className="hero-card-bottom-title">
+                      5 Habits That Separate Creators Who Earn From Those Who
+                      Don't
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Featured mini-cards */}
+            <div
+              className="mini-cards-grid"
+              style={{ opacity: heroInView ? 1 : 0 }}
+            >
+              {featured.slice(0, 2).map((a) => (
+                <div key={a.id} className="mini-card" onClick={() => onRead(a)}>
+                  <div className="mini-card-meta">
+                    <div
+                      className="mini-card-dot"
+                      style={{ background: catColors[a.category] }}
+                    />
+                    <span
+                      className="mini-card-cat"
+                      style={{ color: catColors[a.category] }}
+                    >
+                      {a.category}
+                    </span>
+                    <span className="mini-card-read">{a.readTime}</span>
+                  </div>
+                  <div className="mini-card-title">{a.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Articles ── */}
+      <div className="articles-section">
+        <div className="articles-container">
+          {/* Section header */}
+          <div className="section-header">
+            <h2 className="section-title">
+              {cat === "All" ? "Featured Articles" : `${cat} Articles`}
+            </h2>
+            <div className="section-divider" />
+          </div>
+
+          {/* Category filters */}
+          <div className="cat-filters">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c}
+                className={`cat-btn${cat === c ? " active" : ""}`}
+                onClick={() => setCat(c)}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+
+          {cat === "All" && !search && (
+            <>
+              <div className="featured-grid">
+                {featured.map((a) => (
+                  <ArticleCard
+                    key={a.id}
+                    article={a}
+                    dark={dark}
+                    onRead={onRead}
+                    featured
+                  />
+                ))}
+              </div>
+
+              <div className="trending-header">
+                <Icon name="fire" size={24} color="#7B51CC" />
+                <h2 className="section-title">Trending Now</h2>
+                <div className="section-divider" />
+              </div>
+
+              <div className="trending-list">
+                {trending.map((a, i) => (
+                  <div
+                    key={a.id}
+                    className="trending-row"
+                    onClick={() => onRead(a)}
+                  >
+                    <div className="trending-number">0{i + 1}</div>
+                    <div className="trending-info">
+                      <div className="trending-cat-row">
+                        <Badge color={catColors[a.category]}>
+                          {a.category}
+                        </Badge>
+                      </div>
+                      <div className="trending-title">{a.title}</div>
+                    </div>
+                    <div className="trending-meta">
+                      <div className="trending-read-time">
+                        {a.readTime} read
+                      </div>
+                      <div className="trending-date">{a.date}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {(cat !== "All" || search) && (
+            <div className="filtered-grid">
+              {filtered.length ? (
+                filtered.map((a) => (
+                  <ArticleCard
+                    key={a.id}
+                    article={a}
+                    dark={dark}
+                    onRead={onRead}
+                    featured
+                  />
+                ))
+              ) : (
+                <div className="no-results">
+                  No articles found. Try a different search.
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="email-capture-row">
+            <EmailCapture dark={dark} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── ARTICLE PAGE ─────────────────────────────────────────────────────────────
+
+export function ArticlePage({ article, dark, onBack, onRead }) {
+  const isMobile = useIsMobile();
+  const progress = useScrollProgress();
+  const others = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
+  const catColors = {
+    "Make Money": "#7B51CC",
+    Growth: "#8b5cf6",
+    Guides: "#0ea5e9",
+  };
+  const color = catColors[article.category] || "#7B51CC";
+
+  // Map article slugs to their components
+  const ARTICLE_COMPONENTS = {
+    "sustainable-monthly-income": SustainableMonthlyIncome,
+    "pricing-strategy": PricingStrategy,
+    "get-subscribers": GetSubscribers,
+    "building-consistent-monthly-income": BuildingConsistentMonthlyIncome,
+    "content-ideas-that-sell": ContentIdeasThatSell,
+    "promote-your-profile": PromoteYourProfile,
+    "build-your-fanbase": BuildYourFanbase,
+    "creator-habits": CreatorHabits,
+    "luvlyfans-standard": LuvlyfansStandard,
+    "setup-first-impressions": SetupFirstImpressions,
+    "content-direction": ContentDirection,
+    "first-30-days": First30Days,
+    "pricing-content": PricingContent,
+  };
+
+  const ArticleContent = ARTICLE_COMPONENTS[article.slug];
+
+  return (
+    <div style={{ overflowX: "hidden", width: "100%" }}>
+      {/* Progress Bar */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: `${progress * 100}%`,
+          height: 3,
+          background: "linear-gradient(90deg, #7B51CC, #8b5cf6)",
+          zIndex: 1000,
+          transition: "width 0.1s",
+        }}
+      />
+
+      {/* Hero */}
+      <div style={{ padding: "48px 5vw 0", maxWidth: 1400, margin: "0 auto" }}>
+        <button
+          onClick={onBack}
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
+            fontSize: 13,
+            fontWeight: 600,
+            padding: "0 0 24px",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          ← Back to Blog
+        </button>
+      </div>
+
+      <article
+        style={{ maxWidth: 1400, margin: "0 auto", padding: "0 5vw 80px" }}
+      >
+        <div
+          style={{
+            marginBottom: 32,
+            display: "flex",
+            gap: 10,
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Badge color={color}>{article.category}</Badge>
+          {article.trending && (
+            <Badge color="#f59e0b">
+              <Icon
+                name="fire"
+                size={12}
+                color="#fff"
+                style={{ marginRight: 4 }}
+              />{" "}
+              Trending
+            </Badge>
+          )}
+          <span
+            style={{
+              fontSize: 12,
+              color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+            }}
+          >
+            {article.readTime} read · {article.date}
+          </span>
+        </div>
+
+        <h1
+          style={{
+            margin: "0 0 20px",
+            fontSize: "clamp(28px, 4vw, 44px)",
+            fontWeight: 800,
+            lineHeight: 1.15,
+            fontFamily: "'Lora', Georgia, serif",
+            color: dark ? "#fff" : "#0a0a0a",
+          }}
+        >
+          {article.title}
+        </h1>
+
+        <p
+          style={{
+            margin: "0 0 28px",
+            fontSize: 18,
+            color: dark ? "rgba(255,255,255,0.6)" : "rgba(0,0,0,0.55)",
+            lineHeight: 1.7,
+          }}
+        >
+          {article.excerpt}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "20px 24px",
+            background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+            borderRadius: 14,
+            border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+            marginBottom: 40,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: 16,
+                color: dark ? "#fff" : "#0f0f0f",
+              }}
+            >
+              By {article.author}
+            </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+              }}
+            >
+              {article.authorRole} · {article.readTime} read
+            </div>
+          </div>
+        </div>
+
+        {/* Hero Image / Banner */}
+        <div
+          style={{
+            height: isMobile ? 240 : 400,
+            borderRadius: 18,
+            background: `linear-gradient(135deg, ${article.gradient
+              .replace("from-", "")
+              .replace(" to-", ", ")
+              .split(",")
+              .map((c) => {
+                const map = {
+                  "rose-500": "#7B51CC",
+                  "pink-600": "#db2777",
+                  "amber-500": "#f59e0b",
+                  "orange-500": "#f97316",
+                  "violet-500": "#8b5cf6",
+                  "purple-600": "#9333ea",
+                  "cyan-500": "#06b6d4",
+                  "blue-600": "#2563eb",
+                  "emerald-500": "#10b981",
+                  "teal-600": "#0d9488",
+                  "fuchsia-500": "#d946ef",
+                  "rose-600": "#613db7",
+                };
+                return map[c.trim()] || "#7B51CC";
+              })
+              .join(", ")})`,
+            marginBottom: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {article.thumbnail ? (
+            <img
+              src={article.thumbnail}
+              alt={article.title}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <div style={{ textAlign: "center", color: "#fff" }}>
+              <div style={{ fontSize: 48, marginBottom: 8 }}>
+                <Icon name="chart-line" size={48} color="#fff" />
+              </div>
+              <div style={{ fontSize: 16, fontWeight: 700, opacity: 0.9 }}>
+                Visual guide coming soon
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Article body */}
+        <div
+          style={{
+            fontSize: 17,
+            lineHeight: 1.8,
+            color: dark ? "rgba(255,255,255,0.78)" : "rgba(0,0,0,0.72)",
+          }}
+        >
+          {ArticleContent ? (
+            <ArticleContent />
+          ) : (
+            <>
+              <p>
+                This is a placeholder for the full article content. In a
+                production environment, this would be fetched from a CMS based
+                on the slug: <strong>{article.slug}</strong>.
+              </p>
+              <p>
+                LuvlyFans is dedicated to providing creators with the best tools
+                and educational resources to grow their digital business.
+              </p>
+            </>
+          )}
+        </div>
+
+        {/* Inline CTA */}
+        <div
+          style={{
+            margin: "40px 0",
+            padding: "32px",
+            background: dark
+              ? "rgba(123,81,204,0.08)"
+              : "rgba(123,81,204,0.05)",
+            border: "1.5px solid rgba(123,81,204,0.2)",
+            borderRadius: 18,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.1em",
+              color: "#7B51CC",
+              textTransform: "uppercase",
+              marginBottom: 8,
+            }}
+          >
+            Ready to Apply This?
+          </div>
+          <h3
+            style={{
+              margin: "0 0 10px",
+              fontSize: 22,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Start Your LuvlyFans Page Today
+          </h3>
+          <p
+            style={{
+              margin: "0 0 20px",
+              fontSize: 14,
+              color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
+            }}
+          >
+            Join thousands of creators earning on the platform built for growth.
+            Setup takes under 10 minutes.
+          </p>
+          <CTAButton
+            size="lg"
+            onClick={() => window.open("https://luvlyfans.com/", "_blank")}
+          >
+            Create a Free Account
+          </CTAButton>
+        </div>
+
+        {/* Related */}
+        <div style={{ marginTop: 60 }}>
+          <h3
+            style={{
+              margin: "0 0 20px",
+              fontSize: 20,
+              fontWeight: 800,
+              color: dark ? "#fff" : "#0f0f0f",
+              fontFamily: "'Lora', Georgia, serif",
+            }}
+          >
+            Keep Reading
+          </h3>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+              gap: 16,
+            }}
+          >
+            {others.map((a) => (
+              <ArticleCard key={a.id} article={a} dark={dark} onRead={onRead} />
+            ))}
+          </div>
+        </div>
+      </article>
+    </div>
+  );
+}
+
+// ─── CREATOR HUB ─────────────────────────────────────────────────────────────
 
 export function HubPage({ dark, onRead, setPage }) {
   const [activeModule, setActiveModule] = useState(0);
@@ -944,6 +2793,196 @@ export function HubPage({ dark, onRead, setPage }) {
         </section>
       </div>
     </div>
+  );
+}
+
+// ─── FOOTER ───────────────────────────────────────────────────────────────────
+
+export function Footer({ dark, setPage }) {
+  return (
+    <footer
+      style={{
+        borderTop: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+        padding: "48px 5vw 32px",
+      }}
+    >
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gap: 40,
+            marginBottom: 40,
+            flexWrap: "wrap",
+          }}
+        >
+          <div>
+            <Logo dark={dark} />
+            <p
+              style={{
+                marginTop: 14,
+                fontSize: 13,
+                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+                lineHeight: 1.7,
+                maxWidth: 280,
+              }}
+            >
+              The creator education hub for the next generation of independent
+              earners. Learn, grow, and monetize — smarter.
+            </p>
+          </div>
+          {[
+            {
+              title: "Education",
+              links: [
+                { name: "Creator Hub", action: () => setPage("hub") },
+                {
+                  name: "Getting Started",
+                  action: () => setPage("getting-started"),
+                },
+                {
+                  name: "Playbooks",
+                  action: () => {
+                    setPage("hub");
+                    setTimeout(
+                      () =>
+                        document
+                          .getElementById("playbooks")
+                          ?.scrollIntoView({ behavior: "smooth" }),
+                      100,
+                    );
+                  },
+                },
+              ],
+            },
+            {
+              title: "Platform",
+              links: [
+                {
+                  name: "Platform Overview",
+                  action: () => setPage("getting-started"),
+                },
+                {
+                  name: "Free Accounts",
+                  action: () => setPage("free-creators"),
+                },
+                {
+                  name: "Features",
+                  action: () => {
+                    setPage("home");
+                    setTimeout(
+                      () => window.scrollTo({ top: 0, behavior: "smooth" }),
+                      100,
+                    );
+                  },
+                },
+              ],
+            },
+            {
+              title: "Support",
+              links: [
+                { name: "Mission", action: () => setPage("mission") },
+                { name: "Blog", action: () => setPage("home") },
+                { name: "Contact", action: () => setPage("contact") },
+              ],
+            },
+          ].map((col) => (
+            <div key={col.title}>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.4)",
+                  marginBottom: 14,
+                }}
+              >
+                {col.title}
+              </div>
+              {col.links.map((l) => (
+                <div key={l.name} style={{ marginBottom: 10 }}>
+                  <button
+                    onClick={l.action}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontSize: 13,
+                      color: dark
+                        ? "rgba(255,255,255,0.6)"
+                        : "rgba(0,0,0,0.55)",
+                      padding: 0,
+                      textAlign: "left",
+                    }}
+                  >
+                    {l.name}
+                  </button>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            borderTop: `1px solid ${dark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"}`,
+            paddingTop: 24,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 12,
+          }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              color: dark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.35)",
+            }}
+          >
+            © 2026 LuvlyFans. All rights reserved.
+          </div>
+          <div style={{ display: "flex", gap: 20 }}>
+            <a
+              href="https://luvlyfans.com/pages/privacy"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="https://luvlyfans.com/pages/terms-of-service"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Terms of Service
+            </a>
+            <a
+              href="https://luvlyfans.com/pages/creator-agreement"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: "none",
+                fontSize: 12,
+                color: dark ? "rgba(255,255,255,0.35)" : "rgba(0,0,0,0.4)",
+              }}
+            >
+              Creator Agreement
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
 

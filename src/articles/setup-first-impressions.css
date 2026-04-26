@@ -1,0 +1,19 @@
+/* Setup First Impressions Article Styles */
+
+.article-setup-first-impressions {
+  /* Add custom styles specific to this article */
+}
+
+.article-setup-first-impressions h2 {
+  color: var(--primary);
+  margin-top: 40px;
+}
+
+.article-setup-first-impressions ul {
+  margin: 20px 0;
+  padding-left: 24px;
+}
+
+.article-setup-first-impressions li {
+  margin: 10px 0;
+}

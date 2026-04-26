@@ -1,0 +1,19 @@
+/* Content Direction Article Styles */
+
+.article-content-direction {
+  /* Add custom styles specific to this article */
+}
+
+.article-content-direction h2 {
+  color: var(--primary);
+  margin-top: 40px;
+}
+
+.article-content-direction ul {
+  margin: 20px 0;
+  padding-left: 24px;
+}
+
+.article-content-direction li {
+  margin: 10px 0;
+}

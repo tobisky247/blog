@@ -1,0 +1,27 @@
+/* Sustainable Monthly Income Article Styles */
+
+.article-sustainable-monthly-income {
+  /* Add custom styles specific to this article */
+}
+
+.article-sustainable-monthly-income h2 {
+  color: var(--primary);
+  margin-top: 40px;
+}
+
+.article-sustainable-monthly-income blockquote {
+  border-left: 4px solid #7b51cc;
+  padding-left: 20px;
+  margin: 32px 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.article-sustainable-monthly-income ul {
+  margin: 20px 0;
+  padding-left: 24px;
+}
+
+.article-sustainable-monthly-income li {
+  margin: 10px 0;
+}

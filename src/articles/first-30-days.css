@@ -1,0 +1,20 @@
+/* First 30 Days Article Styles */
+
+.article-first-30-days {
+  /* Add custom styles specific to this article */
+}
+
+.article-first-30-days h2 {
+  color: var(--primary);
+  margin-top: 40px;
+  font-size: 24px;
+}
+
+.article-first-30-days ul {
+  margin: 20px 0;
+  padding-left: 24px;
+}
+
+.article-first-30-days li {
+  margin: 10px 0;
+}
