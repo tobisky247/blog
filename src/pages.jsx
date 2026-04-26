@@ -1377,11 +1377,11 @@ export function HomePage({ dark, onRead, setPage }) {
 
             {/* Asymmetrical featured grid */}
             <div className="hero-grid">
-              {/* Left column */}
+              {/* Left column - Single large card */}
               <div className="hero-col">
-                {/* Card 1 — Creator Habits */}
+                {/* Card 1 — Creator Habits (Full height) */}
                 <div
-                  className="hero-card hero-card-large"
+                  className="hero-card hero-card-large hero-card-full"
                   onClick={() => {
                     const a = ARTICLES.find((a) => a.slug === "creator-habits");
                     if (a) {
@@ -1401,10 +1401,13 @@ export function HomePage({ dark, onRead, setPage }) {
                     </h3>
                   </div>
                 </div>
+              </div>
 
+              {/* Right column - Two stacked cards */}
+              <div className="hero-right-col">
                 {/* Card 2 — LuvlyFans Standard */}
                 <div
-                  className="hero-card hero-card-bottom"
+                  className="hero-card hero-card-right sm"
                   onClick={() => {
                     const a = ARTICLES.find(
                       (a) => a.slug === "luvlyfans-standard",
@@ -1422,19 +1425,16 @@ export function HomePage({ dark, onRead, setPage }) {
                   />
                   <div className="hero-overlay-dark" />
                   <div className="hero-card-bottom-content">
-                    <h3 className="hero-card-bottom-title">
-                      The LuvlyFans Standard: Why the Top 1% are Switching
-                    </h3>
-                    <div className="hero-card-cta-row">
+                    <h4 className="hero-card-bottom-title">
+                      Why the Top 1% are Switching to LuvlyFans.
+                    </h4>
+                    {/*<div className="hero-card-cta-row">
                       <span className="hero-card-cta-label">Read More</span>
                       <div className="hero-card-cta-line" />
-                    </div>
+                    </div>*/}
                   </div>
                 </div>
-              </div>
 
-              {/* Right column */}
-              <div className="hero-right-col">
                 {/* Card 3 — Free Accounts */}
                 <div
                   className="hero-card hero-card-right sm"
@@ -1444,26 +1444,10 @@ export function HomePage({ dark, onRead, setPage }) {
                     src="/assets/promotions/Free accounts.png"
                     alt="Free LuvlyFans Accounts"
                   />
-                  <div className="hero-overlay-center">
-                    <h4 className="hero-card-title-sm">
+                  <div className="hero-overlay-dark" />
+                  <div className="hero-card-bottom-content">
+                    <h4 className="hero-card-bottom-title">
                       Free LuvlyFans Accounts to Follow in {dateLabel}
-                    </h4>
-                  </div>
-                </div>
-
-                {/* Card 4 — Rising Stars */}
-                <div
-                  className="hero-card hero-card-right sm"
-                  onClick={() => setPage("free")}
-                >
-                  <img
-                    src="/assets/promotions/Rising_star.png"
-                    alt="Rising Stars"
-                  />
-                  <div className="hero-overlay-center">
-                    <h4 className="hero-card-title-sm">
-                      Rising Stars on LuvlyFans
-                      <span className="hero-rising-month">{dateLabel}</span>
                     </h4>
                   </div>
                 </div>
