@@ -1,0 +1,59 @@
+/* ═══════════════════════════════════════════════════════
+   EARNING PAGE
+   ═══════════════════════════════════════════════════════ */
+
+.earning-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 5vw;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.earning-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.earning-title {
+  font-size: 48px;
+  font-weight: 800;
+  margin: 20px 0;
+  line-height: 1.1;
+}
+.earning-subtitle {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.7;
+}
+
+.earning-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+.earning-card {
+  padding: 40px;
+  border-radius: 24px;
+  text-align: center;
+}
+.earning-card-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+.earning-card-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+.earning-card-pct {
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.earning-card-desc {
+  font-size: 14px;
+  opacity: 0.6;
+  line-height: 1.6;
+}
