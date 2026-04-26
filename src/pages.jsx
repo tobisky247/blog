@@ -1563,6 +1563,7 @@ export function HomePage({ dark, onRead, setPage }) {
                     article={a}
                     dark={dark}
                     onRead={onRead}
+                    featured
                   />
                 ))
               ) : (
