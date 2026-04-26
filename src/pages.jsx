@@ -1379,26 +1379,19 @@ export function HomePage({ dark, onRead, setPage }) {
             <div className="hero-grid">
               {/* Left column - Single large card */}
               <div className="hero-col">
-                {/* Card 1 — Creator Habits (Full height) */}
+                {/* Card 1 — Free Accounts (Full height) */}
                 <div
                   className="hero-card hero-card-large hero-card-full"
-                  onClick={() => {
-                    const a = ARTICLES.find((a) => a.slug === "creator-habits");
-                    if (a) {
-                      onRead(a);
-                      window.scrollTo(0, 0);
-                    }
-                  }}
+                  onClick={() => setPage("free-creators")}
                 >
                   <img
-                    src="/assets/homepage/hero-26.png"
-                    alt="Creator Habits"
+                    src="/assets/homepage/Free accounts.png"
+                    alt="Free LuvlyFans Accounts"
                   />
                   <div className="hero-overlay">
-                    <h3 className="hero-card-title">
-                      5 Habits That Separate Creators Who Earn From Those Who
-                      Don't
-                    </h3>
+                    <h className="hero-card-title">
+                      Free LuvlyFans Accounts to Follow in {dateLabel}
+                    </h>
                   </div>
                 </div>
               </div>
@@ -1435,19 +1428,26 @@ export function HomePage({ dark, onRead, setPage }) {
                   </div>
                 </div>
 
-                {/* Card 3 — Free Accounts */}
+                {/* Card 3 — Creator Habits */}
                 <div
                   className="hero-card hero-card-right sm"
-                  onClick={() => setPage("free-creators")}
+                  onClick={() => {
+                    const a = ARTICLES.find((a) => a.slug === "creator-habits");
+                    if (a) {
+                      onRead(a);
+                      window.scrollTo(0, 0);
+                    }
+                  }}
                 >
                   <img
-                    src="/assets/homepage/Free accounts.png"
-                    alt="Free LuvlyFans Accounts"
+                    src="/assets/homepage/hero-26.png"
+                    alt="Creator Habits"
                   />
                   <div className="hero-overlay-dark" />
                   <div className="hero-card-bottom-content">
                     <h4 className="hero-card-bottom-title">
-                      Free LuvlyFans Accounts to Follow in {dateLabel}
+                      5 Habits That Separate Creators Who Earn From Those Who
+                      Don't
                     </h4>
                   </div>
                 </div>
