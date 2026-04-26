@@ -117,7 +117,7 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
     >
       {/* Card gradient header */}
       <div style={{
-        height: isMobile ? 120 : (featured ? 220 : 180),
+        height: isMobile ? 180 : (featured ? 280 : 220),
         background: article.thumbnail 
           ? (dark ? "#0a0a0a" : "#f5f5f5") 
           : `linear-gradient(135deg, ${article.gradient.replace("from-", "").replace(" to-", ", ").split(",").map(c => {

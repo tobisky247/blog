@@ -74,7 +74,7 @@ export const ARTICLES = [
     title: "5 Habits That Separate Creators Who Earn From Those Who Don't",
     excerpt: "Most creators post and hope. The ones who earn consistently? They do these five things instead. No gimmicks — just the quiet habits that actually move the needle.",
     readTime: "7 min", author: "LuvlyFans Team", authorRole: "Platform",
-    authorAvatar: "LF", date: "Apr 3, 2026", featured: true, trending: true,
+    authorAvatar: "LF", date: "Apr 3, 2026", featured: false, trending: true,
     thumbnail: "/assets/homepage/plan.jpg",
     gradient: "from-rose-500 to-pink-600",
   },
