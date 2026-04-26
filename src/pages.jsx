@@ -1391,7 +1391,7 @@ export function HomePage({ dark, onRead, setPage }) {
                   }}
                 >
                   <img
-                    src="/assets/promotions/fortune_cookie.png"
+                    src="/assets/homepage/hero-26.png"
                     alt="Creator Habits"
                   />
                   <div className="hero-overlay">
@@ -1441,7 +1441,7 @@ export function HomePage({ dark, onRead, setPage }) {
                   onClick={() => setPage("free-creators")}
                 >
                   <img
-                    src="/assets/promotions/Free accounts.png"
+                    src="/assets/homepage/Free accounts.png"
                     alt="Free LuvlyFans Accounts"
                   />
                   <div className="hero-overlay-dark" />

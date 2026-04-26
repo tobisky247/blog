@@ -49,6 +49,7 @@
   grid-template-columns: 2fr 1fr;
   gap: 20px;
   margin-bottom: 48px;
+  grid-template-rows: 680px;
 }
 .hero-col {
   display: flex;
@@ -90,8 +91,9 @@
 /* Full height card for left column */
 .hero-card-full {
   flex: 1 !important;
-  height: auto !important;
+  height: 100% !important;
   min-height: 60px;
+  max-height: 680px;
 }
 .hero-card-bottom {
   flex: 0 0 auto;
@@ -412,9 +414,10 @@
     flex: 0 0 auto;
   }
   .hero-card-full {
-    flex: 1 !important;
-    height: auto !important;
-    min-height: 560px !important;
+    flex: 0 0 auto !important;
+    height: 380px !important;
+    min-height: 380px !important;
+    max-height: none !important;
   }
   .hero-overlay {
     padding: 24px;
