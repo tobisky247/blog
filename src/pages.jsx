@@ -2346,14 +2346,14 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
               color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.5)",
             }}
           >
-            Join 200,000+ creators earning on the platform built for growth.
+            Join thousands of creators earning on the platform built for growth.
             Setup takes under 10 minutes.
           </p>
           <CTAButton
             size="lg"
             onClick={() => window.open("https://luvlyfans.com/", "_blank")}
           >
-            Create My Page — It's Free
+            Create a Free Account
           </CTAButton>
         </div>
 
@@ -3255,7 +3255,6 @@ export function HubPage({ dark, onRead, setPage }) {
               >
                 Build Your Page
               </button>
-
             </div>
           </div>
         </section>
