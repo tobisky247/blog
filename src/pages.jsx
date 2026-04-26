@@ -2480,9 +2480,6 @@ export function HubPage({ dark, onRead, setPage }) {
               flexWrap: "wrap",
             }}
           >
-            <CTAButton size="lg" onClick={() => setActiveModule(0)}>
-              Start Here
-            </CTAButton>
             <GhostButton
               dark={dark}
               onClick={() => {
@@ -3242,6 +3239,7 @@ export function HubPage({ dark, onRead, setPage }) {
               }}
             >
               <button
+                onClick={() => window.open("https://luvlyfans.com/", "_blank")}
                 style={{
                   padding: "16px 32px",
                   borderRadius: 12,
@@ -3254,22 +3252,9 @@ export function HubPage({ dark, onRead, setPage }) {
                   boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
                 }}
               >
-                Go to Dashboard
+                Build Your Page
               </button>
-              <button
-                style={{
-                  padding: "16px 32px",
-                  borderRadius: 12,
-                  border: "2px solid rgba(255,255,255,0.4)",
-                  background: "transparent",
-                  color: "#fff",
-                  fontWeight: 800,
-                  fontSize: 16,
-                  cursor: "pointer",
-                }}
-              >
-                Create Your First Post
-              </button>
+
             </div>
           </div>
         </section>
