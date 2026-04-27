@@ -132,7 +132,7 @@ export const ARTICLES = [
     tag: "make-money",
     title: "5 Habits That Separate Creators Who Earn From Those Who Don't",
     excerpt:
-      "Most creators post and hope. The ones who earn consistently? They do these five things instead. No gimmicks — just the quiet habits that actually move the needle.",
+      "Most creators post and hope. The ones who earn consistently? They do these five things instead. No gimmicks - just the quiet habits that actually move the needle.",
     readTime: "7 min",
     author: "LuvlyFans Team",
     authorRole: "Platform",
@@ -449,7 +449,7 @@ export const FEATURES = [
     date: "Available Now",
     location: "Creator Tool",
     excerpt:
-      "Creating content takes time. Managing it shouldn't. Media Vault keeps all your photos and videos in one place — ready to reuse, repost, and repurpose whenever you need.",
+      "Creating content takes time. Managing it shouldn't. Media Vault keeps all your photos and videos in one place - ready to reuse, repost, and repurpose whenever you need.",
     type: "Monetization",
   },
 ];
@@ -469,8 +469,8 @@ export const FREE_CREATORS_DIGEST = [
         type: "QuietlyVae",
         category: "Alternative Lifestyle",
         quote:
-          "A bit nerdy, naughty, and hella dorky — but never just one thing. 💫",
-        bio: "I’m Vae, and I love exploring different fantasies… from playful lingerie and solo indulgence, to cheeky cosplay, steamy couple nights, and surprise fetishes you didn’t see coming. Think of me as your unpredictable escape — the girl-next-door who keeps you guessing.💕 Spoil me, chat with me, or dive into my latest treats — either way, you’ll never get bored!",
+          "A bit nerdy, naughty, and hella dorky - but never just one thing. 💫",
+        bio: "I’m Vae, and I love exploring different fantasies… from playful lingerie and solo indulgence, to cheeky cosplay, steamy couple nights, and surprise fetishes you didn’t see coming. Think of me as your unpredictable escape - the girl-next-door who keeps you guessing.💕 Spoil me, chat with me, or dive into my latest treats - either way, you’ll never get bored!",
         color: "#083344",
         image: "/assets/creators/Quietlyvae.avn1.jpeg",
         profileUrl: "https://luvlyfans.com/QuietlyVae",

@@ -40,7 +40,7 @@ export default function LuvlyfansStandard() {
 
       <blockquote>
         "LuvlyFans is the first platform that feels like it's actually on my
-        side. The growth tools alone changed everything for my career." — Top 1%
+        side. The growth tools alone changed everything for my career." - Top 1%
         Creator
       </blockquote>
 

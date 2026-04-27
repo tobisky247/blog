@@ -14,7 +14,7 @@ export default function ContentIdeasThatSell() {
       </p>
       <p>
         This list includes 50 proven content formats that creators use to grow
-        and maintain their subscriber base. These aren't gimmicks — they're
+        and maintain their subscriber base. These aren't gimmicks - they're
         ideas that work.
       </p>
 
@@ -121,7 +121,7 @@ export default function ContentIdeasThatSell() {
       <p>
         Content ideas are everywhere once you start paying attention. The key is
         to stay consistent, engage with your audience, and focus on what makes
-        you unique. These 50 ideas are just a starting point — adapt them to fit
+        you unique. These 50 ideas are just a starting point - adapt them to fit
         your style and watch what performs best.
       </p>
       <p>

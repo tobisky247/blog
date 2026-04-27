@@ -1417,7 +1417,7 @@ export function ComparePage({ dark, setPage }) {
                 WebkitTextFillColor: "transparent",
               }}
             >
-              — The Real Numbers
+              - The Real Numbers
             </span>
           </h1>
           <p
@@ -1476,7 +1476,7 @@ export function ComparePage({ dark, setPage }) {
                 fontFamily: "'Lora', Georgia, serif",
               }}
             >
-              LuvlyFans — Lowest Fees, Fastest Payouts, Best Discovery
+              LuvlyFans - Lowest Fees, Fastest Payouts, Best Discovery
             </h2>
             <div style={{ fontSize: 14, color: "rgba(255,255,255,0.75)" }}>
               Based on platform fees, payout speed, growth tools, and creator
@@ -1766,7 +1766,7 @@ export function ComparePage({ dark, setPage }) {
             single month on LuvlyFans. That's $6,000/year back in your pocket.
           </p>
           <CTAButton size="lg" onClick={() => {}}>
-            Start Earning on LuvlyFans — Free
+            Start Earning on LuvlyFans - Free
           </CTAButton>
           <div
             style={{
@@ -1816,7 +1816,7 @@ export function EarningPage({ dark }) {
             opacity: 0.7,
           }}
         >
-          Beyond subscriptions — discover the multiple revenue streams optimized
+          Beyond subscriptions - discover the multiple revenue streams optimized
           for LuvlyFans creators.
         </p>
       </div>
@@ -1851,7 +1851,7 @@ export function EarningPage({ dark }) {
             title: "Referrals",
             percent: "10%",
             icon: "🤝",
-            desc: "Earn 5% of our platform fee from every creator you bring to LuvlyFans — for life.",
+            desc: "Earn 5% of our platform fee from every creator you bring to LuvlyFans - for life.",
           },
         ].map((m) => (
           <div
@@ -2499,7 +2499,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             <p style={{ fontSize: 18, opacity: 0.7, lineHeight: 1.6 }}>
               Creating content takes time. Uploading, organising, and reusing it
               shouldn't take just as long. Media Vault is where your content
-              library lives — always organised, always ready.
+              library lives - always organised, always ready.
             </p>
           </div>
         </header>
@@ -2548,7 +2548,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               scratch every time.
             </p>
             <p>
-              Think of it like a well-organised hard drive for your page —
+              Think of it like a well-organised hard drive for your page -
               except it's built directly into the platform, accessible whenever
               you need it.
             </p>
@@ -2568,7 +2568,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               <p>
                 No more digging through old posts. No more re-uploading files
                 you've already uploaded. Your media stays in one place so you
-                can focus on what it's supposed to do — connect with your
+                can focus on what it's supposed to do - connect with your
                 audience.
               </p>
             </div>
@@ -2640,7 +2640,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               How Creators Use It
             </h2>
             <p>
-              Media Vault is designed around how creators actually work — not
+              Media Vault is designed around how creators actually work - not
               how platforms assume they do.
             </p>
             <div style={{ display: "grid", gap: 32, marginTop: 32 }}>
@@ -2871,7 +2871,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               >
                 As you build more content, organisation becomes just as
                 important as creation. Media Vault gives you the structure to do
-                both — without slowing either one down.
+                both - without slowing either one down.
               </p>
             </div>
           </div>

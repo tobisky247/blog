@@ -6,20 +6,20 @@ export default function CreatorHabits() {
     <div className="article-creator-habits">
       <p>Most creators start the same way.</p>
       <p>
-        They sign up, post a few times, wait for income to arrive — and wonder
+        They sign up, post a few times, wait for income to arrive - and wonder
         why it doesn't. The truth is that earning consistently on LuvlyFans
         isn't about luck, follower count, or even talent alone. It's about
         habit.
       </p>
       <p>
-        The creators who build real, reliable income — month after month — tend
+        The creators who build real, reliable income - month after month - tend
         to do five things that most others skip entirely.
       </p>
 
       <h2>1. They Treat Their Page Like a Business, Not a Side Project</h2>
       <p>
         The mindset shift is everything. Creators who earn consistently don't
-        log in when they feel like it — they show up the same way a business
+        log in when they feel like it - they show up the same way a business
         owner manages their shop.
       </p>
       <p>That means:</p>
@@ -27,7 +27,7 @@ export default function CreatorHabits() {
         <li>A profile bio that clearly describes what subscribers get</li>
         <li>Pricing that reflects the value of the content</li>
         <li>
-          A posting schedule they stick to — not just when inspiration strikes
+          A posting schedule they stick to - not just when inspiration strikes
         </li>
       </ul>
       <p>
@@ -40,7 +40,7 @@ export default function CreatorHabits() {
         people walk past.
       </blockquote>
 
-      <h2>2. They Post on a Schedule — Even When They Don't Feel Like It</h2>
+      <h2>2. They Post on a Schedule - Even When They Don't Feel Like It</h2>
       <p>
         Consistency beats brilliance almost every time. A creator who posts
         solid content three times a week will outperform one who posts amazing
@@ -61,7 +61,7 @@ export default function CreatorHabits() {
       <h2>3. They Actually Talk to Their Subscribers</h2>
       <p>
         This one is consistently underestimated. The creators who retain
-        subscribers longest are almost always the ones who engage personally —
+        subscribers longest are almost always the ones who engage personally -
         even briefly.
       </p>
       <p>
@@ -72,7 +72,7 @@ export default function CreatorHabits() {
       <p>
         It doesn't have to be time-consuming. Even a few minutes a day spent
         genuinely engaging creates a relationship feel that makes people want to
-        stay — and spend.
+        stay - and spend.
       </p>
       <blockquote>
         Subscribers who feel seen are subscribers who stick around.
@@ -91,14 +91,14 @@ export default function CreatorHabits() {
       </ul>
       <p>
         Over time, patterns emerge. Double down on what works. Don't waste
-        energy creating content that consistently underperforms — no matter how
+        energy creating content that consistently underperforms - no matter how
         much effort went into it.
       </p>
 
       <h2>5. They Protect Their Energy Like It's Their Most Valuable Asset</h2>
       <p>
         Content creation is a long game. Burnout is one of the most common
-        reasons creators stop — not lack of talent, not lack of audience. Just
+        reasons creators stop - not lack of talent, not lack of audience. Just
         running out of energy.
       </p>
       <p>The creators who last set boundaries:</p>
@@ -112,7 +112,7 @@ export default function CreatorHabits() {
       </ul>
       <p>
         Sustainable income requires a sustainable pace. The hustle-every-day
-        approach works for a while — until it doesn't. Building rest into your
+        approach works for a while - until it doesn't. Building rest into your
         rhythm isn't a weakness. It's strategy.
       </p>
       <blockquote>
@@ -123,7 +123,7 @@ export default function CreatorHabits() {
       <h2>The Common Thread</h2>
       <p>
         None of these habits are glamorous. There's no secret hack here. What
-        they share is simple: they're all about showing up — consistently,
+        they share is simple: they're all about showing up - consistently,
         intentionally, and with longevity in mind.
       </p>
       <p>
@@ -133,7 +133,7 @@ export default function CreatorHabits() {
         professional.
       </p>
       <p>
-        Start with one habit. Build from there. Income follows consistency — not
+        Start with one habit. Build from there. Income follows consistency - not
         the other way around.
       </p>
     </div>
