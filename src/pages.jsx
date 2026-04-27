@@ -3091,7 +3091,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
                 lineHeight: 1.1,
               }}
             >
-              Find Top Creator Accounts
+              Free Creator Accounts to Follow in {data.month}
             </h1>
           </div>
         </section>
