@@ -460,7 +460,7 @@ export const FREE_CREATORS_DIGEST = [
       month: "long",
       year: "numeric",
     }).format(new Date()),
-    hero: "/assets/creators/Creator-hero.png",
+    hero: "/assets/creators/creator-hero.png",
     featured: [
       {
         id: 1,
