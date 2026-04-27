@@ -111,6 +111,8 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           }}
         >
           <img
+              loading="eager"
+              fetchPriority="high"
             src="/assets/creators/Loulalou.png"
             alt="CEO Lou - Lustful Events"
             style={{
@@ -177,6 +179,8 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                   }}
                 >
                   <img
+              loading="eager"
+              fetchPriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
@@ -508,6 +512,8 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           }}
         >
           <img
+              loading="eager"
+              fetchPriority="high"
             src="/assets/events/Quietlyvae.avn.jpeg"
             alt="LuvlyFans @ AVN"
             style={{
@@ -559,11 +565,13 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                   style={{
                     borderRadius: 20,
                     overflow: "hidden",
-                    aspectRatio: isMobile ? "16/9" : "auto",
+                    aspectRatio: isMobile ? "16/9" : "4/3",
                     background: "#222",
                   }}
                 >
                   <img
+              loading="eager"
+              fetchPriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
@@ -644,6 +652,8 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             >
               <div style={{ height: isMobile ? 200 : 240, overflow: "hidden" }}>
                 <img
+              loading="eager"
+              fetchPriority="high"
                   src={event.thumbnail}
                   alt={event.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}

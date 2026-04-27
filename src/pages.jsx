@@ -1976,6 +1976,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             {/* Mockup 1: Discovery Feed */}
             <div style={{ margin: "48px 0" }}>
               <img
+              loading="eager"
+              fetchPriority="high"
                 src="/assets/promotions/spotlight2.png"
                 alt="Discovery Feed Mockup"
                 style={{
@@ -2114,6 +2116,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                 }}
               >
                 <img
+              loading="eager"
+              fetchPriority="high"
                   src="/assets/promotions/spotlight3.png"
                   alt="Spotlight Activation"
                   style={{
@@ -2125,6 +2129,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                   }}
                 />
                 <img
+              loading="eager"
+              fetchPriority="high"
                   src="/assets/promotions/spotlight4.png"
                   alt="Spotlight Confirmation"
                   style={{
@@ -2243,6 +2249,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
+              loading="eager"
+              fetchPriority="high"
             src="/assets/promotions/Stories.png"
             alt="Stories on LuvlyFans"
             style={{
@@ -2515,6 +2523,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
+              loading="eager"
+              fetchPriority="high"
             src="/assets/promotions/spotlight_Image.png"
             alt="Media Vault"
             style={{
@@ -2936,6 +2946,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             >
               <div style={{ height: 240, overflow: "hidden" }}>
                 <img
+              loading="eager"
+              fetchPriority="high"
                   src={f.thumbnail}
                   alt={f.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -3184,6 +3196,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                   }
                 >
                   <img
+              loading="eager"
+              fetchPriority="high"
                     src={c.image || "/assets/events/AVN2.jpeg"}
                     alt={c.name}
                     style={{
@@ -3461,6 +3475,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                       }}
                     />
                     <img
+              loading="eager"
+              fetchPriority="high"
                       src={
                         a.thumbnail ||
                         "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500"

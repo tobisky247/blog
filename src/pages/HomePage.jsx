@@ -87,6 +87,8 @@ export function HomePage({ dark, onRead, setPage }) {
                   onClick={() => setPage("free-creators")}
                 >
                   <img
+                    loading="eager"
+                    fetchPriority="high"
                     src="/assets/homepage/Free accounts.png"
                     alt="Free LuvlyFans Accounts"
                   />
@@ -114,6 +116,8 @@ export function HomePage({ dark, onRead, setPage }) {
                   }}
                 >
                   <img
+                    loading="eager"
+                    fetchPriority="high"
                     src="/assets/promotions/spotlight_Image.png"
                     alt="The LuvlyFans Standard"
                     style={{ objectPosition: "center 30%" }}
@@ -142,6 +146,8 @@ export function HomePage({ dark, onRead, setPage }) {
                   }}
                 >
                   <img
+                    loading="eager"
+                    fetchPriority="high"
                     src="/assets/homepage/hero-26.png"
                     alt="Creator Habits"
                   />

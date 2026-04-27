@@ -224,6 +224,8 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
         >
           {article.thumbnail ? (
             <img
+              loading="eager"
+              fetchPriority="high"
               src={article.thumbnail}
               alt={article.title}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
