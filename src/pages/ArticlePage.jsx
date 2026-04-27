@@ -75,100 +75,109 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
         }}
       />
 
-      {/* Breadcrumbs */}
-      <div style={{ padding: "32px 5vw 0", maxWidth: 1100, margin: "0 auto" }}>
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-            flexWrap: "wrap",
-            fontSize: 13,
-            fontWeight: 600,
-          }}
-        >
-          {/* Home */}
-          <button
-            onClick={onBack}
+      {/* Breadcrumb + Article Header */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 5vw 0" }}>
+
+        {/* Breadcrumb nav */}
+        <nav aria-label="Breadcrumb" style={{ marginBottom: 32 }}>
+          <ol
             style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
-              fontSize: 13,
-              fontWeight: 600,
+              listStyle: "none",
+              margin: 0,
               padding: 0,
-              transition: "color 0.15s",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              flexWrap: "wrap",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = dark
-                ? "rgba(255,255,255,0.45)"
-                : "rgba(0,0,0,0.4)")
-            }
           >
-            Blog
-          </button>
+            {/* Blog — the one clickable link */}
+            <li>
+              <button
+                onClick={onBack}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.38)",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  padding: 0,
+                  fontFamily: "inherit",
+                  transition: "color 0.15s",
+                  letterSpacing: "0.01em",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = dark
+                    ? "rgba(255,255,255,0.4)"
+                    : "rgba(0,0,0,0.38)")
+                }
+              >
+                Blog
+              </button>
+            </li>
 
-          {/* Separator */}
-          <span style={{ color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)", fontSize: 12 }}>
-            /
-          </span>
+            {/* Chevron */}
+            <li aria-hidden="true" style={{ color: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.18)", fontSize: 11 }}>›</li>
 
-          {/* Category */}
-          <button
-            onClick={onBack}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
-              fontSize: 13,
-              fontWeight: 600,
-              padding: 0,
-              transition: "color 0.15s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color = dark
-                ? "rgba(255,255,255,0.45)"
-                : "rgba(0,0,0,0.4)")
-            }
-          >
-            {article.category}
-          </button>
+            {/* Category — label only, not a duplicate link */}
+            <li>
+              <span
+                style={{
+                  color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.38)",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {article.category}
+              </span>
+            </li>
 
-          {/* Separator */}
-          <span style={{ color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)", fontSize: 12 }}>
-            /
-          </span>
+            {/* Chevron */}
+            <li aria-hidden="true" style={{ color: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.18)", fontSize: 11 }}>›</li>
 
-          {/* Current article — non-clickable */}
-          <span
-            style={{
-              color: dark ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.65)",
-              fontSize: 13,
-              fontWeight: 600,
-              maxWidth: isMobile ? 180 : 400,
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-            }}
-            aria-current="page"
-          >
-            {article.title}
-          </span>
+            {/* Current article title — truncated */}
+            <li style={{ minWidth: 0 }}>
+              <span
+                aria-current="page"
+                style={{
+                  color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  display: "block",
+                  maxWidth: isMobile ? 160 : 380,
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  letterSpacing: "0.01em",
+                }}
+              >
+                {article.title}
+              </span>
+            </li>
+          </ol>
         </nav>
-      </div>
 
+        {/* Divider */}
+        <div
+          style={{
+            height: 1,
+            background: dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)",
+            marginBottom: 40,
+          }}
+        />
+
+      </div>
 
       <article
         style={{ maxWidth: 1100, margin: "0 auto", padding: "0 5vw 80px" }}
       >
+        {/* Meta row: badges + read time */}
         <div
           style={{
-            marginBottom: 32,
+            marginBottom: 28,
             display: "flex",
             gap: 10,
             alignItems: "center",
