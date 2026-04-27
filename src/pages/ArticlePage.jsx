@@ -76,7 +76,7 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
       />
 
       {/* Hero */}
-      <div style={{ padding: "48px 5vw 0", maxWidth: 1400, margin: "0 auto" }}>
+      <div style={{ padding: "48px 5vw 0", maxWidth: 1100, margin: "0 auto" }}>
         <button
           onClick={onBack}
           style={{
@@ -97,7 +97,7 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
       </div>
 
       <article
-        style={{ maxWidth: 1400, margin: "0 auto", padding: "0 5vw 80px" }}
+        style={{ maxWidth: 1100, margin: "0 auto", padding: "0 5vw 80px" }}
       >
         <div
           style={{
