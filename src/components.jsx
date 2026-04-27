@@ -174,8 +174,8 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
           height: isMobile ? 180 : featured ? 280 : 220,
           background: article.thumbnail
             ? dark
-              ? "#0a0a0a"
-              : "#f5f5f5"
+              ? "#1a1a2e"
+              : "#e8e8e8"
             : `linear-gradient(135deg, ${article.gradient
                 .replace("from-", "")
                 .replace(" to-", ", ")
@@ -203,6 +203,7 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
           padding: "14px 18px",
           position: "relative",
           overflow: "hidden",
+          flexShrink: 0,
         }}
       >
         <div style={{ position: "absolute", top: 12, left: 16, zIndex: 2 }}>
@@ -232,6 +233,8 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
             <img
               src={article.thumbnail}
               alt={article.title}
+              loading="eager"
+              fetchPriority="high"
               style={{
                 position: "absolute",
                 inset: 0,
