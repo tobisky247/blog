@@ -3135,7 +3135,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
                     ? "row-reverse"
                     : "row",
                 flexWrap: "nowrap",
-                paddingBottom: isNarrow ? 0 : 60,
+                paddingBottom: isNarrow ? 0 : 120,
               }}
             >
               {/* Image & Quote Section */}
@@ -3166,7 +3166,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
                         }
                       : {
                           position: "absolute",
-                          bottom: -40,
+                          bottom: -100,
                           right: i % 2 === 0 ? -40 : "auto",
                           left: i % 2 === 1 ? -40 : "auto",
                           width: 280,
