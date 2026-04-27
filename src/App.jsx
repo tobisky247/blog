@@ -163,7 +163,7 @@ export default function App() {
           setSelectedEvent={setSelectedEvent}
         />
       )}
-      {page === "free-creators" && <FreeCreatorsPage dark={dark} />}
+      {page === "free-creators" && <FreeCreatorsPage dark={dark} onRead={handleRead} />}
       {page === "mission" && <MissionPage dark={dark} />}
       {page === "contact" && <ContactPage dark={dark} />}
 

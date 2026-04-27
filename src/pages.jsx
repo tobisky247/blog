@@ -3022,9 +3022,17 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
 // ─── FREE CREATORS PAGE ────────────────────────────────────────────────────────
 
-export function FreeCreatorsPage({ dark }) {
+export function FreeCreatorsPage({ dark, onRead }) {
   const data = FREE_CREATORS_DIGEST[0];
   const isMobile = useIsMobile();
+  const [isNarrow, setIsNarrow] = React.useState(
+    () => window.innerWidth < 960
+  );
+  React.useEffect(() => {
+    const h = () => setIsNarrow(window.innerWidth < 960);
+    window.addEventListener("resize", h);
+    return () => window.removeEventListener("resize", h);
+  }, []);
   return (
     <div
       style={{
@@ -3083,29 +3091,14 @@ export function FreeCreatorsPage({ dark }) {
                 lineHeight: 1.1,
               }}
             >
-              Free Creator Accounts to Follow in {data.month}
+              Find Top Creator Accounts
             </h1>
           </div>
         </section>
       </div>
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 5vw" }}>
-        {/* Intro */}
         <section style={{ textAlign: "center", marginBottom: 120 }}>
-          <div
-            style={{
-              display: "flex",
-              gap: 12,
-              justifyContent: "center",
-              marginBottom: 24,
-              fontSize: 13,
-              fontWeight: 800,
-              textTransform: "uppercase",
-              color: "#7B51CC",
-            }}
-          >
-            <span>#Art</span> <span>#Featured</span> <span>#Lifestyle</span>
-          </div>
           <p
             style={{
               fontSize: 20,
@@ -3119,27 +3112,208 @@ export function FreeCreatorsPage({ dark }) {
             travel to fitness and photography, these creators bring personality
             and originality to LuvlyFans.
           </p>
-          <button
-            style={{
-              marginTop: 40,
-              background: "#7B51CC",
-              color: "#fff",
-              border: "none",
-              padding: "16px 32px",
-              borderRadius: 12,
-              fontSize: 15,
-              fontWeight: 800,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              marginInline: "auto",
-            }}
-            onClick={() => window.open("https://luvlyfans.com/", "_blank")}
-          >
-            <Icon name="star" size={20} color="#fff" /> Find Top Creator
-            Accounts
-          </button>
+        </section>
+
+        {/* Featured Creator List */}
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: isNarrow ? 80 : 140,
+          }}
+        >
+          {data.featured.map((c, i) => (
+            <div
+              key={c.id}
+              style={{
+                display: "flex",
+                gap: isNarrow ? 32 : 60,
+                alignItems: "flex-start",
+                flexDirection: isNarrow
+                  ? "column"
+                  : i % 2 === 1
+                    ? "row-reverse"
+                    : "row",
+                flexWrap: "nowrap",
+                paddingBottom: isNarrow ? 0 : 60,
+              }}
+            >
+              {/* Image & Quote Section */}
+              <div
+                style={{
+                  flex: isNarrow ? "1 1 100%" : "0 0 450px",
+                  position: "relative",
+                  width: isNarrow ? "100%" : "auto",
+                  overflow: "visible",
+                  borderRadius: 24,
+                  display: isNarrow ? "flex" : "block",
+                  flexDirection: "column",
+                  gap: 20,
+                }}
+              >
+                {/* Creator Photo Visual - Fixed cropping for faces on mobile */}
+                <div
+                  style={
+                    isNarrow
+                      ? {
+                          width: "100%",
+                          height: "auto",
+                          borderRadius: 24,
+                          overflow: "hidden",
+                          position: "relative",
+                          border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                          order: -1,
+                        }
+                      : {
+                          position: "absolute",
+                          bottom: -40,
+                          right: i % 2 === 0 ? -40 : "auto",
+                          left: i % 2 === 1 ? -40 : "auto",
+                          width: 280,
+                          height: 350,
+                          borderRadius: 24,
+                          border: `8px solid ${dark ? "#1a1a1a" : "#fff"}`,
+                          boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
+                          display: "flex",
+                          alignItems: "flex-end",
+                          padding: 12,
+                          backgroundColor: dark ? "#111" : "#fff",
+                          overflow: "hidden",
+                          zIndex: 10,
+                        }
+                  }
+                >
+                  <img
+                    src={c.image || "/assets/events/AVN2.jpeg"}
+                    alt={c.name}
+                    style={{
+                      position: isNarrow ? "relative" : "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: isNarrow ? "auto" : "100%",
+                      objectFit: isNarrow ? "contain" : "cover",
+                      display: "block",
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 12,
+                      left: 12,
+                      zIndex: 2,
+                      background: "rgba(255,255,255,0.95)",
+                      padding: "10px 18px",
+                      borderRadius: 12,
+                      fontSize: 13,
+                      fontWeight: 800,
+                      backdropFilter: "blur(4px)",
+                      color: "#111",
+                    }}
+                  >
+                    {c.type}
+                  </div>
+                </div>
+
+                {/* Quote Card (Main background) */}
+                <div
+                  style={{
+                    minHeight: isNarrow ? "auto" : 480,
+                    height: "auto",
+                    borderRadius: 24,
+                    background: c.color,
+                    color: "#fff",
+                    display: "flex",
+                    flexDirection: "column",
+                    padding: isNarrow ? "32px" : 48,
+                    boxShadow: "0 40px 80px rgba(0,0,0,0.2)",
+                    backgroundImage: `radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 70%)`,
+                    position: "relative",
+                  }}
+                >
+                  <h2
+                    style={{
+                      fontSize: "clamp(18px, 3.2vw, 30px)",
+                      fontWeight: 800,
+                      lineHeight: 1.2,
+                      flex: isNarrow ? "none" : 1,
+                      margin: 0,
+                      marginBottom: isNarrow ? 32 : 0,
+                    }}
+                  >
+                    “{c.quote}”
+                  </h2>
+                </div>
+              </div>
+
+              {/* Text Section (Description) */}
+              <div style={{ flex: isNarrow ? "1 1 100%" : "1 1 400px" }}>
+                <div
+                  style={{
+                    fontSize: isNarrow ? 16 : 18,
+                    fontWeight: 400,
+                    color: "#7B51CC",
+                    marginBottom: 12,
+                  }}
+                >
+                  {i + 1}. {c.name}{" "}
+                  <span style={{ fontWeight: 800 }}>{c.handle}</span>
+                </div>
+                <h3
+                  style={{
+                    fontSize: isNarrow ? 22 : 24,
+                    fontWeight: 800,
+                    marginBottom: 20,
+                  }}
+                >
+                  {c.type}
+                </h3>
+                <p
+                  style={{
+                    fontSize: isNarrow ? 16 : 17,
+                    lineHeight: 1.8,
+                    opacity: 0.8,
+                    marginBottom: 32,
+                  }}
+                >
+                  {c.bio}
+                </p>
+                <div
+                  style={{
+                    borderLeft: `4px solid ${c.color}`,
+                    paddingLeft: 24,
+                    margin: "32px 0",
+                    fontSize: 15,
+                    lineHeight: 1.7,
+                    fontStyle: "italic",
+                    opacity: 0.9,
+                  }}
+                >
+                  {c.quote}
+                </div>
+                <div style={{ display: "flex", gap: 16 }}>
+                  <button
+                    onClick={() => window.open(c.profileUrl, "_blank")}
+                    style={{
+                      background: "#7B51CC",
+                      color: "#fff",
+                      border: `2px solid #7B51CC`,
+                      padding: "14px 28px",
+                      borderRadius: 12,
+                      fontWeight: 800,
+                      cursor: "pointer",
+                      flex: isNarrow ? 1 : "initial",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                    }}
+                  >
+                    Follow for free
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </section>
 
         {/* Find Top Creators Spotlight */}
@@ -3151,7 +3325,8 @@ export function FreeCreatorsPage({ dark }) {
             background: dark ? "rgba(123,81,204,0.12)" : "#F8F5FF",
             border: `1px solid ${dark ? "rgba(123,81,204,0.25)" : "rgba(123,81,204,0.1)"}`,
             overflow: "hidden",
-            marginBottom: 120,
+            marginTop: 120,
+            marginBottom: 80,
           }}
         >
           <div
@@ -3199,234 +3374,6 @@ export function FreeCreatorsPage({ dark }) {
           </div>
         </div>
 
-        {/* Featured Creator List */}
-        <section
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: isMobile ? 80 : 140,
-          }}
-        >
-          {data.featured.map((c, i) => (
-            <div
-              key={c.id}
-              style={{
-                display: "flex",
-                gap: isMobile ? 32 : 60,
-                alignItems: "center",
-                flexDirection: isMobile
-                  ? "column"
-                  : i % 2 === 1
-                    ? "row-reverse"
-                    : "row",
-                flexWrap: "wrap",
-              }}
-            >
-              {/* Image & Quote Section */}
-              <div
-                style={{
-                  flex: isMobile ? "1 1 100%" : "1 1 450px",
-                  position: "relative",
-                  width: "100%",
-                  overflow: isMobile ? "visible" : "hidden",
-                  borderRadius: 24,
-                  display: isMobile ? "flex" : "block",
-                  flexDirection: "column",
-                  gap: 20,
-                }}
-              >
-                {/* Creator Photo Visual - Fixed cropping for faces on mobile */}
-                <div
-                  style={
-                    isMobile
-                      ? {
-                          width: "100%",
-                          height: "auto",
-                          borderRadius: 24,
-                          overflow: "hidden",
-                          position: "relative",
-                          border: `1px solid ${dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
-                          order: -1,
-                        }
-                      : {
-                          position: "absolute",
-                          bottom: -40,
-                          right: i % 2 === 0 ? -40 : "auto",
-                          left: i % 2 === 1 ? -40 : "auto",
-                          width: 280,
-                          height: 350,
-                          borderRadius: 24,
-                          border: `8px solid ${dark ? "#1a1a1a" : "#fff"}`,
-                          boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
-                          display: "flex",
-                          alignItems: "flex-end",
-                          padding: 12,
-                          backgroundColor: dark ? "#111" : "#fff",
-                          overflow: "hidden",
-                          zIndex: 10,
-                        }
-                  }
-                >
-                  <img
-                    src={c.image || "/assets/events/AVN2.jpeg"}
-                    alt={c.name}
-                    style={{
-                      position: isMobile ? "relative" : "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: isMobile ? "auto" : "100%",
-                      objectFit: isMobile ? "contain" : "cover",
-                      display: "block",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      bottom: 12,
-                      left: 12,
-                      zIndex: 2,
-                      background: "rgba(255,255,255,0.95)",
-                      padding: "10px 18px",
-                      borderRadius: 12,
-                      fontSize: 13,
-                      fontWeight: 800,
-                      backdropFilter: "blur(4px)",
-                      color: "#111",
-                    }}
-                  >
-                    {c.type}
-                  </div>
-                </div>
-
-                {/* Quote Card (Main background) */}
-                <div
-                  style={{
-                    height: isMobile ? "auto" : 540,
-                    borderRadius: 24,
-                    background: c.color,
-                    color: "#fff",
-                    display: "flex",
-                    flexDirection: "column",
-                    padding: isMobile ? "32px" : 48,
-                    boxShadow: "0 40px 80px rgba(0,0,0,0.2)",
-                    backgroundImage: `radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 70%)`,
-                    position: "relative",
-                  }}
-                >
-                  <h2
-                    style={{
-                      fontSize: "clamp(18px, 3.2vw, 30px)",
-                      fontWeight: 800,
-                      lineHeight: 1.2,
-                      flex: isMobile ? "none" : 1,
-                      margin: 0,
-                      marginBottom: isMobile ? 32 : 0,
-                    }}
-                  >
-                    “{c.quote}”
-                  </h2>
-                  <div
-                    style={{ display: "flex", alignItems: "center", gap: 16 }}
-                  >
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: "50%",
-                        background: "#fff",
-                        color: c.color,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 18,
-                        fontWeight: 900,
-                      }}
-                    >
-                      {c.name[0]}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: 15, fontWeight: 700 }}>
-                        {c.handle}
-                      </div>
-                      <div style={{ fontSize: 12, opacity: 0.7 }}>
-                        on LuvlyFans
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Text Section (Description) */}
-              <div style={{ flex: isMobile ? "1 1 100%" : "1 1 400px" }}>
-                <div
-                  style={{
-                    fontSize: isMobile ? 16 : 18,
-                    fontWeight: 400,
-                    color: "#7B51CC",
-                    marginBottom: 12,
-                  }}
-                >
-                  {i + 1}. {c.name}{" "}
-                  <span style={{ fontWeight: 800 }}>{c.handle}</span>
-                </div>
-                <h3
-                  style={{
-                    fontSize: isMobile ? 22 : 24,
-                    fontWeight: 800,
-                    marginBottom: 20,
-                  }}
-                >
-                  {c.type}
-                </h3>
-                <p
-                  style={{
-                    fontSize: isMobile ? 16 : 17,
-                    lineHeight: 1.8,
-                    opacity: 0.8,
-                    marginBottom: 32,
-                  }}
-                >
-                  {c.bio}
-                </p>
-                <div
-                  style={{
-                    borderLeft: `4px solid ${c.color}`,
-                    paddingLeft: 24,
-                    margin: "32px 0",
-                    fontSize: 15,
-                    lineHeight: 1.7,
-                    fontStyle: "italic",
-                    opacity: 0.9,
-                  }}
-                >
-                  {c.quote}
-                </div>
-                <div style={{ display: "flex", gap: 16 }}>
-                  <button
-                    onClick={() => window.open(c.profileUrl, "_blank")}
-                    style={{
-                      background: "#7B51CC",
-                      color: "#fff",
-                      border: `2px solid #7B51CC`,
-                      padding: "14px 28px",
-                      borderRadius: 12,
-                      fontWeight: 800,
-                      cursor: "pointer",
-                      flex: isMobile ? 1 : "initial",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 8,
-                    }}
-                  >
-                    Follow for free
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </section>
-
         {/* Digest Footer Redesign */}
         <section
           style={{
@@ -3436,61 +3383,6 @@ export function FreeCreatorsPage({ dark }) {
             paddingTop: 80,
           }}
         >
-          {/* Subscribe Pill */}
-          <div
-            style={{
-              padding: "14px 28px",
-              borderRadius: 16,
-              background: dark
-                ? "rgba(123,81,204,0.1)"
-                : "rgba(123,81,204,0.05)",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 12,
-              marginBottom: 32,
-            }}
-          >
-            <div style={{ color: "#7B51CC" }}>
-              <Logo size={isMobile ? 16 : 20} />
-            </div>
-            <span
-              style={{
-                fontSize: isMobile ? 14 : 16,
-                fontWeight: 800,
-                color: "#7B51CC",
-              }}
-            >
-              Subscribe to these Free LuvlyFans Accounts!
-            </span>
-          </div>
-
-          <div style={{ display: "block", marginBottom: 80 }}>
-            <button
-              style={{
-                background: "#0ea5e9",
-                color: "#fff",
-                border: "none",
-                padding: "14px 32px",
-                borderRadius: 99,
-                fontSize: 16,
-                fontWeight: 800,
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                boxShadow: "0 10px 25px rgba(14,165,233,0.3)",
-                transition: "transform 0.2s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = "scale(1.05)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.transform = "scale(1)")
-              }
-            >
-              <Icon name="share-rectangle" size={20} color="#fff" /> Share
-            </button>
-          </div>
 
           {/* Related Posts */}
           <div style={{ textAlign: "left", maxWidth: 1200, margin: "0 auto" }}>
