@@ -75,26 +75,93 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
         }}
       />
 
-      {/* Hero */}
-      <div style={{ padding: "48px 5vw 0", maxWidth: 1100, margin: "0 auto" }}>
-        <button
-          onClick={onBack}
+      {/* Breadcrumbs */}
+      <div style={{ padding: "32px 5vw 0", maxWidth: 1100, margin: "0 auto" }}>
+        <nav
+          aria-label="Breadcrumb"
           style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            color: dark ? "rgba(255,255,255,0.5)" : "rgba(0,0,0,0.45)",
-            fontSize: 13,
-            fontWeight: 600,
-            padding: "0 0 24px",
             display: "flex",
             alignItems: "center",
             gap: 6,
+            flexWrap: "wrap",
+            fontSize: 13,
+            fontWeight: 600,
           }}
         >
-          ← Back to Blog
-        </button>
+          {/* Home */}
+          <button
+            onClick={onBack}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
+              fontSize: 13,
+              fontWeight: 600,
+              padding: 0,
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = dark
+                ? "rgba(255,255,255,0.45)"
+                : "rgba(0,0,0,0.4)")
+            }
+          >
+            Blog
+          </button>
+
+          {/* Separator */}
+          <span style={{ color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)", fontSize: 12 }}>
+            /
+          </span>
+
+          {/* Category */}
+          <button
+            onClick={onBack}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.4)",
+              fontSize: 13,
+              fontWeight: 600,
+              padding: 0,
+              transition: "color 0.15s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color = dark
+                ? "rgba(255,255,255,0.45)"
+                : "rgba(0,0,0,0.4)")
+            }
+          >
+            {article.category}
+          </button>
+
+          {/* Separator */}
+          <span style={{ color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)", fontSize: 12 }}>
+            /
+          </span>
+
+          {/* Current article — non-clickable */}
+          <span
+            style={{
+              color: dark ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.65)",
+              fontSize: 13,
+              fontWeight: 600,
+              maxWidth: isMobile ? 180 : 400,
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+            aria-current="page"
+          >
+            {article.title}
+          </span>
+        </nav>
       </div>
+
 
       <article
         style={{ maxWidth: 1100, margin: "0 auto", padding: "0 5vw 80px" }}
