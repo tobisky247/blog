@@ -3056,13 +3056,16 @@ export function FreeCreatorsPage({ dark, onRead }) {
       }}
     >
       {/* Hero Section */}
-      <div style={{ overflowX: "hidden", width: "100%", maxWidth: "100vw" }}>
+      <div style={{ padding: "32px 5vw 0", maxWidth: 1100, margin: "0 auto" }}>
         <section
           style={{
             position: "relative",
-            height: "70vh",
+            height: "60vh",
+            minHeight: 400,
             overflow: "hidden",
             width: "100%",
+            borderRadius: 24,
+            boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
           }}
         >
           <div
@@ -3072,7 +3075,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
               backgroundImage: `url("${data.hero}")`,
               backgroundSize: "cover",
               backgroundPosition: "center",
-              filter: "brightness(0.65)",
+              filter: "brightness(0.75)",
             }}
           />
           <div
@@ -3086,19 +3089,19 @@ export function FreeCreatorsPage({ dark, onRead }) {
           <div
             style={{
               position: "absolute",
-              bottom: "10%",
-              left: "5vw",
-              right: "5vw",
+              bottom: "8%",
+              left: "6%",
+              right: "6%",
               maxWidth: 800,
             }}
           >
             <Badge>MONTHLY DIGEST</Badge>
             <h1
               style={{
-                fontSize: "clamp(28px, 5vw, 72px)",
+                fontSize: "clamp(28px, 4vw, 56px)",
                 fontWeight: 900,
                 color: "#fff",
-                margin: "24px 0",
+                margin: "20px 0",
                 letterSpacing: "-0.03em",
                 lineHeight: 1.1,
               }}
