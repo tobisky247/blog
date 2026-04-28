@@ -3061,7 +3061,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
           style={{
             position: "relative",
             aspectRatio: isMobile ? "16/10" : "3/1",
-            minHeight: isMobile ? 350 : 300,
+            minHeight: isMobile ? 350 : 250,
             overflow: "hidden",
             width: "100%",
             borderRadius: 24,
@@ -3073,8 +3073,9 @@ export function FreeCreatorsPage({ dark, onRead }) {
               position: "absolute",
               inset: 0,
               backgroundImage: `url("${data.hero}")`,
-              backgroundSize: "cover",
+              backgroundSize: "100% 100%",
               backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
               filter: "brightness(0.75)",
             }}
           />
