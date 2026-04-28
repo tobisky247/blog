@@ -3060,8 +3060,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
         <section
           style={{
             position: "relative",
-            height: "60vh",
-            minHeight: 400,
+            aspectRatio: isMobile ? "16/10" : "3/1",
+            minHeight: isMobile ? 350 : 300,
             overflow: "hidden",
             width: "100%",
             borderRadius: 24,
