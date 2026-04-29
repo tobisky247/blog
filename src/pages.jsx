@@ -3073,7 +3073,7 @@ export function FreeCreatorsPage({ dark, onRead }) {
               position: "absolute",
               inset: 0,
               backgroundImage: `url("${data.hero}")`,
-              backgroundSize: "100% 100%",
+              backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               filter: "brightness(0.75)",
