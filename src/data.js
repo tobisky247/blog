@@ -570,8 +570,8 @@ export const FREE_CREATORS_DIGEST = [
         type: "JaneDoeOreo",
         category: "Girl Next Door",
         quote:
-          "Hello! Welcome! I am Jane. I am a 36 year old adult content creator who is from Alabama! 🍑",
-        bio: "Hello! Welcome! I am Jane. I am a 36 year old adult content creator who is from Alabama! Send me a hello! Subscribe to see more of me.",
+          "A 36-year-old Southern belle from Alabama, ready to show you some real Southern hospitality! 🍑",
+        bio: "Welcome! I'm Jane, a 36-year-old content creator bringing a touch of Alabama heat to your screen. Whether you're looking for genuine connection, playful chat, or my most exclusive content, I'm here to share it all. Send me a 'hello' so we can get to know each other, and subscribe to unlock my full world. Let's create some fun memories together!",
         color: "#5b21b6",
         image: "/assets/creators/janedoe-oreo.png",
         profileUrl: "https://luvlyfans.com/janedoeoreo",
