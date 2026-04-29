@@ -1094,13 +1094,34 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              <div style={{ height: isMobile ? 200 : 240, overflow: "hidden" }}>
+              <div style={{ height: isMobile ? 200 : 240, overflow: "hidden", position: "relative" }}>
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  src={event.thumbnail}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    filter: "blur(20px)",
+                    opacity: 0.6,
+                    transform: "scale(1.1)",
+                    zIndex: 0,
+                  }}
+                />
+                <img
+                  loading="eager"
+                  fetchPriority="high"
                   src={event.thumbnail}
                   alt={event.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  style={{
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    zIndex: 1,
+                  }}
                 />
               </div>
               <div style={{ padding: isMobile ? 24 : 32 }}>
