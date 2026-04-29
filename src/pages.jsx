@@ -3076,7 +3076,19 @@ export function FreeCreatorsPage({ dark, onRead }) {
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
-              filter: "brightness(0.75)",
+              filter: "blur(20px) brightness(0.5)",
+              transform: "scale(1.1)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url("${data.hero}")`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              filter: "brightness(0.85)",
             }}
           />
           <div
