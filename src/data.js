@@ -412,7 +412,7 @@ export const EVENTS = [
   {
     id: 1,
     title: "LuvlyFans at AVN: Celebrating Creators",
-    thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
+    thumbnail: "/assets/events/Quietlyvae.avn2.jpeg",
     date: "January 18, 2026",
     location: "Las Vegas, NV",
     excerpt:
