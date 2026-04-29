@@ -520,6 +520,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               width: "100%",
               height: isMobile ? 300 : 500,
               objectFit: "cover",
+              objectPosition: "top",
               borderRadius: isMobile ? 24 : 32,
               boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
               border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
