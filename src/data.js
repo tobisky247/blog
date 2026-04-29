@@ -419,6 +419,16 @@ export const EVENTS = [
       "LuvlyFans creator QuietlyVae represents the next generation of professional talent at the industry's largest event.",
     type: "Connecting & Networking",
   },
+  {
+    id: 5,
+    title: "QuietlyVae represents Luvlyfans at Creators After Dark",
+    thumbnail: "/assets/events/creators_after_dark2.jpeg",
+    date: "March 15, 2026",
+    location: "Creator Event",
+    excerpt:
+      "Not every important conversation happens on a stage. Some happen in more relaxed spaces.",
+    type: "Connecting & Networking",
+  },
 ];
 
 export const FEATURES = [

@@ -677,6 +677,284 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
     );
   }
 
+    if (selectedEvent === 5) {
+    const afterDarkPhotos = [
+      { src: "/assets/events/creators_after_dark1.jpeg", alt: "Creators After Dark 1" },
+      { src: "/assets/events/creators_after_dark.jpeg", alt: "Creators After Dark 2" },
+      { src: "/assets/events/creators_after_dark7.jpeg", alt: "Creators After Dark 3" },
+      { src: "/assets/events/creators_after_dark6.jpeg", alt: "Creators After Dark 4" },
+      { src: "/assets/events/creators_after_dark5.jpeg", alt: "Creators After Dark 5" },
+      { src: "/assets/events/creators_after_dark4.jpeg", alt: "Creators After Dark 6" },
+    ];
+
+    return (
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedEvent(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 15,
+          }}
+        >
+          ← Back to Events
+        </button>
+
+        {/* Hero Banner */}
+        <section
+          style={{
+            minHeight: isMobile ? "60vh" : "75vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "40px 5vw",
+            textAlign: "center",
+            position: "relative",
+            overflow: "hidden",
+            color: "#fff",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "#000",
+              zIndex: -2,
+            }}
+          />
+          <img
+            src="/assets/events/creators_after_dark2.jpeg"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: 0.4,
+              zIndex: -1,
+              filter: "blur(40px) brightness(0.7)",
+            }}
+          />
+          <div
+            style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}
+          >
+            <Badge>MARCH 15 · CREATOR EVENT</Badge>
+            <h1
+              style={{
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              QuietlyVae represents Luvlyfans at{" "}
+              <span style={{ color: "#7B51CC" }}>Creators After Dark</span>
+            </h1>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
+              Building relationships over reach in relaxed spaces.
+            </p>
+          </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              borderRadius: isMobile ? 24 : 32,
+              overflow: "hidden",
+              boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
+              border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+              background: "#111",
+            }}
+          >
+            <img
+              src="/assets/events/creators_after_dark2.jpeg"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(40px) brightness(0.6)",
+                transform: "scale(1.1)",
+              }}
+            />
+            <img
+              loading="eager"
+              fetchPriority="high"
+              src="/assets/events/creators_after_dark2.jpeg"
+              alt="Creators After Dark"
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                zIndex: 1,
+              }}
+            />
+          </div>
+        </section>
+
+        {/* Content */}
+        <section style={{ maxWidth: 900, margin: "0 auto", padding: "0 5vw" }}>
+          <h2
+            style={{
+              fontSize: isMobile ? 24 : 32,
+              fontWeight: 800,
+              marginBottom: 28,
+              lineHeight: 1.25,
+            }}
+          >
+            Introduction
+          </h2>
+          <div
+            style={{
+              fontSize: 17,
+              lineHeight: 1.9,
+              color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
+            }}
+          >
+            <p>Not every important conversation happens on a stage.</p>
+            <p>Some happen in more relaxed spaces. Smaller settings where creators can speak openly, connect naturally, and share experiences without pressure.</p>
+            <p>Creators After Dark is one of those spaces.</p>
+            <p>LuvlyFans was present through QuietlyVae, who attended and represented the platform within that environment.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>A Different Kind of Event</h3>
+            <p>Creators After Dark feels different from larger events.</p>
+            <p>It’s less structured, more personal, and more focused on connection than visibility. Conversations flow more naturally, and people tend to speak more openly about their experiences.</p>
+            <p>That difference matters.</p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {afterDarkPhotos.map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "4/5" : "3/4",
+                    background: "#111",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      filter: "blur(20px)",
+                      opacity: 0.6,
+                      transform: "scale(1.1)",
+                    }}
+                  />
+                  <img
+                    loading="lazy"
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      zIndex: 1,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What Stood Out</h3>
+            
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Conversations Were More Honest</h4>
+            <p>In a more relaxed setting, creators tend to speak more freely.</p>
+            <p>Topics that came up included:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Income stability</li>
+              <li>Burnout</li>
+              <li>Platform frustrations</li>
+              <li>What they’re trying to build long-term</li>
+            </ul>
+            <p>There’s less filtering, and more honesty.</p>
+
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Relationships Over Reach</h4>
+            <p>The focus wasn’t on numbers.</p>
+            <p>It was on:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Who you connect with</li>
+              <li>Who you trust</li>
+              <li>Who you can collaborate with</li>
+            </ul>
+            <p>These relationships often shape growth just as much as visibility.</p>
+
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Shared Experiences Matter</h4>
+            <p>Even though creators come from different backgrounds, many of the challenges are similar.</p>
+            <p>Hearing those shared experiences in person creates a different level of understanding. It reinforces that most creators are figuring things out as they go, not following a fixed path.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
+            <p>Being present in spaces like this, through creators like QuietlyVae, helps us stay connected to the reality of the creator journey.</p>
+            <p>Not just the visible side, but the conversations that don’t always make it online.</p>
+            <p>It highlights what creators actually care about:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Stability</li>
+              <li>Simplicity</li>
+              <li>Support</li>
+            </ul>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Looking Ahead</h3>
+            <p>Not every insight comes from large events.</p>
+            <p>Sometimes the smaller, more personal environments give a clearer picture of what’s really happening in the space.</p>
+            <p>That perspective is just as important.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Final Thoughts</h3>
+            <p>Creators After Dark is a reminder that the creator world isn’t just about platforms or content.</p>
+            <p>It’s about people, conversations, and shared experiences.</p>
+            <p>Being present in those spaces helps us build with more awareness and intention.</p>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
   // LIST VIEW
   return (
     <div style={{ padding: isMobile ? "40px 5vw" : "80px 5vw" }}>
@@ -707,7 +985,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             <div
               key={event.id}
               onClick={() => {
-                if ([1, 4].includes(event.id)) setSelectedEvent(event.id);
+                if ([1, 4, 5].includes(event.id)) setSelectedEvent(event.id);
                 window.scrollTo(0, 0);
               }}
               style={{
