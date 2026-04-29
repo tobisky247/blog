@@ -174,8 +174,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                   style={{
                     borderRadius: 20,
                     overflow: "hidden",
-                    aspectRatio: isMobile ? "16/9" : "4/3",
-                    background: "#000",
+                    background: "#111",
                   }}
                 >
                   <img
@@ -185,8 +184,8 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     alt={p.alt}
                     style={{
                       width: "100%",
-                      height: "100%",
-                      objectFit: "contain",
+                      height: "auto",
+                      display: "block",
                     }}
                   />
                 </div>
