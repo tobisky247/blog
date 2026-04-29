@@ -402,7 +402,7 @@ export const EVENTS = [
   {
     id: 4,
     title: "Introduction: The Real-World Creator Environment",
-    thumbnail: "/assets/events/AVN.jpeg",
+    thumbnail: "/assets/creators/Loulalou.png",
     date: "April 05, 2026",
     location: "Global Perspective",
     excerpt:
