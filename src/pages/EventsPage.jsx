@@ -713,35 +713,21 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
         {/* Hero Banner */}
         <section
           style={{
-            minHeight: isMobile ? "60vh" : "75vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "40px 5vw",
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
             textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
             position: "relative",
             overflow: "hidden",
-            color: "#fff",
           }}
         >
           <div
             style={{
               position: "absolute",
               inset: 0,
-              background: "#000",
-              zIndex: -2,
-            }}
-          />
-          <img
-            src="/assets/events/creators_after_dark2.jpeg"
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.4,
-              zIndex: -1,
+              opacity: 0.2,
+              background:
+                "url('/assets/events/creators_after_dark2.jpeg') center/cover no-repeat",
               filter: "blur(40px) brightness(0.7)",
             }}
           />
