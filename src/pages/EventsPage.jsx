@@ -172,20 +172,39 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 <div
                   key={i}
                   style={{
+                    position: "relative",
                     borderRadius: 20,
                     overflow: "hidden",
+                    aspectRatio: isMobile ? "16/9" : "4/3",
                     background: "#111",
                   }}
                 >
+                  {/* Blurred background image to fill the card */}
                   <img
-              loading="eager"
-              fetchPriority="high"
+                    src={p.src}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      filter: "blur(20px)",
+                      opacity: 0.6,
+                      transform: "scale(1.1)",
+                    }}
+                  />
+                  {/* Main image fully visible */}
+                  <img
+                    loading="eager"
+                    fetchPriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
+                      position: "relative",
                       width: "100%",
-                      height: "auto",
-                      display: "block",
+                      height: "100%",
+                      objectFit: "contain",
+                      zIndex: 1,
                     }}
                   />
                 </div>
