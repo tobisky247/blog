@@ -553,15 +553,15 @@ export const FREE_CREATORS_DIGEST = [
       {
         id: 7,
         name: "Ellie Bee",
-        handle: "@EllieBee",
-        type: "Ellie Bee",
+        handle: "@Ellie_bee",
+        type: "Ellie_bee",
         category: "Alternative / Bubbly",
         quote:
           "A bubbly teaser with an alternative edge. Curves, ink, and genuine connection. ✨",
         bio: "Ellie Bee brings a unique and vibrant energy to the platform, perfectly blending her bubbly persona with a striking alternative aesthetic. Adorned with expressive tattoos and piercings, she focuses on creating authentic, one-on-one connections with her fans. Ellie specializes in high-end custom content and interactive DMs, ensuring that every fan feels heard and valued in her curated, inclusive digital space.",
         color: "#312e81",
         image: "/assets/creators/Ellie_bee.png",
-        profileUrl: "https://luvlyfans.com/EllieBee",
+        profileUrl: "https://luvlyfans.com/Ellie_bee",
       },
       {
         id: 8,
