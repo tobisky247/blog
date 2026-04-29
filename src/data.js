@@ -411,13 +411,13 @@ export const EVENTS = [
   },
   {
     id: 1,
-    title: "LuvlyFans at the AVN: Celebrating Creators",
+    title: "LuvlyFans at AVN: Celebrating Creators",
     thumbnail: "/assets/events/Quietlyvae.avn.jpeg",
     date: "January 18, 2026",
     location: "Las Vegas, NV",
     excerpt:
       "LuvlyFans creator QuietlyVae represents the next generation of professional talent at the industry's largest event.",
-    type: "Awards & Networking",
+    type: "Connecting & Networking",
   },
 ];
 

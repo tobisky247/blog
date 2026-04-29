@@ -484,7 +484,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               }}
             >
               LuvlyFans @ the{" "}
-              <span style={{ color: "#7B51CC" }}>AVN Awards</span>
+              <span style={{ color: "#7B51CC" }}>AVN </span>
             </h1>
             <p
               style={{
