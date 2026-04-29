@@ -537,7 +537,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               lineHeight: 1.25,
             }}
           >
-            QuietlyVae Represents the Future
+            Introduction
           </h2>
           <div
             style={{
@@ -546,10 +546,27 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
             }}
           >
-            <p>
-              Participating in industry conversations that continue to shape the
-              future of creator-led platforms.
-            </p>
+            <p>Every industry has moments where everything comes together in one place.</p>
+            <p>For the creator space, one of those moments is AVN in Las Vegas.</p>
+            <p>It’s where creators, platforms, brands, and audiences meet in real life. Conversations happen faster, ideas move quicker, and you get a clearer sense of where things are heading.</p>
+            <p>This year, LuvlyFans was part of that environment, with QuietlyVae in attendance representing the platform.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What AVN Represents</h3>
+            <p>AVN isn’t just about visibility.</p>
+            <p>It represents scale.</p>
+            <p>Creators from different countries, different stages, and different styles all come together. You see:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Established creators running structured businesses</li>
+              <li>New creators finding their direction</li>
+              <li>Platforms competing for attention</li>
+              <li>Trends forming in real time</li>
+            </ul>
+            <p>It gives a wider view of the creator economy beyond what you see online.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Being Present Through Creators</h3>
+            <p>Rather than approaching the event as a platform looking in, we chose to be present through creators already part of the space.</p>
+            <p>QuietlyVae attending AVN gave us a grounded way to stay connected to what’s actually happening on the ground. Real conversations, real interactions, and real feedback.</p>
+            <p>That kind of presence matters more than just visibility.</p>
 
             <div
               style={{
@@ -565,13 +582,13 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                   style={{
                     borderRadius: 20,
                     overflow: "hidden",
-                    aspectRatio: isMobile ? "16/9" : "4/3",
-                    background: "#222",
+                    aspectRatio: isMobile ? "4/5" : "3/4",
+                    background: "#111",
                   }}
                 >
                   <img
-              loading="eager"
-              fetchPriority="high"
+                    loading="eager"
+                    fetchPriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
@@ -584,10 +601,52 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               ))}
             </div>
 
-            <p>
-              AVN brings together top creators and innovators. Its presence
-              reflects our commitment to creator success.
-            </p>
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What Stood Out</h3>
+            
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Creators Are Thinking Long-Term</h4>
+            <p>The focus isn’t just on quick wins.</p>
+            <p>More creators are thinking about:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Stability</li>
+              <li>Brand building</li>
+              <li>Consistent income</li>
+            </ul>
+            <p>The mindset is shifting toward sustainability.</p>
+
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Visibility Is Still a Major Topic</h4>
+            <p>Even at a global event, one thing is consistent.</p>
+            <p>Getting seen is still a challenge.</p>
+            <p>It reinforces how important discovery tools are. Content alone isn’t always enough without visibility.</p>
+
+            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>The Space Is Becoming More Structured</h4>
+            <p>Creators are becoming more organised in how they work.</p>
+            <p>They’re:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Planning content ahead</li>
+              <li>Treating their pages like businesses</li>
+              <li>Building systems around consistency</li>
+            </ul>
+            <p>This shift is changing expectations across the industry.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
+            <p>Being present at AVN, through creators like QuietlyVae, helps us stay connected to the reality of the space.</p>
+            <p>It reinforces a few key things:</p>
+            <ul style={{ margin: "20px 0 20px 20px" }}>
+              <li>Simplicity matters</li>
+              <li>Visibility matters</li>
+              <li>Consistency matters</li>
+            </ul>
+            <p>These are the areas that shape real outcomes for creators.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Looking Ahead</h3>
+            <p>The creator space is growing, but it’s also becoming more focused.</p>
+            <p>Events like AVN highlight that shift clearly. More structure, more intention, and more awareness of long-term growth.</p>
+            <p>That’s the direction we’re building towards.</p>
+
+            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Final Thoughts</h3>
+            <p>AVN is a reminder that the creator world is bigger than any one platform.</p>
+            <p>It’s built on people, conversations, and shared experience. Being present, even through creators, helps us understand that better.</p>
+            <p>We’re glad to be part of that journey.</p>
           </div>
         </section>
       </div>
