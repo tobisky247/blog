@@ -849,7 +849,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 gap: 20,
               }}
             >
-              {afterDarkPhotos.map((p, i) => (
+              {afterDarkPhotos.slice(0, 2).map((p, i) => (
                 <div
                   key={i}
                   style={{
@@ -912,6 +912,54 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             </ul>
             <p>These relationships often shape growth just as much as visibility.</p>
 
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {afterDarkPhotos.slice(2, 4).map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "4/5" : "3/4",
+                    background: "#111",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      filter: "blur(20px)",
+                      opacity: 0.6,
+                      transform: "scale(1.1)",
+                    }}
+                  />
+                  <img
+                    loading="lazy"
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      zIndex: 1,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
             <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Shared Experiences Matter</h4>
             <p>Even though creators come from different backgrounds, many of the challenges are similar.</p>
             <p>Hearing those shared experiences in person creates a different level of understanding. It reinforces that most creators are figuring things out as they go, not following a fixed path.</p>
@@ -919,6 +967,55 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
             <p>Being present in spaces like this, through creators like QuietlyVae, helps us stay connected to the reality of the creator journey.</p>
             <p>Not just the visible side, but the conversations that don’t always make it online.</p>
+
+            <div
+              style={{
+                margin: "40px 0",
+                display: "grid",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: 20,
+              }}
+            >
+              {afterDarkPhotos.slice(4, 6).map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    aspectRatio: isMobile ? "4/5" : "3/4",
+                    background: "#111",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      filter: "blur(20px)",
+                      opacity: 0.6,
+                      transform: "scale(1.1)",
+                    }}
+                  />
+                  <img
+                    loading="lazy"
+                    src={p.src}
+                    alt={p.alt}
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "contain",
+                      zIndex: 1,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
             <p>It highlights what creators actually care about:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
               <li>Stability</li>
