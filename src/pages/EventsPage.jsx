@@ -19,10 +19,10 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
   // DETAIL VIEW FOR INTRODUCTION (Lustful Ladies & Perspective)
   if (selectedEvent === 4) {
     const lustfulPhotos = [
+      { src: "/assets/events/events_lustful1.jpeg", alt: "Creator Event 1" },
       { src: "/assets/creators/Loulalou.png", alt: "CEO Lou" },
-      { src: "/assets/events/AVN.jpeg", alt: "Industry Networking" },
-      { src: "/assets/creators/Zozo.png", alt: "Creator Community" },
-      { src: "/assets/events/AVN2.jpeg", alt: "Atmosphere" },
+      { src: "/assets/events/events_lustful2.jpeg", alt: "Creator Event 2" },
+      { src: "/assets/events/events_lustful3.jpeg", alt: "Creator Event 3" },
     ];
 
     return (
