@@ -232,6 +232,21 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
           <>
             <img
               src={article.thumbnail}
+              alt=""
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(20px)",
+                opacity: 0.6,
+                transform: "scale(1.1)",
+                zIndex: 0,
+              }}
+            />
+            <img
+              src={article.thumbnail}
               alt={article.title}
               loading="eager"
               fetchPriority="high"
@@ -240,8 +255,8 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
                 inset: 0,
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
-                zIndex: 0,
+                objectFit: "contain",
+                zIndex: 1,
               }}
             />
             <div

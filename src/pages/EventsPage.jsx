@@ -511,21 +511,44 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             zIndex: 10,
           }}
         >
-          <img
-              loading="eager"
-              fetchPriority="high"
-            src="/assets/events/Quietlyvae.avn.jpeg"
-            alt="LuvlyFans @ AVN"
+          <div
             style={{
+              position: "relative",
               width: "100%",
               height: isMobile ? 300 : 500,
-              objectFit: "cover",
-              objectPosition: "top",
               borderRadius: isMobile ? 24 : 32,
+              overflow: "hidden",
               boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
               border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
+              background: "#111",
             }}
-          />
+          >
+            <img
+              src="/assets/events/Quietlyvae.avn.jpeg"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(40px) brightness(0.6)",
+                transform: "scale(1.1)",
+              }}
+            />
+            <img
+              loading="eager"
+              fetchPriority="high"
+              src="/assets/events/Quietlyvae.avn.jpeg"
+              alt="LuvlyFans @ AVN"
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                zIndex: 1,
+              }}
+            />
+          </div>
         </section>
 
         {/* Content */}
