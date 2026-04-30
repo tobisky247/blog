@@ -61,6 +61,7 @@ export function Nav({ dark, setDark, page, setPage }) {
       ],
     },
     { label: "Events", p: "events" },
+    { label: "Creator Corner", p: "creator-corner" },
   ];
 
   return (

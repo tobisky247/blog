@@ -13,6 +13,7 @@ import {
   FreeCreatorsPage,
   MissionPage,
   ContactPage,
+  CreatorCornerPage,
 } from "./pages";
 import { StickyBar } from "./components";
 import { ARTICLES } from "./data";
@@ -29,6 +30,7 @@ const PAGE_TO_PATH = {
   "free-creators": "/free-creators",
   mission: "/mission",
   contact: "/contact",
+  "creator-corner": "/creator-corner",
 };
 
 // Reverse: URL path to page key
@@ -162,6 +164,9 @@ export default function App() {
           selectedEvent={selectedEvent}
           setSelectedEvent={setSelectedEvent}
         />
+      )}
+      {page === "creator-corner" && (
+        <CreatorCornerPage dark={dark} setPage={handleNav} />
       )}
       {page === "free-creators" && <FreeCreatorsPage dark={dark} onRead={handleRead} />}
       {page === "mission" && <MissionPage dark={dark} />}

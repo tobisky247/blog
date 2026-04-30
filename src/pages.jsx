@@ -7,6 +7,7 @@ export { HomePage } from "./pages/HomePage";
 export { ArticlePage } from "./pages/ArticlePage";
 export { EventsPage } from "./pages/EventsPage";
 export { Footer } from "./pages/Footer";
+export { CreatorCornerPage } from "./pages/CreatorCornerPage";
 
 // ===== COMPONENTS STILL TO BE EXTRACTED =====
 // These components are temporarily kept here until extraction is complete
