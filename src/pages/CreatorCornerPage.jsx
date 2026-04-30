@@ -4,7 +4,7 @@ import { Badge, CTAButton, ArticleCard } from "../components";
 const CREATOR_ARTICLES = [
   {
     id: 1,
-    title: "Creator Voices: Trinity",
+    title: "Trinity: From FetLife to AVN Nominations",
     author: "Trinity",
     date: "April 30, 2026",
     excerpt: "Every creator builds differently. In this feature, we spoke with Trinity about how she got started, what's worked for her, and what she's learned along the way.",
@@ -37,7 +37,7 @@ export function CreatorCornerPage({ dark, setPage }) {
             fontSize: 14,
           }}
         >
-          ← Back to Creator Corner
+          ← Back to Creator Voices
         </button>
 
         {/* Hero Text */}
@@ -71,8 +71,7 @@ export function CreatorCornerPage({ dark, setPage }) {
                 letterSpacing: "-0.03em",
               }}
             >
-              Creator Voices:{" "}
-              <span style={{ color: "#7B51CC" }}>Trinity</span>
+              Trinity: From FetLife to <span style={{ color: "#7B51CC" }}>AVN Nominations</span>
             </h1>
             <p
               style={{
@@ -245,7 +244,7 @@ export function CreatorCornerPage({ dark, setPage }) {
       }}
     >
       <header style={{ marginBottom: isMobile ? 40 : 80 }}>
-        <Badge>CREATOR CORNER</Badge>
+        <Badge>CREATOR VOICES</Badge>
         <h1
           style={{
             fontSize: isMobile ? 32 : 48,
