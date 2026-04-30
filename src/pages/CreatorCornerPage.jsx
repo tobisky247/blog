@@ -4,10 +4,10 @@ import { Badge, CTAButton, ArticleCard } from "../components";
 const CREATOR_ARTICLES = [
   {
     id: 1,
-    title: "In Conversation with Trinity: Finding Her Own Path and Building Connection Over Numbers",
-    author: "Trinity",
+    title: "In Conversation with Trinity Infinity: Finding Her Own Path and Building Connection Over Numbers",
+    author: "Trinity Infinity",
     date: "April 30, 2026",
-    excerpt: "Every creator builds differently. In this feature, we spoke with Trinity about how she got started, what's worked for her, and what she's learned along the way.",
+    excerpt: "Every creator builds differently. In this feature, we spoke with Trinity Infinity about how she got started, what's worked for her, and what she's learned along the way.",
     thumbnail: "/assets/creators/trinity1.jpeg",
   }
 ];
@@ -71,7 +71,7 @@ export function CreatorCornerPage({ dark, setPage }) {
                 letterSpacing: "-0.03em",
               }}
             >
-              In Conversation with <span style={{ color: "#7B51CC" }}>Trinity</span>: Finding Her Own Path and Building Connection Over Numbers
+              In Conversation with <span style={{ color: "#7B51CC" }}>Trinity Infinity</span>: Finding Her Own Path and Building Connection Over Numbers
             </h1>
             <p
               style={{
@@ -83,7 +83,7 @@ export function CreatorCornerPage({ dark, setPage }) {
                 fontWeight: 500,
               }}
             >
-              Published April 30, 2026 • By Trinity
+              Published April 30, 2026 • By Trinity Infinity
             </p>
           </div>
         </section>
@@ -142,7 +142,7 @@ export function CreatorCornerPage({ dark, setPage }) {
           
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24 }}>Introduction</h2>
           <p style={{ marginBottom: 20 }}>Every creator builds differently.</p>
-          <p style={{ marginBottom: 40 }}>In this Creator Voices feature, we spoke with Trinity about how she got started, what’s worked for her, and what she’s learned along the way.</p>
+          <p style={{ marginBottom: 40 }}>In this Creator Voices feature, we spoke with Trinity Infinity about how she got started, what’s worked for her, and what she’s learned along the way.</p>
 
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24, marginTop: 60 }}>Getting Started</h2>
           <h3 style={{ fontSize: 20, fontWeight: 700, color: "#7B51CC", marginBottom: 12 }}>How did you get started as a creator?</h3>
@@ -220,12 +220,12 @@ export function CreatorCornerPage({ dark, setPage }) {
               <img src="/assets/creators/trinity1.jpeg" alt="Trinity" style={{ width: "100%", height: "100%", objectFit: "contain", position: "relative", zIndex: 1 }} />
             </div>
             <div>
-              <h3 style={{ fontSize: 24, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 8 }}>Trinity</h3>
+              <h3 style={{ fontSize: 24, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 8 }}>Trinity Infinity</h3>
               <p style={{ fontSize: 16, opacity: 0.8, marginBottom: 16, lineHeight: 1.5 }}>
                 A creator focused on connection, creativity, and exploring different sides of content and personality.
               </p>
-              <a href="https://luvlyfans.com" target="_blank" rel="noreferrer" style={{ color: "#7B51CC", fontWeight: 700, textDecoration: "none", fontSize: 15 }}>
-                👉 Follow Trinity on LuvlyFans
+              <a href="https://luvlyfans.com/TrinityInfinity" target="_blank" rel="noreferrer" style={{ color: "#7B51CC", fontWeight: 700, textDecoration: "none", fontSize: 15 }}>
+                👉 Follow Trinity Infinity on LuvlyFans
               </a>
             </div>
           </div>
