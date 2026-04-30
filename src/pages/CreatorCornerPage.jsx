@@ -138,7 +138,7 @@ export function CreatorCornerPage({ dark, setPage }) {
         </section>
 
         {/* Article Content */}
-        <div style={{ maxWidth: 760, margin: "0 auto", padding: "60px 5vw", fontSize: 18, lineHeight: 1.8, color: dark ? "rgba(255,255,255,0.85)" : "#333" }}>
+        <div style={{ maxWidth: 760, margin: "0 auto", padding: "0 5vw", fontSize: 18, lineHeight: 1.8, color: dark ? "rgba(255,255,255,0.85)" : "#333" }}>
           
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24 }}>Introduction</h2>
           <p style={{ marginBottom: 20 }}>Every creator builds differently.</p>
