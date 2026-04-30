@@ -4,6 +4,7 @@ import { Badge, CTAButton, ArticleCard } from "../components";
 const CREATOR_ARTICLES = [
   {
     id: 1,
+    slug: "trinity-infinity",
     title: "In Conversation with Trinity Infinity: Finding Her Own Path and Building Connection Over Numbers",
     author: "Trinity Infinity",
     date: "April 30, 2026",
@@ -13,16 +14,50 @@ const CREATOR_ARTICLES = [
 ];
 
 export function CreatorCornerPage({ dark, setPage }) {
-  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(() => {
+    const path = window.location.pathname;
+    if (path.startsWith("/creator-corner/")) {
+      const slug = path.split("/creator-corner/")[1];
+      const found = CREATOR_ARTICLES.find(a => a.slug === slug);
+      return found ? found.id : null;
+    }
+    return null;
+  });
+
   const isMobile = window.innerWidth < 800;
+
+  React.useEffect(() => {
+    const handlePop = () => {
+      const path = window.location.pathname;
+      if (path.startsWith("/creator-corner/")) {
+        const slug = path.split("/creator-corner/")[1];
+        const found = CREATOR_ARTICLES.find(a => a.slug === slug);
+        setSelectedArticle(found ? found.id : null);
+      } else if (path === "/creator-corner") {
+        setSelectedArticle(null);
+      }
+    };
+    window.addEventListener("popstate", handlePop);
+    return () => window.removeEventListener("popstate", handlePop);
+  }, []);
+
+  const handleSelectArticle = (id) => {
+    setSelectedArticle(id);
+    const article = CREATOR_ARTICLES.find(a => a.id === id);
+    if (article) {
+      window.history.pushState({ page: "creator-corner", articleId: id }, "", `/creator-corner/${article.slug}`);
+    } else {
+      window.history.pushState({ page: "creator-corner" }, "", `/creator-corner`);
+    }
+    window.scrollTo(0, 0);
+  };
 
   if (selectedArticle === 1) {
     return (
       <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
         <button
           onClick={() => {
-            setSelectedArticle(null);
-            window.scrollTo(0, 0);
+            handleSelectArticle(null);
           }}
           style={{
             margin: isMobile ? "24px 5vw 0" : "24px 5vw",
@@ -278,8 +313,7 @@ export function CreatorCornerPage({ dark, setPage }) {
           <div
             key={article.id}
             onClick={() => {
-              setSelectedArticle(article.id);
-              window.scrollTo(0, 0);
+              handleSelectArticle(article.id);
             }}
             style={{
               cursor: "pointer",

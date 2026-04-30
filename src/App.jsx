@@ -59,6 +59,11 @@ function parseURL() {
     return { page, article: null };
   }
 
+  // Handle deep links for creator corner
+  if (path.startsWith("/creator-corner/")) {
+    return { page: "creator-corner", article: null };
+  }
+
   // Default to home
   return { page: "home", article: null };
 }
