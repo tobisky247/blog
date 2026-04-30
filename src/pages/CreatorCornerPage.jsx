@@ -18,67 +18,125 @@ export function CreatorCornerPage({ dark, setPage }) {
 
   if (selectedArticle === 1) {
     return (
-      <div style={{ background: dark ? "#0a0a0a" : "#fff", minHeight: "100vh", paddingBottom: 80 }}>
-        {/* Hero Section */}
-        <div style={{ position: "relative", width: "100%", height: isMobile ? "50vh" : "60vh", minHeight: 400, overflow: "hidden" }}>
+      <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
+        <button
+          onClick={() => {
+            setSelectedArticle(null);
+            window.scrollTo(0, 0);
+          }}
+          style={{
+            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
+            background: "none",
+            border: "none",
+            color: "#7B51CC",
+            fontWeight: 700,
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 14,
+          }}
+        >
+          ← Back to Creator Corner
+        </button>
+
+        {/* Hero Text */}
+        <section
+          style={{
+            padding: isMobile ? "60px 5vw" : "120px 5vw",
+            background: dark ? "#0a0a0a" : "#fff",
+            textAlign: "center",
+            borderBottom: `1px solid ${dark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"}`,
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
           <div
             style={{
               position: "absolute",
               inset: 0,
-              backgroundImage: `url("/assets/creators/trinity1.jpeg")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              filter: "blur(20px) brightness(0.6)",
-              transform: "scale(1.1)",
-              zIndex: 0,
+              opacity: 0.2,
+              background: `url("/assets/creators/trinity1.jpeg") center/cover no-repeat`,
+              filter: "blur(40px) brightness(0.7)",
             }}
           />
-          <img
-            src="/assets/creators/trinity1.jpeg"
-            alt="Trinity"
-            style={{
-              position: "relative",
-              width: "100%",
-              height: "100%",
-              objectFit: "contain",
-              zIndex: 1,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "linear-gradient(to bottom, transparent 40%, rgba(10,10,10,0.9) 100%)",
-              zIndex: 2,
-            }}
-          />
-          <div style={{ position: "absolute", bottom: "10%", left: "5vw", zIndex: 3, maxWidth: 800 }}>
-            <button
-              onClick={() => setSelectedArticle(null)}
+          <div style={{ maxWidth: 900, margin: "0 auto", position: "relative" }}>
+            <Badge>CREATOR VOICES</Badge>
+            <h1
               style={{
-                background: "none",
-                border: "none",
-                color: "#7B51CC",
-                fontSize: 15,
-                fontWeight: 700,
-                cursor: "pointer",
-                marginBottom: 20,
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
+                fontSize: "clamp(30px, 6vw, 64px)",
+                fontWeight: 800,
+                margin: "24px 0",
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
               }}
             >
-              ← Back to Creator Corner
-            </button>
-            <Badge>CREATOR VOICES</Badge>
-            <h1 style={{ fontSize: isMobile ? 36 : 56, fontWeight: 800, color: "#fff", marginTop: 16, lineHeight: 1.1 }}>
-              Creator Voices: Trinity
+              Creator Voices:{" "}
+              <span style={{ color: "#7B51CC" }}>Trinity</span>
             </h1>
-            <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 16, marginTop: 16 }}>
+            <p
+              style={{
+                fontSize: isMobile ? 18 : 20,
+                opacity: 0.8,
+                maxWidth: 700,
+                margin: "0 auto",
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}
+            >
               Published April 30, 2026 • By Trinity
             </p>
           </div>
-        </div>
+        </section>
+
+        {/* Hero Image */}
+        <section
+          style={{
+            maxWidth: 1100,
+            margin: isMobile ? "0 auto 40px" : "-60px auto 80px",
+            padding: "0 5vw",
+            position: "relative",
+            zIndex: 10,
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "100%",
+              height: isMobile ? 300 : 500,
+              borderRadius: isMobile ? 24 : 32,
+              overflow: "hidden",
+              boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
+            }}
+          >
+            <img
+              src="/assets/creators/trinity1.jpeg"
+              alt="Trinity"
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                filter: "blur(20px)",
+                opacity: 0.6,
+                transform: "scale(1.1)",
+                zIndex: 0,
+              }}
+            />
+            <img
+              src="/assets/creators/trinity1.jpeg"
+              alt="Trinity"
+              style={{
+                position: "relative",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                zIndex: 1,
+              }}
+            />
+          </div>
+        </section>
 
         {/* Article Content */}
         <div style={{ maxWidth: 760, margin: "0 auto", padding: "60px 5vw", fontSize: 18, lineHeight: 1.8, color: dark ? "rgba(255,255,255,0.85)" : "#333" }}>
