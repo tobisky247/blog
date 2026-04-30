@@ -30,7 +30,7 @@ const PAGE_TO_PATH = {
   "free-creators": "/free-creators",
   mission: "/mission",
   contact: "/contact",
-  "creator-corner": "/creator-corner",
+  "creator-voices": "/creator-voices",
 };
 
 // Reverse: URL path to page key
@@ -61,8 +61,8 @@ function parseURL() {
     return { page: "events", article: null, feature: null, event: eventObj ? eventObj.id : null };
   }
 
-  if (path.startsWith("/creator-corner/")) {
-    return { page: "creator-corner", article: null, feature: null, event: null };
+  if (path.startsWith("/creator-voices/")) {
+    return { page: "creator-voices", article: null, feature: null, event: null };
   }
 
   const page = PATH_TO_PAGE[path];
@@ -197,7 +197,7 @@ export default function App() {
           setSelectedEvent={handleSelectEvent}
         />
       )}
-      {page === "creator-corner" && (
+      {page === "creator-voices" && (
         <CreatorCornerPage dark={dark} setPage={handleNav} />
       )}
       {page === "free-creators" && <FreeCreatorsPage dark={dark} onRead={handleRead} />}

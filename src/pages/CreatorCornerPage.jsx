@@ -16,8 +16,8 @@ const CREATOR_ARTICLES = [
 export function CreatorCornerPage({ dark, setPage }) {
   const [selectedArticle, setSelectedArticle] = useState(() => {
     const path = window.location.pathname;
-    if (path.startsWith("/creator-corner/")) {
-      const slug = path.split("/creator-corner/")[1];
+    if (path.startsWith("/creator-voices/")) {
+      const slug = path.split("/creator-voices/")[1];
       const found = CREATOR_ARTICLES.find(a => a.slug === slug);
       return found ? found.id : null;
     }
@@ -29,11 +29,11 @@ export function CreatorCornerPage({ dark, setPage }) {
   React.useEffect(() => {
     const handlePop = () => {
       const path = window.location.pathname;
-      if (path.startsWith("/creator-corner/")) {
-        const slug = path.split("/creator-corner/")[1];
+      if (path.startsWith("/creator-voices/")) {
+        const slug = path.split("/creator-voices/")[1];
         const found = CREATOR_ARTICLES.find(a => a.slug === slug);
         setSelectedArticle(found ? found.id : null);
-      } else if (path === "/creator-corner") {
+      } else if (path === "/creator-voices") {
         setSelectedArticle(null);
       }
     };
@@ -45,9 +45,9 @@ export function CreatorCornerPage({ dark, setPage }) {
     setSelectedArticle(id);
     const article = CREATOR_ARTICLES.find(a => a.id === id);
     if (article) {
-      window.history.pushState({ page: "creator-corner", articleId: id }, "", `/creator-corner/${article.slug}`);
+      window.history.pushState({ page: "creator-voices", articleId: id }, "", `/creator-voices/${article.slug}`);
     } else {
-      window.history.pushState({ page: "creator-corner" }, "", `/creator-corner`);
+      window.history.pushState({ page: "creator-voices" }, "", `/creator-voices`);
     }
     window.scrollTo(0, 0);
   };
