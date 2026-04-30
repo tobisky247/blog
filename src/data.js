@@ -401,6 +401,7 @@ export const STATS = [
 export const EVENTS = [
   {
     id: 4,
+    slug: "lustful-events-introduction",
     title: "Introduction: The Real-World Creator Environment",
     thumbnail: "/assets/creators/Loulalou.png",
     date: "April 05, 2026",
@@ -411,6 +412,7 @@ export const EVENTS = [
   },
   {
     id: 1,
+    slug: "avn-celebrating-creators",
     title: "LuvlyFans at AVN: Celebrating Creators",
     thumbnail: "/assets/events/Quietlyvae.avn2.jpeg",
     date: "January 18, 2026",
@@ -421,6 +423,7 @@ export const EVENTS = [
   },
   {
     id: 5,
+    slug: "quietlyvae-creators-after-dark",
     title: "QuietlyVae represents Luvlyfans at Creators After Dark",
     thumbnail: "/assets/events/creators_after_dark2.jpeg",
     date: "March 15, 2026",
@@ -434,6 +437,7 @@ export const EVENTS = [
 export const FEATURES = [
   {
     id: 1,
+    slug: "spotlight-global-reach",
     title: "Spotlight: Amplify Your Global Reach",
     thumbnail: "/assets/promotions/spotlight4.png",
     date: "New Feature",
@@ -444,6 +448,7 @@ export const FEATURES = [
   },
   {
     id: 2,
+    slug: "stories-share-moment",
     title: "Stories: Share the Moment",
     thumbnail: "/assets/promotions/Stories.png",
     date: "Available Now",
@@ -454,6 +459,7 @@ export const FEATURES = [
   },
   {
     id: 3,
+    slug: "media-vault",
     title: "Media Vault",
     thumbnail: "/assets/promotions/spotlight_Image.png",
     date: "Available Now",

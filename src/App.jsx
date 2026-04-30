@@ -16,7 +16,7 @@ import {
   CreatorCornerPage,
 } from "./pages";
 import { StickyBar } from "./components";
-import { ARTICLES } from "./data";
+import { ARTICLES, FEATURES, EVENTS } from "./data";
 
 // Map page keys to URL paths
 const PAGE_TO_PATH = {
@@ -39,33 +39,38 @@ Object.entries(PAGE_TO_PATH).forEach(([page, path]) => {
   PATH_TO_PAGE[path] = page;
 });
 
-// Parse the current URL to determine initial page/article
+// Parse the current URL to determine initial page/article/feature/event
 function parseURL() {
   const path = window.location.pathname;
 
-  // Check for article routes: /article/<slug>
   if (path.startsWith("/article/")) {
     const slug = path.replace("/article/", "");
     const article = ARTICLES.find((a) => a.slug === slug);
-    if (article) {
-      return { page: "article", article };
-    }
-    return { page: "home", article: null };
+    return { page: article ? "article" : "home", article: article || null, feature: null, event: null };
   }
 
-  // Check known pages
+  if (path.startsWith("/features/")) {
+    const slug = path.replace("/features/", "");
+    const feature = FEATURES.find((f) => f.slug === slug);
+    return { page: "features", article: null, feature: feature ? feature.id : null, event: null };
+  }
+
+  if (path.startsWith("/events/")) {
+    const slug = path.replace("/events/", "");
+    const eventObj = EVENTS.find((e) => e.slug === slug);
+    return { page: "events", article: null, feature: null, event: eventObj ? eventObj.id : null };
+  }
+
+  if (path.startsWith("/creator-corner/")) {
+    return { page: "creator-corner", article: null, feature: null, event: null };
+  }
+
   const page = PATH_TO_PAGE[path];
   if (page) {
-    return { page, article: null };
+    return { page, article: null, feature: null, event: null };
   }
 
-  // Handle deep links for creator corner
-  if (path.startsWith("/creator-corner/")) {
-    return { page: "creator-corner", article: null };
-  }
-
-  // Default to home
-  return { page: "home", article: null };
+  return { page: "home", article: null, feature: null, event: null };
 }
 
 export default function App() {
@@ -73,8 +78,8 @@ export default function App() {
   const [dark, setDark] = useState(true);
   const [page, setPage] = useState(initial.page);
   const [article, setArticle] = useState(initial.article);
-  const [selectedFeature, setSelectedFeature] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedFeature, setSelectedFeature] = useState(initial.feature);
+  const [selectedEvent, setSelectedEvent] = useState(initial.event);
 
   // Push URL when navigating to a page
   const handleNav = useCallback((p) => {
@@ -102,6 +107,28 @@ export default function App() {
     }
   }, []);
 
+  const handleSelectFeature = useCallback((id) => {
+    setSelectedFeature(id);
+    const feature = FEATURES.find((f) => f.id === id);
+    if (feature) {
+      window.history.pushState({ page: "features", featureId: id }, "", `/features/${feature.slug}`);
+    } else {
+      window.history.pushState({ page: "features" }, "", `/features`);
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleSelectEvent = useCallback((id) => {
+    setSelectedEvent(id);
+    const eventObj = EVENTS.find((e) => e.id === id);
+    if (eventObj) {
+      window.history.pushState({ page: "events", eventId: id }, "", `/events/${eventObj.slug}`);
+    } else {
+      window.history.pushState({ page: "events" }, "", `/events`);
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleBack = useCallback(() => {
     handleNav("home");
   }, [handleNav]);
@@ -109,11 +136,11 @@ export default function App() {
   // Handle browser back/forward buttons
   useEffect(() => {
     const onPopState = () => {
-      const { page: p, article: a } = parseURL();
+      const { page: p, article: a, feature: f, event: e } = parseURL();
       setPage(p);
       setArticle(a);
-      setSelectedFeature(null);
-      setSelectedEvent(null);
+      setSelectedFeature(f);
+      setSelectedEvent(e);
       window.scrollTo(0, 0);
     };
     window.addEventListener("popstate", onPopState);
@@ -160,14 +187,14 @@ export default function App() {
         <FeaturesPage
           dark={dark}
           selectedFeature={selectedFeature}
-          setSelectedFeature={setSelectedFeature}
+          setSelectedFeature={handleSelectFeature}
         />
       )}
       {page === "events" && (
         <EventsPage
           dark={dark}
           selectedEvent={selectedEvent}
-          setSelectedEvent={setSelectedEvent}
+          setSelectedEvent={handleSelectEvent}
         />
       )}
       {page === "creator-corner" && (
