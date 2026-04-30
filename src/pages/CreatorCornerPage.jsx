@@ -4,7 +4,7 @@ import { Badge, CTAButton, ArticleCard } from "../components";
 const CREATOR_ARTICLES = [
   {
     id: 1,
-    title: "Trinity: From FetLife to AVN Nominations",
+    title: "In Conversation with Trinity: Finding Her Own Path and Building Connection Over Numbers",
     author: "Trinity",
     date: "April 30, 2026",
     excerpt: "Every creator builds differently. In this feature, we spoke with Trinity about how she got started, what's worked for her, and what she's learned along the way.",
@@ -64,14 +64,14 @@ export function CreatorCornerPage({ dark, setPage }) {
             <Badge>CREATOR VOICES</Badge>
             <h1
               style={{
-                fontSize: "clamp(30px, 6vw, 64px)",
+                fontSize: "clamp(24px, 5vw, 48px)",
                 fontWeight: 800,
                 margin: "24px 0",
                 lineHeight: 1.1,
                 letterSpacing: "-0.03em",
               }}
             >
-              Trinity: From FetLife to <span style={{ color: "#7B51CC" }}>AVN Nominations</span>
+              In Conversation with <span style={{ color: "#7B51CC" }}>Trinity</span>: Finding Her Own Path and Building Connection Over Numbers
             </h1>
             <p
               style={{
