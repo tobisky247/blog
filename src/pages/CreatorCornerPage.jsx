@@ -130,7 +130,8 @@ export function CreatorCornerPage({ dark, setPage }) {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
+                objectFit: "cover",
+                objectPosition: "top center",
                 zIndex: 1,
               }}
             />
@@ -157,7 +158,7 @@ export function CreatorCornerPage({ dark, setPage }) {
             <div style={{
               position: "absolute", inset: 0, backgroundImage: `url("/assets/creators/trinity.png")`, backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px)", opacity: 0.5
             }} />
-            <img src="/assets/creators/trinity.png" alt="Trinity Content" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "contain" }} />
+            <img src="/assets/creators/trinity.png" alt="Trinity Content" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "cover", objectPosition: "top center" }} />
           </div>
 
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24, marginTop: 60 }}>Early Challenges</h2>
@@ -179,7 +180,7 @@ export function CreatorCornerPage({ dark, setPage }) {
             <div style={{
               position: "absolute", inset: 0, backgroundImage: `url("/assets/creators/trinity3.jpeg")`, backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px)", opacity: 0.5
             }} />
-            <img src="/assets/creators/trinity3.jpeg" alt="Trinity Lifestyle" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "contain" }} />
+            <img src="/assets/creators/trinity3.jpeg" alt="Trinity Lifestyle" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "cover", objectPosition: "top center" }} />
           </div>
 
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24, marginTop: 60 }}>Growth</h2>
