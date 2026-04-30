@@ -102,7 +102,8 @@ export function CreatorCornerPage({ dark, setPage }) {
             style={{
               position: "relative",
               width: "100%",
-              height: isMobile ? 300 : 500,
+              aspectRatio: "1445 / 2048",
+              maxHeight: "85vh", // prevent it from being completely absurdly tall on large screens
               borderRadius: isMobile ? 24 : 32,
               overflow: "hidden",
               boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
@@ -130,8 +131,7 @@ export function CreatorCornerPage({ dark, setPage }) {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
-                objectPosition: "top center",
+                objectFit: "contain",
                 zIndex: 1,
               }}
             />
@@ -154,11 +154,8 @@ export function CreatorCornerPage({ dark, setPage }) {
           <p style={{ marginBottom: 40 }}>No, I’ve never been someone who sticks to just one thing. I like exploring different fantasies, fetishes, and kinks. It keeps things interesting for me and for the people watching.</p>
 
           {/* First Inline Image Spread */}
-          <div style={{ margin: "60px 0", borderRadius: 24, overflow: "hidden", position: "relative", background: dark ? "#111" : "#f5f5f5" }}>
-            <div style={{
-              position: "absolute", inset: 0, backgroundImage: `url("/assets/creators/trinity.png")`, backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px)", opacity: 0.5
-            }} />
-            <img src="/assets/creators/trinity.png" alt="Trinity Content" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "cover", objectPosition: "top center" }} />
+          <div style={{ margin: "60px 0", borderRadius: 24, overflow: "hidden", position: "relative", background: dark ? "#111" : "#f5f5f5", aspectRatio: "4000 / 3000" }}>
+            <img src="/assets/creators/trinity.png" alt="Trinity Content" style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, objectFit: "contain" }} />
           </div>
 
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24, marginTop: 60 }}>Early Challenges</h2>
@@ -176,11 +173,8 @@ export function CreatorCornerPage({ dark, setPage }) {
           <p style={{ marginBottom: 40 }}>I like to say I’m “consistently inconsistent”. I’m always working on multiple things at once, so it can be hard deciding where to put my time.</p>
 
           {/* Second Inline Image Spread */}
-          <div style={{ margin: "60px 0", borderRadius: 24, overflow: "hidden", position: "relative", background: dark ? "#111" : "#f5f5f5" }}>
-            <div style={{
-              position: "absolute", inset: 0, backgroundImage: `url("/assets/creators/trinity3.jpeg")`, backgroundSize: "cover", backgroundPosition: "center", filter: "blur(20px)", opacity: 0.5
-            }} />
-            <img src="/assets/creators/trinity3.jpeg" alt="Trinity Lifestyle" style={{ width: "100%", position: "relative", zIndex: 1, maxHeight: 600, objectFit: "cover", objectPosition: "top center" }} />
+          <div style={{ margin: "60px 0", borderRadius: 24, overflow: "hidden", position: "relative", background: dark ? "#111" : "#f5f5f5", aspectRatio: "1536 / 2048", maxHeight: "85vh" }}>
+            <img src="/assets/creators/trinity3.jpeg" alt="Trinity Lifestyle" style={{ width: "100%", height: "100%", position: "relative", zIndex: 1, objectFit: "contain" }} />
           </div>
 
           <h2 style={{ fontSize: 32, fontWeight: 800, color: dark ? "#fff" : "#111", marginBottom: 24, marginTop: 60 }}>Growth</h2>
