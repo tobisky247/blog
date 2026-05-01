@@ -46,7 +46,10 @@ export function Footer({ dark, setPage }) {
           name: "Features",
           action: () => {
             setPage("home");
-            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+            setTimeout(
+              () => window.scrollTo({ top: 0, behavior: "smooth" }),
+              100,
+            );
           },
         },
       ],
@@ -76,7 +79,6 @@ export function Footer({ dark, setPage }) {
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-
         {/* Main grid */}
         <div
           style={{
@@ -99,7 +101,7 @@ export function Footer({ dark, setPage }) {
               }}
             >
               The creator education hub for the next generation of independent
-              earners. Learn, grow, and monetize — smarter.
+              earners. Learn, grow, and monetize smarter.
             </p>
           </div>
 
@@ -164,9 +166,18 @@ export function Footer({ dark, setPage }) {
             }}
           >
             {[
-              { label: "Privacy Policy", href: "https://luvlyfans.com/pages/privacy" },
-              { label: "Terms of Service", href: "https://luvlyfans.com/pages/terms-of-service" },
-              { label: "Creator Agreement", href: "https://luvlyfans.com/pages/creator-agreement" },
+              {
+                label: "Privacy Policy",
+                href: "https://luvlyfans.com/pages/privacy",
+              },
+              {
+                label: "Terms of Service",
+                href: "https://luvlyfans.com/pages/terms-of-service",
+              },
+              {
+                label: "Creator Agreement",
+                href: "https://luvlyfans.com/pages/creator-agreement",
+              },
             ].map(({ label, href }) => (
               <a
                 key={label}
@@ -184,7 +195,6 @@ export function Footer({ dark, setPage }) {
             ))}
           </div>
         </div>
-
       </div>
     </footer>
   );

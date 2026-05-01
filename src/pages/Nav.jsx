@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../nav.css";
 import { CTAButton, Logo, Icon } from "../components";
 
-export function Nav({ dark, setDark, page, setPage }) {
+export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
   const [scroll, setScroll] = useState(false);
   const [guidesOpen, setGuidesOpen] = useState(false);
   const [hubOpen, setHubOpen] = useState(false);
+  const [blogOpen, setBlogOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -39,12 +40,21 @@ export function Nav({ dark, setDark, page, setPage }) {
   }, [menuOpen]);
 
   const navLinks = [
-    { label: "Blog", p: "home" },
+    {
+      label: "Blog",
+      p: "home",
+      sub: [
+        { label: "All Articles", p: "home", icon: "book 01" },
+        { label: "Make Money", category: "Make Money", icon: "dollar" },
+        { label: "Growth", category: "Growth", icon: "chart-arrow-up" },
+        { label: "Guides", category: "Guides", icon: "book" },
+      ],
+    },
     {
       label: "Creator Hub",
       p: "hub",
       sub: [
-        { label: "Creator Hub", p: "hub", icon: "chart-arrow-up" },
+        { label: "Creator Hub", p: "hub", icon: "chart-pie 01" },
         {
           label: "Free Creators accounts",
           p: "free-creators",
@@ -55,9 +65,13 @@ export function Nav({ dark, setDark, page, setPage }) {
     {
       label: "How-to-guides",
       sub: [
-        { label: "Getting started", p: "getting-started" },
-        { label: "Earning on Luvlyfans", p: "earning" },
-        { label: "Features", p: "features" },
+        { label: "Getting started", p: "getting-started", icon: "idea" },
+        {
+          label: "Earning on Luvlyfans",
+          p: "earning",
+          icon: "money bag-dollar",
+        },
+        { label: "Features", p: "features", icon: "star" },
       ],
     },
     { label: "Events", p: "events" },
@@ -118,18 +132,22 @@ export function Nav({ dark, setDark, page, setPage }) {
               {navLinks.map((link) => (
                 <div
                   key={link.label}
-                  onMouseEnter={() =>
-                    link.sub &&
-                    (link.label === "Creator Hub"
-                      ? setHubOpen(true)
-                      : setGuidesOpen(true))
-                  }
-                  onMouseLeave={() =>
-                    link.sub &&
-                    (link.label === "Creator Hub"
-                      ? setHubOpen(false)
-                      : setGuidesOpen(false))
-                  }
+                  onMouseEnter={() => {
+                    if (link.sub) {
+                      if (link.label === "Creator Hub") setHubOpen(true);
+                      else if (link.label === "How-to-guides")
+                        setGuidesOpen(true);
+                      else if (link.label === "Blog") setBlogOpen(true);
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (link.sub) {
+                      if (link.label === "Creator Hub") setHubOpen(false);
+                      else if (link.label === "How-to-guides")
+                        setGuidesOpen(false);
+                      else if (link.label === "Blog") setBlogOpen(false);
+                    }
+                  }}
                   style={{ position: "relative" }}
                 >
                   <button
@@ -156,19 +174,25 @@ export function Nav({ dark, setDark, page, setPage }) {
                   >
                     {link.label}{" "}
                     {link.sub && (
-                      <span
+                      <Icon
+                        name="direction-down 01"
+                        size={12}
+                        color={
+                          dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)"
+                        }
                         style={{
-                          fontSize: 10,
                           transform: (
-                            link.label === "Creator Hub" ? hubOpen : guidesOpen
+                            link.label === "Creator Hub"
+                              ? hubOpen
+                              : link.label === "Blog"
+                                ? blogOpen
+                                : guidesOpen
                           )
                             ? "rotate(180deg)"
                             : "none",
                           transition: "transform 0.2s",
                         }}
-                      >
-                        ▼
-                      </span>
+                      />
                     )}
                   </button>
 
@@ -184,17 +208,29 @@ export function Nav({ dark, setDark, page, setPage }) {
                         borderRadius: 20,
                         boxShadow: "0 10px 40px rgba(0,0,0,0.4)",
                         opacity: (
-                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                          link.label === "Creator Hub"
+                            ? hubOpen
+                            : link.label === "Blog"
+                              ? blogOpen
+                              : guidesOpen
                         )
                           ? 1
                           : 0,
                         transform: (
-                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                          link.label === "Creator Hub"
+                            ? hubOpen
+                            : link.label === "Blog"
+                              ? blogOpen
+                              : guidesOpen
                         )
                           ? "translateY(5px)"
                           : "translateY(15px)",
                         visibility: (
-                          link.label === "Creator Hub" ? hubOpen : guidesOpen
+                          link.label === "Creator Hub"
+                            ? hubOpen
+                            : link.label === "Blog"
+                              ? blogOpen
+                              : guidesOpen
                         )
                           ? "visible"
                           : "hidden",
@@ -206,11 +242,16 @@ export function Nav({ dark, setDark, page, setPage }) {
                     >
                       {link.sub.map((s) => (
                         <button
-                          key={s.p}
+                          key={s.p || s.category}
                           onClick={() => {
-                            setPage(s.p);
+                            if (s.category) {
+                              onCategoryNav(s.category);
+                            } else {
+                              setPage(s.p);
+                            }
                             setHubOpen(false);
                             setGuidesOpen(false);
+                            setBlogOpen(false);
                             window.scrollTo(0, 0);
                           }}
                           style={{
@@ -519,9 +560,13 @@ export function Nav({ dark, setDark, page, setPage }) {
                       >
                         {link.sub.map((s) => (
                           <button
-                            key={s.p}
+                            key={s.p || s.category}
                             onClick={() => {
-                              setPage(s.p);
+                              if (s.category) {
+                                onCategoryNav(s.category);
+                              } else {
+                                setPage(s.p);
+                              }
                               setMenuOpen(false);
                               window.scrollTo(0, 0);
                             }}

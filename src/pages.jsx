@@ -8,6 +8,7 @@ export { ArticlePage } from "./pages/ArticlePage";
 export { EventsPage } from "./pages/EventsPage";
 export { Footer } from "./pages/Footer";
 export { CreatorCornerPage } from "./pages/CreatorCornerPage";
+export { CategoryPage } from "./pages/CategoryPage";
 
 // ===== COMPONENTS STILL TO BE EXTRACTED =====
 // These components are temporarily kept here until extraction is complete
@@ -347,14 +348,30 @@ export function HubPage({ dark, onRead, setPage }) {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {[
-                "Set up your profile",
-                "Upload your first content",
-                "Set your subscription price",
-                "Turn on Spotlight",
-                "Start promoting your page",
+                {
+                  title: "Set up your profile",
+                  link: "https://blog.luvlyfans.com/article/setup-first-impressions",
+                },
+                {
+                  title: "Upload your first content",
+                  link: "https://blog.luvlyfans.com/article/content-direction",
+                },
+                {
+                  title: "Set your subscription price",
+                  link: "https://blog.luvlyfans.com/article/get-subscribers",
+                },
+                {
+                  title: "Turn on Spotlight",
+                  link: "https://blog.luvlyfans.com/features/spotlight-global-reach",
+                },
+                {
+                  title: "Start promoting your page",
+                  link: "https://blog.luvlyfans.com/article/promote-your-profile",
+                },
               ].map((step, idx) => (
                 <div
-                  key={step}
+                  key={step.title}
+                  onClick={() => window.open(step.link, "_blank")}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -406,7 +423,7 @@ export function HubPage({ dark, onRead, setPage }) {
                       color: dark ? "rgba(255,255,255,0.9)" : "#0f0f0f",
                     }}
                   >
-                    {step}
+                    {step.title}
                   </div>
                   <div
                     style={{
@@ -784,111 +801,115 @@ export function HubPage({ dark, onRead, setPage }) {
           </div>
         </section>
 
-        {/* 7. TESTIMONIALS */}
-        <section style={{ marginBottom: 100 }}>
-          <h2
-            style={{
-              margin: "0 0 32px",
-              fontSize: 28,
-              fontWeight: 800,
-              textAlign: "center",
-              fontFamily: "'Lora', Georgia, serif",
-            }}
-          >
-            Real Feedback from Real Creators
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: 20,
-            }}
-          >
-            {[
-              {
-                name: "Luna V.",
-                text: "I didn’t know where to start before this. The first 30 days guide helped me structure everything properly.",
-                role: "Creator for 8 months",
-              },
-              {
-                name: "Alex M.",
-                text: "Using Spotlight made a difference. I started getting profile visits I wasn’t getting before.",
-                role: "Creator for 3 months",
-              },
-              {
-                name: "Kira S.",
-                text: "The pricing playbook was the most helpful thing. It kept me from guessing what people might pay.",
-                role: "Newly Launched",
-              },
-            ].map((t) => (
-              <div
-                key={t.name}
-                style={{
-                  padding: "32px",
-                  background: dark ? "rgba(255,255,255,0.03)" : "#fff",
-                  border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
-                  borderRadius: 24,
-                  position: "relative",
-                }}
-              >
+        {/* 7. TESTIMONIALS - Temporarily hidden */}
+        {false && (
+          <section style={{ marginBottom: 100 }}>
+            <h2
+              style={{
+                margin: "0 0 32px",
+                fontSize: 28,
+                fontWeight: 800,
+                textAlign: "center",
+                fontFamily: "'Lora', Georgia, serif",
+              }}
+            >
+              Real Feedback from Real Creators
+            </h2>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: 20,
+              }}
+            >
+              {[
+                {
+                  name: "Luna V.",
+                  text: "I didn’t know where to start before this. The first 30 days guide helped me structure everything properly.",
+                  role: "Creator for 8 months",
+                },
+                {
+                  name: "Alex M.",
+                  text: "Using Spotlight made a difference. I started getting profile visits I wasn’t getting before.",
+                  role: "Creator for 3 months",
+                },
+                {
+                  name: "Kira S.",
+                  text: "The pricing playbook was the most helpful thing. It kept me from guessing what people might pay.",
+                  role: "Newly Launched",
+                },
+              ].map((t) => (
                 <div
+                  key={t.name}
                   style={{
-                    fontSize: 40,
-                    position: "absolute",
-                    top: 10,
-                    right: 24,
-                    opacity: 0.1,
-                    color: "#7B51CC",
-                  }}
-                >
-                  “
-                </div>
-                <p
-                  style={{
-                    margin: "0 0 24px",
-                    fontSize: 16,
-                    color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)",
-                    lineHeight: 1.6,
+                    padding: "32px",
+                    background: dark ? "rgba(255,255,255,0.03)" : "#fff",
+                    border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+                    borderRadius: 24,
                     position: "relative",
-                    zIndex: 1,
-                    minHeight: 80,
                   }}
                 >
-                  {t.text}
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div
                     style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      background: "linear-gradient(135deg, #7B51CC, #9333ea)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 800,
-                      color: "#fff",
+                      fontSize: 40,
+                      position: "absolute",
+                      top: 10,
+                      right: 24,
+                      opacity: 0.1,
+                      color: "#7B51CC",
                     }}
                   >
-                    {t.name[0]}
+                    “
                   </div>
-                  <div>
+                  <p
+                    style={{
+                      margin: "0 0 24px",
+                      fontSize: 16,
+                      color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)",
+                      lineHeight: 1.6,
+                      position: "relative",
+                      zIndex: 1,
+                      minHeight: 80,
+                    }}
+                  >
+                    {t.text}
+                  </p>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
                     <div
                       style={{
-                        fontSize: 15,
-                        fontWeight: 700,
-                        color: dark ? "#fff" : "#0f0f0f",
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, #7B51CC, #9333ea)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontWeight: 800,
+                        color: "#fff",
                       }}
                     >
-                      {t.name}
+                      {t.name[0]}
                     </div>
-                    <div style={{ fontSize: 13, opacity: 0.5 }}>{t.role}</div>
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 15,
+                          fontWeight: 700,
+                          color: dark ? "#fff" : "#0f0f0f",
+                        }}
+                      >
+                        {t.name}
+                      </div>
+                      <div style={{ fontSize: 13, opacity: 0.5 }}>{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 8. FINAL CTA */}
         <section
@@ -1843,10 +1864,10 @@ export function EarningPage({ dark }) {
             desc: "Selling exclusive content through our high-conversion messenger system.",
           },
           {
-            title: "Live Tips",
+            title: "Tips",
             percent: "15%",
             icon: "💸",
-            desc: "Interact live and receive real-time tips during streaming or story cycles.",
+            desc: "Interact live and receive real-time tips from posts or direct messages.",
           },
           {
             title: "Referrals",
@@ -1977,8 +1998,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             {/* Mockup 1: Discovery Feed */}
             <div style={{ margin: "48px 0" }}>
               <img
-              loading="eager"
-              fetchPriority="high"
+                loading="eager"
+                fetchPriority="high"
                 src="/assets/promotions/spotlight2.png"
                 alt="Discovery Feed Mockup"
                 style={{
@@ -2117,8 +2138,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                 }}
               >
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src="/assets/promotions/spotlight3.png"
                   alt="Spotlight Activation"
                   style={{
@@ -2130,8 +2151,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                   }}
                 />
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src="/assets/promotions/spotlight4.png"
                   alt="Spotlight Confirmation"
                   style={{
@@ -2250,8 +2271,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
-              loading="eager"
-              fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/assets/promotions/Stories.png"
             alt="Stories on LuvlyFans"
             style={{
@@ -2524,8 +2545,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
-              loading="eager"
-              fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/assets/promotions/spotlight_Image.png"
             alt="Media Vault"
             style={{
@@ -2947,8 +2968,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             >
               <div style={{ height: 240, overflow: "hidden" }}>
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src={f.thumbnail}
                   alt={f.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -3038,9 +3059,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 export function FreeCreatorsPage({ dark, onRead }) {
   const data = FREE_CREATORS_DIGEST[0];
   const isMobile = useIsMobile();
-  const [isNarrow, setIsNarrow] = React.useState(
-    () => window.innerWidth < 960
-  );
+  const [isNarrow, setIsNarrow] = React.useState(() => window.innerWidth < 960);
   React.useEffect(() => {
     const h = () => setIsNarrow(window.innerWidth < 960);
     window.addEventListener("resize", h);
@@ -3213,8 +3232,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                   }
                 >
                   <img
-              loading="eager"
-              fetchPriority="high"
+                    loading="eager"
+                    fetchPriority="high"
                     src={c.image || "/assets/events/AVN2.jpeg"}
                     alt={c.name}
                     style={{
@@ -3414,7 +3433,6 @@ export function FreeCreatorsPage({ dark, onRead }) {
             paddingTop: 80,
           }}
         >
-
           {/* Related Posts */}
           <div style={{ textAlign: "left", maxWidth: 1200, margin: "0 auto" }}>
             <h2
@@ -3492,8 +3510,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                       }}
                     />
                     <img
-              loading="eager"
-              fetchPriority="high"
+                      loading="eager"
+                      fetchPriority="high"
                       src={
                         a.thumbnail ||
                         "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500"

@@ -410,7 +410,7 @@ function ArticleCard({ article, dark, onRead, featured = false }) {
               fontWeight: 700,
             }}
           >
-            🔥 Trending
+            Trending
           </div>
         )}
       </div>
@@ -1144,7 +1144,7 @@ function HomePage({ dark, onRead, setPage }) {
                   fontFamily: "'Playfair Display', Georgia, serif",
                 }}
               >
-                🔥 Trending Now
+                Trending Now
               </h2>
               <div
                 style={{
@@ -2417,7 +2417,7 @@ function Footer({ dark, setPage }) {
               }}
             >
               The creator education hub for the next generation of independent
-              earners. Learn, grow, and monetize — smarter.
+              earners. Learn, grow, and monetize smarter.
             </p>
           </div>
           {[
