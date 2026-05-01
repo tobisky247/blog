@@ -1,6 +1,7 @@
 import React from "react";
 import "./build-your-fanbase.css";
 
+export default function BuildYourFanbase() {
   return (
     <div className="article-build-fanbase">
       <p>Building a fanbase takes time.</p>

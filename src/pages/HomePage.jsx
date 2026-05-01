@@ -89,14 +89,14 @@ export function HomePage({ dark, onRead, setPage }) {
                 >
                   <img
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     src="/assets/homepage/Free accounts.png"
                     alt="Free LuvlyFans Accounts"
                   />
                   <div className="hero-overlay">
-                    <h className="hero-card-title">
+                    <h2 className="hero-card-title">
                       Free LuvlyFans Accounts to Follow in {dateLabel}
-                    </h>
+                    </h2>
                   </div>
                 </div>
               </div>
@@ -118,7 +118,7 @@ export function HomePage({ dark, onRead, setPage }) {
                 >
                   <img
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     src="/assets/promotions/spotlight_Image.png"
                     alt="The LuvlyFans Standard"
                     style={{ objectPosition: "center 30%" }}
@@ -148,7 +148,7 @@ export function HomePage({ dark, onRead, setPage }) {
                 >
                   <img
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     src="/assets/homepage/hero-26.png"
                     alt="Creator Habits"
                   />

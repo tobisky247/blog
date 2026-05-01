@@ -4,7 +4,7 @@
 export function updateMetaTags({ title, description, image, url }) {
   // Update document title (browser tab) with site name
   if (title) {
-    document.title = `${title} | LuvlyFans Blog`;
+    document.title = `${title} | LuvlyFans`;
   }
 
   // Helper to update or create meta tag
@@ -34,13 +34,23 @@ export function updateMetaTags({ title, description, image, url }) {
   }
 
   if (image) {
-    // Ensure absolute URL
-    const imageUrl = image.startsWith("http")
-      ? image
-      : `${window.location.origin}${image}`;
+    // Ensure absolute URL for OG images
+    let imageUrl;
+    if (image.startsWith("http")) {
+      imageUrl = image;
+    } else {
+      // Remove leading slash if present to avoid double slashes
+      const imagePath = image.startsWith("/") ? image : `/${image}`;
+      imageUrl = `${window.location.origin}${imagePath}`;
+    }
 
+    console.log("Setting OG image:", imageUrl); // Debug log
     updateMetaTag("og:image", imageUrl);
     updateMetaTag("twitter:image", imageUrl, true);
+
+    // Add image dimensions for better social sharing
+    updateMetaTag("og:image:width", "1200");
+    updateMetaTag("og:image:height", "630");
   }
 
   if (url) {
@@ -50,6 +60,9 @@ export function updateMetaTags({ title, description, image, url }) {
 
     updateMetaTag("og:url", fullUrl);
   }
+
+  // Always set og:type for proper social sharing
+  updateMetaTag("og:type", "article");
 
   // Update canonical link
   if (url) {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Badge, CTAButton, ArticleCard } from "../components";
+import { Badge, CTAButton, ArticleCard, ShareButton } from "../components";
 
-const CREATOR_ARTICLES = [
+export const CREATOR_ARTICLES = [
   {
     id: 1,
     slug: "trinity-infinity",
@@ -129,13 +129,27 @@ export function CreatorCornerPage({ dark, setPage }) {
                 fontSize: isMobile ? 18 : 20,
                 opacity: 0.8,
                 maxWidth: 700,
-                margin: "0 auto",
+                margin: "0 auto 24px",
                 lineHeight: 1.6,
                 fontWeight: 500,
               }}
             >
               Published April 30, 2026 • By Trinity Infinity
             </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 24,
+              }}
+            >
+              <ShareButton
+                title="In Conversation with Trinity Infinity: Finding Her Own Path and Building Connection Over Numbers"
+                text="Every creator builds differently. In this feature, we spoke with Trinity Infinity about how she got started, what's worked for her, and what she's learned along the way."
+                url={`${window.location.origin}/creator-voices/trinity-infinity`}
+                dark={dark}
+              />
+            </div>
           </div>
         </section>
 

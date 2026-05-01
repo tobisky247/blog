@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../article.css";
-import { Badge, ArticleCard, CTAButton, Icon } from "../components";
+import {
+  Badge,
+  ArticleCard,
+  CTAButton,
+  Icon,
+  ShareButton,
+} from "../components";
 import { useScrollProgress } from "../hooks";
 import { ARTICLES } from "../data";
 
@@ -237,37 +243,56 @@ export function ArticlePage({ article, dark, onBack, onRead, onCategoryNav }) {
           {article.excerpt}
         </p>
 
+        {/* Share and Author Section */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
             gap: 16,
-            padding: "20px 24px",
-            background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
-            borderRadius: 14,
-            border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
-            marginBottom: 40,
+            marginBottom: 28,
+            flexWrap: "wrap",
           }}
         >
-          <div>
-            <div
-              style={{
-                fontWeight: 700,
-                fontSize: 16,
-                color: dark ? "#fff" : "#0f0f0f",
-              }}
-            >
-              By {article.author}
-            </div>
-            <div
-              style={{
-                fontSize: 13,
-                color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
-              }}
-            >
-              {article.authorRole} · {article.readTime} read
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              padding: "20px 24px",
+              background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)",
+              borderRadius: 14,
+              border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+              flex: isMobile ? "1 1 100%" : "1",
+            }}
+          >
+            <div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: dark ? "#fff" : "#0f0f0f",
+                }}
+              >
+                By {article.author}
+              </div>
+              <div
+                style={{
+                  fontSize: 13,
+                  color: dark ? "rgba(255,255,255,0.45)" : "rgba(0,0,0,0.45)",
+                }}
+              >
+                {article.authorRole} · {article.readTime} read
+              </div>
             </div>
           </div>
+
+          <ShareButton
+            title={article.title}
+            text={article.excerpt}
+            url={`${window.location.origin}/article/${article.slug}`}
+            dark={dark}
+          />
         </div>
 
         {/* Hero Image / Banner */}
@@ -308,7 +333,7 @@ export function ArticlePage({ article, dark, onBack, onRead, onCategoryNav }) {
           {article.thumbnail ? (
             <img
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               src={article.thumbnail}
               alt={article.title}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}

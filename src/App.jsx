@@ -18,6 +18,7 @@ import {
 } from "./pages";
 import { StickyBar } from "./components";
 import { ARTICLES, FEATURES, EVENTS } from "./data";
+import { CREATOR_ARTICLES } from "./pages/CreatorCornerPage";
 import { updateMetaTags, resetMetaTags } from "./utils/metaTags";
 
 // Map page keys to URL paths
@@ -57,6 +58,7 @@ function parseURL() {
       feature: null,
       event: null,
       category: null,
+      creatorArticle: null,
     };
   }
 
@@ -74,6 +76,7 @@ function parseURL() {
       feature: null,
       event: null,
       category,
+      creatorArticle: null,
     };
   }
 
@@ -86,6 +89,7 @@ function parseURL() {
       feature: feature ? feature.id : null,
       event: null,
       category: null,
+      creatorArticle: null,
     };
   }
 
@@ -98,22 +102,35 @@ function parseURL() {
       feature: null,
       event: eventObj ? eventObj.id : null,
       category: null,
+      creatorArticle: null,
     };
   }
 
   if (path.startsWith("/creator-voices/")) {
+    const slug = path.replace("/creator-voices/", "");
+    const creatorArticle = slug
+      ? CREATOR_ARTICLES.find((a) => a.slug === slug)
+      : null;
     return {
       page: "creator-voices",
       article: null,
       feature: null,
       event: null,
       category: null,
+      creatorArticle: creatorArticle || null,
     };
   }
 
   const page = PATH_TO_PAGE[path];
   if (page) {
-    return { page, article: null, feature: null, event: null, category: null };
+    return {
+      page,
+      article: null,
+      feature: null,
+      event: null,
+      category: null,
+      creatorArticle: null,
+    };
   }
 
   return {
@@ -122,6 +139,7 @@ function parseURL() {
     feature: null,
     event: null,
     category: null,
+    creatorArticle: null,
   };
 }
 
@@ -133,6 +151,7 @@ export default function App() {
   const [selectedFeature, setSelectedFeature] = useState(initial.feature);
   const [selectedEvent, setSelectedEvent] = useState(initial.event);
   const [category, setCategory] = useState(initial.category);
+  const [creatorArticle, setCreatorArticle] = useState(initial.creatorArticle);
 
   // Push URL when navigating to a page
   const handleNav = useCallback((p) => {
@@ -238,17 +257,25 @@ export default function App() {
       }
     } else if (page === "creator-voices") {
       // Update meta tags for creator voices
-      const creatorVoicesArticles = ARTICLES.filter(
-        (a) => a.category === "Creator Voices",
-      );
-      const firstArticle = creatorVoicesArticles[0];
-      updateMetaTags({
-        title: "Creator Voices",
-        description:
-          "Real stories and insights from creators building on LuvlyFans.",
-        image: firstArticle?.thumbnail || "/og-image.png",
-        url: "/creator-voices",
-      });
+      if (creatorArticle) {
+        // Individual creator article
+        updateMetaTags({
+          title: creatorArticle.title,
+          description: creatorArticle.excerpt,
+          image: creatorArticle.thumbnail,
+          url: `/creator-voices/${creatorArticle.slug}`,
+        });
+      } else {
+        // Creator voices listing page
+        const firstArticle = CREATOR_ARTICLES[0];
+        updateMetaTags({
+          title: "Creator Voices",
+          description:
+            "Real stories and insights from creators building on LuvlyFans.",
+          image: firstArticle?.thumbnail || "/og-image.png",
+          url: "/creator-voices",
+        });
+      }
     } else if (page === "category" && category) {
       // Update meta tags for category
       const categoryArticles = ARTICLES.filter((a) => a.category === category);
@@ -263,7 +290,7 @@ export default function App() {
       // Reset to default for other pages
       resetMetaTags();
     }
-  }, [page, article, selectedEvent, category]);
+  }, [page, article, selectedEvent, category, creatorArticle]);
 
   // Handle browser back/forward buttons
   useEffect(() => {
@@ -274,12 +301,14 @@ export default function App() {
         feature: f,
         event: e,
         category: c,
+        creatorArticle: ca,
       } = parseURL();
       setPage(p);
       setArticle(a);
       setSelectedFeature(f);
       setSelectedEvent(e);
       setCategory(c);
+      setCreatorArticle(ca);
       window.scrollTo(0, 0);
     };
     window.addEventListener("popstate", onPopState);
@@ -293,35 +322,6 @@ export default function App() {
     );
     document.body.style.background = dark ? "#090909" : "#f8f8f6";
   }, [dark]);
-
-  // Update meta tags on page change
-  useEffect(() => {
-    const metaDescription = {
-      home: "Welcome to our website. Explore our features, events, and articles.",
-      article: article ? article.excerpt : "",
-      features: "Discover our features.",
-      events: "Check out our events.",
-      "getting-started": "Get started with our platform.",
-      earning: "Learn how to earn with us.",
-      "free-creators": "Explore content from our free creators.",
-      mission: "Learn about our mission.",
-      contact: "Get in touch with us.",
-      "creator-voices": "Read stories from our creators.",
-      "category-make-money": "Articles and resources on making money.",
-      "category-growth": "Articles and resources on growth.",
-      "category-guides": "Guides and tutorials.",
-    }[page];
-
-    updateMetaTags({
-      title: `Page - ${page.charAt(0).toUpperCase() + page.slice(1)}`,
-      description: metaDescription,
-      // Add more meta tags as needed
-    });
-
-    return () => {
-      resetMetaTags();
-    };
-  }, [page, article]);
 
   return (
     <div
