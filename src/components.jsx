@@ -252,7 +252,7 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
               src={article.thumbnail}
               alt={article.title}
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               style={{
                 position: "absolute",
                 inset: 0,
@@ -592,6 +592,262 @@ export function StickyBar({ dark, onNavigate }) {
       >
         Start Your Page
       </CTAButton>
+    </div>
+  );
+}
+
+export function ShareButton({ title, text, url, dark, style = {} }) {
+  const [copied, setCopied] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const isMobile = useIsMobile(800);
+
+  const handleShare = () => {
+    // Always show our custom menu (desktop and mobile)
+    setShowMenu(!showMenu);
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(url || window.location.href);
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+        setShowMenu(false);
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  const shareToTwitter = () => {
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text || title || "")}&url=${encodeURIComponent(url || window.location.href)}`;
+    window.open(tweetUrl, "_blank", "width=550,height=420");
+    setShowMenu(false);
+  };
+
+  const shareToFacebook = () => {
+    const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url || window.location.href)}`;
+    window.open(fbUrl, "_blank", "width=550,height=420");
+    setShowMenu(false);
+  };
+
+  const shareToLinkedIn = () => {
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url || window.location.href)}`;
+    window.open(linkedInUrl, "_blank", "width=550,height=420");
+    setShowMenu(false);
+  };
+
+  useEffect(() => {
+    if (showMenu) {
+      const handleClick = (e) => {
+        if (!e.target.closest(".share-menu")) {
+          setShowMenu(false);
+        }
+      };
+      document.addEventListener("click", handleClick);
+      return () => document.removeEventListener("click", handleClick);
+    }
+  }, [showMenu]);
+
+  return (
+    <div style={{ position: "relative", ...style }} className="share-menu">
+      <button
+        onClick={handleShare}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.04)",
+          border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}`,
+          color: dark ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.8)",
+          padding: "10px 18px",
+          borderRadius: 99,
+          fontSize: 14,
+          fontWeight: 600,
+          cursor: "pointer",
+          transition: "all 0.2s",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = dark
+            ? "rgba(255,255,255,0.12)"
+            : "rgba(0,0,0,0.06)";
+          e.currentTarget.style.borderColor = dark
+            ? "rgba(255,255,255,0.2)"
+            : "rgba(0,0,0,0.12)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = dark
+            ? "rgba(255,255,255,0.08)"
+            : "rgba(0,0,0,0.04)";
+          e.currentTarget.style.borderColor = dark
+            ? "rgba(255,255,255,0.12)"
+            : "rgba(0,0,0,0.08)";
+        }}
+      >
+        <Icon name="share" size={16} color={dark ? "#fff" : "#0f0f0f"} />
+        <span>Share</span>
+      </button>
+
+      {/* Share Menu */}
+      {showMenu && (
+        <div
+          style={{
+            position: isMobile ? "fixed" : "absolute",
+            top: isMobile ? "auto" : "calc(100% + 8px)",
+            bottom: isMobile ? "80px" : "auto",
+            left: isMobile ? "50%" : "auto",
+            right: isMobile ? "auto" : 0,
+            transform: isMobile ? "translateX(-50%)" : "none",
+            background: dark ? "#1a1a1a" : "#fff",
+            border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)"}`,
+            borderRadius: 20,
+            padding: 10,
+            minWidth: 280,
+            width: isMobile ? "calc(100vw - 40px)" : "auto",
+            maxWidth: isMobile ? 400 : 320,
+            boxShadow: dark
+              ? "0 12px 40px rgba(0,0,0,0.5)"
+              : "0 8px 32px rgba(0,0,0,0.12)",
+            zIndex: 1000,
+          }}
+        >
+          <button
+            onClick={shareToTwitter}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              padding: "12px 14px",
+              background: "none",
+              border: "none",
+              color: dark ? "#fff" : "#0f0f0f",
+              fontSize: 15,
+              fontWeight: 500,
+              cursor: "pointer",
+              borderRadius: 10,
+              textAlign: "left",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = dark
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(0,0,0,0.04)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "none";
+            }}
+          >
+            <Icon name="x" size={20} color={dark ? "#fff" : "#0f0f0f"} />
+            <span>Share on X</span>
+          </button>
+          <button
+            onClick={shareToFacebook}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              padding: "12px 14px",
+              background: "none",
+              border: "none",
+              color: dark ? "#fff" : "#0f0f0f",
+              fontSize: 15,
+              fontWeight: 500,
+              cursor: "pointer",
+              borderRadius: 10,
+              textAlign: "left",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = dark
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(0,0,0,0.04)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "none";
+            }}
+          >
+            <Icon
+              name="facebook 01"
+              size={20}
+              color={dark ? "#fff" : "#0f0f0f"}
+            />
+            <span>Share on Facebook</span>
+          </button>
+          <button
+            onClick={shareToLinkedIn}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              padding: "12px 14px",
+              background: "none",
+              border: "none",
+              color: dark ? "#fff" : "#0f0f0f",
+              fontSize: 15,
+              fontWeight: 500,
+              cursor: "pointer",
+              borderRadius: 10,
+              textAlign: "left",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = dark
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(0,0,0,0.04)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "none";
+            }}
+          >
+            <Icon name="linkedln" size={20} color={dark ? "#fff" : "#0f0f0f"} />
+            <span>Share on LinkedIn</span>
+          </button>
+          <div
+            style={{
+              height: 1,
+              background: dark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
+              margin: "6px 8px",
+            }}
+          />
+          <button
+            onClick={copyLink}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              padding: "12px 14px",
+              background: "none",
+              border: "none",
+              color: copied ? "#7B51CC" : dark ? "#fff" : "#0f0f0f",
+              fontSize: 15,
+              fontWeight: 500,
+              cursor: "pointer",
+              borderRadius: 10,
+              textAlign: "left",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = dark
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(0,0,0,0.04)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "none";
+            }}
+          >
+            <Icon
+              name={copied ? "check-circle" : "link"}
+              size={20}
+              color={copied ? "#7B51CC" : dark ? "#fff" : "#0f0f0f"}
+            />
+            <span>{copied ? "Link copied!" : "Copy link"}</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../events.css";
-import { Badge } from "../components";
+import { Badge, ShareButton } from "../components";
 import { EVENTS } from "../data";
 
 function useIsMobile() {
@@ -93,13 +93,27 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 fontSize: isMobile ? 18 : 20,
                 opacity: 0.8,
                 maxWidth: 700,
-                margin: "0 auto",
+                margin: "0 auto 24px",
                 lineHeight: 1.6,
                 fontWeight: 500,
               }}
             >
               Real-world creator spaces are the foundation of community.
             </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 24,
+              }}
+            >
+              <ShareButton
+                title="Beyond the Screen: Real-World Experiences"
+                text="Real-world creator spaces are the foundation of community."
+                url={`${window.location.origin}/events/lustful-events-introduction`}
+                dark={dark}
+              />
+            </div>
           </div>
         </section>
 
@@ -115,7 +129,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
         >
           <img
             loading="eager"
-            fetchPriority="high"
+            fetchpriority="high"
             src="/assets/creators/Loulalou.png"
             alt="CEO Lou - Lustful Events"
             style={{
@@ -185,7 +199,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 >
                   <img
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
@@ -499,13 +513,27 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 fontSize: isMobile ? 18 : 20,
                 opacity: 0.8,
                 maxWidth: 700,
-                margin: "0 auto",
+                margin: "0 auto 24px",
                 lineHeight: 1.6,
                 fontWeight: 500,
               }}
             >
               The Future of Creator Community
             </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 24,
+              }}
+            >
+              <ShareButton
+                title="LuvlyFans @ the AVN"
+                text="The Future of Creator Community"
+                url={`${window.location.origin}/events/avn-celebrating-creators`}
+                dark={dark}
+              />
+            </div>
           </div>
         </section>
 
@@ -533,7 +561,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           >
             <img
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               src="/assets/events/Quietlyvae.avn.jpeg"
               alt="LuvlyFans @ AVN"
               style={{
@@ -651,7 +679,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 >
                   <img
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                     src={p.src}
                     alt={p.alt}
                     style={{
@@ -893,13 +921,27 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 fontSize: isMobile ? 18 : 20,
                 opacity: 0.8,
                 maxWidth: 700,
-                margin: "0 auto",
+                margin: "0 auto 24px",
                 lineHeight: 1.6,
                 fontWeight: 500,
               }}
             >
               Building relationships over reach in relaxed spaces.
             </p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: 24,
+              }}
+            >
+              <ShareButton
+                title="QuietlyVae represents Luvlyfans at Creators After Dark"
+                text="Building relationships over reach in relaxed spaces."
+                url={`${window.location.origin}/events/quietlyvae-creators-after-dark`}
+                dark={dark}
+              />
+            </div>
           </div>
         </section>
 
@@ -927,7 +969,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           >
             <img
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               src="/assets/events/creators_after_dark2.jpeg"
               alt="Creators After Dark"
               style={{
@@ -1300,7 +1342,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               >
                 <img
                   loading="eager"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   src={event.thumbnail}
                   alt={event.title}
                   style={{
