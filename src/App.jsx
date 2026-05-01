@@ -18,6 +18,7 @@ import {
 } from "./pages";
 import { StickyBar } from "./components";
 import { ARTICLES, FEATURES, EVENTS } from "./data";
+import { updateMetaTags, resetMetaTags } from "./utils/metaTags";
 
 // Map page keys to URL paths
 const PAGE_TO_PATH = {
@@ -214,6 +215,56 @@ export default function App() {
     handleNav("home");
   }, [handleNav]);
 
+  // Update meta tags when page content changes
+  useEffect(() => {
+    if (page === "article" && article) {
+      // Update meta tags for article
+      updateMetaTags({
+        title: article.title,
+        description: article.excerpt,
+        image: article.thumbnail,
+        url: `/article/${article.slug}`,
+      });
+    } else if (page === "events" && selectedEvent) {
+      // Update meta tags for event
+      const event = EVENTS.find((e) => e.id === selectedEvent);
+      if (event) {
+        updateMetaTags({
+          title: event.title,
+          description: event.excerpt,
+          image: event.thumbnail,
+          url: `/events/${event.slug}`,
+        });
+      }
+    } else if (page === "creator-voices") {
+      // Update meta tags for creator voices
+      const creatorVoicesArticles = ARTICLES.filter(
+        (a) => a.category === "Creator Voices",
+      );
+      const firstArticle = creatorVoicesArticles[0];
+      updateMetaTags({
+        title: "Creator Voices",
+        description:
+          "Real stories and insights from creators building on LuvlyFans.",
+        image: firstArticle?.thumbnail || "/og-image.png",
+        url: "/creator-voices",
+      });
+    } else if (page === "category" && category) {
+      // Update meta tags for category
+      const categoryArticles = ARTICLES.filter((a) => a.category === category);
+      const firstArticle = categoryArticles[0];
+      updateMetaTags({
+        title: category,
+        description: `Browse all ${category} articles and guides.`,
+        image: firstArticle?.thumbnail || "/og-image.png",
+        url: `/category/${category.toLowerCase().replace(/ /g, "-")}`,
+      });
+    } else {
+      // Reset to default for other pages
+      resetMetaTags();
+    }
+  }, [page, article, selectedEvent, category]);
+
   // Handle browser back/forward buttons
   useEffect(() => {
     const onPopState = () => {
@@ -242,6 +293,35 @@ export default function App() {
     );
     document.body.style.background = dark ? "#090909" : "#f8f8f6";
   }, [dark]);
+
+  // Update meta tags on page change
+  useEffect(() => {
+    const metaDescription = {
+      home: "Welcome to our website. Explore our features, events, and articles.",
+      article: article ? article.excerpt : "",
+      features: "Discover our features.",
+      events: "Check out our events.",
+      "getting-started": "Get started with our platform.",
+      earning: "Learn how to earn with us.",
+      "free-creators": "Explore content from our free creators.",
+      mission: "Learn about our mission.",
+      contact: "Get in touch with us.",
+      "creator-voices": "Read stories from our creators.",
+      "category-make-money": "Articles and resources on making money.",
+      "category-growth": "Articles and resources on growth.",
+      "category-guides": "Guides and tutorials.",
+    }[page];
+
+    updateMetaTags({
+      title: `Page - ${page.charAt(0).toUpperCase() + page.slice(1)}`,
+      description: metaDescription,
+      // Add more meta tags as needed
+    });
+
+    return () => {
+      resetMetaTags();
+    };
+  }, [page, article]);
 
   return (
     <div

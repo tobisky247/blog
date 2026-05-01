@@ -3105,8 +3105,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
               position: "absolute",
               inset: 0,
               backgroundImage: `url("${data.hero}")`,
-              backgroundSize: "contain",
-              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundPosition: "center top",
               backgroundRepeat: "no-repeat",
               filter: "brightness(0.85)",
             }}

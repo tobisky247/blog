@@ -621,9 +621,25 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
                         fontWeight: 700,
                         marginBottom: 5,
                         cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
                       }}
                     >
-                      {link.label}
+                      <span>{link.label}</span>
+                      {(link.p === "events" || link.p === "creator-voices") && (
+                        <Icon
+                          name="direction-right 01"
+                          size={20}
+                          color={
+                            page === link.p
+                              ? "#7B51CC"
+                              : dark
+                                ? "rgba(255,255,255,0.5)"
+                                : "rgba(0,0,0,0.5)"
+                          }
+                        />
+                      )}
                     </button>
                   )}
                 </div>
