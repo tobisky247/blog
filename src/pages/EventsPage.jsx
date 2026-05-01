@@ -27,26 +27,29 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
     return (
       <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
-        <button
-          onClick={() => {
-            setSelectedEvent(null);
-            window.scrollTo(0, 0);
-          }}
-          style={{
-            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
-            background: "none",
-            border: "none",
-            color: "#7B51CC",
-            fontWeight: 700,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 14,
-          }}
-        >
-          ← Back to Events
-        </button>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 5vw" }}>
+          <button
+            onClick={() => {
+              setSelectedEvent(null);
+              window.scrollTo(0, 0);
+            }}
+            style={{
+              margin: isMobile ? "40px 0 0" : "40px 0 0",
+              background: "none",
+              border: "none",
+              color: "#7B51CC",
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 15,
+              padding: "12px 0",
+            }}
+          >
+            ← Back to Events
+          </button>
+        </div>
 
         {/* Hero */}
         <section
@@ -111,14 +114,15 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
           }}
         >
           <img
-              loading="eager"
-              fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/assets/creators/Loulalou.png"
             alt="CEO Lou - Lustful Events"
             style={{
               width: "100%",
-              height: isMobile ? 300 : 500,
+              height: isMobile ? 400 : 600,
               objectFit: "cover",
+              objectPosition: "center top",
               borderRadius: isMobile ? 24 : 32,
               boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
               border: `2px solid ${dark ? "rgba(255,255,255,0.1)" : "#fff"}`,
@@ -176,6 +180,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     overflow: "hidden",
                     aspectRatio: isMobile ? "4/5" : "3/4",
                     background: "#111",
+                    display: "flex",
                   }}
                 >
                   <img
@@ -187,6 +192,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
+                      objectPosition: "center",
                     }}
                   />
                 </div>
@@ -428,26 +434,29 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
 
     return (
       <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
-        <button
-          onClick={() => {
-            setSelectedEvent(null);
-            window.scrollTo(0, 0);
-          }}
-          style={{
-            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
-            background: "none",
-            border: "none",
-            color: "#7B51CC",
-            fontWeight: 700,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 14,
-          }}
-        >
-          ← Back to Events
-        </button>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 5vw" }}>
+          <button
+            onClick={() => {
+              setSelectedEvent(null);
+              window.scrollTo(0, 0);
+            }}
+            style={{
+              margin: isMobile ? "40px 0 0" : "40px 0 0",
+              background: "none",
+              border: "none",
+              color: "#7B51CC",
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 15,
+              padding: "12px 0",
+            }}
+          >
+            ← Back to Events
+          </button>
+        </div>
 
         {/* Hero */}
         <section
@@ -483,8 +492,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 letterSpacing: "-0.03em",
               }}
             >
-              LuvlyFans @ the{" "}
-              <span style={{ color: "#7B51CC" }}>AVN </span>
+              LuvlyFans @ the <span style={{ color: "#7B51CC" }}>AVN </span>
             </h1>
             <p
               style={{
@@ -515,7 +523,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             style={{
               position: "relative",
               width: "100%",
-              height: isMobile ? 300 : 500,
+              height: isMobile ? 400 : 600,
               borderRadius: isMobile ? 24 : 32,
               overflow: "hidden",
               boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
@@ -524,28 +532,15 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             }}
           >
             <img
-              src="/assets/events/Quietlyvae.avn.jpeg"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                filter: "blur(40px) brightness(0.6)",
-                transform: "scale(1.1)",
-              }}
-            />
-            <img
               loading="eager"
               fetchPriority="high"
               src="/assets/events/Quietlyvae.avn.jpeg"
               alt="LuvlyFans @ AVN"
               style={{
-                position: "relative",
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
-                zIndex: 1,
+                objectFit: "cover",
+                objectPosition: "center top",
               }}
             />
           </div>
@@ -570,26 +565,69 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               color: dark ? "rgba(255,255,255,0.8)" : "#2a2a2a",
             }}
           >
-            <p>Every industry has moments where everything comes together in one place.</p>
-            <p>For the creator space, one of those moments is AVN in Las Vegas.</p>
-            <p>It’s where creators, platforms, brands, and audiences meet in real life. Conversations happen faster, ideas move quicker, and you get a clearer sense of where things are heading.</p>
-            <p>This year, LuvlyFans was part of that environment, with QuietlyVae in attendance representing the platform.</p>
+            <p>
+              Every industry has moments where everything comes together in one
+              place.
+            </p>
+            <p>
+              For the creator space, one of those moments is AVN in Las Vegas.
+            </p>
+            <p>
+              It’s where creators, platforms, brands, and audiences meet in real
+              life. Conversations happen faster, ideas move quicker, and you get
+              a clearer sense of where things are heading.
+            </p>
+            <p>
+              This year, LuvlyFans was part of that environment, with QuietlyVae
+              in attendance representing the platform.
+            </p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What AVN Represents</h3>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              What AVN Represents
+            </h3>
             <p>AVN isn’t just about visibility.</p>
             <p>It represents scale.</p>
-            <p>Creators from different countries, different stages, and different styles all come together. You see:</p>
+            <p>
+              Creators from different countries, different stages, and different
+              styles all come together. You see:
+            </p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
               <li>Established creators running structured businesses</li>
               <li>New creators finding their direction</li>
               <li>Platforms competing for attention</li>
               <li>Trends forming in real time</li>
             </ul>
-            <p>It gives a wider view of the creator economy beyond what you see online.</p>
+            <p>
+              It gives a wider view of the creator economy beyond what you see
+              online.
+            </p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Being Present Through Creators</h3>
-            <p>Rather than approaching the event as a platform looking in, we chose to be present through creators already part of the space.</p>
-            <p>QuietlyVae attending AVN gave us a grounded way to stay connected to what’s actually happening on the ground. Real conversations, real interactions, and real feedback.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Being Present Through Creators
+            </h3>
+            <p>
+              Rather than approaching the event as a platform looking in, we
+              chose to be present through creators already part of the space.
+            </p>
+            <p>
+              QuietlyVae attending AVN gave us a grounded way to stay connected
+              to what’s actually happening on the ground. Real conversations,
+              real interactions, and real feedback.
+            </p>
             <p>That kind of presence matters more than just visibility.</p>
 
             <div
@@ -608,6 +646,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     overflow: "hidden",
                     aspectRatio: isMobile ? "4/5" : "3/4",
                     background: "#111",
+                    display: "flex",
                   }}
                 >
                   <img
@@ -619,15 +658,34 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
+                      objectPosition: "center",
                     }}
                   />
                 </div>
               ))}
             </div>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What Stood Out</h3>
-            
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Creators Are Thinking Long-Term</h4>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              What Stood Out
+            </h3>
+
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              Creators Are Thinking Long-Term
+            </h4>
             <p>The focus isn’t just on quick wins.</p>
             <p>More creators are thinking about:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
@@ -637,12 +695,33 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             </ul>
             <p>The mindset is shifting toward sustainability.</p>
 
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Visibility Is Still a Major Topic</h4>
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              Visibility Is Still a Major Topic
+            </h4>
             <p>Even at a global event, one thing is consistent.</p>
             <p>Getting seen is still a challenge.</p>
-            <p>It reinforces how important discovery tools are. Content alone isn’t always enough without visibility.</p>
+            <p>
+              It reinforces how important discovery tools are. Content alone
+              isn’t always enough without visibility.
+            </p>
 
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>The Space Is Becoming More Structured</h4>
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              The Space Is Becoming More Structured
+            </h4>
             <p>Creators are becoming more organised in how they work.</p>
             <p>They’re:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
@@ -652,8 +731,20 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             </ul>
             <p>This shift is changing expectations across the industry.</p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
-            <p>Being present at AVN, through creators like QuietlyVae, helps us stay connected to the reality of the space.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Why This Matters for LuvlyFans
+            </h3>
+            <p>
+              Being present at AVN, through creators like QuietlyVae, helps us
+              stay connected to the reality of the space.
+            </p>
             <p>It reinforces a few key things:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
               <li>Simplicity matters</li>
@@ -662,14 +753,43 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             </ul>
             <p>These are the areas that shape real outcomes for creators.</p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Looking Ahead</h3>
-            <p>The creator space is growing, but it’s also becoming more focused.</p>
-            <p>Events like AVN highlight that shift clearly. More structure, more intention, and more awareness of long-term growth.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Looking Ahead
+            </h3>
+            <p>
+              The creator space is growing, but it’s also becoming more focused.
+            </p>
+            <p>
+              Events like AVN highlight that shift clearly. More structure, more
+              intention, and more awareness of long-term growth.
+            </p>
             <p>That’s the direction we’re building towards.</p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Final Thoughts</h3>
-            <p>AVN is a reminder that the creator world is bigger than any one platform.</p>
-            <p>It’s built on people, conversations, and shared experience. Being present, even through creators, helps us understand that better.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Final Thoughts
+            </h3>
+            <p>
+              AVN is a reminder that the creator world is bigger than any one
+              platform.
+            </p>
+            <p>
+              It’s built on people, conversations, and shared experience. Being
+              present, even through creators, helps us understand that better.
+            </p>
             <p>We’re glad to be part of that journey.</p>
           </div>
         </section>
@@ -677,38 +797,59 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
     );
   }
 
-    if (selectedEvent === 5) {
+  if (selectedEvent === 5) {
     const afterDarkPhotos = [
-      { src: "/assets/events/creators_after_dark1.jpeg", alt: "Creators After Dark 1" },
-      { src: "/assets/events/creators_after_dark.jpeg", alt: "Creators After Dark 2" },
-      { src: "/assets/events/creators_after_dark7.jpeg", alt: "Creators After Dark 3" },
-      { src: "/assets/events/creators_after_dark6.jpeg", alt: "Creators After Dark 4" },
-      { src: "/assets/events/creators_after_dark5.jpeg", alt: "Creators After Dark 5" },
-      { src: "/assets/events/creators_after_dark4.jpeg", alt: "Creators After Dark 6" },
+      {
+        src: "/assets/events/creators_after_dark1.jpeg",
+        alt: "Creators After Dark 1",
+      },
+      {
+        src: "/assets/events/creators_after_dark.jpeg",
+        alt: "Creators After Dark 2",
+      },
+      {
+        src: "/assets/events/creators_after_dark7.jpeg",
+        alt: "Creators After Dark 3",
+      },
+      {
+        src: "/assets/events/creators_after_dark6.jpeg",
+        alt: "Creators After Dark 4",
+      },
+      {
+        src: "/assets/events/creators_after_dark5.jpeg",
+        alt: "Creators After Dark 5",
+      },
+      {
+        src: "/assets/events/creators_after_dark4.jpeg",
+        alt: "Creators After Dark 6",
+      },
     ];
 
     return (
       <div style={{ paddingBottom: isMobile ? 60 : 100 }}>
-        <button
-          onClick={() => {
-            setSelectedEvent(null);
-            window.scrollTo(0, 0);
-          }}
-          style={{
-            margin: isMobile ? "24px 5vw 0" : "24px 5vw",
-            background: "none",
-            border: "none",
-            color: "#7B51CC",
-            fontWeight: 700,
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: 8,
-            fontSize: 15,
-          }}
-        >
-          ← Back to Events
-        </button>
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 5vw" }}>
+          <button
+            onClick={() => {
+              setSelectedEvent(null);
+              window.scrollTo(0, 0);
+            }}
+            style={{
+              margin: isMobile ? "40px 0 0" : "40px 0 0",
+              background: "none",
+              border: "none",
+              color: "#7B51CC",
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              fontSize: 15,
+              padding: "12px 0",
+            }}
+          >
+            ← Back to Events
+          </button>
+        </div>
 
         {/* Hero Banner */}
         <section
@@ -776,7 +917,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             style={{
               position: "relative",
               width: "100%",
-              height: isMobile ? 300 : 500,
+              height: isMobile ? 400 : 600,
               borderRadius: isMobile ? 24 : 32,
               overflow: "hidden",
               boxShadow: "0 40px 100px rgba(0,0,0,0.3)",
@@ -785,28 +926,15 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             }}
           >
             <img
-              src="/assets/events/creators_after_dark2.jpeg"
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                filter: "blur(40px) brightness(0.6)",
-                transform: "scale(1.1)",
-              }}
-            />
-            <img
               loading="eager"
               fetchPriority="high"
               src="/assets/events/creators_after_dark2.jpeg"
               alt="Creators After Dark"
               style={{
-                position: "relative",
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
-                zIndex: 1,
+                objectFit: "cover",
+                objectPosition: "center top",
               }}
             />
           </div>
@@ -832,13 +960,33 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             }}
           >
             <p>Not every important conversation happens on a stage.</p>
-            <p>Some happen in more relaxed spaces. Smaller settings where creators can speak openly, connect naturally, and share experiences without pressure.</p>
+            <p>
+              Some happen in more relaxed spaces. Smaller settings where
+              creators can speak openly, connect naturally, and share
+              experiences without pressure.
+            </p>
             <p>Creators After Dark is one of those spaces.</p>
-            <p>LuvlyFans was present through QuietlyVae, who attended and represented the platform within that environment.</p>
+            <p>
+              LuvlyFans was present through QuietlyVae, who attended and
+              represented the platform within that environment.
+            </p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>A Different Kind of Event</h3>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              A Different Kind of Event
+            </h3>
             <p>Creators After Dark feels different from larger events.</p>
-            <p>It’s less structured, more personal, and more focused on connection than visibility. Conversations flow more naturally, and people tend to speak more openly about their experiences.</p>
+            <p>
+              It’s less structured, more personal, and more focused on
+              connection than visibility. Conversations flow more naturally, and
+              people tend to speak more openly about their experiences.
+            </p>
             <p>That difference matters.</p>
 
             <div
@@ -857,42 +1005,48 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     overflow: "hidden",
                     aspectRatio: isMobile ? "4/5" : "3/4",
                     background: "#111",
-                    position: "relative",
+                    display: "flex",
                   }}
                 >
-                  <img
-                    src={p.src}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: "blur(20px)",
-                      opacity: 0.6,
-                      transform: "scale(1.1)",
-                    }}
-                  />
                   <img
                     loading="lazy"
                     src={p.src}
                     alt={p.alt}
                     style={{
-                      position: "relative",
                       width: "100%",
                       height: "100%",
-                      objectFit: "contain",
-                      zIndex: 1,
+                      objectFit: "cover",
+                      objectPosition: "center",
                     }}
                   />
                 </div>
               ))}
             </div>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>What Stood Out</h3>
-            
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Conversations Were More Honest</h4>
-            <p>In a more relaxed setting, creators tend to speak more freely.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              What Stood Out
+            </h3>
+
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              Conversations Were More Honest
+            </h4>
+            <p>
+              In a more relaxed setting, creators tend to speak more freely.
+            </p>
             <p>Topics that came up included:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
               <li>Income stability</li>
@@ -902,7 +1056,16 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
             </ul>
             <p>There’s less filtering, and more honesty.</p>
 
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Relationships Over Reach</h4>
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              Relationships Over Reach
+            </h4>
             <p>The focus wasn’t on numbers.</p>
             <p>It was on:</p>
             <ul style={{ margin: "20px 0 20px 20px" }}>
@@ -910,7 +1073,9 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               <li>Who you trust</li>
               <li>Who you can collaborate with</li>
             </ul>
-            <p>These relationships often shape growth just as much as visibility.</p>
+            <p>
+              These relationships often shape growth just as much as visibility.
+            </p>
 
             <div
               style={{
@@ -928,45 +1093,63 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     overflow: "hidden",
                     aspectRatio: isMobile ? "4/5" : "3/4",
                     background: "#111",
-                    position: "relative",
+                    display: "flex",
                   }}
                 >
-                  <img
-                    src={p.src}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: "blur(20px)",
-                      opacity: 0.6,
-                      transform: "scale(1.1)",
-                    }}
-                  />
                   <img
                     loading="lazy"
                     src={p.src}
                     alt={p.alt}
                     style={{
-                      position: "relative",
                       width: "100%",
                       height: "100%",
-                      objectFit: "contain",
-                      zIndex: 1,
+                      objectFit: "cover",
+                      objectPosition: "center",
                     }}
                   />
                 </div>
               ))}
             </div>
 
-            <h4 style={{ fontSize: 22, fontWeight: 700, marginTop: 30, marginBottom: 15 }}>Shared Experiences Matter</h4>
-            <p>Even though creators come from different backgrounds, many of the challenges are similar.</p>
-            <p>Hearing those shared experiences in person creates a different level of understanding. It reinforces that most creators are figuring things out as they go, not following a fixed path.</p>
+            <h4
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginTop: 30,
+                marginBottom: 15,
+              }}
+            >
+              Shared Experiences Matter
+            </h4>
+            <p>
+              Even though creators come from different backgrounds, many of the
+              challenges are similar.
+            </p>
+            <p>
+              Hearing those shared experiences in person creates a different
+              level of understanding. It reinforces that most creators are
+              figuring things out as they go, not following a fixed path.
+            </p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Why This Matters for LuvlyFans</h3>
-            <p>Being present in spaces like this, through creators like QuietlyVae, helps us stay connected to the reality of the creator journey.</p>
-            <p>Not just the visible side, but the conversations that don’t always make it online.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Why This Matters for LuvlyFans
+            </h3>
+            <p>
+              Being present in spaces like this, through creators like
+              QuietlyVae, helps us stay connected to the reality of the creator
+              journey.
+            </p>
+            <p>
+              Not just the visible side, but the conversations that don’t always
+              make it online.
+            </p>
 
             <div
               style={{
@@ -984,32 +1167,18 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                     overflow: "hidden",
                     aspectRatio: isMobile ? "4/5" : "3/4",
                     background: "#111",
-                    position: "relative",
+                    display: "flex",
                   }}
                 >
-                  <img
-                    src={p.src}
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      filter: "blur(20px)",
-                      opacity: 0.6,
-                      transform: "scale(1.1)",
-                    }}
-                  />
                   <img
                     loading="lazy"
                     src={p.src}
                     alt={p.alt}
                     style={{
-                      position: "relative",
                       width: "100%",
                       height: "100%",
-                      objectFit: "contain",
-                      zIndex: 1,
+                      objectFit: "cover",
+                      objectPosition: "center",
                     }}
                   />
                 </div>
@@ -1023,15 +1192,42 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
               <li>Support</li>
             </ul>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Looking Ahead</h3>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Looking Ahead
+            </h3>
             <p>Not every insight comes from large events.</p>
-            <p>Sometimes the smaller, more personal environments give a clearer picture of what’s really happening in the space.</p>
+            <p>
+              Sometimes the smaller, more personal environments give a clearer
+              picture of what’s really happening in the space.
+            </p>
             <p>That perspective is just as important.</p>
 
-            <h3 style={{ fontSize: 28, fontWeight: 800, marginTop: 40, color: "#7B51CC" }}>Final Thoughts</h3>
-            <p>Creators After Dark is a reminder that the creator world isn’t just about platforms or content.</p>
+            <h3
+              style={{
+                fontSize: 28,
+                fontWeight: 800,
+                marginTop: 40,
+                color: "#7B51CC",
+              }}
+            >
+              Final Thoughts
+            </h3>
+            <p>
+              Creators After Dark is a reminder that the creator world isn’t
+              just about platforms or content.
+            </p>
             <p>It’s about people, conversations, and shared experiences.</p>
-            <p>Being present in those spaces helps us build with more awareness and intention.</p>
+            <p>
+              Being present in those spaces helps us build with more awareness
+              and intention.
+            </p>
           </div>
         </section>
       </div>
@@ -1094,33 +1290,24 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
-              <div style={{ height: isMobile ? 200 : 240, overflow: "hidden", position: "relative" }}>
-                <img
-                  src={event.thumbnail}
-                  alt=""
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    filter: "blur(20px)",
-                    opacity: 0.6,
-                    transform: "scale(1.1)",
-                    zIndex: 0,
-                  }}
-                />
+              <div
+                style={{
+                  height: isMobile ? 280 : 320,
+                  overflow: "hidden",
+                  position: "relative",
+                  background: "#000",
+                }}
+              >
                 <img
                   loading="eager"
                   fetchPriority="high"
                   src={event.thumbnail}
                   alt={event.title}
                   style={{
-                    position: "relative",
                     width: "100%",
                     height: "100%",
-                    objectFit: "contain",
-                    zIndex: 1,
+                    objectFit: "cover",
+                    objectPosition: "center",
                   }}
                 />
               </div>
@@ -1137,7 +1324,18 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 >
                   {event.title}
                 </h3>
-                <p style={{ fontSize: 15, opacity: 0.6, lineHeight: 1.6 }}>
+                <p
+                  style={{
+                    fontSize: 15,
+                    opacity: 0.6,
+                    lineHeight: 1.6,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
                   {event.excerpt}
                 </p>
                 <div

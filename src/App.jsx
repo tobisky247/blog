@@ -126,7 +126,7 @@ function parseURL() {
 
 export default function App() {
   const initial = parseURL();
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   const [page, setPage] = useState(initial.page);
   const [article, setArticle] = useState(initial.article);
   const [selectedFeature, setSelectedFeature] = useState(initial.feature);

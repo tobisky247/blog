@@ -202,17 +202,7 @@ export function ArticlePage({ article, dark, onBack, onRead, onCategoryNav }) {
           }}
         >
           <Badge color={color}>{article.category}</Badge>
-          {article.trending && (
-            <Badge color="#f59e0b">
-              <Icon
-                name="fire"
-                size={12}
-                color="#fff"
-                style={{ marginRight: 4 }}
-              />{" "}
-              Trending
-            </Badge>
-          )}
+          {article.trending && <Badge color="#f59e0b">Trending</Badge>}
           <span
             style={{
               fontSize: 12,
@@ -283,7 +273,7 @@ export function ArticlePage({ article, dark, onBack, onRead, onCategoryNav }) {
         {/* Hero Image / Banner */}
         <div
           style={{
-            height: isMobile ? 240 : 400,
+            height: isMobile ? 300 : 500,
             borderRadius: 18,
             background: `linear-gradient(135deg, ${article.gradient
               .replace("from-", "")

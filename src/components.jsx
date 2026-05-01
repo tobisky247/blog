@@ -25,17 +25,20 @@ export function Logo({ dark }) {
 }
 
 export function Icon({ name, size = 20, color = "currentColor", style = {} }) {
+  // For SVGs with spaces in filename, encode the URL properly
+  const encodedName = encodeURIComponent(name);
+
   return (
     <div
       style={{
         width: size,
         height: size,
         backgroundColor: color,
-        maskImage: `url(/assets/svg/${name}.svg)`,
+        maskImage: `url(/assets/svg/${encodedName}.svg)`,
         maskSize: "contain",
         maskRepeat: "no-repeat",
         maskPosition: "center",
-        WebkitMaskImage: `url(/assets/svg/${name}.svg)`,
+        WebkitMaskImage: `url(/assets/svg/${encodedName}.svg)`,
         WebkitMaskSize: "contain",
         WebkitMaskRepeat: "no-repeat",
         WebkitMaskPosition: "center",
@@ -452,7 +455,10 @@ export function EmailCapture({ dark }) {
       <style>{`
         @keyframes float {
           0% { transform: translateY(0px); }
-          100% { transform: translateY(-20px); }
+          25% { transform: translateY(-10px); }
+          50% { transform: translateY(-8px); }
+          75% { transform: translateY(-5px); }
+          100% { transform: translateY(0px); }
         }
       `}</style>
 

@@ -44,9 +44,9 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
       label: "Blog",
       p: "home",
       sub: [
-        { label: "All Articles", p: "home" },
+        { label: "All Articles", p: "home", icon: "book 01" },
         { label: "Make Money", category: "Make Money", icon: "dollar" },
-        { label: "Growth", category: "Growth", icon: "trending-up" },
+        { label: "Growth", category: "Growth", icon: "chart-arrow-up" },
         { label: "Guides", category: "Guides", icon: "book" },
       ],
     },
@@ -54,7 +54,7 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
       label: "Creator Hub",
       p: "hub",
       sub: [
-        { label: "Creator Hub", p: "hub", icon: "chart-arrow-up" },
+        { label: "Creator Hub", p: "hub", icon: "chart-pie 01" },
         {
           label: "Free Creators accounts",
           p: "free-creators",
@@ -65,9 +65,13 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
     {
       label: "How-to-guides",
       sub: [
-        { label: "Getting started", p: "getting-started" },
-        { label: "Earning on Luvlyfans", p: "earning" },
-        { label: "Features", p: "features" },
+        { label: "Getting started", p: "getting-started", icon: "idea" },
+        {
+          label: "Earning on Luvlyfans",
+          p: "earning",
+          icon: "money bag-dollar",
+        },
+        { label: "Features", p: "features", icon: "star" },
       ],
     },
     { label: "Events", p: "events" },
@@ -170,9 +174,13 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
                   >
                     {link.label}{" "}
                     {link.sub && (
-                      <span
+                      <Icon
+                        name="direction-down 01"
+                        size={12}
+                        color={
+                          dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)"
+                        }
                         style={{
-                          fontSize: 10,
                           transform: (
                             link.label === "Creator Hub"
                               ? hubOpen
@@ -184,9 +192,7 @@ export function Nav({ dark, setDark, page, setPage, onCategoryNav }) {
                             : "none",
                           transition: "transform 0.2s",
                         }}
-                      >
-                        ▼
-                      </span>
+                      />
                     )}
                   </button>
 

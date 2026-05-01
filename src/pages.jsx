@@ -801,111 +801,115 @@ export function HubPage({ dark, onRead, setPage }) {
           </div>
         </section>
 
-        {/* 7. TESTIMONIALS */}
-        <section style={{ marginBottom: 100 }}>
-          <h2
-            style={{
-              margin: "0 0 32px",
-              fontSize: 28,
-              fontWeight: 800,
-              textAlign: "center",
-              fontFamily: "'Lora', Georgia, serif",
-            }}
-          >
-            Real Feedback from Real Creators
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-              gap: 20,
-            }}
-          >
-            {[
-              {
-                name: "Luna V.",
-                text: "I didn’t know where to start before this. The first 30 days guide helped me structure everything properly.",
-                role: "Creator for 8 months",
-              },
-              {
-                name: "Alex M.",
-                text: "Using Spotlight made a difference. I started getting profile visits I wasn’t getting before.",
-                role: "Creator for 3 months",
-              },
-              {
-                name: "Kira S.",
-                text: "The pricing playbook was the most helpful thing. It kept me from guessing what people might pay.",
-                role: "Newly Launched",
-              },
-            ].map((t) => (
-              <div
-                key={t.name}
-                style={{
-                  padding: "32px",
-                  background: dark ? "rgba(255,255,255,0.03)" : "#fff",
-                  border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
-                  borderRadius: 24,
-                  position: "relative",
-                }}
-              >
+        {/* 7. TESTIMONIALS - Temporarily hidden */}
+        {false && (
+          <section style={{ marginBottom: 100 }}>
+            <h2
+              style={{
+                margin: "0 0 32px",
+                fontSize: 28,
+                fontWeight: 800,
+                textAlign: "center",
+                fontFamily: "'Lora', Georgia, serif",
+              }}
+            >
+              Real Feedback from Real Creators
+            </h2>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                gap: 20,
+              }}
+            >
+              {[
+                {
+                  name: "Luna V.",
+                  text: "I didn’t know where to start before this. The first 30 days guide helped me structure everything properly.",
+                  role: "Creator for 8 months",
+                },
+                {
+                  name: "Alex M.",
+                  text: "Using Spotlight made a difference. I started getting profile visits I wasn’t getting before.",
+                  role: "Creator for 3 months",
+                },
+                {
+                  name: "Kira S.",
+                  text: "The pricing playbook was the most helpful thing. It kept me from guessing what people might pay.",
+                  role: "Newly Launched",
+                },
+              ].map((t) => (
                 <div
+                  key={t.name}
                   style={{
-                    fontSize: 40,
-                    position: "absolute",
-                    top: 10,
-                    right: 24,
-                    opacity: 0.1,
-                    color: "#7B51CC",
-                  }}
-                >
-                  “
-                </div>
-                <p
-                  style={{
-                    margin: "0 0 24px",
-                    fontSize: 16,
-                    color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)",
-                    lineHeight: 1.6,
+                    padding: "32px",
+                    background: dark ? "rgba(255,255,255,0.03)" : "#fff",
+                    border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)"}`,
+                    borderRadius: 24,
                     position: "relative",
-                    zIndex: 1,
-                    minHeight: 80,
                   }}
                 >
-                  {t.text}
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <div
                     style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      background: "linear-gradient(135deg, #7B51CC, #9333ea)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      fontWeight: 800,
-                      color: "#fff",
+                      fontSize: 40,
+                      position: "absolute",
+                      top: 10,
+                      right: 24,
+                      opacity: 0.1,
+                      color: "#7B51CC",
                     }}
                   >
-                    {t.name[0]}
+                    “
                   </div>
-                  <div>
+                  <p
+                    style={{
+                      margin: "0 0 24px",
+                      fontSize: 16,
+                      color: dark ? "rgba(255,255,255,0.8)" : "rgba(0,0,0,0.7)",
+                      lineHeight: 1.6,
+                      position: "relative",
+                      zIndex: 1,
+                      minHeight: 80,
+                    }}
+                  >
+                    {t.text}
+                  </p>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 12 }}
+                  >
                     <div
                       style={{
-                        fontSize: 15,
-                        fontWeight: 700,
-                        color: dark ? "#fff" : "#0f0f0f",
+                        width: 40,
+                        height: 40,
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, #7B51CC, #9333ea)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontWeight: 800,
+                        color: "#fff",
                       }}
                     >
-                      {t.name}
+                      {t.name[0]}
                     </div>
-                    <div style={{ fontSize: 13, opacity: 0.5 }}>{t.role}</div>
+                    <div>
+                      <div
+                        style={{
+                          fontSize: 15,
+                          fontWeight: 700,
+                          color: dark ? "#fff" : "#0f0f0f",
+                        }}
+                      >
+                        {t.name}
+                      </div>
+                      <div style={{ fontSize: 13, opacity: 0.5 }}>{t.role}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 8. FINAL CTA */}
         <section
@@ -1860,10 +1864,10 @@ export function EarningPage({ dark }) {
             desc: "Selling exclusive content through our high-conversion messenger system.",
           },
           {
-            title: "Live Tips",
+            title: "Tips",
             percent: "15%",
             icon: "💸",
-            desc: "Interact live and receive real-time tips during streaming or story cycles.",
+            desc: "Interact live and receive real-time tips from posts or direct messages.",
           },
           {
             title: "Referrals",

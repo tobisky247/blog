@@ -124,7 +124,8 @@ export function CategoryPage({ category, onRead, dark }) {
             <ArticleCard
               key={article.id}
               article={article}
-              onClick={() => onRead(article)}
+              dark={dark}
+              onRead={onRead}
             />
           ))}
         </div>
