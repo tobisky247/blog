@@ -14,6 +14,7 @@ import {
   MissionPage,
   ContactPage,
   CreatorCornerPage,
+  CategoryPage,
 } from "./pages";
 import { StickyBar } from "./components";
 import { ARTICLES, FEATURES, EVENTS } from "./data";
@@ -31,6 +32,9 @@ const PAGE_TO_PATH = {
   mission: "/mission",
   contact: "/contact",
   "creator-voices": "/creator-voices",
+  "category-make-money": "/category/make-money",
+  "category-growth": "/category/growth",
+  "category-guides": "/category/guides",
 };
 
 // Reverse: URL path to page key
@@ -46,31 +50,78 @@ function parseURL() {
   if (path.startsWith("/article/")) {
     const slug = path.replace("/article/", "");
     const article = ARTICLES.find((a) => a.slug === slug);
-    return { page: article ? "article" : "home", article: article || null, feature: null, event: null };
+    return {
+      page: article ? "article" : "home",
+      article: article || null,
+      feature: null,
+      event: null,
+      category: null,
+    };
+  }
+
+  if (path.startsWith("/category/")) {
+    const categorySlug = path.replace("/category/", "");
+    const categoryMap = {
+      "make-money": "Make Money",
+      growth: "Growth",
+      guides: "Guides",
+    };
+    const category = categoryMap[categorySlug];
+    return {
+      page: category ? "category" : "home",
+      article: null,
+      feature: null,
+      event: null,
+      category,
+    };
   }
 
   if (path.startsWith("/features/")) {
     const slug = path.replace("/features/", "");
     const feature = FEATURES.find((f) => f.slug === slug);
-    return { page: "features", article: null, feature: feature ? feature.id : null, event: null };
+    return {
+      page: "features",
+      article: null,
+      feature: feature ? feature.id : null,
+      event: null,
+      category: null,
+    };
   }
 
   if (path.startsWith("/events/")) {
     const slug = path.replace("/events/", "");
     const eventObj = EVENTS.find((e) => e.slug === slug);
-    return { page: "events", article: null, feature: null, event: eventObj ? eventObj.id : null };
+    return {
+      page: "events",
+      article: null,
+      feature: null,
+      event: eventObj ? eventObj.id : null,
+      category: null,
+    };
   }
 
   if (path.startsWith("/creator-voices/")) {
-    return { page: "creator-voices", article: null, feature: null, event: null };
+    return {
+      page: "creator-voices",
+      article: null,
+      feature: null,
+      event: null,
+      category: null,
+    };
   }
 
   const page = PATH_TO_PAGE[path];
   if (page) {
-    return { page, article: null, feature: null, event: null };
+    return { page, article: null, feature: null, event: null, category: null };
   }
 
-  return { page: "home", article: null, feature: null, event: null };
+  return {
+    page: "home",
+    article: null,
+    feature: null,
+    event: null,
+    category: null,
+  };
 }
 
 export default function App() {
@@ -80,6 +131,7 @@ export default function App() {
   const [article, setArticle] = useState(initial.article);
   const [selectedFeature, setSelectedFeature] = useState(initial.feature);
   const [selectedEvent, setSelectedEvent] = useState(initial.event);
+  const [category, setCategory] = useState(initial.category);
 
   // Push URL when navigating to a page
   const handleNav = useCallback((p) => {
@@ -87,11 +139,32 @@ export default function App() {
     setArticle(null);
     setSelectedFeature(null);
     setSelectedEvent(null);
+    setCategory(null);
     window.scrollTo(0, 0);
 
     const path = PAGE_TO_PATH[p] || "/";
     if (window.location.pathname !== path) {
       window.history.pushState({ page: p }, "", path);
+    }
+  }, []);
+
+  // Navigate to category page
+  const handleCategoryNav = useCallback((categoryName) => {
+    setPage("category");
+    setCategory(categoryName);
+    setArticle(null);
+    setSelectedFeature(null);
+    setSelectedEvent(null);
+    window.scrollTo(0, 0);
+
+    const categorySlug = categoryName.toLowerCase().replace(/ /g, "-");
+    const path = `/category/${categorySlug}`;
+    if (window.location.pathname !== path) {
+      window.history.pushState(
+        { page: "category", category: categoryName },
+        "",
+        path,
+      );
     }
   }, []);
 
@@ -111,7 +184,11 @@ export default function App() {
     setSelectedFeature(id);
     const feature = FEATURES.find((f) => f.id === id);
     if (feature) {
-      window.history.pushState({ page: "features", featureId: id }, "", `/features/${feature.slug}`);
+      window.history.pushState(
+        { page: "features", featureId: id },
+        "",
+        `/features/${feature.slug}`,
+      );
     } else {
       window.history.pushState({ page: "features" }, "", `/features`);
     }
@@ -122,7 +199,11 @@ export default function App() {
     setSelectedEvent(id);
     const eventObj = EVENTS.find((e) => e.id === id);
     if (eventObj) {
-      window.history.pushState({ page: "events", eventId: id }, "", `/events/${eventObj.slug}`);
+      window.history.pushState(
+        { page: "events", eventId: id },
+        "",
+        `/events/${eventObj.slug}`,
+      );
     } else {
       window.history.pushState({ page: "events" }, "", `/events`);
     }
@@ -136,11 +217,18 @@ export default function App() {
   // Handle browser back/forward buttons
   useEffect(() => {
     const onPopState = () => {
-      const { page: p, article: a, feature: f, event: e } = parseURL();
+      const {
+        page: p,
+        article: a,
+        feature: f,
+        event: e,
+        category: c,
+      } = parseURL();
       setPage(p);
       setArticle(a);
       setSelectedFeature(f);
       setSelectedEvent(e);
+      setCategory(c);
       window.scrollTo(0, 0);
     };
     window.addEventListener("popstate", onPopState);
@@ -164,10 +252,19 @@ export default function App() {
         transition: "background 0.3s, color 0.3s",
       }}
     >
-      <Nav dark={dark} setDark={setDark} page={page} setPage={handleNav} />
+      <Nav
+        dark={dark}
+        setDark={setDark}
+        page={page}
+        setPage={handleNav}
+        onCategoryNav={handleCategoryNav}
+      />
 
       {page === "home" && (
         <HomePage dark={dark} onRead={handleRead} setPage={handleNav} />
+      )}
+      {page === "category" && category && (
+        <CategoryPage category={category} onRead={handleRead} dark={dark} />
       )}
       {page === "article" && article && (
         <ArticlePage
@@ -175,6 +272,7 @@ export default function App() {
           dark={dark}
           onBack={handleBack}
           onRead={handleRead}
+          onCategoryNav={handleCategoryNav}
         />
       )}
       {page === "hub" && (
@@ -200,7 +298,9 @@ export default function App() {
       {page === "creator-voices" && (
         <CreatorCornerPage dark={dark} setPage={handleNav} />
       )}
-      {page === "free-creators" && <FreeCreatorsPage dark={dark} onRead={handleRead} />}
+      {page === "free-creators" && (
+        <FreeCreatorsPage dark={dark} onRead={handleRead} />
+      )}
       {page === "mission" && <MissionPage dark={dark} />}
       {page === "contact" && <ContactPage dark={dark} />}
 

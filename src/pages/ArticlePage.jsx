@@ -29,7 +29,7 @@ function useIsMobile() {
   return isMobile;
 }
 
-export function ArticlePage({ article, dark, onBack, onRead }) {
+export function ArticlePage({ article, dark, onBack, onRead, onCategoryNav }) {
   const isMobile = useIsMobile();
   const progress = useScrollProgress();
   const others = ARTICLES.filter((a) => a.id !== article.id).slice(0, 3);
@@ -77,7 +77,6 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
 
       {/* Breadcrumb + Article Header */}
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 5vw 0" }}>
-
         {/* Breadcrumb nav */}
         <nav aria-label="Breadcrumb" style={{ marginBottom: 32 }}>
           <ol
@@ -91,7 +90,7 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
               flexWrap: "wrap",
             }}
           >
-            {/* Blog — the one clickable link */}
+            {/* Home */}
             <li>
               <button
                 onClick={onBack}
@@ -114,48 +113,67 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
                     : "rgba(0,0,0,0.38)")
                 }
               >
-                Blog
+                Home
               </button>
             </li>
 
-            {/* Chevron */}
-            <li aria-hidden="true" style={{ color: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.18)", fontSize: 11 }}>›</li>
+            {/* Separator */}
+            <li
+              style={{
+                color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
+                fontSize: 13,
+              }}
+            >
+              ›
+            </li>
 
-            {/* Category — label only, not a duplicate link */}
+            {/* Category */}
             <li>
-              <span
+              <button
+                onClick={() => onCategoryNav(article.category)}
                 style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
                   color: dark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.38)",
                   fontSize: 13,
                   fontWeight: 600,
+                  padding: 0,
+                  fontFamily: "inherit",
+                  transition: "color 0.15s",
                   letterSpacing: "0.01em",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#7B51CC")}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = dark
+                    ? "rgba(255,255,255,0.4)"
+                    : "rgba(0,0,0,0.38)")
+                }
               >
                 {article.category}
-              </span>
+              </button>
             </li>
 
-            {/* Chevron */}
-            <li aria-hidden="true" style={{ color: dark ? "rgba(255,255,255,0.18)" : "rgba(0,0,0,0.18)", fontSize: 11 }}>›</li>
+            {/* Separator */}
+            <li
+              style={{
+                color: dark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.2)",
+                fontSize: 13,
+              }}
+            >
+              ›
+            </li>
 
-            {/* Current article title — truncated */}
-            <li style={{ minWidth: 0 }}>
-              <span
-                aria-current="page"
-                style={{
-                  color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  display: "block",
-                  maxWidth: isMobile ? 160 : 380,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {article.title}
-              </span>
+            {/* Current Article (non-clickable) */}
+            <li
+              style={{
+                color: dark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.65)",
+                fontSize: 13,
+                fontWeight: 600,
+                letterSpacing: "0.01em",
+              }}
+            >
+              {article.title}
             </li>
           </ol>
         </nav>
@@ -168,7 +186,6 @@ export function ArticlePage({ article, dark, onBack, onRead }) {
             marginBottom: 40,
           }}
         />
-
       </div>
 
       <article
