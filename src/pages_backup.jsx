@@ -1126,8 +1126,7 @@ export function EventsPage({ dark, selectedEvent, setSelectedEvent }) {
                 letterSpacing: "-0.03em",
               }}
             >
-              LuvlyFans @ the{" "}
-              <span style={{ color: "#7B51CC" }}>AVN </span>
+              LuvlyFans @ the <span style={{ color: "#7B51CC" }}>AVN </span>
             </h1>
             <p
               style={{
@@ -2828,7 +2827,7 @@ export function Footer({ dark, setPage }) {
               }}
             >
               The creator education hub for the next generation of independent
-              earners. Learn, grow, and monetize — smarter.
+              earners. Learn, grow, and monetize smarter.
             </p>
           </div>
           {[

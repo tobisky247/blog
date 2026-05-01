@@ -2417,7 +2417,7 @@ function Footer({ dark, setPage }) {
               }}
             >
               The creator education hub for the next generation of independent
-              earners. Learn, grow, and monetize — smarter.
+              earners. Learn, grow, and monetize smarter.
             </p>
           </div>
           {[

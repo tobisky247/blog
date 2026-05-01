@@ -347,14 +347,30 @@ export function HubPage({ dark, onRead, setPage }) {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {[
-                "Set up your profile",
-                "Upload your first content",
-                "Set your subscription price",
-                "Turn on Spotlight",
-                "Start promoting your page",
+                {
+                  title: "Set up your profile",
+                  link: "https://blog.luvlyfans.com/article/setup-first-impressions",
+                },
+                {
+                  title: "Upload your first content",
+                  link: "https://blog.luvlyfans.com/article/content-direction",
+                },
+                {
+                  title: "Set your subscription price",
+                  link: "https://blog.luvlyfans.com/article/get-subscribers",
+                },
+                {
+                  title: "Turn on Spotlight",
+                  link: "https://blog.luvlyfans.com/features/spotlight-global-reach",
+                },
+                {
+                  title: "Start promoting your page",
+                  link: "https://blog.luvlyfans.com/article/promote-your-profile",
+                },
               ].map((step, idx) => (
                 <div
-                  key={step}
+                  key={step.title}
+                  onClick={() => window.open(step.link, "_blank")}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -406,7 +422,7 @@ export function HubPage({ dark, onRead, setPage }) {
                       color: dark ? "rgba(255,255,255,0.9)" : "#0f0f0f",
                     }}
                   >
-                    {step}
+                    {step.title}
                   </div>
                   <div
                     style={{
@@ -1977,8 +1993,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             {/* Mockup 1: Discovery Feed */}
             <div style={{ margin: "48px 0" }}>
               <img
-              loading="eager"
-              fetchPriority="high"
+                loading="eager"
+                fetchPriority="high"
                 src="/assets/promotions/spotlight2.png"
                 alt="Discovery Feed Mockup"
                 style={{
@@ -2117,8 +2133,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                 }}
               >
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src="/assets/promotions/spotlight3.png"
                   alt="Spotlight Activation"
                   style={{
@@ -2130,8 +2146,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
                   }}
                 />
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src="/assets/promotions/spotlight4.png"
                   alt="Spotlight Confirmation"
                   style={{
@@ -2250,8 +2266,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
-              loading="eager"
-              fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/assets/promotions/Stories.png"
             alt="Stories on LuvlyFans"
             style={{
@@ -2524,8 +2540,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
           }}
         >
           <img
-              loading="eager"
-              fetchPriority="high"
+            loading="eager"
+            fetchPriority="high"
             src="/assets/promotions/spotlight_Image.png"
             alt="Media Vault"
             style={{
@@ -2947,8 +2963,8 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
             >
               <div style={{ height: 240, overflow: "hidden" }}>
                 <img
-              loading="eager"
-              fetchPriority="high"
+                  loading="eager"
+                  fetchPriority="high"
                   src={f.thumbnail}
                   alt={f.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -3038,9 +3054,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 export function FreeCreatorsPage({ dark, onRead }) {
   const data = FREE_CREATORS_DIGEST[0];
   const isMobile = useIsMobile();
-  const [isNarrow, setIsNarrow] = React.useState(
-    () => window.innerWidth < 960
-  );
+  const [isNarrow, setIsNarrow] = React.useState(() => window.innerWidth < 960);
   React.useEffect(() => {
     const h = () => setIsNarrow(window.innerWidth < 960);
     window.addEventListener("resize", h);
@@ -3213,8 +3227,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                   }
                 >
                   <img
-              loading="eager"
-              fetchPriority="high"
+                    loading="eager"
+                    fetchPriority="high"
                     src={c.image || "/assets/events/AVN2.jpeg"}
                     alt={c.name}
                     style={{
@@ -3414,7 +3428,6 @@ export function FreeCreatorsPage({ dark, onRead }) {
             paddingTop: 80,
           }}
         >
-
           {/* Related Posts */}
           <div style={{ textAlign: "left", maxWidth: 1200, margin: "0 auto" }}>
             <h2
@@ -3492,8 +3505,8 @@ export function FreeCreatorsPage({ dark, onRead }) {
                       }}
                     />
                     <img
-              loading="eager"
-              fetchPriority="high"
+                      loading="eager"
+                      fetchPriority="high"
                       src={
                         a.thumbnail ||
                         "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500"

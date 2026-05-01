@@ -255,7 +255,7 @@ export function ArticleCard({ article, dark, onRead, featured = false }) {
                 inset: 0,
                 width: "100%",
                 height: "100%",
-                objectFit: "contain",
+                objectFit: "cover",
                 zIndex: 1,
               }}
             />
@@ -433,7 +433,7 @@ export function EmailCapture({ dark }) {
               height: av.size,
               borderRadius: "50%",
               overflow: "hidden",
-              border: "4px solid #fff",
+              border: "2px solid #fff",
               boxShadow: `0 12px 30px ${dark ? "rgba(0,0,0,0.3)" : "rgba(123, 81, 204, 0.15)"}`,
               animation: "float 6s ease-in-out infinite alternate",
               animationDelay: av.delay,
