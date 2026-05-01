@@ -1,12 +1,6 @@
 {
   "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/favicon/(.*)", "destination": "/favicon/$1" },
-    { "source": "/article/:slug", "destination": "/api/meta?type=article&slug=:slug" },
-    { "source": "/events/:slug", "destination": "/api/meta?type=event&slug=:slug" },
-    { "source": "/creator-voices/:slug", "destination": "/api/meta?type=creator&slug=:slug" },
-    { "source": "/features/:slug", "destination": "/api/meta?type=feature&slug=:slug" },
-    { "source": "/category/:slug", "destination": "/api/meta?type=category&slug=:slug" },
-    { "source": "/((?!api/).*)", "destination": "/api/meta?type=home" }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
