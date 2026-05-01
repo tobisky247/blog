@@ -51,12 +51,12 @@ export default function middleware(req) {
     }
 
     if (type && slug) {
-      // Rewrite to the bot-meta API
-      url.pathname = '/api/meta';
-      url.searchParams.set('type', type);
-      url.searchParams.set('slug', slug);
-      url.searchParams.set('bot', 'true');
-      return Response.rewrite(url);
+      // Redirect bots to the bot-meta API
+      const botUrl = new URL('/api/meta', req.url);
+      botUrl.searchParams.set('type', type);
+      botUrl.searchParams.set('slug', slug);
+      botUrl.searchParams.set('bot', 'true');
+      return Response.redirect(botUrl, 307);
     }
   }
 
