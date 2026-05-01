@@ -2,6 +2,9 @@
   "buildCommand": "npm run build",
   "rewrites": [
     { "source": "/article/:slug", "destination": "/api/og" },
+    { "source": "/events/:slug", "destination": "/api/og" },
+    { "source": "/creator-voices/:slug", "destination": "/api/og" },
+    { "source": "/features/:slug", "destination": "/api/og" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [
