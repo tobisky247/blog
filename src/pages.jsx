@@ -1914,6 +1914,7 @@ export function EarningPage({ dark }) {
 // ─── FEATURES PAGE ────────────────────────────────────────────────────────────
 
 export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
+  const isMobile = useIsMobile();
   if (selectedFeature === 1) {
     // Spotlight Detail View
     return (
@@ -2235,7 +2236,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
         {/* Hero */}
         <header
           style={{
-            padding: "80px 5vw",
+            padding: isMobile ? "48px 5vw" : "80px 5vw",
             background: dark ? "rgba(123,81,204,0.05)" : "#f9f6ff",
             borderBottom: `1px solid ${dark ? "rgba(123,81,204,0.1)" : "rgba(123,81,204,0.08)"}`,
           }}
@@ -2287,7 +2288,7 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
         {/* Main Content */}
         <section
-          style={{ maxWidth: 800, margin: "0 auto", padding: "80px 5vw" }}
+          style={{ maxWidth: 800, margin: "0 auto", padding: isMobile ? "40px 5vw" : "80px 5vw" }}
         >
           <div
             style={{
@@ -2360,10 +2361,10 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
             <div
               style={{
-                margin: "48px 0",
-                padding: 40,
+                margin: isMobile ? "32px 0" : "48px 0",
+                padding: isMobile ? 24 : 40,
                 background: "#7B51CC",
-                borderRadius: 32,
+                borderRadius: isMobile ? 20 : 32,
                 color: "#fff",
               }}
             >
@@ -2435,17 +2436,17 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
 
             <div
               style={{
-                marginTop: 64,
+                marginTop: isMobile ? 40 : 64,
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 32,
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: isMobile ? 20 : 32,
               }}
             >
               <div
                 style={{
-                  padding: 40,
+                  padding: isMobile ? 24 : 40,
                   background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8",
-                  borderRadius: 32,
+                  borderRadius: isMobile ? 20 : 32,
                 }}
               >
                 <Badge color="#7B51CC">💡 FOR CREATORS</Badge>
@@ -2460,9 +2461,9 @@ export function FeaturesPage({ dark, selectedFeature, setSelectedFeature }) {
               </div>
               <div
                 style={{
-                  padding: 40,
+                  padding: isMobile ? 24 : 40,
                   background: dark ? "rgba(255,255,255,0.03)" : "#f8f8f8",
-                  borderRadius: 32,
+                  borderRadius: isMobile ? 20 : 32,
                 }}
               >
                 <Badge color="#0ea5e9">👥 FOR FANS</Badge>
