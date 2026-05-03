@@ -158,6 +158,40 @@ const FEATURES = [
   },
 ];
 
+// ── Section-level OG data for listing pages ─────────────────────────────────
+const PAGE_META = {
+  "/": {
+    title: "LuvlyFans Blog",
+    description: "The creator hub built by creators for creators. Learn strategies, case studies, and playbooks to help you earn more.",
+    image: "/og-image.png",
+  },
+  "/events": {
+    title: "Creator Events",
+    description: "Real-world events, meet-ups, and industry moments featuring LuvlyFans creators.",
+    image: "/og-image.png",
+  },
+  "/creator-voices": {
+    title: "Creator Voices",
+    description: "In-depth conversations with LuvlyFans creators about their journeys, strategies, and what actually works.",
+    image: "/og-image.png",
+  },
+  "/features": {
+    title: "Platform Features",
+    description: "Discover the tools and features that help LuvlyFans creators grow their audience and increase their earnings.",
+    image: "/og-image.png",
+  },
+  "/hub": {
+    title: "Creator Hub",
+    description: "Your step-by-step guide to growing on LuvlyFans — from setting up your page to building consistent income.",
+    image: "/og-image.png",
+  },
+  "/free-creators": {
+    title: "Free Creator's Digest",
+    description: "Meet the creators making waves on LuvlyFans. Monthly spotlights, profiles, and community highlights.",
+    image: "/og-image.png",
+  },
+};
+
 // ── Helper: find content by path ────────────────────────────────────────────
 function findContent(pathname) {
   let match;
@@ -186,11 +220,17 @@ function findContent(pathname) {
     if (item) return item;
   }
 
-  return null;
+  // Check listing pages
+  if (PAGE_META[pathname]) {
+    return PAGE_META[pathname];
+  }
+
+  // Default homepage fallback
+  return PAGE_META["/"];
 }
 
-// ── Build a full HTML page with correct OG tags ─────────────────────────────
-function buildOgHtml(title, description, image, url) {
+// ── Build OG HTML ───────────────────────────────────────────────────────────
+function buildOgHtml(title, description, image, url, ogType) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -204,7 +244,7 @@ function buildOgHtml(title, description, image, url) {
     <meta property="og:description" content="${description}" />
     <meta property="og:image" content="${image}" />
     <meta property="og:url" content="${url}" />
-    <meta property="og:type" content="article" />
+    <meta property="og:type" content="${ogType}" />
     <meta property="og:site_name" content="LuvlyFans Blog" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -215,17 +255,19 @@ function buildOgHtml(title, description, image, url) {
     <meta name="twitter:description" content="${description}" />
     <meta name="twitter:image" content="${image}" />
 
+    <!-- Fonts (for real users before redirect) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- Redirect real users to the SPA -->
-    <script>
-      // Bots don't run JS, so only real users will be redirected
-      window.location.href = "${url}";
-    </script>
+    <meta http-equiv="refresh" content="0;url=${url}" />
+    <script>window.location.replace("${url}");</script>
 </head>
 <body>
     <h1>${title}</h1>
     <p>${description}</p>
     <img src="${image}" alt="${title}" />
-    <p><a href="${url}">Read more on LuvlyFans Blog</a></p>
+    <p><a href="${url}">Continue to LuvlyFans Blog</a></p>
 </body>
 </html>`;
 }
@@ -234,34 +276,25 @@ function buildOgHtml(title, description, image, url) {
 export default async function handler(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
-  const baseUrl = url.origin;
+  const baseUrl = "https://blog.luvlyfans.com";
 
   const content = findContent(pathname);
+  const imageUrl = content.thumbnail
+    ? `${baseUrl}${content.thumbnail}`
+    : `${baseUrl}/og-image.png`;
+  const pageUrl = `${baseUrl}${pathname === "/" ? "" : pathname}`;
 
-  if (content) {
-    const imageUrl = content.thumbnail
-      ? `${baseUrl}${content.thumbnail}`
-      : `${baseUrl}/og-image.png`;
-    const pageUrl = `https://blog.luvlyfans.com${pathname}`;
+  // Determine og:type — articles/events get "article", listing pages get "website"
+  const isDetailPage = /\/(article|events|creator-voices|features)\/[^/]+$/.test(pathname);
+  const ogType = isDetailPage ? "article" : "website";
 
-    const html = buildOgHtml(content.title, content.excerpt, imageUrl, pageUrl);
-
-    return new Response(html, {
-      headers: {
-        "content-type": "text/html;charset=UTF-8",
-        "cache-control": "public, max-age=0, must-revalidate",
-      },
-    });
-  }
-
-  // Fallback: fetch and return the original index.html
-  const htmlResponse = await fetch(`${baseUrl}/index.html`);
-  const html = await htmlResponse.text();
+  const html = buildOgHtml(content.title, content.excerpt || content.description, imageUrl, pageUrl, ogType);
 
   return new Response(html, {
+    status: 200,
     headers: {
       "content-type": "text/html;charset=UTF-8",
-      "cache-control": "public, max-age=0, must-revalidate",
+      "cache-control": "public, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
 }
